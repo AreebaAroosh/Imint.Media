@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+        <RepositoryRootDir>$(ProjectDir)..\..\</RepositoryRootDir>
+    </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+		<TargetFrameworkProfile>Client</TargetFrameworkProfile>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+		<RestorePackages>true</RestorePackages>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>True</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>False</Optimize>
+		<OutputPath>$(SolutionDir)bin\Debug</OutputPath>
+		<DefineConstants>DEBUG</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>False</Optimize>
+		<OutputPath>$(SolutionDir)bin\Release</OutputPath>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<DebugSymbols>True</DebugSymbols>
+	</PropertyGroup>
+	<Import Project=".nuget\nuget.targets" />
+    <UsingTask TaskName="GitVersionFile" AssemblyFile=".tools\MSBuildVersioning.dll" />
+    <UsingTask TaskName="SvnVersionFile" AssemblyFile=".tools\MSBuildVersioning.dll" />
+	<Target Name="_DownloadFiles">
+        <DownloadFile Locator="https://github.com/imintsystems/MSBuildVersioningBinaries/raw/master/MSBuildVersioning.dll" OutputFilename=".tools\MSBuildVersioning.dll" Condition=" !Exists('.tools\MSBuildVersioning.dll')" />
+        <DownloadFile Locator="https://nuget.org/nuget.exe" OutputFilename=".nuget\NuGet.exe" Condition=" !Exists('.nuget\NuGet.exe')" />
+	</Target>
+    <Target Name="CheckPrerequisites">
+        <!--
+        Take advantage of MsBuild's build dependency tracking to make sure that we only ever download files once.
+        This effectively acts as a lock that makes sure that the download operation will only happen once and all
+        parallel builds will have to wait for it to complete.
+        -->
+        <MsBuild Targets="_DownloadFiles" Projects="$(MSBuildThisFileFullPath)" Properties="Configuration=NOT_IMPORTANT" />
+    </Target>
+	<Target Name="BeforeBuild" DependsOnTargets="CheckPrerequisites">
+		<GitVersionFile Condition="Exists('$(RepositoryRootDir).git')" TemplateFile="$(RepositoryRootDir)CommonAssemblyInfo.cs" DestinationFile="$(ProjectDir)Properties\AssemblyInfo.Generated.cs" />
+		<SvnVersionFile Condition="Exists('$(RepositoryRootDir).svn') Or Exists('$(RepositoryRootDir)..\.svn')" TemplateFile="$(RepositoryRootDir)CommonAssemblyInfo.cs" DestinationFile="$(ProjectDir)Properties\AssemblyInfo.Generated.cs" />
+		<ItemGroup>
+			<Compile Condition="Exists('$(RepositoryRootDir).git') Or Exists('$(RepositoryRootDir).svn') Or Exists('$(RepositoryRootDir)..\.svn')" Include="Properties\AssemblyInfo.Generated.cs"><DependentUpon>AssemblyInfo.cs</DependentUpon></Compile>  
+		</ItemGroup>
+	</Target>
+    <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+        <ParameterGroup>
+            <Locator ParameterType="System.String" Required="true" />
+            <OutputFilename ParameterType="System.String" Required="true" />
+        </ParameterGroup>
+        <Task>
+            <Reference Include="System.Core" />
+            <Using Namespace="System" />
+            <Using Namespace="System.IO" />
+            <Using Namespace="System.Net" />
+            <Using Namespace="Microsoft.Build.Framework" />
+            <Using Namespace="Microsoft.Build.Utilities" />
+            <Code Type="Fragment" Language="cs">
+                <![CDATA[
+                try {
+                    OutputFilename = Path.GetFullPath(OutputFilename);
+					System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(OutputFilename));
+                    Log.LogMessage("Downloading binary from " + Locator + " ...");
+                    WebClient webClient = new WebClient();
+                    webClient.DownloadFile(Locator, OutputFilename);
+                    return true;
+                }
+                catch (Exception e) 
+				{
+                    Log.LogErrorFromException(e);
+                    return false;
+                }
+            ]]>
+            </Code>
+        </Task>
+    </UsingTask>
+</Project>
