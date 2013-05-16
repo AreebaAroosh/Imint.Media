@@ -128,7 +128,7 @@ namespace Imint.Media.Input
 					foreach (Player.IStream p in this)
 						if (p.NotNull() && p.Open(path))
 						{
-							Log.Cache.Log(Error.Level.Message, "Open Succeded", "Succesfully opened \"" + path + "\" with player \"" + p.Type());
+							Log.Cache.Log(Error.Level.Message, "Open Succeeded", "Successfully opened \"" + path + "\" with player \"" + p.Type());
 							lock (this.@lock)
 							{
 								player = p;
@@ -147,7 +147,7 @@ namespace Imint.Media.Input
 								lock (this.@lock)
 									this.start = DateTime.Now;
 							lock (this.incommingLock)
-							{ // throw away all old incomming commands
+							{ // throw away all old incoming commands
 								this.incommingPlaying = null;
 								this.incommingSeek = null;
 							}
