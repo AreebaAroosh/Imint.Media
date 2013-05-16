@@ -44,7 +44,7 @@ namespace Imint.Media.DirectShow
 		}
 		DateTime Media.Player.ILinear.Position
         {
-            get { return this.Graph.Position; }
+            get { return this.LastPosition.HasValue ? this.LastPosition.Value : this.Graph.Position; }
         }
 		bool Media.Player.ILinear.Play()
         {

@@ -35,10 +35,12 @@ using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 using Serialize = Kean.Core.Serialize;
 using Platform = Kean.Platform;
+using Kean.Core;
 
 namespace Imint.Media.DirectShow
 {
 	public abstract class Stream :
+		Synchronized,
 		Media.Player.IStream,
 		Platform.IHasApplication,
 		IDisposable
@@ -46,6 +48,11 @@ namespace Imint.Media.DirectShow
 		Action<int, DateTime, TimeSpan, Bitmap.Image, Tuple<string, object>[]> sendFrame;
 		protected DirectShow.Binding.IGraph Graph { get; set; }
 		protected Kean.Math.Fraction Rate { get; private set; }
+		DateTime? lastPosition;
+		protected DateTime? LastPosition { 
+			get { lock (this.Lock) return this.lastPosition; }
+			set { lock (this.Lock) this.lastPosition = value; }
+		}
 
 		[Serialize.Parameter]
 		public bool Fuzzy { get; set; }
@@ -89,8 +96,11 @@ namespace Imint.Media.DirectShow
 					this.Graph.Save(Uri.Locator.FromPlatformPath(Environment.SpecialFolder.MyDocuments, "graph.grf"));
 				this.Graph.Send = (DateTime position, TimeSpan lifeTime, Bitmap.Image frame) => 
 				{
-					if (this.Graph.NotNull()) 
-						this.sendFrame(0, position, lifeTime, frame, null); 
+					if (this.Graph.NotNull())
+					{
+						this.LastPosition = position;
+						this.sendFrame(0, position, lifeTime, frame, null);
+					}
 				};
 			}
 			return result;
@@ -99,6 +109,7 @@ namespace Imint.Media.DirectShow
 		{
 			if (this.Graph.NotNull())
 			{
+				this.LastPosition = null;
 				this.Graph.Close();
 				this.Graph = null;
 			}
