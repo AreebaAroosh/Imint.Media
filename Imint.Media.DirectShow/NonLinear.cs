@@ -41,13 +41,6 @@ namespace Imint.Media.DirectShow
         protected NonLinear()
         {                
         }
-        #region ILinear Members
-		DateTime Media.Player.ILinear.Position
-        {
-            get { return this.Graph.Position; }
-        }
-        #endregion
-
         #region INonLinear Members
 		bool Media.Player.INonLinear.IsNonLinear
 		{
@@ -64,7 +57,8 @@ namespace Imint.Media.DirectShow
         }
 
 		void Media.Player.INonLinear.Seek(DateTime position)
-        {            
+        {
+			this.LastPosition = null;
             this.Graph.Seek(position);
         }
 
