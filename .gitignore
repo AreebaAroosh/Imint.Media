@@ -113,3 +113,5 @@ CommonAssemblyInfo.cs
 /.tools
 
 /*.userprefs
+
+AssemblyInfo.Generated.cs

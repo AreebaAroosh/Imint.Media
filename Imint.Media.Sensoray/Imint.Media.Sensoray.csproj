@@ -10,9 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Imint.Media.Sensoray</RootNamespace>
     <AssemblyName>Imint.Media.Sensoray</AssemblyName>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -41,70 +41,63 @@
     <Compile Include="Encoding.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Player\Stream.cs" />
     <Compile Include="VideoSystem.cs" />
     <Compile Include="Stream.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <HintPath>..\packages\GLib.2.28.1\lib\glib-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core">
-      <HintPath>..\packages\Kean.Core.0.2.0.757\lib\net40-Client\Kean.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Buffer">
-      <HintPath>..\packages\Kean.Core.Buffer.0.2.0.757\lib\net40-Client\Kean.Core.Buffer.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Collection">
-      <HintPath>..\packages\Kean.Core.Collection.0.2.0.757\lib\net40-Client\Kean.Core.Collection.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Error">
-      <HintPath>..\packages\Kean.Core.Error.0.2.0.757\lib\net40-Client\Kean.Core.Error.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Recycle">
-      <HintPath>..\packages\Kean.Core.Recycle.0.2.0.757\lib\net40-Client\Kean.Core.Recycle.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Reflect">
-      <HintPath>..\packages\Kean.Core.Reflect.0.2.0.757\lib\net40-Client\Kean.Core.Reflect.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Uri">
-      <HintPath>..\packages\Kean.Core.Uri.0.2.0.757\lib\net40-Client\Kean.Core.Uri.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Draw">
-      <HintPath>..\packages\Kean.Draw.0.2.0.757\lib\net40-Client\Kean.Draw.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Draw.Cairo">
-      <HintPath>..\packages\Kean.Draw.Cairo.0.2.0.757\lib\net40-Client\Kean.Draw.Cairo.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Draw.Raster">
-      <HintPath>..\packages\Kean.Draw.Raster.0.2.0.757\lib\net40-Client\Kean.Draw.Raster.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Math">
-      <HintPath>..\packages\Kean.Math.0.2.0.757\lib\net40-Client\Kean.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Math.Geometry2D">
-      <HintPath>..\packages\Kean.Math.Geometry2D.0.2.0.757\lib\net40-Client\Kean.Math.Geometry2D.dll</HintPath>
-    </Reference>
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <HintPath>..\packages\Pango.1.28.3\lib\pango-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <HintPath>..\packages\Cairo.2.0.0.0\lib\Mono.Cairo.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Buffer\Kean.Core.Buffer.csproj">
+      <Project>{AB030D3B-8B47-4545-86BA-48A8D2AFE020}</Project>
+      <Name>Kean.Core.Buffer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
+      <Project>{964EE8EB-6A7E-4B62-BDBC-37A29E9C0E3B}</Project>
+      <Name>Kean.Core.Collection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Error\Kean.Core.Error.csproj">
+      <Project>{9ee43841-ce0c-4943-bdff-1c5e158a0bdb}</Project>
+      <Name>Kean.Core.Error</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Uri\Kean.Core.Uri.csproj">
+      <Project>{7E58819E-BCDE-4194-8A83-E8E6E3D050F9}</Project>
+      <Name>Kean.Core.Uri</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core\Kean.Core.csproj">
+      <Project>{C5A4BC48-C14F-4F6B-9564-E04C0A79B7C1}</Project>
+      <Name>Kean.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Draw\Kean.Draw.Raster\Kean.Draw.Raster.csproj">
+      <Project>{AB4E5E08-6B2A-4A9F-ABB3-A8F4CE73FB53}</Project>
+      <Name>Kean.Draw.Raster</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Draw\Kean.Draw\Kean.Draw.csproj">
+      <Project>{375108F3-ECBF-4BF9-9161-22BBEAB6A7BC}</Project>
+      <Name>Kean.Draw</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Math\Kean.Math.Geometry2D\Kean.Math.Geometry2D.csproj">
+      <Project>{DAF18CA8-78EA-417F-8730-0A76B0DA2563}</Project>
+      <Name>Kean.Math.Geometry2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Kean\Math\Kean.Math\Kean.Math.csproj">
+      <Project>{96B4C4B4-5177-4717-9B2F-C74A0C2DF7D5}</Project>
+      <Name>Kean.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Imint.Media\Imint.Media\Imint.Media.csproj">
+      <Project>{0C283FE4-7254-4ED1-A125-54C297E985D8}</Project>
+      <Name>Imint.Media</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Content Include="Configuration\Player\80SensorayStream.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Imint.Media.Sensoray.licenseheader" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\Common.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <Policies>
-          <StandardHeader Text="&#xA; Author:&#xA;   ${AuthorName} ${AuthorEmail}&#xA;&#xA; Copyright (c) ${Year}, ${CopyrightHolder}&#xA;&#xA; All rights reserved.&#xA;&#xA; Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:&#xA;&#xA;    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.&#xA;    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in&#xA;      the documentation and/or other materials provided with the distribution.&#xA; &#xA; THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS&#xA; &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT&#xA; LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR&#xA; A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR&#xA; CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,&#xA; EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,&#xA; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR&#xA; PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF&#xA; LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING&#xA; NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS&#xA; SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&#xA;" IncludeInNewFiles="True" />
-        </Policies>
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
 </Project>

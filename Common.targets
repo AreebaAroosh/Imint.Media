@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-        <RepositoryRootDir>$(ProjectDir)..\..\</RepositoryRootDir>
+        <ModuleDir>$(MSBuildThisFileDirectory)</ModuleDir>
     </PropertyGroup>
 	<PropertyGroup>
 		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
 		<TargetFrameworkProfile>Client</TargetFrameworkProfile>
-		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
 		<RestorePackages>true</RestorePackages>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -26,12 +25,10 @@
 		<WarningLevel>4</WarningLevel>
 		<DebugSymbols>True</DebugSymbols>
 	</PropertyGroup>
-	<Import Project=".nuget\nuget.targets" />
     <UsingTask TaskName="GitVersionFile" AssemblyFile=".tools\MSBuildVersioning.dll" />
     <UsingTask TaskName="SvnVersionFile" AssemblyFile=".tools\MSBuildVersioning.dll" />
 	<Target Name="_DownloadFiles">
         <DownloadFile Locator="https://github.com/imintsystems/MSBuildVersioningBinaries/raw/master/MSBuildVersioning.dll" OutputFilename=".tools\MSBuildVersioning.dll" Condition=" !Exists('.tools\MSBuildVersioning.dll')" />
-        <DownloadFile Locator="https://nuget.org/nuget.exe" OutputFilename=".nuget\NuGet.exe" Condition=" !Exists('.nuget\NuGet.exe')" />
 	</Target>
     <Target Name="CheckPrerequisites">
         <!--
@@ -42,10 +39,10 @@
         <MsBuild Targets="_DownloadFiles" Projects="$(MSBuildThisFileFullPath)" Properties="Configuration=NOT_IMPORTANT" />
     </Target>
 	<Target Name="BeforeBuild" DependsOnTargets="CheckPrerequisites">
-		<GitVersionFile Condition="Exists('$(RepositoryRootDir).git')" TemplateFile="$(RepositoryRootDir)CommonAssemblyInfo.cs" DestinationFile="$(ProjectDir)Properties\AssemblyInfo.Generated.cs" />
-		<SvnVersionFile Condition="Exists('$(RepositoryRootDir).svn') Or Exists('$(RepositoryRootDir)..\.svn')" TemplateFile="$(RepositoryRootDir)CommonAssemblyInfo.cs" DestinationFile="$(ProjectDir)Properties\AssemblyInfo.Generated.cs" />
+		<GitVersionFile Condition="Exists('$(ModuleDir).git') Or Exists('$(SolutionDir).git')" TemplateFile="$(ModuleDir)CommonAssemblyInfo.cs" DestinationFile="$(ProjectDir)Properties\AssemblyInfo.Generated.cs" />
+		<SvnVersionFile Condition="Exists('$(ModuleDir).svn') Or Exists('$(SolutionDir).svn')" TemplateFile="$(ModuleDir)CommonAssemblyInfo.cs" DestinationFile="$(ProjectDir)Properties\AssemblyInfo.Generated.cs" />
 		<ItemGroup>
-			<Compile Condition="Exists('$(RepositoryRootDir).git') Or Exists('$(RepositoryRootDir).svn') Or Exists('$(RepositoryRootDir)..\.svn')" Include="Properties\AssemblyInfo.Generated.cs"><DependentUpon>AssemblyInfo.cs</DependentUpon></Compile>  
+			<Compile Condition="Exists('$(ModuleDir).git') Or Exists('$(SolutionDir).git') Or Exists('$(ModuleDir).svn') Or Exists('$(SolutionDir).svn')" Include="Properties\AssemblyInfo.Generated.cs"><DependentUpon>AssemblyInfo.cs</DependentUpon></Compile>  
 		</ItemGroup>
 	</Target>
     <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
