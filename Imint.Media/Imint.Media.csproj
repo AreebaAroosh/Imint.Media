@@ -30,7 +30,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+		<BuildPackage>true</BuildPackage>
+	</PropertyGroup>
   <ItemGroup>
     <Compile Include="IMedia.cs" />
     <Compile Include="Module\Input.cs" />
@@ -104,4 +105,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\Common.targets" />
+	<Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

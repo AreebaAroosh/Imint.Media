@@ -9,7 +9,7 @@
     <description>$description$</description>
   </metadata>
 	<files>
-		<file src="..\..\..\bin\Release\Imint.Media.Input.dll" target="lib\net40-client" />
-		<file src="..\..\..\bin\Release\Modules\Media.xml" target="lib\Modules" />
+		<file src="..\..\bin\Release\Imint.Media.Input.dll" target="lib\net40-client" />
+		<file src="..\..\bin\Release\Modules\Media.xml" target="lib\Modules" />
 	</files>
 </package>
