@@ -97,51 +97,51 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Buffer\Kean.Core.Buffer.csproj">
+    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Buffer\Kean.Core.Buffer.csproj">
       <Project>{AB030D3B-8B47-4545-86BA-48A8D2AFE020}</Project>
       <Name>Kean.Core.Buffer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
+    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
       <Project>{964EE8EB-6A7E-4B62-BDBC-37A29E9C0E3B}</Project>
       <Name>Kean.Core.Collection</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Error\Kean.Core.Error.csproj">
+    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Error\Kean.Core.Error.csproj">
       <Project>{9EE43841-CE0C-4943-BDFF-1C5E158A0BDB}</Project>
       <Name>Kean.Core.Error</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Parallel\Kean.Core.Parallel.csproj">
+    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Parallel\Kean.Core.Parallel.csproj">
       <Project>{8B708CFE-DABA-40D5-8830-4C0D67DAE732}</Project>
       <Name>Kean.Core.Parallel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core.Uri\Kean.Core.Uri.csproj">
+    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Uri\Kean.Core.Uri.csproj">
       <Project>{7E58819E-BCDE-4194-8A83-E8E6E3D050F9}</Project>
       <Name>Kean.Core.Uri</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Core\Kean.Core\Kean.Core.csproj">
+    <ProjectReference Include="..\..\Kean\Core\Kean.Core\Kean.Core.csproj">
       <Project>{C5A4BC48-C14F-4F6B-9564-E04C0A79B7C1}</Project>
       <Name>Kean.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Draw\Kean.Draw.Raster\Kean.Draw.Raster.csproj">
+    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw.Raster\Kean.Draw.Raster.csproj">
       <Project>{AB4E5E08-6B2A-4A9F-ABB3-A8F4CE73FB53}</Project>
       <Name>Kean.Draw.Raster</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Draw\Kean.Draw\Kean.Draw.csproj">
+    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw\Kean.Draw.csproj">
       <Project>{375108F3-ECBF-4BF9-9161-22BBEAB6A7BC}</Project>
       <Name>Kean.Draw</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Math\Kean.Math.Geometry2D\Kean.Math.Geometry2D.csproj">
+    <ProjectReference Include="..\..\Kean\Math\Kean.Math.Geometry2D\Kean.Math.Geometry2D.csproj">
       <Project>{DAF18CA8-78EA-417F-8730-0A76B0DA2563}</Project>
       <Name>Kean.Math.Geometry2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Math\Kean.Math\Kean.Math.csproj">
+    <ProjectReference Include="..\..\Kean\Math\Kean.Math\Kean.Math.csproj">
       <Project>{96B4C4B4-5177-4717-9B2F-C74A0C2DF7D5}</Project>
       <Name>Kean.Math</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Platform\Kean.Platform.Log\Kean.Platform.Log.csproj">
+    <ProjectReference Include="..\..\Kean\Platform\Kean.Platform.Log\Kean.Platform.Log.csproj">
       <Project>{14F02E00-9ED6-4730-BE4D-F0DF96853A21}</Project>
       <Name>Kean.Platform.Log</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Kean\Platform\Kean.Platform\Kean.Platform.csproj">
+    <ProjectReference Include="..\..\Kean\Platform\Kean.Platform\Kean.Platform.csproj">
       <Project>{ABF16C06-E815-40C8-9194-13D9BE11E019}</Project>
       <Name>Kean.Platform</Name>
     </ProjectReference>
