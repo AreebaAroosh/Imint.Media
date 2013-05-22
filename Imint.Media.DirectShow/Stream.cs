@@ -35,7 +35,6 @@ using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 using Serialize = Kean.Core.Serialize;
 using Platform = Kean.Platform;
-using Kean.Core;
 
 namespace Imint.Media.DirectShow
 {
