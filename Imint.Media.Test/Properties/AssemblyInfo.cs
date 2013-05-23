@@ -26,8 +26,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Generated")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Imint.Media.Test")]
+[assembly: AssemblyDescription("Support for generated test video input in Imint.Media.")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
