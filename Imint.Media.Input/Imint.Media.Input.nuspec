@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-<<<<<<< Updated upstream
-  <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <authors>Imint AB</authors>
-    <owners>Imint AB</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-  </metadata>
-	<files>
-		<file src="..\..\bin\Release\Imint.Media.Input.dll" target="lib\net40-client" />
-		<file src="..\..\bin\Release\Modules\Media.xml" target="lib\Modules" />
-	</files>
-=======
 	<metadata>
 		<id>$id$</id>
 		<version>$version$</version>
@@ -22,9 +8,12 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
+			<dependency id="Imint.Media" />
 			<dependency id="Kean.Core" />
 			<dependency id="Kean.Core.Collection" />
+			<dependency id="Kean.Core.Error" />
 			<dependency id="Kean.Core.Parallel" />
+			<dependency id="Kean.Core.Reflect" />
 			<dependency id="Kean.Core.Serialize" />
 			<dependency id="Kean.Core.Uri" />
 			<dependency id="Kean.Draw" />
@@ -32,8 +21,9 @@
 			<dependency id="Kean.Math" />
 			<dependency id="Kean.Math.Geometry2D" />
 			<dependency id="Kean.Platform" />
-			<dependency id="Kean.Platform.Settings" />
 		</dependencies>
 	</metadata>
->>>>>>> Stashed changes
+	<files>
+		<file src="Modules\Media.xml" target="lib\Modules" />
+	</files>
 </package>

@@ -26,7 +26,6 @@ using Kean.Core.Collection.Extension;
 using Raster = Kean.Draw.Raster;
 using Collection = Kean.Core.Collection;
 using Error = Kean.Core.Error;
-using Log = Kean.Platform.Log;
 using Parallel = Kean.Core.Parallel;
 using Uri = Kean.Core.Uri;
 using Platform = Kean.Platform;
@@ -128,7 +127,7 @@ namespace Imint.Media.Input
 					foreach (Player.IStream p in this)
 						if (p.NotNull() && p.Open(path))
 						{
-							Log.Cache.Log(Error.Level.Message, "Open Succeeded", "Successfully opened \"" + path + "\" with player \"" + p.Type());
+							Error.Log.Append(Error.Level.Message, "Open Succeeded", "Successfully opened \"" + path + "\" with player \"" + p.Type());
 							lock (this.@lock)
 							{
 								player = p;

@@ -27,7 +27,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Imint.Media")]
+<<<<<<< Updated upstream
 [assembly: AssemblyDescription("Imint Media library")]
+=======
+[assembly: AssemblyDescription("Interfaces for Imint.Media video handling framework.")]
+>>>>>>> Stashed changes
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

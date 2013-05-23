@@ -26,7 +26,6 @@ using Raster = Kean.Draw.Raster;
 using Collection = Kean.Core.Collection;
 using Error = Kean.Core.Error;
 using Geometry2D = Kean.Math.Geometry2D;
-using Log = Kean.Platform.Log;
 using Parallel = Kean.Core.Parallel;
 using Kean.Core.Collection.Extension;
 using Uri = Kean.Core.Uri;
