@@ -63,7 +63,7 @@ namespace Imint.Media.Test.Generator
 						this.frames = Kean.Math.Integer.Parse(value);
 				}
             }
-            catch (Exception e)
+            catch
             {
                 this.Initialize();
             }
