@@ -22,6 +22,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Configuration\**.xml" target="lib\net40\Configuration" />
+		<file src="Configuration\**.xml" target="lib\net40-client\Configuration" />
 	</files>
 </package>
