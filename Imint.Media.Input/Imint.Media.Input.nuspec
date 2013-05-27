@@ -24,6 +24,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Modules\Media.xml" target="lib\Modules" />
+		<file src="Modules\**.xml" target="lib\net40-client\Modules" />
 	</files>
 </package>
