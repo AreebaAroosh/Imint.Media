@@ -27,7 +27,6 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters.File

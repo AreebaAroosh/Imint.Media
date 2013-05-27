@@ -87,10 +87,6 @@
       <Project>{375108F3-ECBF-4BF9-9161-22BBEAB6A7BC}</Project>
       <Name>Kean.Draw</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Platform\Kean.Platform.Log\Kean.Platform.Log.csproj">
-      <Project>{14F02E00-9ED6-4730-BE4D-F0DF96853A21}</Project>
-      <Name>Kean.Platform.Log</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Kean\Platform\Kean.Platform\Kean.Platform.csproj">
       <Project>{ABF16C06-E815-40C8-9194-13D9BE11E019}</Project>
       <Name>Kean.Platform</Name>
@@ -148,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Imint.Media.DirectShow.Elecard.nuspec" />
     <None Include="Imint.Media.DirectShow.Elecard.licenseheader" />
     <None Include="packages.config" />
   </ItemGroup>

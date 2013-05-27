@@ -31,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <BuildPackage>true</BuildPackage>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Exception\FilterNotFound.cs" />
@@ -137,10 +138,6 @@
       <Project>{96B4C4B4-5177-4717-9B2F-C74A0C2DF7D5}</Project>
       <Name>Kean.Math</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Platform\Kean.Platform.Log\Kean.Platform.Log.csproj">
-      <Project>{14F02E00-9ED6-4730-BE4D-F0DF96853A21}</Project>
-      <Name>Kean.Platform.Log</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Kean\Platform\Kean.Platform\Kean.Platform.csproj">
       <Project>{ABF16C06-E815-40C8-9194-13D9BE11E019}</Project>
       <Name>Kean.Platform</Name>
@@ -158,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Imint.Media.DirectShow.Binding.licenseheader" />
+    <None Include="Imint.Media.DirectShow.Binding.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

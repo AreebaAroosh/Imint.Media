@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Imint.Media.DirectShow.MainConcept")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Support for DirectShow based filters from MainConcept.")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

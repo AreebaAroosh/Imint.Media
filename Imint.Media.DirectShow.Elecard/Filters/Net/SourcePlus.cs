@@ -27,7 +27,6 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 using Kean.Core.Extension;
 using Kean.Core;
@@ -73,7 +72,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Net
 			}
             else
             {
-				Log.Cache.Log(Error.Level.Debug, "Unable to open Elecard NWSource-Plus Filter.", "Elecard NWSource-Plus Filter was unable to open url \"" + this.url + "\".");
+				Error.Log.Append(Error.Level.Debug, "Unable to open Elecard NWSource-Plus Filter.", "Elecard NWSource-Plus Filter was unable to open url \"" + this.url + "\".");
                 DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
             }
             return result;

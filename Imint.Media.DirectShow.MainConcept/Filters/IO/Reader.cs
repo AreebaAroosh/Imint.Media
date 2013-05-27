@@ -27,7 +27,6 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 using Kean.Core.Extension;
 namespace Imint.Media.DirectShow.MainConcept.Filters.IO
@@ -62,7 +61,7 @@ namespace Imint.Media.DirectShow.MainConcept.Filters.IO
             }
             else
             {
-                Log.Cache.Log(Error.Level.Debug, "Unable to open Hauppauge Transport Reader.", "Hauppauge Transport Reader was unable to open file \"" + this.file + "\".");
+                Error.Log.Append(Error.Level.Debug, "Unable to open Hauppauge Transport Reader.", "Hauppauge Transport Reader was unable to open file \"" + this.file + "\".");
                 DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
             }
             return result;

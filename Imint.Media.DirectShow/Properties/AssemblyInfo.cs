@@ -33,8 +33,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DirectShowPlayer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Imint.Media.DirectShow")]
+[assembly: AssemblyDescription("Support for DirectShow in Imint.Media.")]
 
 
 // Setting ComVisible to false makes the types in this assembly not visible 

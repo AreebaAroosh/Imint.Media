@@ -28,7 +28,6 @@
  
 using System;
 using Kean.Core.Extension;
-using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters

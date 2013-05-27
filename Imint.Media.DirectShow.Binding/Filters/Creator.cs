@@ -28,7 +28,6 @@
  
 using System;
 using Kean.Core.Extension;
-using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters
@@ -73,7 +72,7 @@ namespace Imint.Media.DirectShow.Binding.Filters
                             0 <= build.Graph.Connect(source, DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Input, 0)) :
                             0 == build.Graph.ConnectDirect(source, DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Input, 0), new DirectShowLib.AMMediaType()))))
                         {
-							Log.Cache.Log(Error.Level.Debug, "Unable to connect.", "DirectShow was unable to connect \"" + filterInformation.achName + "\" with \"" + this.Description + "\".");
+							Error.Log.Append(Error.Level.Debug, "Unable to connect.", "DirectShow was unable to connect \"" + filterInformation.achName + "\" with \"" + this.Description + "\".");
                             Exception.GraphError.Check(source.Disconnect());
                             Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
                         }

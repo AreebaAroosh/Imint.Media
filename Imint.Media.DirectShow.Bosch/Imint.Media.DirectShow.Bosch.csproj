@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -30,13 +31,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <BuildPackage>true</BuildPackage>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)lib\DirectShow\DirectShowLib-2005.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters\Decoder\Mpeg4.cs" />
     <Compile Include="Filters\Demultiplexer\Mpeg4.cs" />
@@ -70,12 +66,8 @@
       <Project>{375108F3-ECBF-4BF9-9161-22BBEAB6A7BC}</Project>
       <Name>Kean.Draw</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Platform\Kean.Platform.Log\Kean.Platform.Log.csproj">
-      <Project>{14F02E00-9ED6-4730-BE4D-F0DF96853A21}</Project>
-      <Name>Kean.Platform.Log</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Kean\Platform\Kean.Platform\Kean.Platform.csproj">
-      <Project>{ABF16C06-E815-40C8-9194-13D9BE11E019}</Project>
+      <Project>{abf16c06-e815-40c8-9194-13d9be11e019}</Project>
       <Name>Kean.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\Imint.Media.DirectShow.Binding\Imint.Media.DirectShow.Binding.csproj">
@@ -95,10 +87,18 @@
     <Content Include="Configuration\Player\10BoschFile.xml">
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Imint.Media.DirectShow.Bosch.licenseheader" />
+    <None Include="Imint.Media.DirectShow.Bosch.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\DirectShowLib2005.2.0\lib\DirectShowLib-2005.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\Common.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

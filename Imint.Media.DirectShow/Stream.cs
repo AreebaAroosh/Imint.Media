@@ -31,7 +31,6 @@ using Kean.Core;
 using Kean.Core.Extension;
 using Bitmap = Kean.Draw.Raster;
 using Uri = Kean.Core.Uri;
-using Log = Kean.Platform.Log;
 using Error = Kean.Core.Error;
 using Serialize = Kean.Core.Serialize;
 using Platform = Kean.Platform;

@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Imint.Media.DirectShow.Binding")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("DirectShow binding used to handle DirectShow graphs.")]
 
 
 // Setting ComVisible to false makes the types in this assembly not visible 

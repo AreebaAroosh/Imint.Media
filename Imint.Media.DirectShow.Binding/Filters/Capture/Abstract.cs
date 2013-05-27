@@ -33,7 +33,6 @@ using Collection = Kean.Core.Collection;
 using Buffer = Kean.Core.Buffer;
 using Kean.Core.Collection.Extension;
 using Error = Kean.Core.Error;
-using Log = Kean.Platform.Log;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture
 {
@@ -63,7 +62,7 @@ namespace Imint.Media.DirectShow.Binding.Filters.Capture
                     }
                     else
                     {
-                        Log.Cache.Log(Error.Level.Debug, "Unable to open capture.", "DirectShow was unable to capture \"" + this.device + "\".");
+                        Error.Log.Append(Error.Level.Debug, "Unable to open capture.", "DirectShow was unable to capture \"" + this.device + "\".");
                         Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
                     }
                 }

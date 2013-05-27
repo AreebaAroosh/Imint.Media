@@ -37,8 +37,7 @@ namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
 {
     public abstract class Abstract :
         Creator,
-        IDisposable,
-        DirectShowLib.ISampleGrabberCB
+        IDisposable
     {
 		public Kean.Math.Fraction Rate { get; set; }
         public Kean.Draw.CoordinateSystem CoordinateSystem { get; set; }
@@ -58,7 +57,7 @@ namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
             DirectShowLib.ISampleGrabber result = new DirectShowLib.SampleGrabber() as DirectShowLib.ISampleGrabber;
             Exception.GraphError.Check(result.SetMediaType(new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Video, formatType = DirectShowLib.FormatType.VideoInfo, subType = this.SubType }));
             Exception.GraphError.Check(result.SetBufferSamples(true));
-            Exception.GraphError.Check(result.SetCallback(this, 1));
+            Exception.GraphError.Check(result.SetCallback(new Callback(this), 1));
             return (this.grabber = result) as DirectShowLib.IBaseFilter;
         }
         public override bool Build(DirectShowLib.IPin source, IBuild build)
@@ -85,17 +84,6 @@ namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
             return result;
         }
         protected abstract Bitmap.Image CreateBitmap(Buffer.Sized data, Geometry2D.Integer.Size resolution);
-        #region ISampleGrabberCB Members
-        int DirectShowLib.ISampleGrabberCB.BufferCB(double position, IntPtr buffer, int length)
-        {
-            this.build.Send.Call(new TimeSpan((long)(position * 1000 * 10000)), new TimeSpan(this.lifetime), this.CreateBitmap(new Buffer.Sized(buffer, length), this.size) );
-            return 0;
-        }
-        int DirectShowLib.ISampleGrabberCB.SampleCB(double SampleTime, DirectShowLib.IMediaSample pSample)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
         ~Abstract()
         {
 			Error.Log.Wrap((Action)this.Dispose)();
@@ -112,6 +100,28 @@ namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
                 this.grabber.SetCallback(null, 1);
                 this.grabber = null;
             }
-        }
-    }
+		}
+		#region Callback
+		class Callback :
+	        DirectShowLib.ISampleGrabberCB
+		{
+			Abstract parent;
+			public Callback(Abstract parent)
+			{
+				this.parent = parent;
+			}
+			#region ISampleGrabberCB Members
+			int DirectShowLib.ISampleGrabberCB.BufferCB(double position, IntPtr buffer, int length)
+			{
+				this.parent.build.Send.Call(new TimeSpan((long)(position * 1000 * 10000)), new TimeSpan(this.parent.lifetime), this.parent.CreateBitmap(new Buffer.Sized(buffer, length), this.parent.size));
+				return 0;
+			}
+			int DirectShowLib.ISampleGrabberCB.SampleCB(double SampleTime, DirectShowLib.IMediaSample pSample)
+			{
+				throw new NotImplementedException();
+			}
+			#endregion
+		}
+		#endregion
+	}
 }

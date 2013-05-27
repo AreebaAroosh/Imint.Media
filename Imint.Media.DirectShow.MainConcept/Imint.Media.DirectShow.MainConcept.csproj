@@ -30,11 +30,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <BuildPackage>true</BuildPackage>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)lib\DirectShow\DirectShowLib-2005.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\DirectShowLib2005.2.0\lib\DirectShowLib-2005.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -84,12 +85,8 @@
       <Name>Kean.Draw</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Math\Kean.Math\Kean.Math.csproj">
-      <Project>{96B4C4B4-5177-4717-9B2F-C74A0C2DF7D5}</Project>
+      <Project>{96b4c4b4-5177-4717-9b2f-c74a0c2df7d5}</Project>
       <Name>Kean.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Platform\Kean.Platform.Log\Kean.Platform.Log.csproj">
-      <Project>{14F02E00-9ED6-4730-BE4D-F0DF96853A21}</Project>
-      <Name>Kean.Platform.Log</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Platform\Kean.Platform\Kean.Platform.csproj">
       <Project>{ABF16C06-E815-40C8-9194-13D9BE11E019}</Project>
@@ -109,8 +106,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Imint.Media.DirectShow.MainConcept.nuspec" />
     <None Include="Imint.Media.DirectShow.MainConcept.licenseheader" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\Common.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
