@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-<<<<<<< Updated upstream
-  <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <authors>Imint AB</authors>
-    <owners>Imint AB</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-  </metadata>
-	<files>
-		<file src="..\..\bin\Release\Imint.Media.Input.dll" target="lib\net40-client" />
-		<file src="..\..\bin\Release\Modules\Media.xml" target="lib\Modules" />
-	</files>
-=======
 	<metadata>
 		<id>$id$</id>
 		<version>$version$</version>
@@ -35,5 +21,4 @@
 			<dependency id="Kean.Platform.Settings" />
 		</dependencies>
 	</metadata>
->>>>>>> Stashed changes
 </package>
