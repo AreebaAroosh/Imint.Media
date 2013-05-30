@@ -24,6 +24,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Modules\**.xml" target="lib\net40-client\Modules" />
+		<file src="Modules\**.xml" target="build\Modules" />
+		<file src="Imint.Media.Input.targets" target="build" />
 	</files>
 </package>
