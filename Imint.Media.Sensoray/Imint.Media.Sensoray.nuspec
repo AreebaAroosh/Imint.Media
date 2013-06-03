@@ -21,6 +21,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Configuration\**.xml" target="lib\net40-client\Configuration" />
+		<file src="Configuration\**.xml" target="build\Configuration" />
+		<file src="Imint.Media.Sensoray.targets" target="build" />
 	</files>
 </package>
