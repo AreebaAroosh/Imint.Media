@@ -8,7 +8,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
-			<dependency id="DirectSHowLib-2005" />
+			<dependency id="DirectShowLib2005" />
 			<dependency id="Imint.Media" />
 			<dependency id="Kean.Core" />
 			<dependency id="Kean.Core.Buffer" />

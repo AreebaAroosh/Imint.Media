@@ -117,17 +117,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Player\10ElecardNetwork.xml">
+    <None Include="Configuration\Player\10ElecardNetwork.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\10ElecardFile.xml">
+    </None>
+    <None Include="Configuration\Player\10ElecardFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\10ElecardNetworkRecord.xml">
+    </None>
+    <None Include="Configuration\Player\10ElecardNetworkRecord.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\10ElecardNetworkTimeshift.xml">
-    </Content>
+    </None>
+    <None Include="Configuration\Player\10ElecardNetworkTimeshift.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Classes_v10, Version=1.2.0.930, Culture=neutral, PublicKeyToken=a6d5afb38b2cfcfa, processorArchitecture=x86">
@@ -146,6 +145,7 @@
   <ItemGroup>
     <None Include="Imint.Media.DirectShow.Elecard.nuspec" />
     <None Include="Imint.Media.DirectShow.Elecard.licenseheader" />
+    <None Include="Imint.Media.DirectShow.Elecard.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

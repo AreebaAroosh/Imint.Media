@@ -84,12 +84,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Player\10BoschFile.xml">
-    </Content>
+    <None Include="Configuration\Player\10BoschFile.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Imint.Media.DirectShow.Bosch.licenseheader" />
     <None Include="Imint.Media.DirectShow.Bosch.nuspec" />
+    <None Include="Imint.Media.DirectShow.Bosch.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

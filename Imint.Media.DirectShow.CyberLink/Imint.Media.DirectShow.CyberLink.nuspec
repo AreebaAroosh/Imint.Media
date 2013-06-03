@@ -8,7 +8,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
-			<dependency id="DirectSHowLib-2005" />
+			<dependency id="DirectShowLib2005" />
 			<dependency id="Imint.Media" />
 			<dependency id="Imint.Media.DirectShow" />
 			<dependency id="Imint.Media.DirectShow.Binding" />
@@ -22,6 +22,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Configuration\**.xml" target="lib\net40-client\Configuration" />
+		<file src="Configuration\**.xml" target="build\Configuration" />
+		<file src="Imint.Media.DirectShow.CyberLink.targets" target="build" />
 	</files>
 </package>

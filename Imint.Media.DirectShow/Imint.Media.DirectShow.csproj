@@ -97,22 +97,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Player\80DirectShowCapture.xml">
+    <None Include="Configuration\Player\80DirectShowCapture.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\80DirectShowFileAvi.xml">
+    </None>
+    <None Include="Configuration\Player\80DirectShowFileAvi.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\80DirectShowFileWmv.xml">
+    </None>
+    <None Include="Configuration\Player\80DirectShowFileWmv.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\80DirectShowFileMpeg.xml">
+    </None>
+    <None Include="Configuration\Player\80DirectShowFileMpeg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Imint.Media.DirectShow.licenseheader" />
     <None Include="Imint.Media.DirectShow.nuspec" />
+    <None Include="Imint.Media.DirectShow.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

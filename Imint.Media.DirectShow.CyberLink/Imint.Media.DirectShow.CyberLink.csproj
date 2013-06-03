@@ -49,17 +49,16 @@
     <Compile Include="CapturePlayerRecord.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Player\20CyberLinkCapturePlayer.xml">
+    <None Include="Configuration\Player\20CyberLinkCapturePlayer.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\20CyberLinkCapturePlayerRecord.xml">
+    </None>
+    <None Include="Configuration\Player\20CyberLinkCapturePlayerRecord.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\20CyberLinkCaptureTimeshift.xml">
-    </Content>
-    <Content Include="Configuration\Player\20CyberLinkFileMpeg.xml">
+    </None>
+    <None Include="Configuration\Player\20CyberLinkCaptureTimeshift.xml" />
+    <None Include="Configuration\Player\20CyberLinkFileMpeg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
@@ -110,6 +109,7 @@
   <ItemGroup>
     <None Include="Imint.Media.DirectShow.CyberLink.nuspec" />
     <None Include="Imint.Media.DirectShow.CyberLink.licenseheader" />
+    <None Include="Imint.Media.DirectShow.CyberLink.targets" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -52,12 +52,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Player\20MainConceptFileMpeg.xml">
+    <None Include="Configuration\Player\20MainConceptFileMpeg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configuration\Player\20MainConceptCapture.xml">
+    </None>
+    <None Include="Configuration\Player\20MainConceptCapture.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <None Include="Imint.Media.DirectShow.MainConcept.targets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">

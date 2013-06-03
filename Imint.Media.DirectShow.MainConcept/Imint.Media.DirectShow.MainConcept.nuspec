@@ -8,7 +8,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
-			<dependency id="DirectShowLib-2005" />
+			<dependency id="DirectShowLib2005" />
 			<dependency id="Imint.Media" />
 			<dependency id="Imint.Media.DirectShow" />
 			<dependency id="Imint.Media.DirectShow.Binding" />
@@ -23,6 +23,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Configuration\**.xml" target="lib\Configuration" />
+		<file src="Configuration\**.xml" target="build\Configuration" />
+		<file src="Imint.Media.DirectShow.MainConcept.targets" target="build" />
 	</files>
 </package>
