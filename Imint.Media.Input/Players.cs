@@ -50,8 +50,8 @@ namespace Imint.Media.Input
 		object @lock;
 		Collection.Hooked.List<Player.IStream> data;
 		bool hasNext;
-        bool isLinear;
-        bool isNonLinear;
+		bool isLinear;
+		bool isNonLinear;
 		Status status;
 		DateTime start;
 		Player.IStream player;
@@ -61,12 +61,12 @@ namespace Imint.Media.Input
 		object incommingLock = new object();
 		bool? incommingPlaying;
 		DateTime? incommingSeek;
-        public int Channels { get; private set; }
+		public int Channels { get; private set; }
 		Collection.List<string> supportedExtensions = new Collection.List<string>();
 		public Collection.List<string> SupportedExtensions { get { return supportedExtensions; } }
 		public Action<Frame> Send { get; set; }
 		public Action<bool, bool, DateTime, DateTime, DateTime, bool, bool, bool> UpdateState { get; set; }
-        public Players() :
+		public Players() :
 			this(new Collection.Hooked.List<Player.IStream>(), new object())
 		{ }
 		Players(Collection.Hooked.List<Player.IStream> hooked, object @lock) :
@@ -100,7 +100,7 @@ namespace Imint.Media.Input
 		}
 		void WrappedSend(int channel, DateTime time, TimeSpan lifetime, Raster.Image content, Tuple<string, object>[] meta)
 		{
-			if (false && Error.Log.CatchErrors)
+			if (Error.Log.CatchErrors)
 			{
 				try
 				{
@@ -259,7 +259,7 @@ namespace Imint.Media.Input
 		public void Pause()
 		{
 			lock (this.incommingLock)
-                this.incommingPlaying = false;
+				this.incommingPlaying = false;
 		}
 		public void Seek(DateTime position)
 		{

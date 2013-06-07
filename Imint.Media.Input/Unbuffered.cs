@@ -34,13 +34,10 @@ namespace Imint.Media.Input
 {
 	public class Unbuffered :
 		Synchronized,
-        IInputControl
+		IInputControl
 	{
-        long dropCount;
-        long totalCount;
+		long dropCount;
 		bool dropNext;
-		int missedUpdateState;
-		bool stateUpdated;
 		Players players;
 		[Serialize.Parameter("Player")]
 		public Players Players { 
@@ -65,7 +62,7 @@ namespace Imint.Media.Input
 		public Unbuffered()
 		{
 			this.Players = new Players();
-       	}
+		}
 		#region IDisposable Members
 		public void Dispose()
 		{
@@ -81,16 +78,16 @@ namespace Imint.Media.Input
 		{
 			this.Status = closed ? Status.Closed : playing ? Status.Playing : Status.Paused;
 			this.Position = position;
-            this.Start = start;
-            this.End = end;
-            this.Length = end - start;
+			this.Start = start;
+			this.End = end;
+			this.Length = end - start;
 			this.Seekable = isNonLinear;
-            this.HasEnd = isNonLinear;
-            this.HasStart = isNonLinear;
-            this.HasPosition = isLinear;
-            this.HasPrevious = isNonLinear;
+			this.HasEnd = isNonLinear;
+			this.HasStart = isNonLinear;
+			this.HasPosition = isLinear;
+			this.HasPrevious = isNonLinear;
 			this.HasNext = hasNext;
-            if (position.AddMilliseconds(120) > end && playing && this.Seekable && !this.HasNext)
+			if (position.AddMilliseconds(120) > end && playing && this.Seekable && !this.HasNext)
 			{
 				switch (this.EndMode)
 				{
@@ -117,10 +114,10 @@ namespace Imint.Media.Input
 			lock (this.Lock)
 				if (drop = this.dropNext)
 					this.dropNext = false;
-            if (!drop)
+			if (!drop)
 				this.send(frame);
-            else
-                this.dropCount++;
+			else
+				this.dropCount++;
 
 		}
 		protected virtual void Done(bool droped)
@@ -128,12 +125,12 @@ namespace Imint.Media.Input
 			if (droped)
 				this.dropCount++;
 		}
-        public event Func<Uri.Locator, Uri.Locator> OpenFilter;
+		public event Func<Uri.Locator, Uri.Locator> OpenFilter;
 		public virtual bool Open(Uri.Locator resource)
 		{
-            this.Resource = resource;
-            if (this.OpenFilter.NotNull())
-                resource = this.OpenFilter(resource);
+			this.Resource = resource;
+			if (this.OpenFilter.NotNull())
+				resource = this.OpenFilter(resource);
 			lock (this.Lock)
 				return this.Players.Open(resource);
 		}
@@ -161,74 +158,74 @@ namespace Imint.Media.Input
 				this.Start = new DateTime();
 				this.End = new DateTime();
 				this.Length = new TimeSpan();
-                this.HasStart = false;
-                this.HasPosition = false;
-                this.HasEnd = false;
-                this.Seekable = false;
-                this.HasPrevious = false;
-                this.HasNext = false;
+				this.HasStart = false;
+				this.HasPosition = false;
+				this.HasEnd = false;
+				this.Seekable = false;
+				this.HasPrevious = false;
+				this.HasNext = false;
 				this.Resource = null;
-        	}
+			}
 		}
 		public virtual void Seek(DateTime position)
 		{
 			lock (this.Lock)
 				this.Players.Seek(position);
-        }
-        #region Next
-        bool hasNext;
+		}
+		#region Next
+		bool hasNext;
 		public virtual bool HasNext
-        {
-            get { lock (this.Lock) return this.hasNext; }
-            protected set
-            {
-                lock (this.Lock)
-                    if (this.HasNext != value)
-                    {
-                        this.hasNext = value;
-                        this.ThreadPool.Enqueue(this.HasNextChanged.Call, value);
-                    }
-            }
-        }
+		{
+			get { lock (this.Lock) return this.hasNext; }
+			protected set
+			{
+				lock (this.Lock)
+					if (this.HasNext != value)
+					{
+						this.hasNext = value;
+						this.ThreadPool.Enqueue(this.HasNextChanged.Call, value);
+					}
+			}
+		}
 		public virtual event Action<bool> HasNextChanged;
 		public virtual void Next()
 		{ }
-        #endregion
-        #region Previous
-        bool hasPrevious;
+		#endregion
+		#region Previous
+		bool hasPrevious;
 		public virtual bool HasPrevious
-        {
-            get { lock (this.Lock) return this.hasPrevious; }
-            protected set
-            {
-                lock (this.Lock)
-                    if (this.HasPrevious != value)
-                    {
-                        this.hasPrevious = value;
-                        this.ThreadPool.Enqueue(this.HasPreviousChanged.Call, value);
-                    }
-            }
-        }
+		{
+			get { lock (this.Lock) return this.hasPrevious; }
+			protected set
+			{
+				lock (this.Lock)
+					if (this.HasPrevious != value)
+					{
+						this.hasPrevious = value;
+						this.ThreadPool.Enqueue(this.HasPreviousChanged.Call, value);
+					}
+			}
+		}
 		public virtual void Previous()
 		{ }
-        #endregion
-        protected virtual void Reset()
+		#endregion
+		protected virtual void Reset()
 		{ }
 
 		#region IControl Members
-        Uri.Locator resource;
+		Uri.Locator resource;
 		public virtual Uri.Locator Resource 
-        {
-            get { return this.resource; }
-            protected set 
-            {
-                if (!this.resource.SameOrEquals(value))
-                {
-                    this.resource = value;
-                    this.ResourceChanged.Call(value);
-                }
-            }
-        }
+		{
+			get { return this.resource; }
+			protected set 
+			{
+				if (!this.resource.SameOrEquals(value))
+				{
+					this.resource = value;
+					this.ResourceChanged.Call(value);
+				}
+			}
+		}
 		public virtual event Action<Uri.Locator> ResourceChanged;
 		Status status;
 		public virtual Status Status
@@ -247,23 +244,23 @@ namespace Imint.Media.Input
 			}
 		}
 		public virtual event Action<Status> StatusChanged;
-        #region Start
-        bool hasStart;
+		#region Start
+		bool hasStart;
 		public virtual bool HasStart
-        {
-            get { lock (this.Lock) return this.hasStart; }
-            protected set
-            {
-                lock (this.Lock)
-                    if (this.hasStart != value)
-                    {
-                        this.hasStart = value;
-                        this.ThreadPool.Enqueue(this.HasStartChanged.Call, value);
-                    }
-            }
-        }
+		{
+			get { lock (this.Lock) return this.hasStart; }
+			protected set
+			{
+				lock (this.Lock)
+					if (this.hasStart != value)
+					{
+						this.hasStart = value;
+						this.ThreadPool.Enqueue(this.HasStartChanged.Call, value);
+					}
+			}
+		}
 		public virtual event Action<bool> HasStartChanged;
-        DateTime start;
+		DateTime start;
 		public virtual DateTime Start
 		{
 			get { lock (this.Lock) return this.start; }
@@ -278,24 +275,24 @@ namespace Imint.Media.Input
 			}
 		}
 		public virtual event Action<DateTime> StartChanged;
-        #endregion
-        #region End
-        bool hasEnd;
+		#endregion
+		#region End
+		bool hasEnd;
 		public virtual bool HasEnd
-        {
-            get { lock (this.Lock) return this.hasEnd; }
-            protected set
-            {
-                lock (this.Lock)
-                    if (this.hasEnd != value)
-                    {
-                        this.hasEnd = value;
-                        this.ThreadPool.Enqueue(this.HasEndChanged.Call, value);
-                    }
-            }
-        }
+		{
+			get { lock (this.Lock) return this.hasEnd; }
+			protected set
+			{
+				lock (this.Lock)
+					if (this.hasEnd != value)
+					{
+						this.hasEnd = value;
+						this.ThreadPool.Enqueue(this.HasEndChanged.Call, value);
+					}
+			}
+		}
 		public virtual event Action<bool> HasEndChanged;
-        DateTime end;
+		DateTime end;
 		public virtual DateTime End
 		{
 			get { lock (this.Lock) return this.end; }
@@ -304,13 +301,13 @@ namespace Imint.Media.Input
 				lock (this.Lock)
 					if (this.End != value)
 					{
-                        this.end = value;
+						this.end = value;
 						this.ThreadPool.Enqueue(this.EndChanged.Call, value);
 					}
 			}
 		}
 		public virtual event Action<DateTime> EndChanged;
-        #endregion
+		#endregion
 		#region Length
 		TimeSpan length;
 		public virtual TimeSpan Length
@@ -328,23 +325,23 @@ namespace Imint.Media.Input
 		}
 		public virtual event Action<TimeSpan> LengthChanged;
 		#endregion
-        #region Position
-        bool hasPosition;
+		#region Position
+		bool hasPosition;
 		public virtual bool HasPosition
-        {
-            get { lock (this.Lock) return this.hasPosition; }
-            protected set
-            {
-                lock (this.Lock)
-                    if (this.hasPosition != value)
-                    {
-                        this.hasPosition = value;
-                        this.ThreadPool.Enqueue(this.HasPositionChanged.Call, value);
-                    }
-            }
-        }
+		{
+			get { lock (this.Lock) return this.hasPosition; }
+			protected set
+			{
+				lock (this.Lock)
+					if (this.hasPosition != value)
+					{
+						this.hasPosition = value;
+						this.ThreadPool.Enqueue(this.HasPositionChanged.Call, value);
+					}
+			}
+		}
 		public virtual event Action<bool> HasPositionChanged;
-        DateTime position;
+		DateTime position;
 		public virtual DateTime Position
 		{
 			get { lock (this.Lock) return this.position; }
@@ -359,8 +356,8 @@ namespace Imint.Media.Input
 			}
 		}
 		public virtual event Action<DateTime> PositionChanged;
-        #endregion
-        
+		#endregion
+		
 		bool seekable;
 		public virtual bool Seekable
 		{

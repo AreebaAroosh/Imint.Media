@@ -33,15 +33,15 @@ using Collection = Kean.Core.Collection;
 
 namespace Imint.Media.Module
 {
-    public class InputControl :
-        Input,
-        IMedia,
+	public class InputControl :
+		Input,
+		IMedia,
 		IInputControl
 	{
 		IControl backend;
 		public InputControl(IInputControl backend) :
-            base(backend)
-        {
+			base(backend)
+		{
 			this.backend = backend;
 			this.backend.StartChanged += start => this.StartChanged.Call(start + this.Offset);
 			this.backend.PositionChanged += position => this.PositionChanged.Call(position + this.Offset);
@@ -69,7 +69,7 @@ namespace Imint.Media.Module
 			this.Eject();
 			base.Stop();
 		}
-        #region IControl Members
+		#region IControl Members
 		#region Ratio
 		Kean.Math.Fraction ratio = null;
 		[Platform.Settings.Property("ratio", "Aspect ratio of the corresponding video source.", "Get/set the video aspect ratio using double value [integer.decimals] or integer fraction [nominator/denominator].")]
@@ -137,7 +137,7 @@ namespace Imint.Media.Module
 		[Settings.Property("state", "State of media.", "The state [closed | paused | playing] of media.")]
 		[Notify("StatusChanged")]
 		public Status Status { get { return this.backend.Status; } }
-        public event Action<Status> StatusChanged
+		public event Action<Status> StatusChanged
 		{
 			add { this.backend.StatusChanged += value; }
 			remove { this.backend.StatusChanged -= value; }
@@ -152,41 +152,41 @@ namespace Imint.Media.Module
 		#endregion
 
 		#region Start
-        [Settings.Property("start", "Start position of media.", "The start position of the media in format [[h:]mm:]ss[.fff].")]
-        [Notify("StartChanged")]
-        public DateTime Start 
+		[Settings.Property("start", "Start position of media.", "The start position of the media in format [[h:]mm:]ss[.fff].")]
+		[Notify("StartChanged")]
+		public new DateTime Start 
 		{ 
 			get { return this.backend.Start + this.Offset; }
 			set { this.Offset = value - this.backend.Start; }
 		}
-        public event Action<DateTime> StartChanged;
-        #endregion
+		public event Action<DateTime> StartChanged;
+		#endregion
 
-        #region Position
-        [Settings.Property("position", "Position of media.", "The current position of the media in format [[h:]mm:]ss[.fff].")]
-        [Notify("PositionChanged")]
-        public DateTime Position { get { return this.backend.Position + this.Offset; } }
+		#region Position
+		[Settings.Property("position", "Position of media.", "The current position of the media in format [[h:]mm:]ss[.fff].")]
+		[Notify("PositionChanged")]
+		public DateTime Position { get { return this.backend.Position + this.Offset; } }
 		public event Action<DateTime> PositionChanged;
-        #endregion
+		#endregion
 
-        #region End
-        [Settings.Property("end", "End position of media.", "The end position of the media in format [[h:]mm:]ss[.fff].")]
-        [Notify("EndChanged")]
+		#region End
+		[Settings.Property("end", "End position of media.", "The end position of the media in format [[h:]mm:]ss[.fff].")]
+		[Notify("EndChanged")]
 		public DateTime End { get { return this.backend.End + this.Offset; } }
-        public event Action<DateTime> EndChanged;
-        #endregion
+		public event Action<DateTime> EndChanged;
+		#endregion
 
-        [Settings.Property("extensions", "Media file extensions.", "Get all media file extensions that can be opened.")]
-        public string AllExtensions 
-        { 
-            get
-            {
-                string result = "";
-                foreach(string extension in this.Extensions)
-                   result += extension + " ";
-                return result;
-            }
-        }
+		[Settings.Property("extensions", "Media file extensions.", "Get all media file extensions that can be opened.")]
+		public string AllExtensions 
+		{ 
+			get
+			{
+				string result = "";
+				foreach(string extension in this.Extensions)
+				   result += extension + " ";
+				return result;
+			}
+		}
 		public string[] Extensions { get { return this.backend.Extensions; } }
 
 		[Settings.Method("open", "Opens media.", "Opens media specified by locator argument.")]
@@ -212,37 +212,37 @@ namespace Imint.Media.Module
 		[Settings.Method("eject", "Eject opened media.", "Eject currently opened media.")]
 		public void Eject() { this.backend.Eject(); }
 
-        #region Seek
-        [Settings.Property("seekable", "Media is seekable bool flag.", "Get bool flag which says if the input media is seekable.")]
-        [Notify("SeekableChanged")]
+		#region Seek
+		[Settings.Property("seekable", "Media is seekable bool flag.", "Get bool flag which says if the input media is seekable.")]
+		[Notify("SeekableChanged")]
 		public bool Seekable { get { return this.backend.Seekable; } }
-        public event Action<bool> SeekableChanged
+		public event Action<bool> SeekableChanged
 		{
 			add { this.backend.SeekableChanged += value; }
 			remove { this.backend.SeekableChanged -= value; }
 		}
 		[Settings.Method("seek", "Seek position of media.", "Seek to current position of the media in format [[h:]mm:]ss[.fff].")]
 		public void Seek(DateTime position) { this.backend.Seek(position); }
-        #endregion
+		#endregion
 
-        #region Next
-        [Settings.Property("hasnext", "Media has next bool flag.", "Get bool flag which says if the input media position can seeked to the last captured position.")]
-        [Notify("HasNextChanged")]
-        public bool HasNext { get { return this.backend.HasNext; } }
-        public event Action<bool> HasNextChanged
+		#region Next
+		[Settings.Property("hasnext", "Media has next bool flag.", "Get bool flag which says if the input media position can seeked to the last captured position.")]
+		[Notify("HasNextChanged")]
+		public bool HasNext { get { return this.backend.HasNext; } }
+		public event Action<bool> HasNextChanged
 		{
 			add { this.backend.HasNextChanged += value; }
 			remove { this.backend.HasNextChanged -= value; }
 		}
 		[Settings.Method("next", "Go to last captured position.", "The media plays from the last captured position.")]
 		public void Next() { this.backend.Next(); }
-        #endregion
-        
-        #region Previous
-        [Settings.Property("hasprevious", "Media has previous bool flag.", "Get bool flag which says if the input media position can seeked to the first captured position.")]
-        [Notify("HasPreviousChanged")]
-        public bool HasPrevious { get { return this.backend.HasPrevious; } }
-        public event Action<bool> HasPreviousChanged
+		#endregion
+		
+		#region Previous
+		[Settings.Property("hasprevious", "Media has previous bool flag.", "Get bool flag which says if the input media position can seeked to the first captured position.")]
+		[Notify("HasPreviousChanged")]
+		public bool HasPrevious { get { return this.backend.HasPrevious; } }
+		public event Action<bool> HasPreviousChanged
 		{
 			add { this.backend.HasPreviousChanged += value; }
 			remove { this.backend.HasPreviousChanged -= value; }
