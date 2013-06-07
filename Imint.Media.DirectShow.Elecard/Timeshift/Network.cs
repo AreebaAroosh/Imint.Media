@@ -34,8 +34,7 @@ namespace Imint.Media.DirectShow.Elecard.Timeshift
 {
 
 	public class Network :
-		DirectShow.NonLinear,
-		Kean.Platform.IHasApplication
+		DirectShow.NonLinear
 	{
 		public Network()
 		{
@@ -77,9 +76,6 @@ namespace Imint.Media.DirectShow.Elecard.Timeshift
 			}
 			return result as DirectShow.Binding.IGraph;
 		}
-		#region IHasApplication Members
-		public Kean.Platform.Application Application { get; set; }
-		#endregion
 	}
 
 }

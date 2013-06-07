@@ -62,7 +62,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters
 						this.backend = new global::Elecard.Utilities.Filter(ref this.guid);
 				}
 			}
-			catch (Exception e) { }
+			catch (Exception) { }
 			return this.backend.NotNull() ? System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(this.backend.GetIUnknown) as DirectShowLib.IBaseFilter : null;
 		}
 		protected override bool PreConfiguration(Binding.IBuild build)

@@ -36,7 +36,6 @@ namespace Imint.Media.DirectShow.CyberLink
 	public class CaptureTimeshift :
 		DirectShow.NonLinear
 	{
-		DirectShow.Binding.IGraph recorder;
 		public CaptureTimeshift()
 		{ }
 		protected override DirectShow.Binding.IGraph Open(Uri.Locator name)

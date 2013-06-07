@@ -67,8 +67,8 @@ namespace Imint.Media.DirectShow
 		public void Dispose()
 		{
 			(this as Media.Player.IStream).Close();
-            if (this.sendFrame.IsNull())
-                this.sendFrame = null;
+			if (this.sendFrame.IsNull())
+				this.sendFrame = null;
 		}
 		#endregion
 

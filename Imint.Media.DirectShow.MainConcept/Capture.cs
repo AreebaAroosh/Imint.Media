@@ -36,7 +36,6 @@ namespace Imint.Media.DirectShow.MainConcept
     public class Capture :
         DirectShow.NonLinear
     {
-        DirectShow.Binding.IGraph recorder;
         public Capture()
         {
         }

@@ -45,10 +45,7 @@ namespace Imint.Media.DirectShow.CyberLink.Filters.Encoder
 		}
 		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
 		{
-			bool result;
-			if (result = base.Build(source, build))
-				;
-			return result;
+			return base.Build(source, build);
 		}
 	}
 }

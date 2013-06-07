@@ -30,25 +30,18 @@ using System;
 
 namespace Imint.Media.DirectShow.MainConcept.Filters.Encoder
 {
-    public class Mpeg2 :
-        DirectShow.Binding.Filters.FromFile
-    {
-        DirectShowLib.IBaseFilter encoder;
-        public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg2 :
+		DirectShow.Binding.Filters.FromFile
+	{
+		DirectShowLib.IBaseFilter encoder;
+		public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
 			base(new System.Guid("AE5660AE-7E08-48E6-A738-7EE6338C614F"), "hcw_mcm2ve.ax", "MainConcept (HCW) MPEG-2 Video Encoder", next)
-        {
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            return this.encoder = base.Create();
-        }
-        public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
-        {
-            bool result;
-            if (result = base.Build(source, build))
-                ;
-            return result;
-        }
-    }
+		{
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			return this.encoder = base.Create();
+		}
+	}
 }
