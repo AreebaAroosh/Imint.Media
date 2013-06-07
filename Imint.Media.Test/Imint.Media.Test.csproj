@@ -81,25 +81,22 @@
       <Project>{96B4C4B4-5177-4717-9B2F-C74A0C2DF7D5}</Project>
       <Name>Kean.Math</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Imint.Media\Imint.Media.Input\Imint.Media.Input.csproj">
-      <Project>{0B948F72-FF2B-4936-B23F-D8E8D092DAC5}</Project>
-      <Name>Imint.Media.Input</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Imint.Media\Imint.Media\Imint.Media.csproj">
       <Project>{0C283FE4-7254-4ED1-A125-54C297E985D8}</Project>
       <Name>Imint.Media</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Player\90TestPlayers.xml">
+    <None Include="Configuration\Player\90TestPlayers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <EmbeddedResource Include="Generator\strip.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Imint.Media.Test.targets" />
     <None Include="Imint.Media.Test.nuspec" />
     <None Include="Imint.Media.Test.licenseheader" />
   </ItemGroup>
