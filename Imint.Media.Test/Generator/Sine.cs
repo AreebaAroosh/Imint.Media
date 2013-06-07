@@ -40,8 +40,6 @@ namespace Imint.Media.Test.Generator
         {
             this.Initialize();
         }
-        [Serialize.Parameter]
-        public Colorspace Format { get; set; }
         public override string Name
         {
             get { return "sine"; }
