@@ -19,6 +19,7 @@
 			<dependency id="Kean.Draw.Raster" />
 			<dependency id="Kean.Platform" />
 		</dependencies>
+		<minClientVersion>"2.5"</minClientVersion>
 	</metadata>
 	<files>
 		<file src="Configuration\**.xml" target="build\Configuration" />
