@@ -22,6 +22,7 @@
 			<dependency id="Kean.Math.Geometry2D" />
 			<dependency id="Kean.Platform" />
 		</dependencies>
+		<minClientVersion>"2.5"</minClientVersion>
 	</metadata>
 	<files>
 		<file src="Modules\**.xml" target="build\Modules" />
