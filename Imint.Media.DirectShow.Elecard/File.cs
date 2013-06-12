@@ -46,7 +46,7 @@ namespace Imint.Media.DirectShow.Elecard
             DirectShow.Binding.IGraph result = null;
             if (name.Path.NotNull())
             {
-                string file = name.Path.PlatformPath;
+                string file = name.PlatformPath;
                 string extension = System.IO.Path.GetExtension(file).ToLower().TrimStart('.');
                 if (name.Scheme == "file" && file.NotEmpty() && this.SupportedExtensions.Exists(v => v == extension) && System.IO.File.Exists(file))
                 {

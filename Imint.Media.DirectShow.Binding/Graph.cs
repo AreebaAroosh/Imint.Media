@@ -220,7 +220,7 @@ namespace Imint.Media.DirectShow.Binding
 		{
 			bool result = false;
 			if (result = this.graph.NotNull())
-				DirectShowLib.Utils.FilterGraphTools.SaveGraphFile(this.graph, locator.Path.PlatformPath);
+				DirectShowLib.Utils.FilterGraphTools.SaveGraphFile(this.graph, locator.PlatformPath);
 			return result;
 		}
         #endregion

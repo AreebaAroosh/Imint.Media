@@ -35,33 +35,33 @@ using Kean.Core.Collection.Extension;
 
 namespace Imint.Media.DirectShow
 {
-    public abstract class File :
-        NonLinear,
+	public abstract class File :
+		NonLinear,
 		Media.Player.IFile
-    {
-        public File()
-        {
-        }
+	{
+		public File()
+		{
+		}
 		protected abstract bool Open(DirectShow.Binding.IGraph graph, string file);
-        protected override DirectShow.Binding.IGraph Open(Uri.Locator locator)
-        {
-            DirectShow.Binding.IGraph result = null;
-            if (locator.Path.NotNull())
-            {
-                string file = locator.Path.PlatformPath;
+		protected override DirectShow.Binding.IGraph Open(Uri.Locator locator)
+		{
+			DirectShow.Binding.IGraph result = null;
+			if (locator.Path.NotNull())
+			{
+				string file = locator.PlatformPath;
 				string extension = System.IO.Path.GetExtension(file).ToLower().TrimStart('.');
-                if (locator.Scheme == "file" && file.NotEmpty() && this.SupportedExtensions.Exists(v => v == extension) && System.IO.File.Exists(file))
-                {
-                    result = new Binding.Graph();
-                    if (!this.Open(result, file))
-                    {
-                        result.Close();
-                        result = null;
-                    }
-                }
-            }
-            return result;
-        }
+				if (locator.Scheme == "file" && file.NotEmpty() && this.SupportedExtensions.Exists(v => v == extension) && System.IO.File.Exists(file))
+				{
+					result = new Binding.Graph();
+					if (!this.Open(result, file))
+					{
+						result.Close();
+						result = null;
+					}
+				}
+			}
+			return result;
+		}
 
 		#region IFile Members
 		public abstract string[] SupportedExtensions { get; }
