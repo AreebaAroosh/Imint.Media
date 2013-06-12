@@ -77,7 +77,7 @@ namespace Imint.Media.Test.Generator
 
 			try
 			{
-				Uri.Path path = argument.Path.PlatformPath;
+				Uri.Path path = argument.PlatformPath;
 				if (path.NotNull())
 				{
 					Bitmap.Image image = Bitmap.Image.Open(path);
