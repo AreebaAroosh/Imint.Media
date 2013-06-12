@@ -29,29 +29,53 @@
 using System;
 using Kean.Core.Extension;
 using Uri = Kean.Core.Uri;
-using DirectShow = Imint.Media.DirectShow;
+using Serialize = Kean.Core.Serialize;
+using Geometry2D = Kean.Math.Geometry2D;
+using Math = Kean.Math;
 
 namespace Imint.Media.DirectShow
 {
-    public class Capture :
-        Stream
-    {
-        protected override DirectShow.Binding.IGraph Open(Uri.Locator locator)
-        {
-            DirectShow.Binding.IGraph result = null; 
-            if (locator.Scheme == "directshow+capture" && locator.Authority.NotNull())
-            {
+	public class Capture :
+		Stream,
+		Player.ICapture
+	{
+		[Serialize.Parameter]
+		public Geometry2D.Integer.Shell Crop { get; set; }
+		[Serialize.Parameter]
+		public Math.Fraction Ratio { get; set; }
+
+		protected override DirectShow.Binding.IGraph Open(Uri.Locator locator)
+		{
+			DirectShow.Binding.IGraph result = null; 
+			if (locator.Scheme == "directshow+capture" && locator.Authority.NotNull())
+			{
 				result = new DirectShow.Binding.Graph();
 				bool built = result.Open(new DirectShow.Binding.Filters.Capture.All(locator.Authority, new DirectShow.Binding.Filters.SampleGrabber.Yuyv(new DirectShow.Binding.Filters.NullRenderer()) { FuzzyMatch = this.Fuzzy }));
-                if (built)
-                    result.Play();
-                else
-                {
-                    result.Close();
-                    result = null;
-                }
-            }
-            return result;
-        }
-    }
+				if (built)
+					result.Play();
+				else
+				{
+					result.Close();
+					result = null;
+				}
+			}
+			return result;
+		}
+
+		public System.Collections.Generic.IEnumerator<Resource> GetSources()
+		{
+			Uri.Query query = new Uri.Query();
+			if (this.Crop.NotZero)
+				query["crop"] = this.Crop;
+			if (this.Ratio.Nominator != 0)
+				query["ratio"] = this.Ratio;
+			foreach (string device in DirectShow.Binding.Graph.Devices)
+				yield return new Resource(device, new Uri.Locator()
+				{
+					Scheme = "directshow+capture",
+					Authority = device,
+					Query = query,
+				}, ResourceType.Capture);
+		}
+	}
 }
