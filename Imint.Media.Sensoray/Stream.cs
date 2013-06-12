@@ -63,7 +63,7 @@ namespace Imint.Media.Sensoray
 			this.backend.Mp4Mode = Binding.Mp4Mode.Standard;
 			this.backend.RecordMode = Binding.RecordMode.Video;
 			this.backend.Bitrate = bitrate;
-			return this.backend.StartRecord(resource.Path.PlatformPath);
+			return this.backend.StartRecord(resource.PlatformPath);
 		}
 		public bool Start()
 		{
