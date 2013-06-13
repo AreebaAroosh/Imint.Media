@@ -61,12 +61,18 @@ namespace Imint.Media.Sensoray.Binding
 		static Board board;
 		public static Board Open()
 		{
-			if (Board.board.IsNull())
+			try
 			{
-				S2253.OpenBoard(-1);
-				int deviceCount = 0;
-				S2253.GetNumDevices(ref deviceCount);
-				Board.board = new Board(deviceCount);
+				if (Board.board.IsNull())
+				{
+					S2253.OpenBoard(-1);
+					int deviceCount = 0;
+					S2253.GetNumDevices(ref deviceCount);
+					Board.board = new Board(deviceCount);
+				}
+			}
+			catch (Exception)
+			{
 			}
 			return Board.board;
 		}
