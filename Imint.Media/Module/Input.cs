@@ -33,25 +33,25 @@ using Serialize = Kean.Core.Serialize;
 
 namespace Imint.Media.Module
 {
-    public class Input :
-        Platform.Module,
-        IInput
-    {
+	public class Input :
+		Platform.Module,
+		IInput
+	{
 		IInput backend;
 		Action<Frame> send;
 		public Input(IInput backend) :
-            base("Media")
-        {
+			base("Media")
+		{
 			this.backend = backend;
 			this.backend.Send = this.Send;
 			this.backend.OnReset += () => this.OnReset.Call();
 		}
-        protected override void Initialize()
-        {
-            this.Application["Settings"].WhenLoaded<Settings.Module>(m => m.Load("media", "Media controls.", "Object that contains all media controls.", this));
+		protected override void Initialize()
+		{
+			this.Application["Settings"].WhenLoaded<Settings.Module>(m => m.Load("media", "Media controls.", "Object that contains all media controls.", this));
 			this.Application["ThreadPool"].WhenLoaded<Platform.Module<Parallel.ThreadPool>>(m => (this as IInput).Initialize(m.Value));
 			base.Initialize();
-        }
+		}
 		protected override void Stop()
 		{
 			base.Stop();

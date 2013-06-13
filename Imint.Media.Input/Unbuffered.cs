@@ -375,6 +375,17 @@ namespace Imint.Media.Input
 		public virtual event Action<bool> SeekableChanged;
 
 		public virtual event Action<bool> HasPreviousChanged;
+
+		public System.Collections.Generic.IEnumerable<Resource> Devices 
+		{ 
+			get 
+			{
+				foreach (Player.IStream player in this.Players)
+					if (player is Player.ICapture)
+						foreach (Resource device in (player as Player.ICapture).Devices)
+							yield return device;
+			} 
+		}
 		string[] extensions;
 		public virtual string[] Extensions
 		{

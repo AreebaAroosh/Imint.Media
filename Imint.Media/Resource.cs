@@ -31,14 +31,31 @@ namespace Imint.Media
 {
 	public class Resource
 	{
-		public string Label { get; private set; }
-		public Uri.Locator Locator { get; private set; }
 		public ResourceType Type { get; private set; }
-		public Resource(string label, Uri.Locator locator, ResourceType type)
+		string label;
+		public string Label { get { return this.label ?? (this.Locator.NotNull() ? (string)this.Locator.Authority : "(unnamed)"); } }
+		public Uri.Locator Locator { get; private set; }
+		public Resource(ResourceType type, string label, Uri.Locator locator)
 		{
-			this.Label = label;
-			this.Locator = locator;
 			this.Type = type;
+			this.label = label;
+			this.Locator = locator;
+		}
+		public static implicit operator string(Resource resource)
+		{
+			return resource.Type.AsString() + ", " + resource.Label + ", " + resource.Locator;
+		}
+		public static explicit operator Resource(string resource)
+		{
+			Resource result = null;
+			if (resource.NotEmpty())
+			{
+				string[] splitted = resource.Split(',');
+				int c = 0;
+				int length = splitted.Length;
+				result = new Resource(length > 2 ? splitted[c++].Parse<ResourceType>() : ResourceType.Unknown, length > 1 ? splitted[c++].Trim() : null, splitted[c]);
+			}
+			return result;
 		}
 	}
 }

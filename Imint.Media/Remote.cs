@@ -205,6 +205,10 @@ namespace Imint.Media
 			remove { this.hasPreviousChanged -= value; }
 		}
 		#endregion
+		public System.Collections.Generic.IEnumerable<Resource> Devices 
+		{ 
+			get { return this.backend.Get<string>("media.devices").Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Map(device => (Resource)device); } 
+		}
 		public string[] Extensions { get { return this.backend.Get<string>("media.extensions").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); } }
 
 		public bool Open(Uri.Locator resource) { return this.backend.Call("media.open", resource); }

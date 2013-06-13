@@ -189,6 +189,12 @@ namespace Imint.Media.Module
 		}
 		public string[] Extensions { get { return this.backend.Extensions; } }
 
+
+		[Settings.Property("devices", "All detected capture devices.", "Get a list of all capture devices that can be opened.")]
+		public string AllDevices { get { return this.Devices.Map(device => (string)device).Join("; "); } }
+		public System.Collections.Generic.IEnumerable<Resource> Devices { get { return this.backend.Devices; } }
+
+
 		[Settings.Method("open", "Opens media.", "Opens media specified by locator argument.")]
 		public bool Open(Uri.Locator resource) 
 		{

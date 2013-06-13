@@ -25,6 +25,6 @@ namespace Imint.Media.Player
 {
 	public interface ICapture
 	{
-		System.Collections.Generic.IEnumerator<Resource> GetSources();
+		System.Collections.Generic.IEnumerable<Resource> Devices { get; }
 	}
 }

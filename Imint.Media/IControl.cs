@@ -25,35 +25,36 @@ using Geometry2D = Kean.Math.Geometry2D;
 
 namespace Imint.Media
 {
-    public interface IControl :
+	public interface IControl :
 		IDisposable
-    {
-        Uri.Locator Resource { get; }
-        event Action<Uri.Locator> ResourceChanged;
-        Status Status { get; }
-        event Action<Status> StatusChanged;
+	{
+		Uri.Locator Resource { get; }
+		event Action<Uri.Locator> ResourceChanged;
+		Status Status { get; }
+		event Action<Status> StatusChanged;
 		DateTime Start { get; }
-        event Action<DateTime> StartChanged;
-        DateTime Position { get; }
-        event Action<DateTime> PositionChanged;
-        DateTime End { get; }
-        event Action<DateTime> EndChanged;
+		event Action<DateTime> StartChanged;
+		DateTime Position { get; }
+		event Action<DateTime> PositionChanged;
+		DateTime End { get; }
+		event Action<DateTime> EndChanged;
 
-        bool Seekable { get; }
-        event Action<bool> SeekableChanged;
-        bool HasNext { get; }
-        event Action<bool> HasNextChanged;
-        bool HasPrevious { get; }
-        event Action<bool> HasPreviousChanged;
+		bool Seekable { get; }
+		event Action<bool> SeekableChanged;
+		bool HasNext { get; }
+		event Action<bool> HasNextChanged;
+		bool HasPrevious { get; }
+		event Action<bool> HasPreviousChanged;
 
-        string[] Extensions { get; }
+		System.Collections.Generic.IEnumerable<Resource> Devices { get; }
+		string[] Extensions { get; }
 
 		bool Open(Uri.Locator resource);
-        void Play();
-        void Pause();
-        void Eject();
-        void Seek(DateTime position);
-        void Next();
-        void Previous();
+		void Play();
+		void Pause();
+		void Eject();
+		void Seek(DateTime position);
+		void Next();
+		void Previous();
 	}
 }
