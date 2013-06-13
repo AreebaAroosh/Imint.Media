@@ -32,23 +32,23 @@ using Uri = Kean.Core.Uri;
 
 namespace Imint.Media.DirectShow.Binding
 {
-    public interface IGraph :
-        IDisposable
-    {
-        DateTime Position { get; }
-        DateTime Start { get; }
-        DateTime End { get; }
+	public interface IGraph :
+		IDisposable
+	{
+		DateTime Position { get; }
+		DateTime Start { get; }
+		DateTime End { get; }
 
-        Status Status { get; }
+		Status Status { get; }
 
-        bool Play();
-        bool Pause();
+		bool Play();
+		bool Pause();
 		bool Stop();
-        bool Open(Filters.Abstract recipe);
-        void Close();
-        void Seek(DateTime position);
+		bool Open(Filters.Abstract recipe);
+		void Close();
+		void Seek(DateTime position);
 
-        Action<DateTime, TimeSpan, Bitmap.Image> Send { set; }
+		Action<DateTime, TimeSpan, Bitmap.Image> Send { set; }
 		bool Save(Uri.Locator locator);
 	}
 }

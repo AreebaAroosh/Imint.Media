@@ -38,103 +38,103 @@ using Parallel = Kean.Core.Parallel;
 
 namespace Imint.Media.DirectShow.Binding
 {
-    public class Graph :
-        IGraph,
-        IBuild,
-        IDisposable
-    {
+	public class Graph :
+		IGraph,
+		IBuild,
+		IDisposable
+	{
 
-        DirectShowLib.IFilterGraph2 graph;
-        Action playing;
+		DirectShowLib.IFilterGraph2 graph;
+		Action playing;
 		Parallel.RepeatThread eventPoller;
-        Action onClose;
-        public Graph()
-        {
-        }
+		Action onClose;
+		public Graph()
+		{
+		}
 		public Graph(Platform.Application application)
 		{
 			this.Application = application;
 		}
 		~Graph()
-        {
-            Error.Log.Wrap((Action)this.Dispose)();
-        }
-        #region IDisposable Members
-        public void Dispose()
-        {
-            (this as IGraph).Close();
-        }
-        #endregion
-        public DateTime LastSeek { get; private set; }
-        public DateTime CurrentPosition { get; private set; }
-        #region IGraph Members
-        public virtual DateTime Position
-        {
-            get
-            {
-                long duration = 0;
-                if (this.graph is DirectShowLib.IMediaSeeking)
-                {
-                    Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).SetTimeFormat(DirectShowLib.TimeFormat.MediaTime));
-                    Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).GetCurrentPosition(out duration));
-                }
-                return new DateTime(duration);
-            }
-        }
-        public virtual DateTime Start {get { return new DateTime(); } }
-        public virtual DateTime End
-        {
-            get
-            {
-                long duration = 0;
-                if (this.graph is DirectShowLib.IMediaSeeking)
-                {
-                    Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).SetTimeFormat(DirectShowLib.TimeFormat.MediaTime));
-                    Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).GetDuration(out duration));
-                }
-                return new DateTime(duration);
-            }
-        }
-        public virtual Status Status
-        {
-            get
-            {
-                Status result = Status.Closed;
-                if (this.graph is DirectShowLib.IMediaControl)
-                {
-                    DirectShowLib.FilterState state;
-                    Exception.GraphError.Check((this.graph as DirectShowLib.IMediaControl).GetState(40, out state));
-                    switch (state)
-                    {
-                        case DirectShowLib.FilterState.Stopped:
-                        case DirectShowLib.FilterState.Paused:
-                            result = Status.Paused;
-                            break;
-                        case DirectShowLib.FilterState.Running:
-                            result = Status.Playing;
-                            break;
-                    }
-                }
-                return result;
-            }
-        }
-        public virtual bool Play()
-        {
-            bool result;
-            if (result = this.graph is DirectShowLib.IMediaControl)
-            {
-                result &= (this.graph as DirectShowLib.IMediaControl).Run() == 1;
-                this.playing.Call();
-            }
-            return result;
-        }
-        public virtual bool Pause()
-        {
-            bool result;
-            if (result = this.graph is DirectShowLib.IMediaControl)
-                result &= (this.graph as DirectShowLib.IMediaControl).Pause() == 1;
-            return result;
-        }
+		{
+			Error.Log.Wrap((Action)this.Dispose)();
+		}
+		#region IDisposable Members
+		public void Dispose()
+		{
+			(this as IGraph).Close();
+		}
+		#endregion
+		public DateTime LastSeek { get; private set; }
+		public DateTime CurrentPosition { get; private set; }
+		#region IGraph Members
+		public virtual DateTime Position
+		{
+			get
+			{
+				long duration = 0;
+				if (this.graph is DirectShowLib.IMediaSeeking)
+				{
+					Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).SetTimeFormat(DirectShowLib.TimeFormat.MediaTime));
+					Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).GetCurrentPosition(out duration));
+				}
+				return new DateTime(duration);
+			}
+		}
+		public virtual DateTime Start {get { return new DateTime(); } }
+		public virtual DateTime End
+		{
+			get
+			{
+				long duration = 0;
+				if (this.graph is DirectShowLib.IMediaSeeking)
+				{
+					Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).SetTimeFormat(DirectShowLib.TimeFormat.MediaTime));
+					Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).GetDuration(out duration));
+				}
+				return new DateTime(duration);
+			}
+		}
+		public virtual Status Status
+		{
+			get
+			{
+				Status result = Status.Closed;
+				if (this.graph is DirectShowLib.IMediaControl)
+				{
+					DirectShowLib.FilterState state;
+					Exception.GraphError.Check((this.graph as DirectShowLib.IMediaControl).GetState(40, out state));
+					switch (state)
+					{
+						case DirectShowLib.FilterState.Stopped:
+						case DirectShowLib.FilterState.Paused:
+							result = Status.Paused;
+							break;
+						case DirectShowLib.FilterState.Running:
+							result = Status.Playing;
+							break;
+					}
+				}
+				return result;
+			}
+		}
+		public virtual bool Play()
+		{
+			bool result;
+			if (result = this.graph is DirectShowLib.IMediaControl)
+			{
+				result &= (this.graph as DirectShowLib.IMediaControl).Run() == 1;
+				this.playing.Call();
+			}
+			return result;
+		}
+		public virtual bool Pause()
+		{
+			bool result;
+			if (result = this.graph is DirectShowLib.IMediaControl)
+				result &= (this.graph as DirectShowLib.IMediaControl).Pause() == 1;
+			return result;
+		}
 		public virtual bool Stop()
 		{
 			bool result;
@@ -142,9 +142,9 @@ namespace Imint.Media.DirectShow.Binding
 				result &= (this.graph as DirectShowLib.IMediaControl).Stop() == 1;
 			return result;
 		}
-        public virtual bool Open(Filters.Abstract recipe)
-        {
-            this.graph = new DirectShowLib.FilterGraph() as DirectShowLib.IFilterGraph2;
+		public virtual bool Open(Filters.Abstract recipe)
+		{
+			this.graph = new DirectShowLib.FilterGraph() as DirectShowLib.IFilterGraph2;
 			DirectShowLib.IMediaEventEx mediaEvent = this.graph as DirectShowLib.IMediaEventEx;
 			if (mediaEvent.NotNull())
 			{
@@ -179,43 +179,43 @@ namespace Imint.Media.DirectShow.Binding
 					}
 				});
 			}
-            return recipe.Build(this);
-        }
-        public virtual void Close()
-        {
-            if (this.graph is DirectShowLib.IMediaControl)
-            {
+			return recipe.Build(this);
+		}
+		public virtual void Close()
+		{
+			if (this.graph is DirectShowLib.IMediaControl)
+			{
 				this.Stop();
-                this.onClose.Call();
-                this.onClose = null;
-                this.Send = null;
-                if (this.eventPoller.NotNull())
+				this.onClose.Call();
+				this.onClose = null;
+				this.Send = null;
+				if (this.eventPoller.NotNull())
 				{
 					this.eventPoller.Abort();
 					this.eventPoller = null;
 				}
-                Exception.GraphError.Check((this.graph as DirectShowLib.IMediaControl).StopWhenReady());
-                Exception.GraphError.Check(this.graph.Abort());
-                //System.Runtime.InteropServices.Marshal.ReleaseComObject(this.graph);
-                this.graph = null;
-            }
-        }
-        public virtual void Seek(DateTime position)
-        {
-            if (this.graph is DirectShowLib.IMediaSeeking)
-            {
-                long current = 0;
-                long end = 0;
-                Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).SetTimeFormat(DirectShowLib.TimeFormat.MediaTime));
-                Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).GetPositions(out current, out end));
+				Exception.GraphError.Check((this.graph as DirectShowLib.IMediaControl).StopWhenReady());
+				Exception.GraphError.Check(this.graph.Abort());
+				//System.Runtime.InteropServices.Marshal.ReleaseComObject(this.graph);
+				this.graph = null;
+			}
+		}
+		public virtual void Seek(DateTime position)
+		{
+			if (this.graph is DirectShowLib.IMediaSeeking)
+			{
+				long current = 0;
+				long end = 0;
+				Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).SetTimeFormat(DirectShowLib.TimeFormat.MediaTime));
+				Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).GetPositions(out current, out end));
 				Exception.GraphError.Check((this.graph as DirectShowLib.IMediaSeeking).SetPositions(position.Ticks,
-                                                                                         DirectShowLib.AMSeekingSeekingFlags.AbsolutePositioning,
-                                                                                         end,
-                                                                                         DirectShowLib.AMSeekingSeekingFlags.NoPositioning));
-                this.LastSeek = position;
-            }
-        }
-        public virtual Action<DateTime, TimeSpan, Bitmap.Image> Send { set; get; }
+																						 DirectShowLib.AMSeekingSeekingFlags.AbsolutePositioning,
+																						 end,
+																						 DirectShowLib.AMSeekingSeekingFlags.NoPositioning));
+				this.LastSeek = position;
+			}
+		}
+		public virtual Action<DateTime, TimeSpan, Bitmap.Image> Send { set; get; }
 		public bool Save(Kean.Core.Uri.Locator locator)
 		{
 			bool result = false;
@@ -223,32 +223,41 @@ namespace Imint.Media.DirectShow.Binding
 				DirectShowLib.Utils.FilterGraphTools.SaveGraphFile(this.graph, locator.PlatformPath);
 			return result;
 		}
-        #endregion
+		#endregion
 
-        #region IBuild Members
-        DirectShowLib.IFilterGraph2 Binding.IBuild.Graph { get { return this.graph; } }
-        event Action IBuild.Playing 
-        {
-            add { this.playing += value; }
-            remove { this.playing -= value; }
-        }
-        event Action IBuild.OnClose
-        {
-            add { this.onClose += value; }
-            remove { this.onClose -= value; }
-        }
-        Action<TimeSpan, TimeSpan, Bitmap.Image> Binding.IBuild.Send
-        {
-            get
-            {
-                return (TimeSpan position, TimeSpan lifetime, Bitmap.Image bitmap) =>
-                {
-                    this.CurrentPosition = new DateTime(position.Ticks);
-                    this.Send.Call(new DateTime(position.Ticks), lifetime, bitmap);
-                };
-            }
-        }
+		#region IBuild Members
+		DirectShowLib.IFilterGraph2 Binding.IBuild.Graph { get { return this.graph; } }
+		event Action IBuild.Playing 
+		{
+			add { this.playing += value; }
+			remove { this.playing -= value; }
+		}
+		event Action IBuild.OnClose
+		{
+			add { this.onClose += value; }
+			remove { this.onClose -= value; }
+		}
+		Action<TimeSpan, TimeSpan, Bitmap.Image> Binding.IBuild.Send
+		{
+			get
+			{
+				return (TimeSpan position, TimeSpan lifetime, Bitmap.Image bitmap) =>
+				{
+					this.CurrentPosition = new DateTime(position.Ticks);
+					this.Send.Call(new DateTime(position.Ticks), lifetime, bitmap);
+				};
+			}
+		}
 		public Platform.Application Application { get; private set; }
 		#endregion
-    }
+		public static System.Collections.Generic.IEnumerable<string> Devices
+		{
+			get
+			{
+				foreach (DirectShowLib.DsDevice device in DirectShowLib.DsDevice.GetDevicesOfCat(DirectShowLib.FilterCategory.VideoInputDevice))
+					yield return device.Name;
+			}
+		}
+
+	}
 }
