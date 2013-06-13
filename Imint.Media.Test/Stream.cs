@@ -31,10 +31,20 @@ using Kean.Core.Extension;
 namespace Imint.Media.Test
 {
 	public class Stream :
-		Media.Player.IStream
+		Media.Player.IStream,
+		Media.Player.ICapture
 	{
+		public System.Collections.Generic.IEnumerable<Resource> Devices
+		{
+			get
+			{
+				foreach (Generator.Abstract generator in this.Generators)
+					yield return new Media.Resource(ResourceType.Test, generator.Name, "test://" + generator.Name);
+			}
+		}
+		Collection.IList<Generator.Abstract> generators = new Collection.List<Generator.Abstract>();
 		[Serialize.Parameter("Generator")]
-		public Collection.IList<Generator.Abstract> Generators { get; private set; }
+		public Collection.IList<Generator.Abstract> Generators { get { return this.generators; } }
 
 		[Serialize.Parameter]
 		public int FramesPerSeconds { get; set; }
@@ -43,16 +53,12 @@ namespace Imint.Media.Test
 		protected Generator.Abstract generator;
 		protected int Count { get { return this.generator.NotNull() ? this.generator.Count : 0; } }
 		protected System.Timers.Timer Timer { get; private set; }
-		protected object signal;
+		protected object signal = new object();
 		int index = 0;
 		protected int Index { get { lock (this.signal) return this.index; } set { lock (this.signal) this.index = value; } }
 		public Stream()
 		{
 			this.FramesPerSeconds = 25;
-			this.Generators = new Collection.List<Generator.Abstract>();
-			// TODO: fix deserialization
-			this.Generators.Add(new Generator.Sine()).Add(new Generator.Photo());
-			this.signal = new object();
 			this.duration = new TimeSpan(0, 0, 0, 0, 1000 / this.FramesPerSeconds);
 		}
 		#region IStream Members
@@ -69,7 +75,7 @@ namespace Imint.Media.Test
 				{
 					this.generator.Open(name);
 					Kean.Math.Fraction rate = name.Query["rate"];
-					if (rate.NotNull())
+					if (rate.Nominator > 0)
 						this.Timer = new System.Timers.Timer(1000 / (float)rate);
 					else
 						this.Timer = new System.Timers.Timer(1000 / this.FramesPerSeconds);
