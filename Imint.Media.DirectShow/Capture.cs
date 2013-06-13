@@ -44,6 +44,25 @@ namespace Imint.Media.DirectShow
 		[Serialize.Parameter]
 		public Math.Fraction Ratio { get; set; }
 
+		public System.Collections.Generic.IEnumerable<Resource> Devices
+		{
+			get 
+			{
+				Uri.Query query = new Uri.Query();
+				if (this.Crop.NotZero)
+					query["crop"] = this.Crop;
+				if (this.Ratio.Nominator != 0)
+					query["ratio"] = this.Ratio;
+				foreach (string device in DirectShow.Binding.Graph.Devices)
+					yield return new Resource(ResourceType.Capture, device, new Uri.Locator()
+					{
+						Scheme = "directshow+capture",
+						Authority = device,
+						Query = query,
+					});
+			}
+		}
+
 		protected override DirectShow.Binding.IGraph Open(Uri.Locator locator)
 		{
 			DirectShow.Binding.IGraph result = null; 
@@ -60,22 +79,6 @@ namespace Imint.Media.DirectShow
 				}
 			}
 			return result;
-		}
-
-		public System.Collections.Generic.IEnumerator<Resource> GetSources()
-		{
-			Uri.Query query = new Uri.Query();
-			if (this.Crop.NotZero)
-				query["crop"] = this.Crop;
-			if (this.Ratio.Nominator != 0)
-				query["ratio"] = this.Ratio;
-			foreach (string device in DirectShow.Binding.Graph.Devices)
-				yield return new Resource(device, new Uri.Locator()
-				{
-					Scheme = "directshow+capture",
-					Authority = device,
-					Query = query,
-				}, ResourceType.Capture);
 		}
 	}
 }
