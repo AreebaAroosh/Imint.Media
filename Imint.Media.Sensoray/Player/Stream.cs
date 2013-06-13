@@ -39,8 +39,22 @@ using Error = Kean.Core.Error;
 namespace Imint.Media.Sensoray.Player
 {
 	public class Stream :
-		Media.Player.IStream
+		Media.Player.IStream,
+		Media.Player.ICapture
 	{
+		public System.Collections.Generic.IEnumerable<Resource> Devices
+		{
+			get 
+			{ 
+				Binding.Board board = Binding.Board.Open();
+				int count = board.NotNull() ? board.Count : 0;
+				for (int i = 0; i < count; i++)
+				{
+					yield return new Media.Resource(ResourceType.Capture, "Sensoray device " + i + " stream A", "sensoray://" + i + ":0");
+					yield return new Media.Resource(ResourceType.Capture, "Sensoray device " + i + " stream B", "sensoray://" + i + ":1");
+				}
+			}
+		}
 		public int Channels { get { return 1; } }
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { set; private get; }
 		public Status Status { get; private set; }
@@ -125,6 +139,7 @@ namespace Imint.Media.Sensoray.Player
 		{
 			this.Close();
 		}
+
 	}
 
 }
