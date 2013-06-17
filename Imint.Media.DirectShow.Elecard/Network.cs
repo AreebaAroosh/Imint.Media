@@ -32,17 +32,18 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard
 {
-    public class Network :
-       DirectShow.Stream
-    {
-        protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
-        {
-            DirectShow.Binding.IGraph result = null;
+	public class Network :
+		DirectShow.Stream,
+		Media.Player.ICapture
+	{
+		protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
+		{
+			DirectShow.Binding.IGraph result = null;
 			if (name.Scheme.Head == "elecard" && name.Scheme.Tail.NotNull() && name.Scheme.Tail.Head != "file" && name.Authority.NotNull() && name.Query["video"].IsNull())
-            {
+			{
 				name = name.Copy();
-                name.Scheme = name.Scheme.Tail;
-                result = new DirectShow.Binding.Graph(this.Application);
+				name.Scheme = name.Scheme.Tail;
+				result = new DirectShow.Binding.Graph(this.Application);
 				if (this.Open(result, name))
 				{
 					result.Play();
@@ -54,12 +55,18 @@ namespace Imint.Media.DirectShow.Elecard
 					result.Close();
 					result = null;
 				}
-            }
-            return result;
-        }
+			}
+			return result;
+		}
 		bool Open(DirectShow.Binding.IGraph graph, Uri.Locator name)
 		{
 			return graph.Open(new Filters.Net.SourcePlus(name, new Filters.Demultiplexer.MpegPush(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All()) { Output = -1 }) { WaitForOutput = new TimeSpan(0, 0, 0, 1) }));
+		}
+
+		public System.Collections.Generic.IEnumerable<Resource> Devices
+		{
+			// TODO: Enumerate network streams
+			get { yield break; }
 		}
 	}
 }
