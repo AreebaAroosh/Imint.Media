@@ -32,9 +32,9 @@ using Collection = Kean.Core.Collection;
 
 namespace Imint.Media.Input
 {
-    public class Module :
+	public class Module :
 		Media.Module.InputControl
-    {
+	{
 		Unbuffered backend;
 		[Serialize.Parameter("Player")]
 		public Players Players 
@@ -50,7 +50,7 @@ namespace Imint.Media.Input
 		}
 		public Module() :
 			this(new Unbuffered())
-        { }
+		{ }
 		Module(Unbuffered backend) :
 			base(backend)
 		{

@@ -23,11 +23,11 @@ using System;
 
 namespace Imint.Media
 {
-    public enum Scan : 
+	public enum Scan : 
 		byte
-    {
-        Unknown,
-        Interlaced,
-        Progressive,
-    }
+	{
+		Unknown,
+		Interlaced,
+		Progressive,
+	}
 }

@@ -26,19 +26,19 @@ namespace Imint.Media
 	/// <summary>
 	/// Used to signal the status of the player.
 	/// </summary>
-    public enum Status
-    {
+	public enum Status
+	{
 		/// <summary>
 		/// The player is closed and no input source is opened right now.
 		/// </summary>
-        Closed,
+		Closed,
 		/// <summary>
 		/// A source is opened but it is not playing.
 		/// </summary>
-        Paused,
+		Paused,
 		/// <summary>
 		/// A source is opened and it plays.
 		/// </summary>
-        Playing,
-    }
+		Playing,
+	}
 }

@@ -29,9 +29,9 @@ namespace Imint.Media.Player
 	/// If the player opens file resources implement IFile as well.
 	/// All calls to the player starting with open and until a close is done is guaranteed to be done from the same thread.
 	/// </summary>
-    public interface INonLinear :
-        ILinear
-    {
+	public interface INonLinear :
+		ILinear
+	{
 		/// <summary>
 		/// Returns false if the opened resource does not support the INonLinear capabilities although the player does implement them.
 		/// If it returns true IsLinear must also return true since INonLinear is a superset of ILinear.
@@ -41,18 +41,18 @@ namespace Imint.Media.Player
 		/// The time and date at which recording of the video started. ILinear.Postion is relative to this.
 		/// If this is not available it should be zero and the position should be relative to zero.
 		/// </summary>
-        DateTime Start { get; }
+		DateTime Start { get; }
 		/// <summary>
 		/// The time and date when the recording of the video ended. If the recording is still performed this value will contain current 
 		/// date and time and will be changing.
 		/// </summary>
-        DateTime End { get; }
+		DateTime End { get; }
 		/// <summary>
 		/// Method that initiates a seek in the video stream.
 		/// Upon return the seek must not have been perfomed yet. If the desired position is unreachable a for the situation
 		/// relevant position should be used instead.
 		/// </summary>
 		/// <param name="position">Position in the range between Start and End to which to seek.</param>
-        void Seek(DateTime position);
-    }
+		void Seek(DateTime position);
+	}
 }

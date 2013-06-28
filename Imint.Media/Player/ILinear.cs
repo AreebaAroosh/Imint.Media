@@ -30,9 +30,9 @@ namespace Imint.Media.Player
 	/// If the player opens file resources implement IFile as well.
 	/// All calls to the player starting with open and until a close is done is guaranteed to be done from the same thread.
 	/// </summary>
-    public interface ILinear :
-        IStream
-    {
+	public interface ILinear :
+		IStream
+	{
 		/// <summary>
 		/// Returns false if the opened resource does not support the ILinear capabilities although the player does implement them.
 		/// </summary>
@@ -46,11 +46,11 @@ namespace Imint.Media.Player
 		/// Called to start playing of resource.
 		/// </summary>
 		/// <returns>True if resource started to play.</returns>
-        bool Play();
+		bool Play();
 		/// <summary>
 		/// Called to halt playing of resource.
 		/// </summary>
 		/// <returns>True if pause was successfull.</returns>
-        bool Pause();
-    }
+		bool Pause();
+	}
 }

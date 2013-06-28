@@ -23,11 +23,11 @@ using System;
 
 namespace Imint.Media.Input
 {
-    public enum EndMode
-    {
-        Pause,
-        Play,
-        Repeat,
+	public enum EndMode
+	{
+		Pause,
+		Play,
+		Repeat,
 		Eject,
 	}
 }

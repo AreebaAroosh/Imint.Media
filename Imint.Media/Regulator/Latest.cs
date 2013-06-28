@@ -69,7 +69,7 @@ namespace Imint.Media.Regulator
 		#endregion
 		void Receive(Frame frame)
 		{
-            if (frame.NotNull())
+			if (frame.NotNull())
 				lock (this.Lock)
 				{
 					if (this.activeCount >= this.MaximumActive)
