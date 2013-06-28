@@ -31,23 +31,23 @@ using Serialize = Kean.Core.Serialize;
 
 namespace Imint.Media.Test.Generator
 {
-    public class Sine :
-        Cached
-    {
-        int frames;
-        Geometry2D.Integer.Size resolution;
-        public Sine()
-        {
-            this.Initialize();
-        }
-        public override string Name
-        {
-            get { return "sine"; }
-        }
-        protected override int Prepare(Uri.Locator argument)
-        {
-            try
-            {
+	public class Sine :
+		Cached
+	{
+		int frames;
+		Geometry2D.Integer.Size resolution;
+		public Sine()
+		{
+			this.Initialize();
+		}
+		public override string Name
+		{
+			get { return "sine"; }
+		}
+		protected override int Prepare(Uri.Locator argument)
+		{
+			try
+			{
 				if (!argument.Query.Empty)
 				{
 					string value = argument.Query["resolution"];
@@ -60,45 +60,45 @@ namespace Imint.Media.Test.Generator
 					if (value.NotEmpty())
 						this.frames = Kean.Math.Integer.Parse(value);
 				}
-            }
-            catch
-            {
-                this.Initialize();
-            }
-            return this.frames;
-        }
-        protected override Tuple<Bitmap.Image, Tuple<string, object>[]> Generate(int frame)
-        {
-            Bitmap.Image result = new Bitmap.Bgra(this.resolution);
-            int width = result.Size.Width;
-            unsafe
-            {
-                byte* pointer = (byte*)result.Pointer;
+			}
+			catch
+			{
+				this.Initialize();
+			}
+			return this.frames;
+		}
+		protected override Tuple<Bitmap.Image, Tuple<string, object>[]> Generate(int frame)
+		{
+			Bitmap.Image result = new Bitmap.Bgra(this.resolution);
+			int width = result.Size.Width;
+			unsafe
+			{
+				byte* pointer = (byte*)result.Pointer;
 				for (int x = 0; x < result.Size.Width; x++)
 					for (int y = 0; y < result.Size.Height; y++)
-                    {
+					{
 						int pixel = (x + y * result.Size.Width) * 4;
-                        double value =
+						double value =
 							(Math.Sin(Convert.ToSingle((x + frame * 10) % result.Size.Width) / Convert.ToSingle(result.Size.Width) * 2.0 * Math.PI * 7) +
 							Math.Sin(Convert.ToSingle(y) / Convert.ToSingle(result.Size.Height) * 2.0 * Math.PI * 5) + 2.0)
-                            / 4.0 * 254.0;
-                        byte byteValue = Convert.ToByte(value * (Math.Sin(Convert.ToSingle(y * 0.005 + frame * 0.5)) + 1.0) / 2.0);
-                        byte red = byteValue;
-                        byte green = 0;
-                        byte blue = Convert.ToByte(255 - byteValue);
-                        pointer[4 * (y * width + x) + 0] = blue;
-                        pointer[4 * (y * width + x) + 1] = green;
-                        pointer[4 * (y * width + x) + 2] = red;
-                        pointer[4 * (y * width + x) + 3] = 255;
-                    }
-            }
-            return Tuple.Create<Bitmap.Image, Tuple<string, object>[]>(result, null);
-        }
-        private void Initialize()
-        {
-            this.frames = 10;
-            this.resolution = new Geometry2D.Integer.Size(640, 480);
-            base.Format = Colorspace.Bgra;
-        }
-    }
+							/ 4.0 * 254.0;
+						byte byteValue = Convert.ToByte(value * (Math.Sin(Convert.ToSingle(y * 0.005 + frame * 0.5)) + 1.0) / 2.0);
+						byte red = byteValue;
+						byte green = 0;
+						byte blue = Convert.ToByte(255 - byteValue);
+						pointer[4 * (y * width + x) + 0] = blue;
+						pointer[4 * (y * width + x) + 1] = green;
+						pointer[4 * (y * width + x) + 2] = red;
+						pointer[4 * (y * width + x) + 3] = 255;
+					}
+			}
+			return Tuple.Create<Bitmap.Image, Tuple<string, object>[]>(result, null);
+		}
+		private void Initialize()
+		{
+			this.frames = 10;
+			this.resolution = new Geometry2D.Integer.Size(640, 480);
+			base.Format = Colorspace.Bgra;
+		}
+	}
 }

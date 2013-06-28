@@ -23,26 +23,26 @@ using System;
 
 namespace Imint.Media.Test
 {
-    public class Linear :
-        Stream,
+	public class Linear :
+		Stream,
 		Media.Player.ILinear
-    {
+	{
 		public override Status Status { get { return this.Count == 0 ? base.Status : this.Playing ? Status.Playing : Status.Paused; } }
-        public bool Playing { get; private set; }
-        public bool Play()
-        {
-            this.Timer.Start();
-            this.Playing = true;
-            return true;
-        }
-        public bool Pause()
-        {
-            this.Timer.Stop();
-            this.Playing = false;
-            return true;
-        }
-        public bool IsLinear { get { return true; } }
-        public DateTime Position { get { return new DateTime(1000 / this.FramesPerSeconds * 10000 * this.Index); } }
+		public bool Playing { get; private set; }
+		public bool Play()
+		{
+			this.Timer.Start();
+			this.Playing = true;
+			return true;
+		}
+		public bool Pause()
+		{
+			this.Timer.Stop();
+			this.Playing = false;
+			return true;
+		}
+		public bool IsLinear { get { return true; } }
+		public DateTime Position { get { return new DateTime(1000 / this.FramesPerSeconds * 10000 * this.Index); } }
 		protected override void SendFrame()
 		{
 			lock (this.signal)
@@ -50,5 +50,5 @@ namespace Imint.Media.Test
 				this.Send(0, this.Position, this.duration, this.generator[this.Index].Item1.Copy() as Kean.Draw.Raster.Image, this.generator[this.Index].Item2);
 			}
 		}
-    }
+	}
 }

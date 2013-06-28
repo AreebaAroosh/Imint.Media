@@ -26,18 +26,18 @@ using System.Text;
 
 namespace Imint.Media.Test
 {
-    public class NonLinear :
-        Linear,
+	public class NonLinear :
+		Linear,
 		Media.Player.INonLinear
-    {
-        public bool IsNonLinear { get { return true; } }
-        public DateTime Start { get { return new DateTime(); } }
-        public DateTime End { get { return new DateTime(1000 / this.FramesPerSeconds * 10000 * (this.Count-1)); } }
-        public void Seek(DateTime position)
-        {
-            this.Index = Kean.Math.Integer.Clamp((int)(position.Ticks) / 10000 / (1000 / this.FramesPerSeconds), 0, this.Count - 1);
-            if (!this.Playing)
-                this.SendFrame();
-        }
-    }
+	{
+		public bool IsNonLinear { get { return true; } }
+		public DateTime Start { get { return new DateTime(); } }
+		public DateTime End { get { return new DateTime(1000 / this.FramesPerSeconds * 10000 * (this.Count-1)); } }
+		public void Seek(DateTime position)
+		{
+			this.Index = Kean.Math.Integer.Clamp((int)(position.Ticks) / 10000 / (1000 / this.FramesPerSeconds), 0, this.Count - 1);
+			if (!this.Playing)
+				this.SendFrame();
+		}
+	}
 }

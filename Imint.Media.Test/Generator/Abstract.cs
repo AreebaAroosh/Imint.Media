@@ -27,13 +27,13 @@ using Uri = Kean.Core.Uri;
 
 namespace Imint.Media.Test.Generator
 {
-    public abstract class Abstract :
-        Collection.Abstract.ReadOnlyVector<Tuple<Raster.Image, Tuple<string, object>[]>>,
+	public abstract class Abstract :
+		Collection.Abstract.ReadOnlyVector<Tuple<Raster.Image, Tuple<string, object>[]>>,
 		IDisposable
-    {
-        public abstract string Name { get; }
-        public abstract void Open(Uri.Locator argument);
-        public abstract void Close();
+	{
+		public abstract string Name { get; }
+		public abstract void Open(Uri.Locator argument);
+		public abstract void Close();
 
 		public void Dispose()
 		{
