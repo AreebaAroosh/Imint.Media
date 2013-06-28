@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Decoder
 {
-    public class Wmv :
-        Dmo.Decoder
-    {
-        public Wmv(params Abstract[] next) :
-            base(new System.Guid("82D353DF-90BD-4382-8BC2-3F6192B76E34"), "WMVideo Decoder Dmo", next) 
-        {
-            this.Output = 0;
-        }
-    }
+	public class Wmv :
+		Dmo.Decoder
+	{
+		public Wmv(params Abstract[] next) :
+			base(new System.Guid("82D353DF-90BD-4382-8BC2-3F6192B76E34"), "WMVideo Decoder Dmo", next) 
+		{
+			this.Output = 0;
+		}
+	}
 }

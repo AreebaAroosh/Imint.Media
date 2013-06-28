@@ -32,11 +32,11 @@ using Bitmap = Kean.Draw.Raster;
 
 namespace Imint.Media.DirectShow
 {
-    public class Mpeg :
-        File
-    {
+	public class Mpeg :
+		File
+	{
 		protected override bool Open(Binding.IGraph graph, string file)
-        {
+		{
 			bool result = false;
 			DirectShow.Binding.Filters.SampleGrabber.All samplegrabber = new DirectShow.Binding.Filters.SampleGrabber.All() { Rate = this.Rate, FuzzyMatch = this.Fuzzy };
 			if (this.Fuzzy)
@@ -45,19 +45,19 @@ namespace Imint.Media.DirectShow
 				result = graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.Mpeg2(new DirectShow.Binding.Filters.Decoder.Mpeg2(new DirectShow.Binding.Filters.Dmo.ColorConverter(samplegrabber))) { Output = 0 })) ||
 					   graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.Mpeg2(new DirectShow.Binding.Filters.Decoder.Mpeg2(new DirectShow.Binding.Filters.Dmo.ColorConverter(samplegrabber))) { Output = 1 }));
 			return result;
-        }
-        public override string[] SupportedExtensions
-        {
-            get 
-            {
-                string[] result;
-                OperatingSystem system = Environment.OSVersion;
-                if (system.Platform == PlatformID.Win32NT && system.Version.Major == 6 && system.Version.Minor != 0)
-                    result = new string[] { "vob", "mpg", "mpeg", "ps", "mod" };
-                else
-                    result = new string[0];
-                return result; 
-            }
-        }
-    }
+		}
+		public override string[] SupportedExtensions
+		{
+			get 
+			{
+				string[] result;
+				OperatingSystem system = Environment.OSVersion;
+				if (system.Platform == PlatformID.Win32NT && system.Version.Major == 6 && system.Version.Minor != 0)
+					result = new string[] { "vob", "mpg", "mpeg", "ps", "mod" };
+				else
+					result = new string[0];
+				return result; 
+			}
+		}
+	}
 }

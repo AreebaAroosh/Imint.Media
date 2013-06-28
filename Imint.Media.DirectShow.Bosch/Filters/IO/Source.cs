@@ -31,40 +31,40 @@ using Error = Kean.Core.Error;
 using Kean.Core.Extension;
 namespace Imint.Media.DirectShow.Bosch.Filters.IO
 {
-    public class Source :
-        DirectShow.Binding.Filters.Guid
-    {
-        string file;
+	public class Source :
+		DirectShow.Binding.Filters.Guid
+	{
+		string file;
 		public Source(string file, params DirectShow.Binding.Filters.Abstract[] next) :
 			base(new System.Guid("86DFF86C-BB6C-4DBB-AE9A-914BC9B81233"), "VCS MPEG-4 File Source \"" + file + "\"", next) 
-        {
-            this.file = file;
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.AMMediaType sourceMedia = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = new Guid("555DC977-D6F1-4C2E-8D64-F58221A91234") };
-            DirectShowLib.IBaseFilter result = base.Create();
-            if(result.NotNull())
+		{
+			this.file = file;
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.AMMediaType sourceMedia = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = new Guid("555DC977-D6F1-4C2E-8D64-F58221A91234") };
+			DirectShowLib.IBaseFilter result = base.Create();
+			if(result.NotNull())
 				DirectShow.Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.file, sourceMedia));
-            return result;
-        }
-        public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter = this.Create();
+			return result;
+		}
+		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter = this.Create();
 			if (build.Graph.AddFilter(filter, "VCS MPEG-4 File Source") == 0)
-            {
-                foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
-                    if (result = candidate.Build(filter, build))
-                        break;
-            }
-            else
-            {
+			{
+				foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
+					if (result = candidate.Build(filter, build))
+						break;
+			}
+			else
+			{
 				Error.Log.Append(Error.Level.Debug, "Unable to open Hauppauge Transport Reader.", "VCS MPEG-4 File Source was unable to open file \"" + this.file + "\".");
-                DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-            }
-            return result;
-        }
-    }
+				DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+			}
+			return result;
+		}
+	}
 }

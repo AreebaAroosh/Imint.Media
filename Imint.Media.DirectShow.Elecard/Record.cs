@@ -33,7 +33,7 @@ using Kean.Core.Extension;
 namespace Imint.Media.DirectShow.Elecard
 {
 	public class Record :
-	   DirectShow.Stream
+		DirectShow.Stream
 	{
 		protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
 		{

@@ -32,13 +32,13 @@ using Platform = Kean.Platform;
 
 namespace Imint.Media.DirectShow.Binding
 {
-    public interface IBuild :
-        IDisposable
-    {
-        DirectShowLib.IFilterGraph2 Graph { get; }
-        event Action Playing;
-        event Action OnClose;
-        Action<TimeSpan, TimeSpan, Bitmap.Image> Send { get; }
+	public interface IBuild :
+		IDisposable
+	{
+		DirectShowLib.IFilterGraph2 Graph { get; }
+		event Action Playing;
+		event Action OnClose;
+		Action<TimeSpan, TimeSpan, Bitmap.Image> Send { get; }
 		Platform.Application Application { get; }
 	}
 }

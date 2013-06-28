@@ -32,38 +32,38 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters
 {
-    public abstract class Abstract
-    {
-        public string Description { get; private set; }
-        public Abstract[] Next { get { return this.Followers[0]; } }
-        public Abstract[][] Followers { get; private set; }
-        public int? Output { get; set; }
-        public bool FuzzyMatch { get; set; }
-        public Abstract(string description, params Abstract[][] followers)
-        {
-            this.Description = description;
-            this.Followers = followers;
+	public abstract class Abstract
+	{
+		public string Description { get; private set; }
+		public Abstract[] Next { get { return this.Followers[0]; } }
+		public Abstract[][] Followers { get; private set; }
+		public int? Output { get; set; }
+		public bool FuzzyMatch { get; set; }
+		public Abstract(string description, params Abstract[][] followers)
+		{
+			this.Description = description;
+			this.Followers = followers;
 			this.Output = 0;
-        }
-        public Abstract(string description, params Abstract[] next) :
-            this(description, new Abstract[][] { next })
-        {
-        }
-        public override string ToString()
-        {
-            System.Text.StringBuilder result = new System.Text.StringBuilder(this.Description);
-            result.Append("(");
-            if (this.Next.NotNull())
-                foreach (Abstract candidate in this.Next) // TODO: fix for all followers
-                    result.Append(candidate.ToString());
-            result.Append("), ");            
-            return result.ToString();
-        }
+		}
+		public Abstract(string description, params Abstract[] next) :
+			this(description, new Abstract[][] { next })
+		{
+		}
+		public override string ToString()
+		{
+			System.Text.StringBuilder result = new System.Text.StringBuilder(this.Description);
+			result.Append("(");
+			if (this.Next.NotNull())
+				foreach (Abstract candidate in this.Next) // TODO: fix for all followers
+					result.Append(candidate.ToString());
+			result.Append("), ");            
+			return result.ToString();
+		}
 
-        public bool Build(IBuild build)
-        {
-            return this.Build((DirectShowLib.IPin)null, build);
-        }
+		public bool Build(IBuild build)
+		{
+			return this.Build((DirectShowLib.IPin)null, build);
+		}
 		public virtual bool Build(DirectShowLib.IBaseFilter previous, IBuild build)
 		{
 			bool result = false;
@@ -77,13 +77,13 @@ namespace Imint.Media.DirectShow.Binding.Filters
 			return result;
 		}
 		public virtual bool Build(DirectShowLib.IBaseFilter previous, int i, IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IPin outPin = DirectShowLib.DsFindPin.ByDirection(previous, DirectShowLib.PinDirection.Output, i);
+		{
+			bool result = false;
+			DirectShowLib.IPin outPin = DirectShowLib.DsFindPin.ByDirection(previous, DirectShowLib.PinDirection.Output, i);
 			if (outPin.NotNull())
 				result = this.Build(outPin, build);
-            return result;
-        }
-        public abstract bool Build(DirectShowLib.IPin source, IBuild build);
-    }
+			return result;
+		}
+		public abstract bool Build(DirectShowLib.IPin source, IBuild build);
+	}
 }

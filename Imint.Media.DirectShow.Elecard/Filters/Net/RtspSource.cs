@@ -32,42 +32,42 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Net
 {
-    public class RtspSource :
-       Abstract
-    {
-        string url;
+	public class RtspSource :
+	   Abstract
+	{
+		string url;
 		public RtspSource(string url, params DirectShow.Binding.Filters.Abstract[] next) :
 			base("net.rtspsource", new System.Guid(global::Elecard.ElUids.Filters.CLSID_RTSPNWSource), "ertspnws.ax", "Elecard RTSP NetSource \"" + url + "\"", next)
-        {
-            this.url = url;
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.IBaseFilter result = base.Create();
+		{
+			this.url = url;
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.IBaseFilter result = base.Create();
 			if (result is DirectShowLib.IFileSourceFilter)
 			{
 				Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.url, new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport }));
 				System.Threading.Thread.Sleep(500);
 			}
 			return result;
-        }
+		}
 		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter = this.Create();
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter = this.Create();
 			if (build.Graph.AddFilter(filter, "Elecard RTSP NetSource") == 0)
-            {
+			{
 				foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
-                    if (result = candidate.Build(filter, build))
-                        break;
+					if (result = candidate.Build(filter, build))
+						break;
 			}
-            else
-            {
+			else
+			{
 				Error.Log.Append(Error.Level.Debug, "Unable to open Elecard RTSP NetSource Filter.", "Elecard RTSP NetSource Filter was unable to open url \"" + this.url + "\".");
-                DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-            }
-            return result;
-        }
-    }
+				DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+			}
+			return result;
+		}
+	}
 }

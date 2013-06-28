@@ -32,9 +32,9 @@ using Bitmap = Kean.Draw.Raster;
 
 namespace Imint.Media.DirectShow
 {
-    public class Avi :
-        File
-    {
+	public class Avi :
+		File
+	{
 		protected override bool Open(Binding.IGraph graph, string file)
 		{
 			bool result = false;
@@ -55,5 +55,5 @@ namespace Imint.Media.DirectShow
 		{
 			get { return new string[] { "avi" }; }
 		}
-    }
+	}
 }

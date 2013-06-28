@@ -32,41 +32,41 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Net
 {
-    public class PushSource :
-       DirectShow.Binding.Filters.Guid
-    {
-        string url;
-        public PushSource(string url, params DirectShow.Binding.Filters.Abstract[] next) :
-            base(new System.Guid("E9717081-6E91-40BC-B5A6-6DFFAD59B5C3"), "NWPushSource Filter \"" + url + "\"", next)
-        {
-            this.url = url;
-            this.Output = 1;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.AMMediaType sourceMedia = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport };
-            DirectShowLib.IBaseFilter result = base.Create();
-            if (result.NotNull())
-                DirectShow.Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.url, sourceMedia));
-            System.Threading.Thread.Sleep(500);
-            return result;
-        }
-        public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter = this.Create();
-            if (build.Graph.AddFilter(filter, "NWPushSource Filter") == 0)
-            {
-                foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
-                    if (result = candidate.Build(filter, build))
-                        break;
-            }
-            else
-            {
-                Error.Log.Append(Error.Level.Debug, "Unable to open NWPushSource Filter.", "NWPushSource Filter was unable to open url \"" + this.url + "\".");
-                DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-            }
-            return result;
-        }
-    }
+	public class PushSource :
+	   DirectShow.Binding.Filters.Guid
+	{
+		string url;
+		public PushSource(string url, params DirectShow.Binding.Filters.Abstract[] next) :
+			base(new System.Guid("E9717081-6E91-40BC-B5A6-6DFFAD59B5C3"), "NWPushSource Filter \"" + url + "\"", next)
+		{
+			this.url = url;
+			this.Output = 1;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.AMMediaType sourceMedia = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport };
+			DirectShowLib.IBaseFilter result = base.Create();
+			if (result.NotNull())
+				DirectShow.Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.url, sourceMedia));
+			System.Threading.Thread.Sleep(500);
+			return result;
+		}
+		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter = this.Create();
+			if (build.Graph.AddFilter(filter, "NWPushSource Filter") == 0)
+			{
+				foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
+					if (result = candidate.Build(filter, build))
+						break;
+			}
+			else
+			{
+				Error.Log.Append(Error.Level.Debug, "Unable to open NWPushSource Filter.", "NWPushSource Filter was unable to open url \"" + this.url + "\".");
+				DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+			}
+			return result;
+		}
+	}
 }

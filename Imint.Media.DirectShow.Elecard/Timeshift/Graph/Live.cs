@@ -32,150 +32,150 @@ using Bitmap = Kean.Draw.Raster;
 
 namespace Imint.Media.DirectShow.Elecard.Timeshift.Graph
 {
-    class Live :
-        NonLive
-    {
-        enum Mode
-        {
-            Live,
-            Timeshift,
-            Freeze
-        }
-        const float timeshiftPart = 0.95f;
-        object @lock = new object();
-        Mode state;
-        Mode State
-        {
-            get { lock (this.@lock) return this.state; }
-            set { lock (this.@lock) { this.state = value; } }
-        }
-        DateTime freezePosition = new DateTime();
-        public override bool Play()
-        {
-            switch (this.State)
-            {
-                case Mode.Timeshift:
+	class Live :
+		NonLive
+	{
+		enum Mode
+		{
+			Live,
+			Timeshift,
+			Freeze
+		}
+		const float timeshiftPart = 0.95f;
+		object @lock = new object();
+		Mode state;
+		Mode State
+		{
+			get { lock (this.@lock) return this.state; }
+			set { lock (this.@lock) { this.state = value; } }
+		}
+		DateTime freezePosition = new DateTime();
+		public override bool Play()
+		{
+			switch (this.State)
+			{
+				case Mode.Timeshift:
 					base.Play();
 					break;
-                case Mode.Freeze:
-                    this.Seek(this.freezePosition);
-                    break;
-            }
-            return true;
-        }
-        public override bool Pause()
-        {
-            switch (this.State)
-            {
-                case Mode.Timeshift:
-                    base.Pause();
-                    break;
-                case Mode.Live:
-                    {
-                        this.State = Mode.Freeze;
-                        this.freezePosition = this.Recorder.Position;
-                    }
-                    break;
-            }
-            return true;
-        }
+				case Mode.Freeze:
+					this.Seek(this.freezePosition);
+					break;
+			}
+			return true;
+		}
+		public override bool Pause()
+		{
+			switch (this.State)
+			{
+				case Mode.Timeshift:
+					base.Pause();
+					break;
+				case Mode.Live:
+					{
+						this.State = Mode.Freeze;
+						this.freezePosition = this.Recorder.Position;
+					}
+					break;
+			}
+			return true;
+		}
 
-        public override void Seek(DateTime position)
-        {
-            if (position < new DateTime((long)(this.End.Ticks * Live.timeshiftPart)))
-            {
-                this.State = Mode.Timeshift;
-                base.Seek(position);
-                base.Play();
-            }
-            else
-            {
-                this.State = Mode.Live;
-                base.Pause();
-            }
-        }
-        public override DateTime Position
-        {
-            get
-            {
+		public override void Seek(DateTime position)
+		{
+			if (position < new DateTime((long)(this.End.Ticks * Live.timeshiftPart)))
+			{
+				this.State = Mode.Timeshift;
+				base.Seek(position);
+				base.Play();
+			}
+			else
+			{
+				this.State = Mode.Live;
+				base.Pause();
+			}
+		}
+		public override DateTime Position
+		{
+			get
+			{
 
-                DateTime result;
-                switch (this.State)
-                {
-                    case Mode.Timeshift:
+				DateTime result;
+				switch (this.State)
+				{
+					case Mode.Timeshift:
 						result = base.LastSeek.AddTicks(base.Position.Ticks);
-					    break;
-                    default:
-                    case Mode.Live:
-                        result = this.End;
-                        break;
-                    case Mode.Freeze:
-                        result = this.freezePosition;
-                        break;
-                }
-                return result;
-            }
-        }
-        public override DateTime Start
-        {
-            get { return this.Recorder.Start; }
-        }
-        public override DateTime End
-        {
-            get
-            {
-                DateTime result;
-                switch (this.State)
-                {
+						break;
+					default:
+					case Mode.Live:
+						result = this.End;
+						break;
+					case Mode.Freeze:
+						result = this.freezePosition;
+						break;
+				}
+				return result;
+			}
+		}
+		public override DateTime Start
+		{
+			get { return this.Recorder.Start; }
+		}
+		public override DateTime End
+		{
+			get
+			{
+				DateTime result;
+				switch (this.State)
+				{
 
-                    default:
-                    case Mode.Timeshift:
-                        result = new DateTime((long)(base.End.Ticks * (1.0f / Live.timeshiftPart)));
-                        break;
-                    case Mode.Freeze:
-                    case Mode.Live:
-                        result = this.Recorder.Position;
-                        break;
-                }
-                return result;
-            }
-        }
+					default:
+					case Mode.Timeshift:
+						result = new DateTime((long)(base.End.Ticks * (1.0f / Live.timeshiftPart)));
+						break;
+					case Mode.Freeze:
+					case Mode.Live:
+						result = this.Recorder.Position;
+						break;
+				}
+				return result;
+			}
+		}
 		public override Status Status
-        {
-            get
-            {
+		{
+			get
+			{
 				Status result;
-                switch (this.State)
-                {
-                    case Mode.Timeshift:
-                        result = base.Status;
-                        break;
-                    default:
-                    case Mode.Live:
+				switch (this.State)
+				{
+					case Mode.Timeshift:
+						result = base.Status;
+						break;
+					default:
+					case Mode.Live:
 						result = Status.Playing;
-                        break;
-                    case Mode.Freeze:
+						break;
+					case Mode.Freeze:
 						result = Status.Paused;
-                        break;
-                }
-                return result;
-            }
-        }
-        public override Action<DateTime, TimeSpan, Bitmap.Image> Send
-        {
-            set
-            {
-                base.Send = (position, valid, data) =>
-                {
-                    if (this.State == Mode.Timeshift)
-                        value.Call(position, valid, data);
-                };
-                this.Recorder.Send = (position, valid, data) =>
-                {
-                    if (this.State == Mode.Live)
-                        value.Call(position, valid, data);
-                };
-            }
-        }
-    }
+						break;
+				}
+				return result;
+			}
+		}
+		public override Action<DateTime, TimeSpan, Bitmap.Image> Send
+		{
+			set
+			{
+				base.Send = (position, valid, data) =>
+				{
+					if (this.State == Mode.Timeshift)
+						value.Call(position, valid, data);
+				};
+				this.Recorder.Send = (position, valid, data) =>
+				{
+					if (this.State == Mode.Live)
+						value.Call(position, valid, data);
+				};
+			}
+		}
+	}
 }

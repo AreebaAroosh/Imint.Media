@@ -31,26 +31,26 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters.File
 {
-    public class Sink :
-        Creator
-    {
-        string filename;
-        public Sink(string filename) :
-            base("DirectShow File Sink")
-        {
-            string folderPath = System.IO.Path.GetDirectoryName(filename);
-            System.IO.Directory.CreateDirectory(folderPath);
-            this.filename = filename;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.IBaseFilter result = new DirectShowLib.FileWriter() as DirectShowLib.IBaseFilter;
-            if (result is DirectShowLib.IFileSinkFilter2)
-            {
-                Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetMode(DirectShowLib.AMFileSinkFlags.OverWrite));
-                Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetFileName(this.filename, new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport }));
-            }
-            return result;
-        }
-    }
+	public class Sink :
+		Creator
+	{
+		string filename;
+		public Sink(string filename) :
+			base("DirectShow File Sink")
+		{
+			string folderPath = System.IO.Path.GetDirectoryName(filename);
+			System.IO.Directory.CreateDirectory(folderPath);
+			this.filename = filename;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.IBaseFilter result = new DirectShowLib.FileWriter() as DirectShowLib.IBaseFilter;
+			if (result is DirectShowLib.IFileSinkFilter2)
+			{
+				Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetMode(DirectShowLib.AMFileSinkFlags.OverWrite));
+				Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetFileName(this.filename, new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport }));
+			}
+			return result;
+		}
+	}
 }

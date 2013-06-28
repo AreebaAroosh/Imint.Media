@@ -31,40 +31,40 @@ using Error = Kean.Core.Error;
 using Kean.Core.Extension;
 namespace Imint.Media.DirectShow.MainConcept.Filters.IO
 {
-    public class Reader :
-        DirectShow.Binding.Filters.FromFile
-    {
-        string file;
-        public Reader(string file, params DirectShow.Binding.Filters.Abstract[] next) :
-            base(new System.Guid("AE592C9A-7CB9-45D1-9FC8-D5DF2A5C6744"), "HCWTSReader.ax", "Hauppauge Transport Reader \"" + file + "\"", next) 
-        {
-            this.file = file;
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.AMMediaType sourceMedia = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport };
-            DirectShowLib.IBaseFilter result = base.Create();
-            if(result.NotNull())
-                DirectShow.Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.file, sourceMedia));
-            return result;
-        }
-        public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter = this.Create();
-            if (build.Graph.AddFilter(filter, "Hauppauge Transport Reader") == 0)
-            {
-                foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
-                    if (result = candidate.Build(filter, this.Output.Value, build))
-                        break;
-            }
-            else
-            {
-                Error.Log.Append(Error.Level.Debug, "Unable to open Hauppauge Transport Reader.", "Hauppauge Transport Reader was unable to open file \"" + this.file + "\".");
-                DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-            }
-            return result;
-        }
-    }
+	public class Reader :
+		DirectShow.Binding.Filters.FromFile
+	{
+		string file;
+		public Reader(string file, params DirectShow.Binding.Filters.Abstract[] next) :
+			base(new System.Guid("AE592C9A-7CB9-45D1-9FC8-D5DF2A5C6744"), "HCWTSReader.ax", "Hauppauge Transport Reader \"" + file + "\"", next) 
+		{
+			this.file = file;
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.AMMediaType sourceMedia = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport };
+			DirectShowLib.IBaseFilter result = base.Create();
+			if(result.NotNull())
+				DirectShow.Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.file, sourceMedia));
+			return result;
+		}
+		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter = this.Create();
+			if (build.Graph.AddFilter(filter, "Hauppauge Transport Reader") == 0)
+			{
+				foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
+					if (result = candidate.Build(filter, this.Output.Value, build))
+						break;
+			}
+			else
+			{
+				Error.Log.Append(Error.Level.Debug, "Unable to open Hauppauge Transport Reader.", "Hauppauge Transport Reader was unable to open file \"" + this.file + "\".");
+				DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+			}
+			return result;
+		}
+	}
 }

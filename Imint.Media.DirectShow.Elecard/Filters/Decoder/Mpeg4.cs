@@ -33,13 +33,13 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Decoder
 {
-    public class Mpeg4 :
-        Abstract
-    {
-        public Mpeg4(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg4 :
+		Abstract
+	{
+		public Mpeg4(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("decoder.mpeg4", new Guid(global::Elecard.ElUids.Filters.CLSID_EMPEG4VideoDecoder), "em4vdec.ax", "Elecard MPEG-4 Video Decoder", next)
-        {
-            this.Output = 0;
-        }
+		{
+			this.Output = 0;
+		}
 	}
 }

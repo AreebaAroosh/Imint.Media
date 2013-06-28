@@ -32,26 +32,26 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.File
 {
-    public class Sink :
-       Abstract
-    {
-        string file;
+	public class Sink :
+	   Abstract
+	{
+		string file;
 		public Sink(string file, params DirectShow.Binding.Filters.Abstract[] next) :
 			base("file.sink", new System.Guid(global::Elecard.ElUids.Filters.CLSID_ESinkFilter), "esf.ax", "Elecard Sink Filter \"" + file + "\"", next)
-        {
-            this.file = file;
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(file));
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.IBaseFilter result = base.Create();
-            if (result is DirectShowLib.IFileSinkFilter2)
-            {
+		{
+			this.file = file;
+			System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(file));
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.IBaseFilter result = base.Create();
+			if (result is DirectShowLib.IFileSinkFilter2)
+			{
 				Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetMode(DirectShowLib.AMFileSinkFlags.OverWrite));
 				Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetFileName(this.file, new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport }));
 			}
 			return result;
-        }
-    }
+		}
+	}
 }

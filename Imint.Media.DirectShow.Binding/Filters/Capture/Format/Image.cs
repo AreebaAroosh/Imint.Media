@@ -31,10 +31,10 @@ using Bitmap = Kean.Math.Geometry2D;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture.Format
 {
-    public class Image
-    {
-        public Bitmap.Integer.Size Resolution { get; set; }
-        public System.Guid Type { get; set; }
-        public bool ForceHeight { get; set; }
-    }
+	public class Image
+	{
+		public Bitmap.Integer.Size Resolution { get; set; }
+		public System.Guid Type { get; set; }
+		public bool ForceHeight { get; set; }
+	}
 }

@@ -33,20 +33,20 @@ using Kean.Core.Extension;
 namespace Imint.Media.DirectShow.MainConcept
 {
 
-    public class Capture :
-        DirectShow.NonLinear
-    {
-        public Capture()
-        {
-        }
-        protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
-        {
-            Graph.Live result = null;
-            if (name.Scheme == "directshow+capture" && name.Authority.NotNull() && name.Query.NotNull() && name.Query["video"].NotNull())
-            {
-                string filename = name.Query["video"];
-                result = new Graph.Live();
-                result.Recorder = new DirectShow.Binding.Graph();
+	public class Capture :
+		DirectShow.NonLinear
+	{
+		public Capture()
+		{
+		}
+		protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
+		{
+			Graph.Live result = null;
+			if (name.Scheme == "directshow+capture" && name.Authority.NotNull() && name.Query.NotNull() && name.Query["video"].NotNull())
+			{
+				string filename = name.Query["video"];
+				result = new Graph.Live();
+				result.Recorder = new DirectShow.Binding.Graph();
 				if (result.Recorder.Open(new DirectShow.Binding.Filters.Capture.All(name.Authority, new DirectShow.Binding.Filters.SampleGrabber.Yuyv(new Filters.Encoder.Mpeg2(new Filters.Multiplexer.Mpeg2(new DirectShow.Binding.Filters.File.Sink(filename)))))))
 				{
 					result.Recorder.Play();
@@ -68,10 +68,10 @@ namespace Imint.Media.DirectShow.MainConcept
 					result.Close();
 					result = null;
 				}
-            }
-            return result as DirectShow.Binding.IGraph;
-        }
-    }
+			}
+			return result as DirectShow.Binding.IGraph;
+		}
+	}
 }
 
 

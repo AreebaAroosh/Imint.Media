@@ -32,18 +32,18 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Utils
 {
-    public class InfinitePinTee :
-        Creator
-    {
-        public InfinitePinTee(params Abstract[][] followers) :
-            base("DirectShow Infinite Pin Tee", followers)
-        {
-        }
+	public class InfinitePinTee :
+		Creator
+	{
+		public InfinitePinTee(params Abstract[][] followers) :
+			base("DirectShow Infinite Pin Tee", followers)
+		{
+		}
 
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            return new DirectShowLib.InfTee() as DirectShowLib.IBaseFilter;
-        }
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			return new DirectShowLib.InfTee() as DirectShowLib.IBaseFilter;
+		}
 		public override bool Build(DirectShowLib.IPin source, IBuild build)
 		{
 			bool result = false;
@@ -86,5 +86,5 @@ namespace Imint.Media.DirectShow.Binding.Filters.Utils
 			}
 			return result;
 		}
-    }
+	}
 }

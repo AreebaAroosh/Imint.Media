@@ -36,116 +36,116 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture
 {
-    public abstract class Abstract :
-        Filters.Abstract
-    {
-        string device;
-        public Abstract(string device, params Filters.Abstract[] next) :
-            base(device, next)
-        {
-            this.device = device;
-            this.Output = 0;
-        }
-        public override bool Build(DirectShowLib.IPin source, IBuild build)
-        {
-            bool result = false;
-            if (Abstract.FindCaptureDeviceNameByIdentifier(this.device).NotNull())
-            {
-                DirectShowLib.IBaseFilter filter = Abstract.FindCaptureDeviceByIdentifier(this.device, false);
-                if (filter.NotNull() && this.SetFormat(filter))
-                {
-                    if (build.Graph.AddFilter(filter, "Capture") == 0)
-                    {
-                        foreach (Filters.Abstract candidate in this.Next)
-                            if (result = candidate.Build(filter, 0, build))
-                                break;
-                    }
-                    else
-                    {
-                        Error.Log.Append(Error.Level.Debug, "Unable to open capture.", "DirectShow was unable to capture \"" + this.device + "\".");
-                        Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-                    }
-                }
-            }
-            return result;
-        }
-        DirectShowLib.AMMediaType[] GetOutputMediaTypes(DirectShowLib.IBaseFilter filter)
-        {
-            DirectShowLib.AMMediaType[] result = null;
-            DirectShowLib.IPin outPin = DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Output, 0);
-            if (outPin is DirectShowLib.IAMStreamConfig)
-            {
-                int count = 0;
-                int size = 0;
-                Exception.GraphError.Check((outPin as DirectShowLib.IAMStreamConfig).GetNumberOfCapabilities(out count, out size));
-                Buffer.Vector<byte> buffer = new Buffer.Vector<byte>(size);
-                result = new DirectShowLib.AMMediaType[count];
-                for (int i = 0; i < count; i++)
-                    Exception.GraphError.Check((outPin as DirectShowLib.IAMStreamConfig).GetStreamCaps(i, out result[i], buffer));
-            }
-            return result;
-        }
-        void SetOutputMedia(DirectShowLib.IBaseFilter filter, DirectShowLib.AMMediaType media)
-        {
-            DirectShowLib.IPin outPin = DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Output, 0);
-            if (outPin is DirectShowLib.IAMStreamConfig)
-                Exception.GraphError.Check((outPin as DirectShowLib.IAMStreamConfig).SetFormat(media));
-        }
-        bool SetFormat(DirectShowLib.IBaseFilter filter)
-        {
-            bool result = false;
-            Format.Image wanted = this.Media(filter);
-            if (wanted.NotNull())
-            {
-                if (wanted.Resolution.NotNull())
-                {
-                    DirectShowLib.AMMediaType[] media = this.GetOutputMediaTypes(filter);
-                    if (media.NotNull())
-                    {
-                        for (int i = 0; i < media.Length; i++)
-                        {
-                            DirectShowLib.VideoInfoHeader header = Abstract.GetHeader(media[i]);
-                            if (media[i].subType == wanted.Type &&
-                                header.BmiHeader.Width == wanted.Resolution.Width)
-                            {
-                                if (header.BmiHeader.Height == wanted.Resolution.Height)
-                                {
-                                    this.SetOutputMedia(filter, media[i]);
-                                    result = true;
-                                    break;
-                                }
-                                else if (wanted.ForceHeight)
-                                {
-                                    header.BmiHeader.Height = wanted.Resolution.Height;
-                                    header.BmiHeader.ImageSize = header.BmiHeader.Width * header.BmiHeader.Height * header.BmiHeader.BitCount / 8;
-                                    header.BitRate = (int)((10000000 / header.AvgTimePerFrame) * header.BmiHeader.ImageSize * 8);
-                                    Abstract.SetHeader(media[i], header);
-                                    media[i].sampleSize = header.BmiHeader.ImageSize;
-                                    this.SetOutputMedia(filter, media[i]);
-                                    result = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                    result = true;
-            }
-            return result;
-        }
-        protected virtual Format.Image Media(DirectShowLib.IBaseFilter filter)
-        {
-            return new Format.Image();
-        }
-        protected static DirectShowLib.VideoInfoHeader GetHeader(DirectShowLib.AMMediaType media)
-        {
-            return System.Runtime.InteropServices.Marshal.PtrToStructure(media.formatPtr, typeof(DirectShowLib.VideoInfoHeader)) as DirectShowLib.VideoInfoHeader;
-        }
-        protected static void SetHeader(DirectShowLib.AMMediaType media, DirectShowLib.VideoInfoHeader header)
-        {
-            System.Runtime.InteropServices.Marshal.StructureToPtr(header, media.formatPtr, true);
-        }
+	public abstract class Abstract :
+		Filters.Abstract
+	{
+		string device;
+		public Abstract(string device, params Filters.Abstract[] next) :
+			base(device, next)
+		{
+			this.device = device;
+			this.Output = 0;
+		}
+		public override bool Build(DirectShowLib.IPin source, IBuild build)
+		{
+			bool result = false;
+			if (Abstract.FindCaptureDeviceNameByIdentifier(this.device).NotNull())
+			{
+				DirectShowLib.IBaseFilter filter = Abstract.FindCaptureDeviceByIdentifier(this.device, false);
+				if (filter.NotNull() && this.SetFormat(filter))
+				{
+					if (build.Graph.AddFilter(filter, "Capture") == 0)
+					{
+						foreach (Filters.Abstract candidate in this.Next)
+							if (result = candidate.Build(filter, 0, build))
+								break;
+					}
+					else
+					{
+						Error.Log.Append(Error.Level.Debug, "Unable to open capture.", "DirectShow was unable to capture \"" + this.device + "\".");
+						Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+					}
+				}
+			}
+			return result;
+		}
+		DirectShowLib.AMMediaType[] GetOutputMediaTypes(DirectShowLib.IBaseFilter filter)
+		{
+			DirectShowLib.AMMediaType[] result = null;
+			DirectShowLib.IPin outPin = DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Output, 0);
+			if (outPin is DirectShowLib.IAMStreamConfig)
+			{
+				int count = 0;
+				int size = 0;
+				Exception.GraphError.Check((outPin as DirectShowLib.IAMStreamConfig).GetNumberOfCapabilities(out count, out size));
+				Buffer.Vector<byte> buffer = new Buffer.Vector<byte>(size);
+				result = new DirectShowLib.AMMediaType[count];
+				for (int i = 0; i < count; i++)
+					Exception.GraphError.Check((outPin as DirectShowLib.IAMStreamConfig).GetStreamCaps(i, out result[i], buffer));
+			}
+			return result;
+		}
+		void SetOutputMedia(DirectShowLib.IBaseFilter filter, DirectShowLib.AMMediaType media)
+		{
+			DirectShowLib.IPin outPin = DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Output, 0);
+			if (outPin is DirectShowLib.IAMStreamConfig)
+				Exception.GraphError.Check((outPin as DirectShowLib.IAMStreamConfig).SetFormat(media));
+		}
+		bool SetFormat(DirectShowLib.IBaseFilter filter)
+		{
+			bool result = false;
+			Format.Image wanted = this.Media(filter);
+			if (wanted.NotNull())
+			{
+				if (wanted.Resolution.NotNull())
+				{
+					DirectShowLib.AMMediaType[] media = this.GetOutputMediaTypes(filter);
+					if (media.NotNull())
+					{
+						for (int i = 0; i < media.Length; i++)
+						{
+							DirectShowLib.VideoInfoHeader header = Abstract.GetHeader(media[i]);
+							if (media[i].subType == wanted.Type &&
+								header.BmiHeader.Width == wanted.Resolution.Width)
+							{
+								if (header.BmiHeader.Height == wanted.Resolution.Height)
+								{
+									this.SetOutputMedia(filter, media[i]);
+									result = true;
+									break;
+								}
+								else if (wanted.ForceHeight)
+								{
+									header.BmiHeader.Height = wanted.Resolution.Height;
+									header.BmiHeader.ImageSize = header.BmiHeader.Width * header.BmiHeader.Height * header.BmiHeader.BitCount / 8;
+									header.BitRate = (int)((10000000 / header.AvgTimePerFrame) * header.BmiHeader.ImageSize * 8);
+									Abstract.SetHeader(media[i], header);
+									media[i].sampleSize = header.BmiHeader.ImageSize;
+									this.SetOutputMedia(filter, media[i]);
+									result = true;
+									break;
+								}
+							}
+						}
+					}
+				}
+				else
+					result = true;
+			}
+			return result;
+		}
+		protected virtual Format.Image Media(DirectShowLib.IBaseFilter filter)
+		{
+			return new Format.Image();
+		}
+		protected static DirectShowLib.VideoInfoHeader GetHeader(DirectShowLib.AMMediaType media)
+		{
+			return System.Runtime.InteropServices.Marshal.PtrToStructure(media.formatPtr, typeof(DirectShowLib.VideoInfoHeader)) as DirectShowLib.VideoInfoHeader;
+		}
+		protected static void SetHeader(DirectShowLib.AMMediaType media, DirectShowLib.VideoInfoHeader header)
+		{
+			System.Runtime.InteropServices.Marshal.StructureToPtr(header, media.formatPtr, true);
+		}
 
 		public static DirectShowLib.IBaseFilter FindCaptureDeviceByIdentifier(string identifier, bool defaultFirstDevice)
 		{
@@ -189,5 +189,5 @@ namespace Imint.Media.DirectShow.Binding.Filters.Capture
 			return deviceName;
 		}
 
-    }
+	}
 }

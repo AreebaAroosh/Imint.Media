@@ -32,13 +32,13 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Bosch.Filters.Demultiplexer
 {
-    public class Mpeg4 :
-        DirectShow.Binding.Filters.Guid
-    {
-        public Mpeg4(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg4 :
+		DirectShow.Binding.Filters.Guid
+	{
+		public Mpeg4(params DirectShow.Binding.Filters.Abstract[] next) :
 			base(new System.Guid("86DFF86C-C4C7-4AC6-82A6-01C19F52D0BD"), "VCS MPEG Demux Filter", next)
-        {
+		{
 			this.Output = 0;
-        }
+		}
 	}
 }

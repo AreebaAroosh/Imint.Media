@@ -33,13 +33,13 @@ using System.Text;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Demultiplexer
 {
-    public class Mpeg2 :
-        Guid
-    {
-        public Mpeg2(params Abstract[] next) :
-            base(new System.Guid("AFB6C280-2C41-11D3-8A60-0000F81E0E4A"), "DirectShow MPEG-2 Demultiplexer", next)
-        {
-            this.Output = 0;
-        }
-    }
+	public class Mpeg2 :
+		Guid
+	{
+		public Mpeg2(params Abstract[] next) :
+			base(new System.Guid("AFB6C280-2C41-11D3-8A60-0000F81E0E4A"), "DirectShow MPEG-2 Demultiplexer", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

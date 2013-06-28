@@ -34,7 +34,7 @@ using Kean.Core;
 namespace Imint.Media.DirectShow.CyberLink.Filters.IO
 {
 	public class Reader :
-	   DirectShow.Binding.Filters.FromFile
+		DirectShow.Binding.Filters.FromFile
 	{
 		string file;
 		public Reader(string file, params DirectShow.Binding.Filters.Abstract[] next) :

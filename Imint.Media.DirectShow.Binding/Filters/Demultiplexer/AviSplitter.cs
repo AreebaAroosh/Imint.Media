@@ -30,18 +30,18 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Demultiplexer
 {
-    public class AviSplitter :
-        Creator
-    {
-        public AviSplitter(params Abstract[] next) :
-            base("DirectShow Avi Splitter", next) 
-        {
-            this.Output = 0;
-        }
+	public class AviSplitter :
+		Creator
+	{
+		public AviSplitter(params Abstract[] next) :
+			base("DirectShow Avi Splitter", next) 
+		{
+			this.Output = 0;
+		}
 
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            return new DirectShowLib.AviSplitter() as DirectShowLib.IBaseFilter;
-        }
-    }
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			return new DirectShowLib.AviSplitter() as DirectShowLib.IBaseFilter;
+		}
+	}
 }

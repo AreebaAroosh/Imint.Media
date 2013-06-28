@@ -31,12 +31,12 @@ using Geometry2D = Kean.Math.Geometry2D;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture.Format
 {
-    public class Vga : Abstract
-    {
-        public Vga(string device, params Filters.Abstract[] next) : base(device, next) { }
-        protected override Image Media(DirectShowLib.IBaseFilter filter)
-        {
-            return new Image() { Type = DirectShowLib.MediaSubType.YUY2, Resolution = new Geometry2D.Integer.Size(640, 480) };
-        }
-    }
+	public class Vga : Abstract
+	{
+		public Vga(string device, params Filters.Abstract[] next) : base(device, next) { }
+		protected override Image Media(DirectShowLib.IBaseFilter filter)
+		{
+			return new Image() { Type = DirectShowLib.MediaSubType.YUY2, Resolution = new Geometry2D.Integer.Size(640, 480) };
+		}
+	}
 }

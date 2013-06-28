@@ -33,24 +33,24 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Decoder.K16
 {
-    public class Avc :
-        Abstract
-    {
-        public Avc(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Avc :
+		Abstract
+	{
+		public Avc(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("decoder.k16.avc", new System.Guid(global::Elecard.ElUids.Filters.CLSID_EAVCDEC_16K), "eavcdec_16k.ax", "Elecard AVC Video Decoder 16K", next)
-        {
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            this.Configure(new string[] { 
-                "Software", 
-                "Elecard", 
-                "Elecard AVC Video Decoder 16K", 
-                System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) }, 
-                KeyValue.Create("Error concealment", 2)
-                );
-            return base.Create();
-        }
-    }
+		{
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			this.Configure(new string[] { 
+				"Software", 
+				"Elecard", 
+				"Elecard AVC Video Decoder 16K", 
+				System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) }, 
+				KeyValue.Create("Error concealment", 2)
+				);
+			return base.Create();
+		}
+	}
 }

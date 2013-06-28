@@ -30,14 +30,14 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Compressor
 {
-    public class Mjpeg :
-        Guid
-    {
-        public Mjpeg(params Abstract[] next) :
-            base(new System.Guid("B80AB0A0-7416-11D2-9EEB-006008039E37"), "DirectShow Mjpeg compressor", next) 
-        {
-            this.Output = 0;
-        }
-    }
+	public class Mjpeg :
+		Guid
+	{
+		public Mjpeg(params Abstract[] next) :
+			base(new System.Guid("B80AB0A0-7416-11D2-9EEB-006008039E37"), "DirectShow Mjpeg compressor", next) 
+		{
+			this.Output = 0;
+		}
+	}
 }
 

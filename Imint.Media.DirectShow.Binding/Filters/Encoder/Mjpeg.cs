@@ -31,21 +31,21 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Encoder
 {
-    public class Mjpeg :
-        Guid
-    {
-        public Mjpeg(params Abstract[] next) :
-            base(new System.Guid("B80AB0A0-7416-11D2-9EEB-006008039E37"), "DirectShow MJPEG Encoder", next) 
-        {
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-             DirectShowLib.IBaseFilter result = base.Create();
-             DirectShowLib.IPin pin = DirectShowLib.DsFindPin.ByDirection(result, DirectShowLib.PinDirection.Output, this.Output.Value);
-             if (pin.NotNull() && pin is DirectShowLib.IAMVideoCompression)
-                 Exception.GraphError.Check((pin as DirectShowLib.IAMVideoCompression).put_Quality(1.0));
-             return result;
-        }
-    }
+	public class Mjpeg :
+		Guid
+	{
+		public Mjpeg(params Abstract[] next) :
+			base(new System.Guid("B80AB0A0-7416-11D2-9EEB-006008039E37"), "DirectShow MJPEG Encoder", next) 
+		{
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			 DirectShowLib.IBaseFilter result = base.Create();
+			 DirectShowLib.IPin pin = DirectShowLib.DsFindPin.ByDirection(result, DirectShowLib.PinDirection.Output, this.Output.Value);
+			 if (pin.NotNull() && pin is DirectShowLib.IAMVideoCompression)
+				 Exception.GraphError.Check((pin as DirectShowLib.IAMVideoCompression).put_Quality(1.0));
+			 return result;
+		}
+	}
 }

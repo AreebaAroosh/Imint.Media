@@ -33,13 +33,13 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Decoder.HD
 {
-    public class Mpeg2 :
-        Abstract
-    {
-        public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg2 :
+		Abstract
+	{
+		public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("decoder.hd.mpeg2", new Guid(global::Elecard.ElUids.Filters.CLSID_EM2VD_HD), "em2vd_hd.ax", "Elecard MPEG-2 Video Decoder HD", next)
-        {
-            this.Output = 0;
-        }
+		{
+			this.Output = 0;
+		}
 	}
 }

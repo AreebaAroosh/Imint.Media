@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Encoder
 {
-    public class Dv :
-        Guid
-    {
-        public Dv(params Abstract[] next) :
-            base(new System.Guid("13AA3650-BB6F-11D0-AFB9-00AA00B67A42"), "DirectShow DV Video Encoder", next) 
-        {
-            this.Output = 0;
-        }
-    }
+	public class Dv :
+		Guid
+	{
+		public Dv(params Abstract[] next) :
+			base(new System.Guid("13AA3650-BB6F-11D0-AFB9-00AA00B67A42"), "DirectShow DV Video Encoder", next) 
+		{
+			this.Output = 0;
+		}
+	}
 }

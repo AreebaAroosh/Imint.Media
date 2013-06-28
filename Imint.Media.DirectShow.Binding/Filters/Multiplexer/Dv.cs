@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Multiplexer
 {
-    public class Dv :
-        Guid
-    {
-        public Dv(params Abstract[] next) :
-            base(new System.Guid("129D7E40-C10D-11D0-AFB9-00AA00B67A42"), "DirectShow Dv Muxer", next)
-        {
-            this.Output = 0;
-        }
-    }
+	public class Dv :
+		Guid
+	{
+		public Dv(params Abstract[] next) :
+			base(new System.Guid("129D7E40-C10D-11D0-AFB9-00AA00B67A42"), "DirectShow Dv Muxer", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

@@ -33,35 +33,35 @@ using Uri = Kean.Core.Uri;
 using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow
-{    
-    public abstract class NonLinear :
-        Linear,
+{
+	public abstract class NonLinear :
+		Linear,
 		Media.Player.INonLinear
-    {
-        protected NonLinear()
-        {                
-        }
-        #region INonLinear Members
+	{
+		protected NonLinear()
+		{                
+		}
+		#region INonLinear Members
 		bool Media.Player.INonLinear.IsNonLinear
 		{
 			get { return true; }
 		}
 		DateTime Media.Player.INonLinear.Start
-        {
-            get { return this.Graph.Start; }
-        }
+		{
+			get { return this.Graph.Start; }
+		}
 
 		DateTime Media.Player.INonLinear.End
-        {
-            get { return this.Graph.End; }
-        }
+		{
+			get { return this.Graph.End; }
+		}
 
 		void Media.Player.INonLinear.Seek(DateTime position)
-        {
+		{
 			this.LastPosition = null;
-            this.Graph.Seek(position);
-        }
+			this.Graph.Seek(position);
+		}
 
-        #endregion
+		#endregion
 	}
 }

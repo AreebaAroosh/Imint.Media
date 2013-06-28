@@ -31,42 +31,42 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.MainConcept.Filters.IO
 {
-    public class Writer :
-        DirectShow.Binding.Filters.FromFile
-    {
-        string filename;
-        public Writer(string filename) :
-            base(new System.Guid("56ECEE04-1726-4D6F-8792-21C8DBACA7BE"), "HCWTSWriter.ax", "Hauppauge Transport Writer")
-        {
-            this.filename = filename;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.AMMediaType media = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Program };
-            DirectShowLib.IBaseFilter result = base.Create();
-            if (result.NotNull())
-            {
-                DirectShowLib.FilterInfo info;
-                result.QueryFilterInfo(out info);
-                string info2;
-                result.QueryVendorInfo(out info2);
-                DirectShow.Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter).SetFileName(this.filename, media));
-            }
-            return result;
-        }
-        public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
-        {
-            build.Playing += () =>
-            {
-            //    if (this.recorder.NotNull())
-            //        this.recorder.StartBackupToFile(this.filename, 0);
-            };
-            build.OnClose += () =>
-            {
-            //    if (this.recorder.NotNull())
-            //        this.recorder.StopBackupToFile();
-            };
-            return base.Build(source, build);
-        }
-    }
+	public class Writer :
+		DirectShow.Binding.Filters.FromFile
+	{
+		string filename;
+		public Writer(string filename) :
+			base(new System.Guid("56ECEE04-1726-4D6F-8792-21C8DBACA7BE"), "HCWTSWriter.ax", "Hauppauge Transport Writer")
+		{
+			this.filename = filename;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.AMMediaType media = new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Program };
+			DirectShowLib.IBaseFilter result = base.Create();
+			if (result.NotNull())
+			{
+				DirectShowLib.FilterInfo info;
+				result.QueryFilterInfo(out info);
+				string info2;
+				result.QueryVendorInfo(out info2);
+				DirectShow.Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter).SetFileName(this.filename, media));
+			}
+			return result;
+		}
+		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
+		{
+			build.Playing += () =>
+			{
+			//    if (this.recorder.NotNull())
+			//        this.recorder.StartBackupToFile(this.filename, 0);
+			};
+			build.OnClose += () =>
+			{
+			//    if (this.recorder.NotNull())
+			//        this.recorder.StopBackupToFile();
+			};
+			return base.Build(source, build);
+		}
+	}
 }

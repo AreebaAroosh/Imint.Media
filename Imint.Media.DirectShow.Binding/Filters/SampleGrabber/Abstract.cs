@@ -35,75 +35,75 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
 {
-    public abstract class Abstract :
-        Creator,
-        IDisposable
-    {
+	public abstract class Abstract :
+		Creator,
+		IDisposable
+	{
 		public Kean.Math.Fraction Rate { get; set; }
-        public Kean.Draw.CoordinateSystem CoordinateSystem { get; set; }
-        IBuild build;
-        Geometry2D.Integer.Size size;
-        long lifetime;
-        DirectShowLib.ISampleGrabber grabber;
-        protected abstract System.Guid SubType { get; }
-        protected Abstract(string description, params Filters.Abstract[] next) :
-            base(description, next)
-        {
-            this.Output = 0;
-        }
-        
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.ISampleGrabber result = new DirectShowLib.SampleGrabber() as DirectShowLib.ISampleGrabber;
-            Exception.GraphError.Check(result.SetMediaType(new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Video, formatType = DirectShowLib.FormatType.VideoInfo, subType = this.SubType }));
-            Exception.GraphError.Check(result.SetBufferSamples(true));
-            Exception.GraphError.Check(result.SetCallback(new Callback(this), 1));
-            return (this.grabber = result) as DirectShowLib.IBaseFilter;
-        }
-        public override bool Build(DirectShowLib.IPin source, IBuild build)
-        {
-            this.build = build;
-            this.build.OnClose += this.Dispose;
-            bool result;
-            if (result = base.Build(source, build))
-            {
-                DirectShowLib.AMMediaType media = new DirectShowLib.AMMediaType();
-                Exception.GraphError.Check((this.grabber as  DirectShowLib.ISampleGrabber).GetConnectedMediaType(media));
-                DirectShowLib.VideoInfoHeader header = (DirectShowLib.VideoInfoHeader)System.Runtime.InteropServices.Marshal.PtrToStructure(media.formatPtr, typeof(DirectShowLib.VideoInfoHeader));
-                this.size = new Geometry2D.Integer.Size(header.BmiHeader.Width, header.BmiHeader.Height);
-                this.lifetime = header.AvgTimePerFrame;
-                // NOTE!!!! Here we set a default frame rate if the video does not have such information available.
-                if (this.lifetime < 1000 || this.lifetime > 10000000)
-                    this.lifetime = 400000;
+		public Kean.Draw.CoordinateSystem CoordinateSystem { get; set; }
+		IBuild build;
+		Geometry2D.Integer.Size size;
+		long lifetime;
+		DirectShowLib.ISampleGrabber grabber;
+		protected abstract System.Guid SubType { get; }
+		protected Abstract(string description, params Filters.Abstract[] next) :
+			base(description, next)
+		{
+			this.Output = 0;
+		}
+		
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.ISampleGrabber result = new DirectShowLib.SampleGrabber() as DirectShowLib.ISampleGrabber;
+			Exception.GraphError.Check(result.SetMediaType(new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Video, formatType = DirectShowLib.FormatType.VideoInfo, subType = this.SubType }));
+			Exception.GraphError.Check(result.SetBufferSamples(true));
+			Exception.GraphError.Check(result.SetCallback(new Callback(this), 1));
+			return (this.grabber = result) as DirectShowLib.IBaseFilter;
+		}
+		public override bool Build(DirectShowLib.IPin source, IBuild build)
+		{
+			this.build = build;
+			this.build.OnClose += this.Dispose;
+			bool result;
+			if (result = base.Build(source, build))
+			{
+				DirectShowLib.AMMediaType media = new DirectShowLib.AMMediaType();
+				Exception.GraphError.Check((this.grabber as  DirectShowLib.ISampleGrabber).GetConnectedMediaType(media));
+				DirectShowLib.VideoInfoHeader header = (DirectShowLib.VideoInfoHeader)System.Runtime.InteropServices.Marshal.PtrToStructure(media.formatPtr, typeof(DirectShowLib.VideoInfoHeader));
+				this.size = new Geometry2D.Integer.Size(header.BmiHeader.Width, header.BmiHeader.Height);
+				this.lifetime = header.AvgTimePerFrame;
+				// NOTE!!!! Here we set a default frame rate if the video does not have such information available.
+				if (this.lifetime < 1000 || this.lifetime > 10000000)
+					this.lifetime = 400000;
 				if (this.Rate.NotNull())
 				{
 					double factor = (double)this.Rate / (1000 / new TimeSpan(this.lifetime).TotalMilliseconds) ;
 					int code = (this.build.Graph as DirectShowLib.IMediaSeeking).SetRate(factor);
 				}
 			}
-            return result;
-        }
-        protected abstract Bitmap.Image CreateBitmap(Buffer.Sized data, Geometry2D.Integer.Size resolution);
-        ~Abstract()
-        {
+			return result;
+		}
+		protected abstract Bitmap.Image CreateBitmap(Buffer.Sized data, Geometry2D.Integer.Size resolution);
+		~Abstract()
+		{
 			Error.Log.Wrap((Action)this.Dispose)();
 		}
-        public void Dispose()
-        {
-            if (this.build.NotNull())
-            {
-                this.build.OnClose -= this.Dispose;
-                this.build = null;
-            }
-            if (this.grabber.NotNull())
-            {
-                this.grabber.SetCallback(null, 1);
-                this.grabber = null;
-            }
+		public void Dispose()
+		{
+			if (this.build.NotNull())
+			{
+				this.build.OnClose -= this.Dispose;
+				this.build = null;
+			}
+			if (this.grabber.NotNull())
+			{
+				this.grabber.SetCallback(null, 1);
+				this.grabber = null;
+			}
 		}
 		#region Callback
 		class Callback :
-	        DirectShowLib.ISampleGrabberCB
+			DirectShowLib.ISampleGrabberCB
 		{
 			Abstract parent;
 			public Callback(Abstract parent)

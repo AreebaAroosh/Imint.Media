@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.MainConcept.Filters.Demultiplexer
 {
-    public class Mpeg2 :
-        DirectShow.Binding.Filters.Guid
-    {
-        public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
-            base(new System.Guid("AFB6C280-2C41-11D3-8A60-0000F81E0E4A"), "MPEG-2 Demultiplexer", next)
-        {
-            this.Output = 4;
-        }
-    }
+	public class Mpeg2 :
+		DirectShow.Binding.Filters.Guid
+	{
+		public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
+			base(new System.Guid("AFB6C280-2C41-11D3-8A60-0000F81E0E4A"), "MPEG-2 Demultiplexer", next)
+		{
+			this.Output = 4;
+		}
+	}
 }

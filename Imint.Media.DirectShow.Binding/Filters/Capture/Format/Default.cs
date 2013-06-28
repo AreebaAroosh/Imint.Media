@@ -31,8 +31,8 @@ using Geometry2D = Kean.Math.Geometry2D;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture.Format
 {
-    public class Default : Abstract
-    {
-        public Default(string device, params Filters.Abstract[] next) : base(device, next) { }
-    }
+	public class Default : Abstract
+	{
+		public Default(string device, params Filters.Abstract[] next) : base(device, next) { }
+	}
 }

@@ -30,17 +30,17 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters
 {
-    public class NullRenderer :
-        Creator
-    {
-        public NullRenderer() :
-            base("DirectShow Null Renderer")
-        {
-        }
-        
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            return new DirectShowLib.NullRenderer() as DirectShowLib.IBaseFilter;
-        }
-    }
+	public class NullRenderer :
+		Creator
+	{
+		public NullRenderer() :
+			base("DirectShow Null Renderer")
+		{
+		}
+		
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			return new DirectShowLib.NullRenderer() as DirectShowLib.IBaseFilter;
+		}
+	}
 }

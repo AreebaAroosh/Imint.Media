@@ -31,9 +31,9 @@ using Uri = Kean.Core.Uri;
 
 namespace Imint.Media.DirectShow
 {
-    public class Wmv :
-        File
-    {
+	public class Wmv :
+		File
+	{
 		protected override bool Open(Binding.IGraph graph, string file)
 		{
 			bool result = false;
@@ -53,5 +53,5 @@ namespace Imint.Media.DirectShow
 		{
 			get { return new string[] { "wmv", "asf" }; }
 		}
-    }
+	}
 }

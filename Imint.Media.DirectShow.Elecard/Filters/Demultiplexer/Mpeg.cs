@@ -32,13 +32,13 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Demultiplexer
 {
-    public class Mpeg :
-        Abstract
-    {
-        public Mpeg(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg :
+		Abstract
+	{
+		public Mpeg(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("demultiplexer.mpeg", new System.Guid(global::Elecard.ElUids.Filters.CLSID_MPGDMX), "empgdmx.ax", "Elecard MPEG Demultiplexer", next)
-        {
+		{
 			this.Output = 0;
-        }
+		}
 	}
 }

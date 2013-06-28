@@ -33,18 +33,18 @@ using Geometry2D = Kean.Math.Geometry2D;
 
 namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
 {
-    public class Bgr :
-        Abstract
-    {
-        protected override System.Guid SubType { get { return DirectShowLib.MediaSubType.RGB24; } }
-        public Bgr(params Filters.Abstract[] next) :
-            base("Bgr Sample Grabber", next)
-        {
-            this.CoordinateSystem = CoordinateSystem = Kean.Draw.CoordinateSystem.YUpward;
-        }
-        protected override Bitmap.Image CreateBitmap(Buffer.Sized data, Geometry2D.Integer.Size resolution)
-        {
-            return new Bitmap.Bgr(data, resolution, this.CoordinateSystem);
-        }
-    }
+	public class Bgr :
+		Abstract
+	{
+		protected override System.Guid SubType { get { return DirectShowLib.MediaSubType.RGB24; } }
+		public Bgr(params Filters.Abstract[] next) :
+			base("Bgr Sample Grabber", next)
+		{
+			this.CoordinateSystem = CoordinateSystem = Kean.Draw.CoordinateSystem.YUpward;
+		}
+		protected override Bitmap.Image CreateBitmap(Buffer.Sized data, Geometry2D.Integer.Size resolution)
+		{
+			return new Bitmap.Bgr(data, resolution, this.CoordinateSystem);
+		}
+	}
 }

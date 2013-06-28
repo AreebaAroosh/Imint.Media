@@ -32,40 +32,40 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters.File
 {
-    public class AsfReader :
-        Creator
-    {
-        string file;
-        public AsfReader(string file, params Abstract[] next) :
-            base("DirectShow File Source \"" + file + "\"", next)
-        {
-            this.file = file;
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            return new DirectShowLib.WMAsfReader() as DirectShowLib.IBaseFilter;
-        }
-        public override bool Build(DirectShowLib.IPin source, IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter = this.Create();
-            if (filter.NotNull())
-            {
-                Exception.GraphError.Check((filter as DirectShowLib.IFileSourceFilter).Load(this.file, new DirectShowLib.AMMediaType()));
-                if (build.Graph.AddFilter(filter, "Asf Reader") == 0)
-                {
-                    foreach (Abstract candidate in this.Next)
-                        if (result = candidate.Build(filter, build))
-                            break;
-                }
-                else
-                {
-                    Error.Log.Append(Error.Level.Debug, "Unable to open file.", "DirectShow was unable to open file \"" + this.file + "\".");
-                    Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-                }
-            }
-            return result;
-        }
-    }
+	public class AsfReader :
+		Creator
+	{
+		string file;
+		public AsfReader(string file, params Abstract[] next) :
+			base("DirectShow File Source \"" + file + "\"", next)
+		{
+			this.file = file;
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			return new DirectShowLib.WMAsfReader() as DirectShowLib.IBaseFilter;
+		}
+		public override bool Build(DirectShowLib.IPin source, IBuild build)
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter = this.Create();
+			if (filter.NotNull())
+			{
+				Exception.GraphError.Check((filter as DirectShowLib.IFileSourceFilter).Load(this.file, new DirectShowLib.AMMediaType()));
+				if (build.Graph.AddFilter(filter, "Asf Reader") == 0)
+				{
+					foreach (Abstract candidate in this.Next)
+						if (result = candidate.Build(filter, build))
+							break;
+				}
+				else
+				{
+					Error.Log.Append(Error.Level.Debug, "Unable to open file.", "DirectShow was unable to open file \"" + this.file + "\".");
+					Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+				}
+			}
+			return result;
+		}
+	}
 }

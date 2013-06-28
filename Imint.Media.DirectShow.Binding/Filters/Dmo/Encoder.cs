@@ -31,21 +31,21 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Dmo
 {
-    public class Encoder :
-        Creator
-    {
-        System.Guid guid;
-        public Encoder(System.Guid guid, string description, params Abstract[] next) :
-            base(description, next)
-        {
-            this.guid = guid;
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.IBaseFilter result = new DirectShowLib.DMOWrapperFilter() as DirectShowLib.IBaseFilter;
-            Exception.GraphError.Check((result as DirectShowLib.IDMOWrapperFilter).Init(guid, DirectShowLib.DMO.DMOCategory.VideoEncoder));
-            return result;
-        }
-    }
+	public class Encoder :
+		Creator
+	{
+		System.Guid guid;
+		public Encoder(System.Guid guid, string description, params Abstract[] next) :
+			base(description, next)
+		{
+			this.guid = guid;
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.IBaseFilter result = new DirectShowLib.DMOWrapperFilter() as DirectShowLib.IBaseFilter;
+			Exception.GraphError.Check((result as DirectShowLib.IDMOWrapperFilter).Init(guid, DirectShowLib.DMO.DMOCategory.VideoEncoder));
+			return result;
+		}
+	}
 }

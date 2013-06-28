@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.MainConcept.Filters.Multiplexer
 {
-    public class Mpeg2 :
-        DirectShow.Binding.Filters.FromFile
-    {
-        public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
-            base(new System.Guid("68E7FACB-C317-466D-B8FC-42AE81DE0681"), "hcw_mcmpeg2mux.ax", "MainConcept (HCW) MPEG Multiplexer-Plus", next)
-        {
-            this.Output = 0;
-        }
-    }
+	public class Mpeg2 :
+		DirectShow.Binding.Filters.FromFile
+	{
+		public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
+			base(new System.Guid("68E7FACB-C317-466D-B8FC-42AE81DE0681"), "hcw_mcmpeg2mux.ax", "MainConcept (HCW) MPEG Multiplexer-Plus", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

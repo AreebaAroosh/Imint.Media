@@ -30,12 +30,12 @@ using System;
 
 namespace Imint.Media.DirectShow
 {
-    public abstract class Linear : 
-        Stream,
-        Media.Player.ILinear
-    {
-        protected Linear()
-        {
+	public abstract class Linear : 
+		Stream,
+		Media.Player.ILinear
+	{
+		protected Linear()
+		{
 		}
 		#region Media.ILinear Members
 		bool Media.Player.ILinear.IsLinear
@@ -43,17 +43,17 @@ namespace Imint.Media.DirectShow
 			get { return true; }
 		}
 		DateTime Media.Player.ILinear.Position
-        {
-            get { return this.LastPosition.HasValue ? this.LastPosition.Value : this.Graph.Position; }
-        }
+		{
+			get { return this.LastPosition.HasValue ? this.LastPosition.Value : this.Graph.Position; }
+		}
 		bool Media.Player.ILinear.Play()
-        {
-            return this.Graph.Play();
-        }
+		{
+			return this.Graph.Play();
+		}
 		bool Media.Player.ILinear.Pause()
-        {
-            return this.Graph.Pause();
-        }
-        #endregion
+		{
+			return this.Graph.Pause();
+		}
+		#endregion
 	}
 }

@@ -33,17 +33,17 @@ using Geometry2D = Kean.Math.Geometry2D;
 
 namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
 {
-    public class Yuyv :
-        Abstract
-    {
-        protected override System.Guid SubType { get { return DirectShowLib.MediaSubType.YUY2; } }
-        public Yuyv(params Filters.Abstract[] next) :
+	public class Yuyv :
+		Abstract
+	{
+		protected override System.Guid SubType { get { return DirectShowLib.MediaSubType.YUY2; } }
+		public Yuyv(params Filters.Abstract[] next) :
 			base("Yuyv Sample Grabber", next)
-        {
-        }
-        protected override Raster.Image CreateBitmap(Buffer.Sized data, Geometry2D.Integer.Size resolution)
-        {
-            return new Raster.Yuyv(data, resolution, this.CoordinateSystem);
-        }
-    }
+		{
+		}
+		protected override Raster.Image CreateBitmap(Buffer.Sized data, Geometry2D.Integer.Size resolution)
+		{
+			return new Raster.Yuyv(data, resolution, this.CoordinateSystem);
+		}
+	}
 }

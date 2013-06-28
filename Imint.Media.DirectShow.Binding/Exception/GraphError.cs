@@ -32,28 +32,28 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Exception
 {
-    public class GraphError :
-        Abstract
-    {
-        GraphError(Error.Level level, string title, string message, params string[] arguments) :
-            base(level, title, message, arguments)
-        {
-        }
-        public static void Check(int code)
-        {
-            switch (code)
-            {
-                case 0: // no error, do nothing
-                case 1: // succeeded, do nothing
-                    break;
-                default:
-                    string message = DirectShowLib.DsError.GetErrorText(code);
-                    if (message.NotNull())
-                        new GraphError(Error.Level.Debug, "DirectShow Error", message).Throw();
-                    else
-                        new GraphError(Error.Level.Debug, "DirectShow Error", "Not recognized error code " + code + ".").Throw();
-                    break;
-            }
-        }
-    }
+	public class GraphError :
+		Abstract
+	{
+		GraphError(Error.Level level, string title, string message, params string[] arguments) :
+			base(level, title, message, arguments)
+		{
+		}
+		public static void Check(int code)
+		{
+			switch (code)
+			{
+				case 0: // no error, do nothing
+				case 1: // succeeded, do nothing
+					break;
+				default:
+					string message = DirectShowLib.DsError.GetErrorText(code);
+					if (message.NotNull())
+						new GraphError(Error.Level.Debug, "DirectShow Error", message).Throw();
+					else
+						new GraphError(Error.Level.Debug, "DirectShow Error", "Not recognized error code " + code + ".").Throw();
+					break;
+			}
+		}
+	}
 }

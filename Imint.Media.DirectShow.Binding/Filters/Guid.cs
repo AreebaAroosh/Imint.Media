@@ -32,33 +32,33 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters
 {
-    public class Guid :
-        Creator
-    {
+	public class Guid :
+		Creator
+	{
 		protected System.Guid Identifier { get; private set; }
-        public Guid(System.Guid guid, string description) :
-            base(description)
-        {
-            this.Identifier = guid;
-        }
-        public Guid(System.Guid guid, string description, params Filters.Abstract[] next) :
-            base(description, next)
-        {
-            this.Identifier = guid;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.IBaseFilter result = null;
-            try
-            {
-                result = Activator.CreateInstance(Type.GetTypeFromCLSID(this.Identifier)) as DirectShowLib.IBaseFilter;
-            }
-            catch(System.Exception e)
-            {
-                string message = "Filter \"" + this.Description + "\" could not find the guid \"" + this.Identifier.ToString() + "\".";
-                new DirectShow.Binding.Exception.FilterNotFound(Error.Level.Debug, message, e.Message).Throw();
-            }
-            return result;
-        }
-    }
+		public Guid(System.Guid guid, string description) :
+			base(description)
+		{
+			this.Identifier = guid;
+		}
+		public Guid(System.Guid guid, string description, params Filters.Abstract[] next) :
+			base(description, next)
+		{
+			this.Identifier = guid;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.IBaseFilter result = null;
+			try
+			{
+				result = Activator.CreateInstance(Type.GetTypeFromCLSID(this.Identifier)) as DirectShowLib.IBaseFilter;
+			}
+			catch(System.Exception e)
+			{
+				string message = "Filter \"" + this.Description + "\" could not find the guid \"" + this.Identifier.ToString() + "\".";
+				new DirectShow.Binding.Exception.FilterNotFound(Error.Level.Debug, message, e.Message).Throw();
+			}
+			return result;
+		}
+	}
 }

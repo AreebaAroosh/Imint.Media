@@ -33,21 +33,21 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Decoder.SD
 {
-    public class Mpeg2 :
-        Abstract
-    {
-        public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg2 :
+		Abstract
+	{
+		public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("decoder.sd.mpeg2", new Guid(global::Elecard.ElUids.Filters.CLSID_EM2VD_SD), "em2vd_sd.ax", "Elecard MPEG-2 Video Decoder SD", next)
-        {
-            this.Output = 0;
-        }
+		{
+			this.Output = 0;
+		}
 		public override DirectShowLib.IBaseFilter Create()
 		{
 			this.Configure(new string[] { 
-                "Software", 
-                "Elecard", 
-                "Elecard MPEG-2 Video Decoder SD", 
-                System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
+				"Software", 
+				"Elecard", 
+				"Elecard MPEG-2 Video Decoder SD", 
+				System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
 				KeyValue.Create("Quality", 3)
 				);
 			return base.Create();

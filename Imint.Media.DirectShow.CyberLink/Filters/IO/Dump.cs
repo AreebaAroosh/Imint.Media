@@ -33,7 +33,7 @@ using Kean.Core.Extension;
 namespace Imint.Media.DirectShow.CyberLink.Filters.IO
 {
 	public class Dump :
-	   DirectShow.Binding.Filters.FromFile
+		DirectShow.Binding.Filters.FromFile
 	{
 		string file;
 		public Dump(string file, params DirectShow.Binding.Filters.Abstract[] next) :

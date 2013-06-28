@@ -38,7 +38,7 @@ namespace Imint.Media.DirectShow.CyberLink
 		protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
 		{
 			DirectShow.Binding.IGraph result = null;
-            if (name.Scheme == "directshow+capture" && name.Scheme.Tail.NotNull() && name.Authority.NotNull() && name.Query["video"].NotEmpty())
+			if (name.Scheme == "directshow+capture" && name.Scheme.Tail.NotNull() && name.Authority.NotNull() && name.Query["video"].NotEmpty())
 			{
 				name = name.Copy();
 				name.Scheme = name.Scheme.Tail;

@@ -33,23 +33,23 @@ using Kean.Core;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Net
 {
-    public class SourcePlus :
-       Abstract
-    {
-        string url;
+	public class SourcePlus :
+	   Abstract
+	{
+		string url;
 		public SourcePlus(string url, params DirectShow.Binding.Filters.Abstract[] next) :
 			base("net.sourceplus", new System.Guid(global::Elecard.ElUids.Filters.CLSID_NWSource), "enwsplus.ax", "Elecard NWSource-Plus \"" + url + "\"", next)
-        {
-            this.url = url;
-            this.Output = 0;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
+		{
+			this.url = url;
+			this.Output = 0;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
 			this.Configure(new string[] { 
-                "Software", 
-                "Elecard", 
-                "Elecard NWSource-Plus", 
-                System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
+				"Software", 
+				"Elecard", 
+				"Elecard NWSource-Plus", 
+				System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
 				KeyValue.Create("[DS] Data Timeout", 0)
 				);
 			DirectShowLib.IBaseFilter result = base.Create();
@@ -61,21 +61,21 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Net
 			return result;
 		}
 		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter = this.Create();
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter = this.Create();
 			if (build.Graph.AddFilter(filter, "Elecard NWSource-Plus") == 0)
-            {
+			{
 				foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
-                    if (result = candidate.Build(filter, build))
-                        break;
+					if (result = candidate.Build(filter, build))
+						break;
 			}
-            else
-            {
+			else
+			{
 				Error.Log.Append(Error.Level.Debug, "Unable to open Elecard NWSource-Plus Filter.", "Elecard NWSource-Plus Filter was unable to open url \"" + this.url + "\".");
-                DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-            }
-            return result;
-        }
-    }
+				DirectShow.Binding.Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+			}
+			return result;
+		}
+	}
 }

@@ -31,16 +31,16 @@ using Uri = Kean.Core.Uri;
 
 namespace Imint.Media.DirectShow
 {
-    public class General :
-        File
-    {
+	public class General :
+		File
+	{
 		protected override bool Open(Binding.IGraph graph, string file)
 		{
 			return graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.SampleGrabber.All() { FuzzyMatch = this.Fuzzy, Rate = this.Rate }));
-        }
+		}
 		public override string[] SupportedExtensions
 		{
 			get { return new string[] { "avi", "mpg", "mp4", "mpeg", "wmv" }; }
 		}
-    }
+	}
 }

@@ -33,13 +33,13 @@ using System.Text;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Decoder
 {
-    public class Mpeg2 :
-       Guid
-    {
-        public Mpeg2(params Abstract[] next) :
-            base(new System.Guid("212690FB-83E5-4526-8FD7-74478B7939CD"), "Microsoft DTV-DVD Video Decoder", next)
-        {
-            this.Output = 0;
-        }
-    }
+	public class Mpeg2 :
+	   Guid
+	{
+		public Mpeg2(params Abstract[] next) :
+			base(new System.Guid("212690FB-83E5-4526-8FD7-74478B7939CD"), "Microsoft DTV-DVD Video Decoder", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

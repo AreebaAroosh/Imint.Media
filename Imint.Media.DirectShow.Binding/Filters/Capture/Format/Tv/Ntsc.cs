@@ -31,20 +31,20 @@ using Geometry2D = Kean.Math.Geometry2D;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture.Format.Tv
 {
-    public class Ntsc : Capture.Abstract
-    {
-        public Ntsc(string device, params Filters.Abstract[] next) : base(device, next) {}
-        protected override Image Media(DirectShowLib.IBaseFilter filter)
-        {
-            Image result = null;
-            if (filter is DirectShowLib.IAMAnalogVideoDecoder)
-            {
-                DirectShowLib.AnalogVideoStandard standard;
-                (filter as DirectShowLib.IAMAnalogVideoDecoder).get_TVFormat(out standard);
-                if (standard >= DirectShowLib.AnalogVideoStandard.NTSC_M && standard <= DirectShowLib.AnalogVideoStandard.NTSCMask)
-                    result = new Image() { Type = DirectShowLib.MediaSubType.YUY2, Resolution = new Geometry2D.Integer.Size(720, 480), ForceHeight = true };
-            }
-            return result;
-        }
-    }
+	public class Ntsc : Capture.Abstract
+	{
+		public Ntsc(string device, params Filters.Abstract[] next) : base(device, next) {}
+		protected override Image Media(DirectShowLib.IBaseFilter filter)
+		{
+			Image result = null;
+			if (filter is DirectShowLib.IAMAnalogVideoDecoder)
+			{
+				DirectShowLib.AnalogVideoStandard standard;
+				(filter as DirectShowLib.IAMAnalogVideoDecoder).get_TVFormat(out standard);
+				if (standard >= DirectShowLib.AnalogVideoStandard.NTSC_M && standard <= DirectShowLib.AnalogVideoStandard.NTSCMask)
+					result = new Image() { Type = DirectShowLib.MediaSubType.YUY2, Resolution = new Geometry2D.Integer.Size(720, 480), ForceHeight = true };
+			}
+			return result;
+		}
+	}
 }

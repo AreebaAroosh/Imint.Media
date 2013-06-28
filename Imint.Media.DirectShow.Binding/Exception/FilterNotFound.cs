@@ -31,13 +31,13 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Exception
 {
-    /// <summary>
-    /// Exception thrown when an filter could not be found.
-    /// </summary>
-    public class FilterNotFound : Error.Exception
-    {
-        public FilterNotFound(Error.Level level, string filter, string message)
-            : base(level, "Unable to Find Filter.", "Filter \"{0}\" does not exist.", filter, message)
-        { }
-    }
+	/// <summary>
+	/// Exception thrown when an filter could not be found.
+	/// </summary>
+	public class FilterNotFound : Error.Exception
+	{
+		public FilterNotFound(Error.Level level, string filter, string message)
+			: base(level, "Unable to Find Filter.", "Filter \"{0}\" does not exist.", filter, message)
+		{ }
+	}
 }

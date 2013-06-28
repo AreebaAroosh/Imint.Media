@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.MainConcept.Filters.Decoder
 {
-    public class Mpeg2 :
-        DirectShow.Binding.Filters.FromFile
-    {
-        public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg2 :
+		DirectShow.Binding.Filters.FromFile
+	{
+		public Mpeg2(params DirectShow.Binding.Filters.Abstract[] next) :
 			base(new System.Guid("1501477C-2855-40EE-AE95-9CF5466B2EA2"), "HCW_mcm2vd.ax", "MainConcept (HCW) MPEG-2 Video Decoder", next)
-        {
-            this.Output = 0;
-        }
-    }
+		{
+			this.Output = 0;
+		}
+	}
 }

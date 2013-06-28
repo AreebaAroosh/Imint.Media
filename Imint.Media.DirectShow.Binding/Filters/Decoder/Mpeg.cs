@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Decoder
 {
-    public class Mpeg :
-        Guid
-    {
-        public Mpeg(params Abstract[] next) :
-            base(new System.Guid("FEB50740-7BEF-11CE-9BD9-0000E202599C"), "DirectShow MPEG Decoder", next) 
-        {
-            this.Output = 0;
-        }
-    }
+	public class Mpeg :
+		Guid
+	{
+		public Mpeg(params Abstract[] next) :
+			base(new System.Guid("FEB50740-7BEF-11CE-9BD9-0000E202599C"), "DirectShow MPEG Decoder", next) 
+		{
+			this.Output = 0;
+		}
+	}
 }

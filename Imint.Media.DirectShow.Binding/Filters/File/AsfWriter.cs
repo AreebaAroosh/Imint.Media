@@ -31,24 +31,24 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters.File
 {
-    public class AsfWriter :
-        Creator
-    {
-        string file;
-        public AsfWriter(string file) :
-            base("AsfWriter")
-        {
-            this.file = file;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.IBaseFilter result = new DirectShowLib.WMAsfWriter() as DirectShowLib.IBaseFilter;
-            if (result is DirectShowLib.IFileSinkFilter2)
-            {
-                Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetMode(DirectShowLib.AMFileSinkFlags.OverWrite));
-                Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetFileName(this.file, new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Video, subType = DirectShowLib.MediaSubType.Asf }));
-            }
-            return result;
-        }
-    }
+	public class AsfWriter :
+		Creator
+	{
+		string file;
+		public AsfWriter(string file) :
+			base("AsfWriter")
+		{
+			this.file = file;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.IBaseFilter result = new DirectShowLib.WMAsfWriter() as DirectShowLib.IBaseFilter;
+			if (result is DirectShowLib.IFileSinkFilter2)
+			{
+				Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetMode(DirectShowLib.AMFileSinkFlags.OverWrite));
+				Exception.GraphError.Check((result as DirectShowLib.IFileSinkFilter2).SetFileName(this.file, new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Video, subType = DirectShowLib.MediaSubType.Asf }));
+			}
+			return result;
+		}
+	}
 }

@@ -32,13 +32,13 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Bosch.Filters.Decoder
 {
-    public class Mpeg4 :
-        DirectShow.Binding.Filters.Guid
-    {
-        public Mpeg4(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Mpeg4 :
+		DirectShow.Binding.Filters.Guid
+	{
+		public Mpeg4(params DirectShow.Binding.Filters.Abstract[] next) :
 			base(new System.Guid("6D8FB801-EA10-46DF-8BED-929C600A4612"), "VCS Video Decoder", next)
-        {
-            this.Output = 0;
-        }
+		{
+			this.Output = 0;
+		}
 	}
 }

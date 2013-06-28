@@ -32,52 +32,52 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters
 {
-    public abstract class Creator :
-        Abstract
-    {
+	public abstract class Creator :
+		Abstract
+	{
 		public TimeSpan WaitForOutput { get; set; }
 		public Creator(string description, params Filters.Abstract[][] followers) :
-            base(description, followers)
-        { }
-        public abstract DirectShowLib.IBaseFilter Create();
-        protected void CreateSource(DirectShowLib.DsGuid pinCategory, DirectShowLib.IBaseFilter source, DirectShowLib.IBaseFilter destination, IBuild build)
-        {
-            DirectShowLib.ICaptureGraphBuilder2 captureGraph = new DirectShowLib.CaptureGraphBuilder2() as DirectShowLib.ICaptureGraphBuilder2;
-            Exception.GraphError.Check(captureGraph.SetFiltergraph(build.Graph));
-            Exception.GraphError.Check(captureGraph.RenderStream(pinCategory, DirectShowLib.MediaType.Video, source, null, destination));
-        }
+			base(description, followers)
+		{ }
+		public abstract DirectShowLib.IBaseFilter Create();
+		protected void CreateSource(DirectShowLib.DsGuid pinCategory, DirectShowLib.IBaseFilter source, DirectShowLib.IBaseFilter destination, IBuild build)
+		{
+			DirectShowLib.ICaptureGraphBuilder2 captureGraph = new DirectShowLib.CaptureGraphBuilder2() as DirectShowLib.ICaptureGraphBuilder2;
+			Exception.GraphError.Check(captureGraph.SetFiltergraph(build.Graph));
+			Exception.GraphError.Check(captureGraph.RenderStream(pinCategory, DirectShowLib.MediaType.Video, source, null, destination));
+		}
 		protected virtual bool PreConfiguration(IBuild build) { return true; }
 		protected virtual bool PostConfiguration(IBuild build) { return true; }
-        public override bool Build(DirectShowLib.IPin source, IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter = this.Create();
-            if (filter.NotNull() && build.Graph.AddFilter(filter, this.Description) == 0 && this.PreConfiguration(build))
-            {
-                result = true;
-                DirectShowLib.PinInfo pinInformation;
-                Exception.GraphError.Check(source.QueryPinInfo(out pinInformation));
-                DirectShowLib.FilterInfo filterInformation;
-                Exception.GraphError.Check(pinInformation.filter.QueryFilterInfo(out filterInformation));
-                switch (filterInformation.achName)
-                {
-                    case "Capture":
-                        this.CreateSource(DirectShowLib.PinCategory.Capture, pinInformation.filter, filter, build);
-                        break;
-                    case "Source":
-                        this.CreateSource(null, pinInformation.filter, filter, build);
-                        break;
-                    default:
-                        if (!(result = (this.FuzzyMatch ?
-                            0 <= build.Graph.Connect(source, DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Input, 0)) :
-                            0 == build.Graph.ConnectDirect(source, DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Input, 0), new DirectShowLib.AMMediaType()))))
-                        {
+		public override bool Build(DirectShowLib.IPin source, IBuild build)
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter = this.Create();
+			if (filter.NotNull() && build.Graph.AddFilter(filter, this.Description) == 0 && this.PreConfiguration(build))
+			{
+				result = true;
+				DirectShowLib.PinInfo pinInformation;
+				Exception.GraphError.Check(source.QueryPinInfo(out pinInformation));
+				DirectShowLib.FilterInfo filterInformation;
+				Exception.GraphError.Check(pinInformation.filter.QueryFilterInfo(out filterInformation));
+				switch (filterInformation.achName)
+				{
+					case "Capture":
+						this.CreateSource(DirectShowLib.PinCategory.Capture, pinInformation.filter, filter, build);
+						break;
+					case "Source":
+						this.CreateSource(null, pinInformation.filter, filter, build);
+						break;
+					default:
+						if (!(result = (this.FuzzyMatch ?
+							0 <= build.Graph.Connect(source, DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Input, 0)) :
+							0 == build.Graph.ConnectDirect(source, DirectShowLib.DsFindPin.ByDirection(filter, DirectShowLib.PinDirection.Input, 0), new DirectShowLib.AMMediaType()))))
+						{
 							Error.Log.Append(Error.Level.Debug, "Unable to connect.", "DirectShow was unable to connect \"" + filterInformation.achName + "\" with \"" + this.Description + "\".");
-                            Exception.GraphError.Check(source.Disconnect());
-                            Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-                        }
-                        break;
-                }
+							Exception.GraphError.Check(source.Disconnect());
+							Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+						}
+						break;
+				}
 				if (result &= this.PostConfiguration(build))
 				{
 					if (this.WaitForOutput.Ticks > 0)
@@ -87,8 +87,8 @@ namespace Imint.Media.DirectShow.Binding.Filters
 							if (result &= candidate.Build(filter, build))
 								break;
 				}
-            }
+			}
 			return result;
-        }
-    }
+		}
+	}
 }

@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Decompressor
 {
-    public class Avi :
-        Guid
-    {
-        public Avi(params Abstract[] next) :
-            base(new System.Guid("CF49D4E0-1115-11CE-B03A-0020AF0BA770"), "DirectShow Avi Decompressor", next) 
-        {
-            this.Output = 0;
-        }
-    }
+	public class Avi :
+		Guid
+	{
+		public Avi(params Abstract[] next) :
+			base(new System.Guid("CF49D4E0-1115-11CE-B03A-0020AF0BA770"), "DirectShow Avi Decompressor", next) 
+		{
+			this.Output = 0;
+		}
+	}
 }

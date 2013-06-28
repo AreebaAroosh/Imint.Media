@@ -33,13 +33,13 @@ using System.Text;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Dmo
 {
-    public class Mpeg4s :
-        Moniker
-    {
-        public Mpeg4s(params Abstract[] next) :
-            base("@device:dmo:{2A11BAE2-FE6E-4249-864B-9E9ED6E8DBC2}{4A69B442-28BE-4991-969C-B500ADF5D8A8}", "Mpeg4s Decoder DMO", next)
-        {
-            this.Output = 0;
-        }
-    }
+	public class Mpeg4s :
+		Moniker
+	{
+		public Mpeg4s(params Abstract[] next) :
+			base("@device:dmo:{2A11BAE2-FE6E-4249-864B-9E9ED6E8DBC2}{4A69B442-28BE-4991-969C-B500ADF5D8A8}", "Mpeg4s Decoder DMO", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

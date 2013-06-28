@@ -31,13 +31,13 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Compressor
 {
-    public class MsMpeg4v2 :
-        Moniker
-    {
-        public MsMpeg4v2(params Abstract[] next) :
-            base("@device:cm:{33D9A760-90C8-11D0-BD43-00A0C911CE86}\\mp42", "Microsoft MPEG-4 V2 (Avi Compressor)", next)
-        {
-            this.Output = 0;
-        }
-    }
+	public class MsMpeg4v2 :
+		Moniker
+	{
+		public MsMpeg4v2(params Abstract[] next) :
+			base("@device:cm:{33D9A760-90C8-11D0-BD43-00A0C911CE86}\\mp42", "Microsoft MPEG-4 V2 (Avi Compressor)", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

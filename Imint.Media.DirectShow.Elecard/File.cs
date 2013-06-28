@@ -35,45 +35,45 @@ using Kean.Core.Collection.Extension;
 
 namespace Imint.Media.DirectShow.Elecard
 {
-    public class File :
-        DirectShow.NonLinear,
+	public class File :
+		DirectShow.NonLinear,
 		Media.Player.IFile
-    {
-        public File()
-        { }
-        protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
-        {
-            DirectShow.Binding.IGraph result = null;
-            if (name.Path.NotNull())
-            {
-                string file = name.PlatformPath;
-                string extension = System.IO.Path.GetExtension(file).ToLower().TrimStart('.');
-                if (name.Scheme == "file" && file.NotEmpty() && this.SupportedExtensions.Exists(v => v == extension) && System.IO.File.Exists(file))
-                {
-                    result = new Binding.Graph(this.Application);
-                    if (!this.Open(result, file))
-                    {
-                        result.Close();
-                        result = null;
-                    }
-                }
-            }
-            return result;
-        }
-        bool Open(DirectShow.Binding.IGraph graph, string file)
-        {
-            return graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
-                 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.Mpeg2(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
-                 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
-                 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg4(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
-                 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())));
+	{
+		public File()
+		{ }
+		protected override DirectShow.Binding.IGraph Open(Uri.Locator name)
+		{
+			DirectShow.Binding.IGraph result = null;
+			if (name.Path.NotNull())
+			{
+				string file = name.PlatformPath;
+				string extension = System.IO.Path.GetExtension(file).ToLower().TrimStart('.');
+				if (name.Scheme == "file" && file.NotEmpty() && this.SupportedExtensions.Exists(v => v == extension) && System.IO.File.Exists(file))
+				{
+					result = new Binding.Graph(this.Application);
+					if (!this.Open(result, file))
+					{
+						result.Close();
+						result = null;
+					}
+				}
+			}
+			return result;
+		}
+		bool Open(DirectShow.Binding.IGraph graph, string file)
+		{
+			return graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
+				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.Mpeg2(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
+				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
+				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg4(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
+				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())));
 
-        }
-        #region IFile Members
-        public string[] SupportedExtensions
-        {
-            get { return new string[] { "avi", "mpg", "h264", "mp4" }; }
-        }
-        #endregion
-    }
+		}
+		#region IFile Members
+		public string[] SupportedExtensions
+		{
+			get { return new string[] { "avi", "mpg", "h264", "mp4" }; }
+		}
+		#endregion
+	}
 }

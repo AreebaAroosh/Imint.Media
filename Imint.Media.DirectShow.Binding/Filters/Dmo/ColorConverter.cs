@@ -33,13 +33,13 @@ using System.Text;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Dmo
 {
-    public class ColorConverter :
-        Moniker
-    {
-        public ColorConverter(params Abstract[] next) :
-            base("@device:dmo:{98230571-0087-4204-B020-3282538E57D3}{D990EE14-776C-4723-BE46-3DA2F56F10B9}", "Color Converter DMO", next)
-        {
-            this.Output = 0;
-        }
-    }
+	public class ColorConverter :
+		Moniker
+	{
+		public ColorConverter(params Abstract[] next) :
+			base("@device:dmo:{98230571-0087-4204-B020-3282538E57D3}{D990EE14-776C-4723-BE46-3DA2F56F10B9}", "Color Converter DMO", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

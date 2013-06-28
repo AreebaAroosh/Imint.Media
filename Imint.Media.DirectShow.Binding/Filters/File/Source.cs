@@ -31,32 +31,32 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters.File
 {
-    public class Source :
-        Abstract
-    {
-        string file;
-        public Source(string file, params Abstract[] next) :
-            base("DirectShow File Source \"" + file + "\"", next)
-        {
-            this.file = file;
-            this.Output = 0;
-        }
-        public override bool Build(DirectShowLib.IPin source, IBuild build)
-        {
-            bool result = false;
-            DirectShowLib.IBaseFilter filter;
-            if (build.Graph.AddSourceFilter(this.file, "Ds.NET FileFilter", out filter) == 0)
-            {
-                foreach (Abstract candidate in this.Next)
-                    if (result = candidate.Build(filter, build))
-                        break;
-            }
-            else
-            {
-                Error.Log.Append(Error.Level.Debug, "Unable to open file.", "DirectShow was unable to open file \"" + this.file + "\".");
-                Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
-            }
-            return result;
-        }
-    }
+	public class Source :
+		Abstract
+	{
+		string file;
+		public Source(string file, params Abstract[] next) :
+			base("DirectShow File Source \"" + file + "\"", next)
+		{
+			this.file = file;
+			this.Output = 0;
+		}
+		public override bool Build(DirectShowLib.IPin source, IBuild build)
+		{
+			bool result = false;
+			DirectShowLib.IBaseFilter filter;
+			if (build.Graph.AddSourceFilter(this.file, "Ds.NET FileFilter", out filter) == 0)
+			{
+				foreach (Abstract candidate in this.Next)
+					if (result = candidate.Build(filter, build))
+						break;
+			}
+			else
+			{
+				Error.Log.Append(Error.Level.Debug, "Unable to open file.", "DirectShow was unable to open file \"" + this.file + "\".");
+				Exception.GraphError.Check(build.Graph.RemoveFilter(filter));
+			}
+			return result;
+		}
+	}
 }

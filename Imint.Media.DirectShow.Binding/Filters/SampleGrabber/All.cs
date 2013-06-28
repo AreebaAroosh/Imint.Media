@@ -31,28 +31,28 @@ using Bitmap = Kean.Draw.Raster;
 
 namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
 {
-    public class All :
-        Filters.Abstract
-    {
+	public class All :
+		Filters.Abstract
+	{
 		public Kean.Math.Fraction Rate { get; set; }
 		public All() :
-            this(new NullRenderer())
-        { }
-        public All(params Filters.Abstract[] next) :
-            base("All Sample Grabbers", new Yvu420(next), new Yuv420(next), new Yuyv(next), new Bgr(next), new Bgra(next))
-        { }
-        public override bool Build(DirectShowLib.IPin source, IBuild build)
-        {
-            foreach (Filters.Abstract candidate in this.Next)
-                candidate.FuzzyMatch = this.FuzzyMatch;
-            bool result = false;
+			this(new NullRenderer())
+		{ }
+		public All(params Filters.Abstract[] next) :
+			base("All Sample Grabbers", new Yvu420(next), new Yuv420(next), new Yuyv(next), new Bgr(next), new Bgra(next))
+		{ }
+		public override bool Build(DirectShowLib.IPin source, IBuild build)
+		{
+			foreach (Filters.Abstract candidate in this.Next)
+				candidate.FuzzyMatch = this.FuzzyMatch;
+			bool result = false;
 			foreach (Abstract candidate in this.Next)
 			{
 				candidate.Rate = this.Rate;
 				if (result = candidate.Build(source, build))
 					break;
 			}
-            return result;
-        }
-    }
+			return result;
+		}
+	}
 }

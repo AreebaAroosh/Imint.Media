@@ -31,23 +31,23 @@ using Bitmap = Kean.Draw.Raster;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture
 {
-    public class All :
-        Filters.Abstract
-    {
-        public All(string device, params Filters.Abstract[] next) :
-            base("All Capture cases", 
-            new Format.Tv.Pal(device, next), new Format.Tv.Ntsc(device, next),
-            new Format.Svga(device, next), new Format.Pal(device, next), 
-            new Format.Ntsc(device, next), new Format.Vga(device, next),
-            new Format.Qvga(device, next), new Format.Default(device, next))
-        { }
-        public override bool Build(DirectShowLib.IPin source, IBuild build)
-        {
-            bool result = false;
-            foreach (Abstract candidate in this.Next)
-                if (result = candidate.Build(source, build))
-                    break;
-            return result;
-        }
-    }
+	public class All :
+		Filters.Abstract
+	{
+		public All(string device, params Filters.Abstract[] next) :
+			base("All Capture cases", 
+			new Format.Tv.Pal(device, next), new Format.Tv.Ntsc(device, next),
+			new Format.Svga(device, next), new Format.Pal(device, next), 
+			new Format.Ntsc(device, next), new Format.Vga(device, next),
+			new Format.Qvga(device, next), new Format.Default(device, next))
+		{ }
+		public override bool Build(DirectShowLib.IPin source, IBuild build)
+		{
+			bool result = false;
+			foreach (Abstract candidate in this.Next)
+				if (result = candidate.Build(source, build))
+					break;
+			return result;
+		}
+	}
 }

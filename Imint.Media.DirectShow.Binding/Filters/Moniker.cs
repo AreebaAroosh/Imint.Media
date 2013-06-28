@@ -32,33 +32,33 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters
 {
-    public class Moniker :
-        Creator
-    {
-        string moniker;
-        public Moniker(string moniker, string description) :
-            base(description)
-        {
-            this.moniker = moniker;
-        }
-        public Moniker(string moniker, string description, params Filters.Abstract[] next) :
-            base(description, next)
-        {
-            this.moniker = moniker;
-        }
-        public override DirectShowLib.IBaseFilter Create()
-        {
-            DirectShowLib.IBaseFilter result = null;
-            try
-            {
-                result = System.Runtime.InteropServices.Marshal.BindToMoniker(this.moniker) as DirectShowLib.IBaseFilter;
-            }
-            catch (System.Exception e)
-            {
-                string message = "Filter \"" + this.Description + "\" could not find the moniker \"" + this.moniker + "\".";
-                new DirectShow.Binding.Exception.FilterNotFound(Error.Level.Debug, message, e.Message).Throw();
-            }
-            return result;
-        }
-    }
+	public class Moniker :
+		Creator
+	{
+		string moniker;
+		public Moniker(string moniker, string description) :
+			base(description)
+		{
+			this.moniker = moniker;
+		}
+		public Moniker(string moniker, string description, params Filters.Abstract[] next) :
+			base(description, next)
+		{
+			this.moniker = moniker;
+		}
+		public override DirectShowLib.IBaseFilter Create()
+		{
+			DirectShowLib.IBaseFilter result = null;
+			try
+			{
+				result = System.Runtime.InteropServices.Marshal.BindToMoniker(this.moniker) as DirectShowLib.IBaseFilter;
+			}
+			catch (System.Exception e)
+			{
+				string message = "Filter \"" + this.Description + "\" could not find the moniker \"" + this.moniker + "\".";
+				new DirectShow.Binding.Exception.FilterNotFound(Error.Level.Debug, message, e.Message).Throw();
+			}
+			return result;
+		}
+	}
 }

@@ -35,12 +35,12 @@ namespace Imint.Media.DirectShow.Binding.Filters.Compressor
 	/// Codec available from http://www.undercut.org/msmpeg4/
 	/// </summary>
 	public class MsMpeg4v3 :
-        Moniker
-    {
-        public MsMpeg4v3(params Abstract[] next) :
-            base("@device:cm:{33D9A760-90C8-11D0-BD43-00A0C911CE86}\\mp43", "Microsoft MPEG-4 V3 (Avi Compressor)", next)
-        {
-            this.Output = 0;
-        }
-    }
+		Moniker
+	{
+		public MsMpeg4v3(params Abstract[] next) :
+			base("@device:cm:{33D9A760-90C8-11D0-BD43-00A0C911CE86}\\mp43", "Microsoft MPEG-4 V3 (Avi Compressor)", next)
+		{
+			this.Output = 0;
+		}
+	}
 }

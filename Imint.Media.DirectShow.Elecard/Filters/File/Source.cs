@@ -33,24 +33,24 @@ using Kean.Core;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.File
 {
-    public class Source :
-       Abstract
-    {
-        string file;
+	public class Source :
+	   Abstract
+	{
+		string file;
 		public Source(string file, params DirectShow.Binding.Filters.Abstract[] next) :
 			base("file.source", new System.Guid(global::Elecard.ElUids.Filters.CLSID_FileListSource), "efls.ax", "Elecard File List Source Filter \"" + file + "\"", next)
-        {
-            this.file = file;
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(file));
-            this.Output = 0;
-        }
+		{
+			this.file = file;
+			System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(file));
+			this.Output = 0;
+		}
 		public override DirectShowLib.IBaseFilter Create()
 		{
 			this.Configure(new string[] { 
-                "Software", 
-                "Elecard", 
-                "Elecard File List Source", 
-                System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
+				"Software", 
+				"Elecard", 
+				"Elecard File List Source", 
+				System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
 				KeyValue.Create("Dynamic length", 1)
 				);
 			DirectShowLib.IBaseFilter result = base.Create();
@@ -75,5 +75,5 @@ namespace Imint.Media.DirectShow.Elecard.Filters.File
 			}
 			return result;
 		}
-    }
+	}
 }

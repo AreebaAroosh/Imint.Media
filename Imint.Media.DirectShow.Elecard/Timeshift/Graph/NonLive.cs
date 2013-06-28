@@ -30,15 +30,15 @@ using System;
 
 namespace Imint.Media.DirectShow.Elecard.Timeshift.Graph
 {
-    class NonLive :
+	class NonLive :
 		DirectShow.Binding.Graph
-    {
+	{
 		public DirectShow.Binding.IGraph Recorder { get; set; }
-        public override DateTime Position { get { return base.CurrentPosition; } }
-        public override void Close()
-        {
-            this.Recorder.Close();
-            base.Close();
-        }
-    }
+		public override DateTime Position { get { return base.CurrentPosition; } }
+		public override void Close()
+		{
+			this.Recorder.Close();
+			base.Close();
+		}
+	}
 }

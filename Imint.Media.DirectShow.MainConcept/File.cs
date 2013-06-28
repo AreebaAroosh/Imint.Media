@@ -32,9 +32,9 @@ using Bitmap = Kean.Draw.Raster;
 
 namespace Imint.Media.DirectShow.MainConcept
 {
-    public class File :
-        Imint.Media.DirectShow.File
-    {
+	public class File :
+		Imint.Media.DirectShow.File
+	{
 		protected override bool Open(Binding.IGraph graph, string file)
 		{
 			return graph.Open(new Filters.IO.Reader(file, new Filters.Demultiplexer.Mpeg2(new Filters.Decoder.Mpeg2(new DirectShow.Binding.Filters.SampleGrabber.All() { Rate = this.Rate }))));
@@ -43,6 +43,6 @@ namespace Imint.Media.DirectShow.MainConcept
 		{
 			get { return new string[] { "mpeg", "mpg" }; }
 		}
-    }
+	}
 }
 

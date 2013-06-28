@@ -32,22 +32,22 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Demultiplexer
 {
-    public class MpegPush :
-        Abstract
-    {
-        public MpegPush(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class MpegPush :
+		Abstract
+	{
+		public MpegPush(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("demultiplexer.mpegpush", new System.Guid(global::Elecard.ElUids.Filters.CLSID_MPGPDMX), "empgpdmx.ax", "Elecard MPEG Push Demultiplexer", next)
-        {
+		{
 			this.Output = 0;
-        }
+		}
 		DirectShowLib.IBaseFilter filter;
 		public override DirectShowLib.IBaseFilter Create()
 		{
 			this.Configure(new string[] { 
-			    "Software", 
-			    "Elecard", 
-			    "Elecard MPEG Push Demultiplexer", 
-			    System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
+				"Software", 
+				"Elecard", 
+				"Elecard MPEG Push Demultiplexer", 
+				System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
 				KeyValue.Create("Latency value for time adjustment", 0)
 				);
 			return this.filter = base.Create();

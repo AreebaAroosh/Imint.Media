@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Multiplexer
 {
-    public class Avi :
-        Guid
-    {
-        public Avi(params Abstract[] next) :
-            base(new System.Guid("E2510970-F137-11CE-8B67-00AA00A3F1A6"), "DirectShow Avi Muxer", next) 
-        {
-            this.Output = 0;
-        }
-    }
+	public class Avi :
+		Guid
+	{
+		public Avi(params Abstract[] next) :
+			base(new System.Guid("E2510970-F137-11CE-8B67-00AA00A3F1A6"), "DirectShow Avi Muxer", next) 
+		{
+			this.Output = 0;
+		}
+	}
 }

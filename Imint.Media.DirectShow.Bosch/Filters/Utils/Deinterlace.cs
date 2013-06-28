@@ -32,13 +32,13 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.DirectShow.Bosch.Filters.Utils
 {
-    public class Deinterlace :
-        DirectShow.Binding.Filters.Guid
-    {
-        public Deinterlace(params DirectShow.Binding.Filters.Abstract[] next) :
+	public class Deinterlace :
+		DirectShow.Binding.Filters.Guid
+	{
+		public Deinterlace(params DirectShow.Binding.Filters.Abstract[] next) :
 			base(new System.Guid("CF22E83A-5A52-4BA2-A927-0862CE745E20"), "VCS Interlace Filter", next)
-        {
+		{
 			this.Output = 0;
-        }
+		}
 	}
 }

@@ -30,13 +30,13 @@ using System;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Decompressor
 {
-    public class Mjpeg :
-        Guid
-    {
-        public Mjpeg(params Abstract[] next) :
-            base(new System.Guid("301056D0-6DFF-11D2-9EEB-006008039E37"), "DirectShow Mjpeg Decompressor", next) 
-        {
-            this.Output = 0;
-        }
-    }
+	public class Mjpeg :
+		Guid
+	{
+		public Mjpeg(params Abstract[] next) :
+			base(new System.Guid("301056D0-6DFF-11D2-9EEB-006008039E37"), "DirectShow Mjpeg Decompressor", next) 
+		{
+			this.Output = 0;
+		}
+	}
 }

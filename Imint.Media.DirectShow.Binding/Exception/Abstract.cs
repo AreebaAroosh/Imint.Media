@@ -31,10 +31,10 @@ using Error = Kean.Core.Error;
 
 namespace Imint.Media.DirectShow.Binding.Exception
 {
-    public abstract class Abstract :
-        Error.Exception
-    {
-        internal Abstract(Error.Level level, string title, string message, params string[] arguments) : this(null, level, title, message, arguments) { }
-        internal Abstract(System.Exception innerException, Error.Level level, string title, string message, params string[] arguments) : base(innerException, level, title, message, arguments) { }
-    }
+	public abstract class Abstract :
+		Error.Exception
+	{
+		internal Abstract(Error.Level level, string title, string message, params string[] arguments) : this(null, level, title, message, arguments) { }
+		internal Abstract(System.Exception innerException, Error.Level level, string title, string message, params string[] arguments) : base(innerException, level, title, message, arguments) { }
+	}
 }

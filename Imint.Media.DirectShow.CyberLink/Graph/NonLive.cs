@@ -35,7 +35,7 @@ namespace Imint.Media.DirectShow.CyberLink.Graph
 	{
 		public DirectShow.Binding.IGraph Recorder { get; set; }
 		//public override DateTime Position { get { return base.CurrentPosition; } }
-	    public override DateTime End { get { return this.Recorder.Position; } }
+		public override DateTime End { get { return this.Recorder.Position; } }
 		public override void Close()
 		{
 			this.Recorder.Close();
