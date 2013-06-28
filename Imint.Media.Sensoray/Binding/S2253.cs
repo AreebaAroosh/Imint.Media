@@ -572,238 +572,238 @@ namespace Sensoray
 		}
 
 #if _WIN64
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_Open(Int32 brdidx);
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_Open(Int32 brdidx);
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_Close(Int32 brdidx);
-    
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_Close(Int32 brdidx);
+	
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetNumDevices(ref Int32 pNumDevices);
-    
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetVidSys(MID2253_VIDSYS vidsys, Int32 devid);
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetNumDevices(ref Int32 pNumDevices);
+	
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetVidSys(MID2253_VIDSYS vidsys, Int32 devid);
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetVidSys(ref MID2253_VIDSYS vidsys, Int32 devid);
-    
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetVidSys(ref MID2253_VIDSYS vidsys, Int32 devid);
+	
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetStatus(ref MID2253STATUS pStatus, Int32 devid, Int32 strmidx);
-    
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetStatus(ref MID2253STATUS pStatus, Int32 devid, Int32 strmidx);
+	
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetRecordMode(MID2253_RECMODE recmode, Int32 devid, Int32 strmidx);
-    
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetRecordMode(MID2253_RECMODE recmode, Int32 devid, Int32 strmidx);
+	
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetRecordMode(ref MID2253_RECMODE recmode, Int32 devid, Int32 strmidx);
-    
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetRecordMode(ref MID2253_RECMODE recmode, Int32 devid, Int32 strmidx);
+	
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetMp4Mode(MID2253_MP4MODE mp4mode, Int32 devid, Int32 strmidx);
-    
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetMp4Mode(MID2253_MP4MODE mp4mode, Int32 devid, Int32 strmidx);
+	
 
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetMp4Mode(ref MID2253_MP4MODE mp4mode, Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetAudioEncoding(MID2253_AUDENC aenc, Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetAudioEncoding(ref MID2253_AUDENC aenc, Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetAudioBitrate(MID2253_AUDIO_BITRATE audbr, Int32 devid, Int32 strmidx);
-     
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetAudioBitrate(ref MID2253_AUDIO_BITRATE audbr, Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_StartRecord(String filename, Int32 bUnicode, Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetLevel(Int32 param, Byte value, Int32 devid);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetLevel(Int32 param, ref Byte value, Int32 devid);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_StartPreview(Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_StartAudioPreview(Int32 devid);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_StopAudioPreview(Int32 devid);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_StopStream(Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetImageSize(Int32 w, Int32 h, Int32 devid, Int32 strmidx);
-    
-        [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetImageSize(ref Int32 w, ref Int32 h, Int32 devid, Int32 strmidx);
-    
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetMp4Mode(ref MID2253_MP4MODE mp4mode, Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetAudioEncoding(MID2253_AUDENC aenc, Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetAudioEncoding(ref MID2253_AUDENC aenc, Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetAudioBitrate(MID2253_AUDIO_BITRATE audbr, Int32 devid, Int32 strmidx);
+	 
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetAudioBitrate(ref MID2253_AUDIO_BITRATE audbr, Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_StartRecord(String filename, Int32 bUnicode, Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetLevel(Int32 param, Byte value, Int32 devid);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetLevel(Int32 param, ref Byte value, Int32 devid);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_StartPreview(Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_StartAudioPreview(Int32 devid);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_StopAudioPreview(Int32 devid);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_StopStream(Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetImageSize(Int32 w, Int32 h, Int32 devid, Int32 strmidx);
+	
+		[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetImageSize(ref Int32 w, ref Int32 h, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetStreamType(Int32 stype, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetStreamType(Int32 stype, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetStreamType(ref Int32 stype, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetStreamType(ref Int32 stype, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_SetOsd(MID2253_OSDTYPE osdtype, ref MID2253OSD osd, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_SetOsd(MID2253_OSDTYPE osdtype, ref MID2253OSD osd, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetClock(ref MID2253CLOCK clk, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetClock(ref MID2253CLOCK clk, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetBitrate(Int32 bitrate, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetBitrate(Int32 bitrate, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetBitrate(ref Int32 bitrate, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetBitrate(ref Int32 bitrate, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetJpegQ(Int32 q, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetJpegQ(Int32 q, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetJpegQ(ref Int32 q, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetJpegQ(ref Int32 q, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetInterpolateMode(Int32 val, Int32 devid);
-    
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetInterpolateMode(ref Int32 val, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetInterpolateMode(Int32 val, Int32 devid);
+	
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetInterpolateMode(ref Int32 val, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_StartSnapshot(Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_StartSnapshot(Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetSample(IntPtr data, UInt32 inlen, ref UInt32 outlen, Int32 to, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetSample(IntPtr data, UInt32 inlen, ref UInt32 outlen, Int32 to, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_EnableSnapshot(Int32 bOn, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_EnableSnapshot(Int32 bOn, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetSerialNumber(ref UInt32 serial_number, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetSerialNumber(ref UInt32 serial_number, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_SetStreamWindow(IntPtr hwnd, Int32 devid, Int32 strmidx);
-    
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_SetStreamWindowPosition(ref RECTANGLE rect, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_SetStreamWindow(IntPtr hwnd, Int32 devid, Int32 strmidx);
+	
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_SetStreamWindowPosition(ref RECTANGLE rect, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_RepaintWindow(IntPtr hdc, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_RepaintWindow(IntPtr hdc, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetGpioInput(ref Int32 value, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetGpioInput(ref Int32 value, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetGpioOutput(Int32 value, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetGpioOutput(Int32 value, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetGpioOutput(ref Int32 value, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetGpioOutput(ref Int32 value, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_WaitGpioInput(MID2253_GPIO_SIGNAL signal, Int32 timout, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_WaitGpioInput(MID2253_GPIO_SIGNAL signal, Int32 timout, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetAudioInput(MID2253_AUDIO_INPUT input, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetAudioInput(MID2253_AUDIO_INPUT input, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetAudioGain(Boolean bAGC,  Int32 gain, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetAudioGain(Boolean bAGC,  Int32 gain, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetAudioGain(ref Boolean bAGC, ref Int32 gain, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetAudioGain(ref Boolean bAGC, ref Int32 gain, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_FlipImage(Boolean bFlipV, Boolean bFlipH, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_FlipImage(Boolean bFlipV, Boolean bFlipH, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetIDR(Int32 val, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetIDR(Int32 val, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_LowLatencyPreview(Boolean bON, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_LowLatencyPreview(Boolean bON, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_StartDecode(String filename, Int32 bUnicode, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_StartDecode(String filename, Int32 bUnicode, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_StopDecode(Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_StopDecode(Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_SetNotify(IntPtr hNotifyAPp, UInt32 mNotifyMsg, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_SetNotify(IntPtr hNotifyAPp, UInt32 mNotifyMsg, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_TestDeviceRemoval(Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_TestDeviceRemoval(Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_TestDecodeDone(Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_TestDecodeDone(Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-       static extern Int32 S2253_SetOverlay(ref MID2253_OVL_STRUCT ovl, IntPtr data, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	   static extern Int32 S2253_SetOverlay(ref MID2253_OVL_STRUCT ovl, IntPtr data, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetOutputMode(MID2253_OUTPUT_MODE mode, Int32 devid);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetOutputMode(MID2253_OUTPUT_MODE mode, Int32 devid);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_GetParam(MID2253_PARAM type, ref Int32 val, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_GetParam(MID2253_PARAM type, ref Int32 val, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_SetUserData(String data, Int32 len, Int32 interval, Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_SetUserData(String data, Int32 len, Int32 interval, Int32 devid, Int32 strmidx);
+	
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_StartCallback(Int32 devid, Int32 strmidx);
-    
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		static extern Int32 S2253_StartCallback(Int32 devid, Int32 strmidx);
+	
    public delegate Int32 DataCallback(IntPtr merged, Int32 size, Int32 board, Int32 strmidx);
 
    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        static extern Int32 S2253_RegisterCallback(DataCallback cb, Int32 devid, Int32 strmidx);
+		static extern Int32 S2253_RegisterCallback(DataCallback cb, Int32 devid, Int32 strmidx);
 
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-    static extern Int32 S2253_GetHVLock(ref Int32 hvlock, Int32 devid);
-    
-    [DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-    static extern Int32 S2253_SetPreviewType(MID2253_PREVIEWTYPE type, Int32 devid, Int32 strmidx);
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	static extern Int32 S2253_GetHVLock(ref Int32 hvlock, Int32 devid);
+	
+	[DllImport("mid2253_x64.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+	static extern Int32 S2253_SetPreviewType(MID2253_PREVIEWTYPE type, Int32 devid, Int32 strmidx);
 #else
 		[DllImport("mid2253.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
 		static extern Int32 S2253_Open(Int32 brdidx);
