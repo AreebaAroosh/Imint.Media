@@ -48,12 +48,16 @@
     <Compile Include="Stream.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Imint.Media\Imint.Media\Imint.Media.csproj">
+      <Project>{0C283FE4-7254-4ED1-A125-54C297E985D8}</Project>
+      <Name>Imint.Media</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Buffer\Kean.Core.Buffer.csproj">
-      <Project>{AB030D3B-8B47-4545-86BA-48A8D2AFE020}</Project>
+      <Project>{ab030d3b-8b47-4545-86ba-48a8d2afe020}</Project>
       <Name>Kean.Core.Buffer</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
-      <Project>{964EE8EB-6A7E-4B62-BDBC-37A29E9C0E3B}</Project>
+      <Project>{964ee8eb-6a7e-4b62-bdbc-37a29e9c0e3b}</Project>
       <Name>Kean.Core.Collection</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Error\Kean.Core.Error.csproj">
@@ -61,32 +65,24 @@
       <Name>Kean.Core.Error</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Uri\Kean.Core.Uri.csproj">
-      <Project>{7E58819E-BCDE-4194-8A83-E8E6E3D050F9}</Project>
+      <Project>{7e58819e-bcde-4194-8a83-e8e6e3d050f9}</Project>
       <Name>Kean.Core.Uri</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core\Kean.Core.csproj">
-      <Project>{C5A4BC48-C14F-4F6B-9564-E04C0A79B7C1}</Project>
+      <Project>{c5a4bc48-c14f-4f6b-9564-e04c0a79b7c1}</Project>
       <Name>Kean.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Draw\Kean.Draw.Raster\Kean.Draw.Raster.csproj">
-      <Project>{AB4E5E08-6B2A-4A9F-ABB3-A8F4CE73FB53}</Project>
+      <Project>{ab4e5e08-6b2a-4a9f-abb3-a8f4ce73fb53}</Project>
       <Name>Kean.Draw.Raster</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Draw\Kean.Draw\Kean.Draw.csproj">
-      <Project>{375108F3-ECBF-4BF9-9161-22BBEAB6A7BC}</Project>
+      <Project>{375108f3-ecbf-4bf9-9161-22bbeab6a7bc}</Project>
       <Name>Kean.Draw</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Math\Kean.Math.Geometry2D\Kean.Math.Geometry2D.csproj">
-      <Project>{DAF18CA8-78EA-417F-8730-0A76B0DA2563}</Project>
+      <Project>{daf18ca8-78ea-417f-8730-0a76b0da2563}</Project>
       <Name>Kean.Math.Geometry2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Math\Kean.Math\Kean.Math.csproj">
-      <Project>{96B4C4B4-5177-4717-9B2F-C74A0C2DF7D5}</Project>
-      <Name>Kean.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Imint.Media\Imint.Media\Imint.Media.csproj">
-      <Project>{0C283FE4-7254-4ED1-A125-54C297E985D8}</Project>
-      <Name>Imint.Media</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
