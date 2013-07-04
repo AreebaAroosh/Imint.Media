@@ -198,15 +198,20 @@ namespace Imint.Media.Module
 		[Settings.Method("open", "Opens media.", "Opens media specified by locator argument.")]
 		public bool Open(Uri.Locator resource) 
 		{
-			string crop = resource.Query["crop"];
-			if (crop.NotEmpty())
-				this.Crop = (Geometry2D.Integer.Shell)crop;
-			string scan = resource.Query["scan"];
-			if (scan.NotEmpty())
-				this.Scan = (Media.Scan)Enum.Parse(typeof(Media.Scan), scan, true);
-			this.Ratio = resource.Query["ratio"];
-			resource.Query.Remove("crop", "ratio", "scan");
-			return this.backend.Open(resource);
+			bool result = false;
+			if (resource.NotNull())
+			{
+				string crop = resource.Query["crop"];
+				if (crop.NotEmpty())
+					this.Crop = (Geometry2D.Integer.Shell)crop;
+				string scan = resource.Query["scan"];
+				if (scan.NotEmpty())
+					this.Scan = (Media.Scan)Enum.Parse(typeof(Media.Scan), scan, true);
+				this.Ratio = resource.Query["ratio"];
+				resource.Query.Remove("crop", "ratio", "scan");
+				result = this.backend.Open(resource);
+			}
+			return result;
 		}
 
 		[Settings.Method("play", "Start playback.", "Start playback of opened media.")]
