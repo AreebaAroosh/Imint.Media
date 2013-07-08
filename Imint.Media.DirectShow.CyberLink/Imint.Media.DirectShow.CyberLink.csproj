@@ -59,6 +59,7 @@
     <None Include="Configuration\Player\20CyberLinkFileMpeg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
@@ -110,12 +111,11 @@
     <None Include="Imint.Media.DirectShow.CyberLink.nuspec" />
     <None Include="Imint.Media.DirectShow.CyberLink.licenseheader" />
     <None Include="Imint.Media.DirectShow.CyberLink.targets" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\DirectShowLib2005.2.0\lib\DirectShowLib-2005.dll</HintPath>
+      <HintPath>$(SolutionDir)packages\DirectShowLib2005.2.0.0.0\lib\DirectShowLib-2005.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

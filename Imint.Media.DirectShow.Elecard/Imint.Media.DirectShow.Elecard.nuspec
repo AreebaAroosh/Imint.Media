@@ -9,7 +9,6 @@
 		<description>$description$</description>
 		<dependencies>
 			<dependency id="Elecard" />
-			<dependency id="DirectShowLib2005" />
 			<dependency id="Imint.Icop" />
 			<dependency id="Imint.Icop.Client" />
 			<dependency id="Imint.Media" />

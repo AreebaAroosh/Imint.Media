@@ -114,7 +114,6 @@
     <None Include="Imint.Media.DirectShow.licenseheader" />
     <None Include="Imint.Media.DirectShow.nuspec" />
     <None Include="Imint.Media.DirectShow.targets" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\Common.targets" />
