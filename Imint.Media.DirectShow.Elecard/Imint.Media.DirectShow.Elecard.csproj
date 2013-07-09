@@ -12,7 +12,8 @@
     <AssemblyName>Imint.Media.DirectShow.Elecard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -131,13 +132,11 @@
     <None Include="Configuration\Player\10ElecardNetworkTimeshift.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Classes_v10, Version=1.2.0.930, Culture=neutral, PublicKeyToken=a6d5afb38b2cfcfa, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)packages\Elecard.1.4.111027\lib\net40\Classes_v10.dll</HintPath>
+    <Reference Include="Classes_v10">
+      <HintPath>..\..\packages\Elecard.1.4.111027\lib\net40\Classes_v10.dll</HintPath>
     </Reference>
-    <Reference Include="Consts_v10, Version=1.2.0.930, Culture=neutral, PublicKeyToken=f893c3352ed489cb, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(SolutionDir)packages\Elecard.1.4.111027\lib\net40\Consts_v10.dll</HintPath>
+    <Reference Include="Consts_v10">
+      <HintPath>..\..\packages\Elecard.1.4.111027\lib\net40\Consts_v10.dll</HintPath>
     </Reference>
     <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
