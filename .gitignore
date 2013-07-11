@@ -115,3 +115,5 @@ CommonAssemblyInfo.cs
 /*.userprefs
 
 AssemblyInfo.Generated.cs
+
+/Imint.Media.Sensoray.Installer/VersionInfo.Generated.wxi
