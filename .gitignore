@@ -109,3 +109,5 @@ UpgradeLog*.XML
 
 AssemblyInfo.Generated.cs
 /.tools
+
+/Imint.Media.DirectShow.Installer/VersionInfo.Generated.wxi
