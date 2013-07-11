@@ -7,7 +7,7 @@
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes"/>
 
-		<Feature Id="ProductFeature" Title="Imint.Media.DirectShow.Installer" Level="1">
+		<Feature Id="ProductFeature" Title="Imint.Media.DirectShow" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 			<ComponentGroupRef Id="ProductPlayer" />
 		</Feature>
