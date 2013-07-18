@@ -35,6 +35,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Demultiplexer
 	public class MpegPush :
 		Abstract
 	{
+		public int Latency { get; set; }
 		public MpegPush(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("demultiplexer.mpegpush", new System.Guid(global::Elecard.ElUids.Filters.CLSID_MPGPDMX), "empgpdmx.ax", "Elecard MPEG Push Demultiplexer", next)
 		{
@@ -48,7 +49,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Demultiplexer
 				"Elecard", 
 				"Elecard MPEG Push Demultiplexer", 
 				System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
-				KeyValue.Create("Latency value for time adjustment", 0)
+				KeyValue.Create("Latency value for time adjustment", this.Latency)
 				);
 			return this.filter = base.Create();
 		}
