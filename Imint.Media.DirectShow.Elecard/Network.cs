@@ -37,8 +37,20 @@ namespace Imint.Media.DirectShow.Elecard
 		DirectShow.Stream,
 		Media.Player.ICapture
 	{
+		/// <summary>
+		/// Time, in seconds, after which to stop waiting for a stream to send more data.
+		/// Set to 0 to never give up, recovering as soon as the stream comes back online.
+		/// Set to 1 to give up after 1 second. Set to 300 to give up after 5 minutes.
+		/// Default is 0.
+		/// </summary>
 		[Serialize.Parameter]
 		public int Timeout { get; set; }
+		/// <summary>
+		/// Number of frames to allow the stream to buffer before playing.
+		/// If the buffer is too small, the video may stutter and garble.
+		/// Set to 0 for no latency. Set to 1 or higher if your machine can't keep up.
+		/// Default is 0.
+		/// </summary>
 		[Serialize.Parameter]
 		public int Latency { get; set; }
 
