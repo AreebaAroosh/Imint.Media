@@ -60,6 +60,7 @@ namespace Imint.Media.Photo
 		/// The timer that keeps track of when to update frames.
 		/// </summary>
 		protected System.Timers.Timer Timer { get; private set; }
+		public DateTime Position { get { return new DateTime((long)(1000 / (float)this.Rate * 10000 * this.Index)); } }
 		object signal = new object();
 		/// <summary>
 		/// Constructor.
@@ -123,12 +124,11 @@ namespace Imint.Media.Photo
 		/// <summary>
 		/// Sends a frame on the stream's channels.
 		/// </summary>
-		protected virtual void SendFrame()
+		protected void SendFrame()
 		{
 			lock (this.signal)
 			{
-				this.Send(0, this.currentTime, this.duration, this.photos[this.Index].Copy() as Raster.Image, null);
-				this.currentTime += this.duration;
+				this.Send(0, this.Position, this.duration, this.photos[this.Index].Copy() as Raster.Image, null);
 			}
 		}
 		#endregion
