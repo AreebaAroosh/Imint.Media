@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <BuildPackage>true</BuildPackage>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,6 +48,8 @@
     <None Include="Configuration\Player\95Photo.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Imint.Media.Photo.nuspec" />
+    <None Include="Imint.Media.Photo.targets" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
@@ -91,11 +94,6 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+	<Import Project="$(ProjectDir)..\Common.targets" />
+	<Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
