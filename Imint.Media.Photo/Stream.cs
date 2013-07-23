@@ -106,7 +106,7 @@ namespace Imint.Media.Photo
 		string[] GetImageSeries(Uri.Locator name)
 		{
 			string[] result;
-			MatchCollection matches = Regex.Matches(name.Path.Name, @"(.*)(\d\d+)$");
+			MatchCollection matches = Regex.Matches(name.Path.Name, @"()(\d*\d{2})$");
 			if (matches.Count > 0)
 			{
 				string match = matches[0].Groups[1].Value;
