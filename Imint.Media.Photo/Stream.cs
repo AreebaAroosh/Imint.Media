@@ -46,12 +46,12 @@ namespace Imint.Media.Photo
 		/// <summary>
 		/// The duration of one frame.
 		/// </summary>
-		protected TimeSpan duration;
-		protected Buffer.Abstract buffer;
+		protected TimeSpan Duration { get; set; }
+		protected Buffer.Abstract Buffer { get; set; }
 		/// <summary>
 		/// The number of frames in the sequence.
 		/// </summary>
-		protected int Count { get { return (this.buffer.NotNull()) ? buffer.Count : 0; } }
+		protected int Count { get { return (this.Buffer.NotNull()) ? Buffer.Count : 0; } }
 		int index = 0;
 		/// <summary>
 		/// The index of the frame currently being shown.
@@ -74,19 +74,19 @@ namespace Imint.Media.Photo
 		#region IStream Members
 		public int Channels { get { return 1; } }
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { get; set; }
-		public virtual Status Status { get { return (this.buffer.NotNull() && this.Count == 0) ? Status.Closed : Status.Playing; } }
+		public virtual Status Status { get { return (this.Buffer.NotNull() && this.Count == 0) ? Status.Closed : Status.Playing; } }
 		public bool Open(Uri.Locator name)
 		{
 			bool result = false;
 			if (name.Scheme == "file" && this.SupportedExtensions.Contains(name.Path.Extension))
 			{
 				//this.buffer = (this.Count > 50) ? new Buffer.Long() : new Buffer.Short();
-				this.buffer = Buffer.Abstract.Open(name);
+				this.Buffer = Photo.Buffer.Abstract.Open(name);
 				Kean.Math.Fraction rate = name.Query["rate"];
 				if (rate.Nominator <= 0)
 					rate = this.Rate;
 				this.Timer = new System.Timers.Timer(1000 / (float)rate);
-				this.duration = new TimeSpan((long)(10000 * 1000 / (float)rate));
+				this.Duration = new TimeSpan((long)(10000 * 1000 / (float)rate));
 
 				this.Timer.Elapsed += (object sender, System.Timers.ElapsedEventArgs elapsedArguments) =>
 				{
@@ -94,7 +94,7 @@ namespace Imint.Media.Photo
 					{
 						if (this.Count != 0)
 							this.Index = (this.Index + 1) % this.Count;
-						System.Threading.Monitor.PulseAll(this.signal);
+						System.Threading.Monitor.Pulse(this.signal);
 					}
 				};
 				result = true;
@@ -109,10 +109,10 @@ namespace Imint.Media.Photo
 				this.Timer.Dispose();
 				this.Timer = null;
 			}
-			if (this.buffer.NotNull())
+			if (this.Buffer.NotNull())
 			{
-				this.buffer.Dispose();
-				this.buffer = null;
+				this.Buffer.Close();
+				this.Buffer = null;
 			}
 		}
 		public void Poll()
@@ -128,9 +128,9 @@ namespace Imint.Media.Photo
 		{
 			lock (this.signal)
 			{
-				Tuple<int, Raster.Image> next = this.buffer.Next();
+				Tuple<int, Raster.Image> next = this.Buffer.Next();
 				this.Index = next.Item1;
-				this.Send(0, this.Position, this.duration, next.Item2 as Raster.Image, null);
+				this.Send(0, this.Position, this.Duration, next.Item2 as Raster.Image, null);
 			}
 		}
 		#endregion

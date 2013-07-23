@@ -10,39 +10,50 @@ using Kean.Core.Extension;
 
 namespace Imint.Media.Photo.Buffer
 {
-	public class Long :
+	class Long :
 		Abstract
 	{
+		int tailIndex = 0;
 		Collection.IQueue<Raster.Image> buffer;
-		int lastIndex = 0;
 		Kean.Core.Parallel.RepeatThread loader;
+		object signal = new object();
 		
 		public Long(string[] photoPaths)
 		{
-			wrap = false;
-			buffer = new Collection.Synchronized.Queue<Raster.Image>();
-			this.photoPaths = photoPaths;
+			this.Wrap = false;
+			this.buffer = new Collection.Synchronized.Queue<Raster.Image>();
+			this.PhotoPaths = photoPaths;
 			this.loader = Parallel.RepeatThread.Start("PhotoLoader", () =>
 			{
-				while (this.lastIndex-this.index < 10)
-				{
-					this.buffer.Enqueue(Raster.Image.Open(this.photoPaths[lastIndex % this.Count]));
-					this.lastIndex++;
-					if (this.lastIndex == this.Count + 10)
-						this.lastIndex %= this.Count;
-				}
-				//lock (this.signal)
-				//	System.Threading.Monitor.Wait(this.signal, 20);
+				while (this.tailIndex - this.Position < 10 && this.tailIndex < this.Count)
+					this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[tailIndex++]));
+				lock (this.signal)
+					System.Threading.Monitor.Wait(this.signal, 60);
 			});
 		}
 
 		public override Tuple<int, Raster.Image> Next()
 		{
-			index++;
-			Tuple<int, Raster.Image> result = new Tuple<int, Raster.Image>(index, buffer.Dequeue() as Raster.Image);
+			lock (this.signal)
+			{
+				if (this.tailIndex - this.Position < 10)
+					System.Threading.Monitor.Pulse(this.signal);
+			}
+			this.Position++;
+			Tuple<int, Raster.Image> result = new Tuple<int, Raster.Image>(this.Position, this.buffer.Dequeue() as Raster.Image);
 			return result;
 		}
-
+		public override bool Seek(int position)
+		{
+			bool result;
+			lock (this.signal)
+			{
+				this.Clear();
+				result = base.Seek(this.tailIndex = position);
+				System.Threading.Monitor.Pulse(this.signal);
+			}
+			return result;
+		}
 		public override void Close()
 		{
 			if (this.loader.NotNull())
@@ -50,10 +61,15 @@ namespace Imint.Media.Photo.Buffer
 				this.loader.Dispose();
 				this.loader = null;
 			}
+			this.Clear();
+			this.buffer = null;
+		}
+		void Clear()
+		{
 			Raster.Image image;
-			while (!buffer.Empty)
+			while (!this.buffer.Empty)
 			{
-				image = buffer.Dequeue();
+				image = this.buffer.Dequeue();
 				if (image.NotNull())
 					image.Dispose();
 			}

@@ -35,7 +35,7 @@ namespace Imint.Media.Photo
 		public DateTime End { get { return new DateTime((long)(1000 / (float)this.Rate * 10000 * (this.Count - 1))); } }
 		public void Seek(DateTime position)
 		{
-			this.Index = Kean.Math.Integer.Clamp((int)(position.Ticks / 10000 / (1000 / (float)this.Rate)), 0, this.Count - 1);
+			this.Buffer.Seek(Kean.Math.Integer.Clamp((int)(position.Ticks / 10000 / (1000 / (float)this.Rate)), 0, this.Count - 1));
 			if (!this.Playing)
 				this.SendFrame();
 		}

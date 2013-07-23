@@ -14,27 +14,32 @@ namespace Imint.Media.Photo.Buffer
 	public abstract class Abstract :
 		IDisposable
 	{
-		protected string[] photoPaths;
-		protected bool wrap = false;
-		protected int index = 0;
-		public int Position;
+		protected string[] PhotoPaths { get; set; }
+		protected bool Wrap { get; set; }
+		public int Position { get; protected set; }
+		public int Count { get { return this.PhotoPaths.Length; } }
+		protected Abstract()
+		{ }
 		public abstract Tuple<int, Raster.Image> Next();
-		public int Count { get { return this.photoPaths.Length; } }
+		public virtual bool Seek(int position)
+		{
+			bool result;
+			if (result = position >= 0 && position < this.Count)
+				this.Position = position;
+			return result;
+		}
 		public abstract void Close();
-		public void Dispose()
-		{			
+		void IDisposable.Dispose()
+		{
 			this.Close();
 		}
-
 		public static Buffer.Abstract Open(Uri.Locator name)
 		{
 			Buffer.Abstract result;
 			string[] photoPaths = GetImageSeries(name);
 			// If the series contains more than roughly 40 images, we can't store them all in memory.
 			if (photoPaths.Length > 40)
-			{
 				result = new Buffer.Long(photoPaths);
-			}
 			else
 				result = new Buffer.Short(photoPaths);
 			return result;

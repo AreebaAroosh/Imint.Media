@@ -7,34 +7,32 @@ using Raster = Kean.Draw.Raster;
 
 namespace Imint.Media.Photo.Buffer
 {
-	public class Short :
+	class Short :
 		Abstract
 	{
 		Raster.Image[] buffer;
 		public Short(string[] photoPaths)
 		{
-			wrap = true;
-			this.photoPaths = photoPaths;
-			buffer = new Raster.Image[this.Count];
+			this.Wrap = true;
+			this.PhotoPaths = photoPaths;
+			this.buffer = new Raster.Image[this.Count];
 			for (int i = 0; i < this.Count; i++)
-			{
-				buffer[i] = Raster.Image.Open(photoPaths[i]);
-			}
+				this.buffer[i] = Raster.Image.Open(photoPaths[i]);
 		}
 
 		public override Tuple<int, Raster.Image> Next()
 		{
-			Tuple<int, Raster.Image> result = new Tuple<int, Raster.Image>(index, buffer[index++].Copy() as Raster.Image);
-			index %= this.Count;
+			Tuple<int, Raster.Image> result = new Tuple<int, Raster.Image>(this.Position, this.buffer[this.Position++].Copy() as Raster.Image);
+			if (this.Wrap)
+				this.Position %= this.Count;
 			return result;
 		}
-
 		public override void Close()
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				buffer[i].Dispose();
-				buffer[i] = null;
+				this.buffer[i].Dispose();
+				this.buffer[i] = null;
 			}
 		}
 	}
