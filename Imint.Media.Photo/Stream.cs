@@ -27,6 +27,7 @@ using Collection = Kean.Core.Collection;
 using Serialize = Kean.Core.Serialize;
 using Uri = Kean.Core.Uri;
 using Kean.Core.Extension;
+using System.Text.RegularExpressions;
 
 namespace Imint.Media.Photo
 {
@@ -78,8 +79,10 @@ namespace Imint.Media.Photo
 			bool result = false;
 			if (name.Scheme == "file" && this.SupportedExtensions.Contains(name.Path.Extension))
 			{
-				this.photos = new Raster.Image[] { Raster.Image.Open(name.PlatformPath) };
-
+				string[] photoPaths = GetImageSeries(name);
+				this.photos = new Raster.Image[photoPaths.Length];
+				for (int i = 0; i < photoPaths.Length; i++)
+					this.photos[i] = Raster.Image.Open(photoPaths[i]);
 				Kean.Math.Fraction rate = name.Query["rate"];
 				if (rate.Nominator <= 0)
 					rate = this.Rate;
@@ -98,6 +101,19 @@ namespace Imint.Media.Photo
 				result = true;
 				this.Timer.Start();
 			}
+			return result;
+		}
+		string[] GetImageSeries(Uri.Locator name)
+		{
+			string[] result;
+			MatchCollection matches = Regex.Matches(name.Path.Name, @"(.*)(\d\d+)$");
+			if (matches.Count > 0)
+			{
+				string match = matches[0].Groups[1].Value;
+				result = System.IO.Directory.GetFiles(System.IO.Path.GetDirectoryName(name.PlatformPath), match + "*.png").Sort();
+			}
+			else
+				result = new string[]{ name.PlatformPath };
 			return result;
 		}
 		public void Close()
