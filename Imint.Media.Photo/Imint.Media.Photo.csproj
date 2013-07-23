@@ -32,6 +32,9 @@
     <BuildPackage>true</BuildPackage>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Buffer\Abstract.cs" />
+    <Compile Include="Buffer\Long.cs" />
+    <Compile Include="Buffer\Short.cs" />
     <Compile Include="Linear.cs" />
     <Compile Include="NonLinear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -41,6 +44,10 @@
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
       <Project>{964ee8eb-6a7e-4b62-bdbc-37a29e9c0e3b}</Project>
       <Name>Kean.Core.Collection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Parallel\Kean.Core.Parallel.csproj">
+      <Project>{8b708cfe-daba-40d5-8830-4c0d67dae732}</Project>
+      <Name>Kean.Core.Parallel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kean\Core\Kean.Core.Serialize\Kean.Core.Serialize.csproj">
       <Project>{06324516-5008-4a34-9c54-041f30f5a229}</Project>

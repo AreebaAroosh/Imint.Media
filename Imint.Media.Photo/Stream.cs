@@ -47,12 +47,11 @@ namespace Imint.Media.Photo
 		/// The duration of one frame.
 		/// </summary>
 		protected TimeSpan duration;
-		Collection.Queue<Raster.Image> buffer;
-		Raster.Image[] photos;
+		protected Buffer.Abstract buffer;
 		/// <summary>
 		/// The number of frames in the sequence.
 		/// </summary>
-		protected int Count { get { return (this.photos.NotNull()) ? photos.Length : 0; } }
+		protected int Count { get { return (this.buffer.NotNull()) ? buffer.Count : 0; } }
 		int index = 0;
 		/// <summary>
 		/// The index of the frame currently being shown.
@@ -64,6 +63,7 @@ namespace Imint.Media.Photo
 		protected System.Timers.Timer Timer { get; private set; }
 		public DateTime Position { get { return new DateTime((long)(1000 / (float)this.Rate * 10000 * this.Index)); } }
 		object signal = new object();
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -74,16 +74,14 @@ namespace Imint.Media.Photo
 		#region IStream Members
 		public int Channels { get { return 1; } }
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { get; set; }
-		public virtual Status Status { get { return (this.photos.NotNull() && this.Count == 0) ? Status.Closed : Status.Playing; } }
+		public virtual Status Status { get { return (this.buffer.NotNull() && this.Count == 0) ? Status.Closed : Status.Playing; } }
 		public bool Open(Uri.Locator name)
 		{
 			bool result = false;
 			if (name.Scheme == "file" && this.SupportedExtensions.Contains(name.Path.Extension))
 			{
-				string[] photoPaths = GetImageSeries(name);
-				this.photos = new Raster.Image[photoPaths.Length];
-				for (int i = 0; i < photoPaths.Length; i++)
-					this.photos[i] = Raster.Image.Open(photoPaths[i]);
+				//this.buffer = (this.Count > 50) ? new Buffer.Long() : new Buffer.Short();
+				this.buffer = Buffer.Abstract.Open(name);
 				Kean.Math.Fraction rate = name.Query["rate"];
 				if (rate.Nominator <= 0)
 					rate = this.Rate;
@@ -96,25 +94,12 @@ namespace Imint.Media.Photo
 					{
 						if (this.Count != 0)
 							this.Index = (this.Index + 1) % this.Count;
-						System.Threading.Monitor.Pulse(this.signal);
+						System.Threading.Monitor.PulseAll(this.signal);
 					}
 				};
 				result = true;
 				this.Timer.Start();
 			}
-			return result;
-		}
-		string[] GetImageSeries(Uri.Locator name)
-		{
-			string[] result;
-			MatchCollection matches = Regex.Matches(name.Path.Name, @"()(\d*\d{2})$");
-			if (matches.Count > 0)
-			{
-				string match = matches[0].Groups[1].Value;
-				result = System.IO.Directory.GetFiles(System.IO.Path.GetDirectoryName(name.PlatformPath), match + "*.png").Sort();
-			}
-			else
-				result = new string[]{ name.PlatformPath };
 			return result;
 		}
 		public void Close()
@@ -124,12 +109,10 @@ namespace Imint.Media.Photo
 				this.Timer.Dispose();
 				this.Timer = null;
 			}
-			if (this.photos.NotNull())
+			if (this.buffer.NotNull())
 			{
-				foreach (Raster.Image image in this.photos)
-					if (image.NotNull())
-						image.Dispose();
-				this.photos = null;
+				this.buffer.Dispose();
+				this.buffer = null;
 			}
 		}
 		public void Poll()
@@ -145,7 +128,9 @@ namespace Imint.Media.Photo
 		{
 			lock (this.signal)
 			{
-				this.Send(0, this.Position, this.duration, this.photos[this.Index].Copy() as Raster.Image, null);
+				Tuple<int, Raster.Image> next = this.buffer.Next();
+				this.Index = next.Item1;
+				this.Send(0, this.Position, this.duration, next.Item2 as Raster.Image, null);
 			}
 		}
 		#endregion
