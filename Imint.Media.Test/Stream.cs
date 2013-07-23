@@ -125,7 +125,7 @@ namespace Imint.Media.Test
 			if (this.Generators.NotNull())
 			{
 				foreach (Generator.Abstract generator in this.Generators)
-					generator.Dispose();
+					generator.Close();
 			}
 		}
 	}

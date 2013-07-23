@@ -35,7 +35,7 @@ namespace Imint.Media.Test.Generator
 		public abstract void Open(Uri.Locator argument);
 		public abstract void Close();
 
-		public void Dispose()
+		void IDisposable.Dispose()
 		{
 			this.Close();
 			foreach (Tuple<Raster.Image, Tuple<string, object>[]> item in this)
