@@ -47,6 +47,7 @@ namespace Imint.Media.Photo
 		/// The duration of one frame.
 		/// </summary>
 		protected TimeSpan duration;
+		Collection.Queue<Raster.Image> buffer;
 		Raster.Image[] photos;
 		/// <summary>
 		/// The number of frames in the sequence.
