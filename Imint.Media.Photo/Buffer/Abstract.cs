@@ -51,14 +51,18 @@ namespace Imint.Media.Photo.Buffer
 			MatchCollection matches = Regex.Matches(name.Path.Name, @"()(\d*\d{2})$");
 			// If the file has a name ending in 2 or more digits,
 			// assume series and get a sorted list of the files in it.
-			if (matches.Count > 0)
+			if (matches.Count == 1)
 			{
 				string match = matches[0].Groups[1].Value;
 				string directory = System.IO.Path.GetDirectoryName(name.PlatformPath);
 				result = System.IO.Directory.GetFiles(directory, match + "*.png").Sort();
 			}
+			else if (matches.Count > 1) // This shouldn't happen.
+			{
+				result = null;
+			}
 			else // The filename didn't end in 2 or more digits.
-				result = new string[]{ name.PlatformPath };
+				result = new string[] { name.PlatformPath };
 			return result;
 		}
 	}

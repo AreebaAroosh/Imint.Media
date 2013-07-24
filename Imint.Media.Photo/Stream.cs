@@ -74,7 +74,7 @@ namespace Imint.Media.Photo
 		#region IStream Members
 		public int Channels { get { return 1; } }
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { get; set; }
-		public virtual Status Status { get { return (this.Buffer.NotNull() && this.Count == 0) ? Status.Closed : Status.Playing; } }
+		public virtual Status Status { get { return (this.Buffer.NotNull() && this.Count > 0) ? Status.Playing : Status.Closed; } }
 		public bool Open(Uri.Locator name)
 		{
 			bool result = false;
@@ -92,8 +92,6 @@ namespace Imint.Media.Photo
 				{
 					lock (this.signal)
 					{
-						if (this.Count != 0)
-							this.Index = (this.Index + 1) % this.Count;
 						System.Threading.Monitor.Pulse(this.signal);
 					}
 				};

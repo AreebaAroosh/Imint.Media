@@ -13,25 +13,35 @@ namespace Imint.Media.Photo.Buffer
 	class Long :
 		Abstract
 	{
-		int tailIndex = 0;
+		int tailIndex;
 		Collection.IQueue<Raster.Image> buffer;
 		Kean.Core.Parallel.RepeatThread loader;
 		object signal = new object();
 		
 		public Long(string[] photoPaths)
 		{
-			this.Wrap = false;
 			this.buffer = new Collection.Synchronized.Queue<Raster.Image>();
 			this.PhotoPaths = photoPaths;
-			this.loader = Parallel.RepeatThread.Start("PhotoLoader", () =>
-			{
-				while (this.tailIndex - this.Position < 10 && this.tailIndex < this.Count)
-					this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[tailIndex++]));
-				lock (this.signal)
-					System.Threading.Monitor.Wait(this.signal, 60);
-			});
+			this.Wrap = (this.Count <= 1000);
+			// If the number of photos is larger than some abitrary value, playback should not loop.
+			this.loader = Parallel.RepeatThread.Start("PhotoLoader", this.Wrap ? (Action)this.WrappingLoader : this.Loader);
 		}
-
+		private void Loader()
+		{
+			while (this.tailIndex - this.Position < 10 && this.tailIndex < this.Count)
+				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[tailIndex++]));
+			lock (this.signal)
+				System.Threading.Monitor.Wait(this.signal, 20);
+		}
+		private void WrappingLoader()
+		{
+			while (this.tailIndex - this.Position < 10)
+				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[tailIndex++ % this.Count]));
+			if (this.Position < 10)
+				this.tailIndex %= this.Count;
+			lock (this.signal)
+				System.Threading.Monitor.Wait(this.signal, 20);
+		}
 		public override Tuple<int, Raster.Image> Next()
 		{
 			lock (this.signal)
@@ -40,6 +50,8 @@ namespace Imint.Media.Photo.Buffer
 					System.Threading.Monitor.Pulse(this.signal);
 			}
 			this.Position++;
+			if (this.Wrap)
+				this.Position %= this.Count;
 			Tuple<int, Raster.Image> result = new Tuple<int, Raster.Image>(this.Position, this.buffer.Dequeue() as Raster.Image);
 			return result;
 		}
@@ -58,6 +70,8 @@ namespace Imint.Media.Photo.Buffer
 		{
 			if (this.loader.NotNull())
 			{
+				this.loader.Stop();
+				this.loader.Abort();
 				this.loader.Dispose();
 				this.loader = null;
 			}
