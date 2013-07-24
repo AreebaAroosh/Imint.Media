@@ -58,9 +58,9 @@ namespace Imint.Media.Input
 		System.Threading.Thread sender;
 		DateTime end;
 		DateTime position;
-		object incommingLock = new object();
-		bool? incommingPlaying;
-		DateTime? incommingSeek;
+		object incomingLock = new object();
+		bool? incomingPlaying;
+		DateTime? incomingSeek;
 		public int Channels { get; private set; }
 		Collection.List<string> supportedExtensions = new Collection.List<string>();
 		public Collection.List<string> SupportedExtensions { get { return supportedExtensions; } }
@@ -145,10 +145,10 @@ namespace Imint.Media.Input
 							if (!(player is Player.ILinear && (player as Player.ILinear).IsLinear))
 								lock (this.@lock)
 									this.start = DateTime.Now;
-							lock (this.incommingLock)
+							lock (this.incomingLock)
 							{ // throw away all old incoming commands
-								this.incommingPlaying = null;
-								this.incommingSeek = null;
+								this.incomingPlaying = null;
+								this.incomingSeek = null;
 							}
 							while (player.Status != Status.Closed)
 							{
@@ -160,12 +160,12 @@ namespace Imint.Media.Input
 									{
 										bool? playing;
 										DateTime? seek;
-										lock (this.incommingLock)
+										lock (this.incomingLock)
 										{
-											playing = this.incommingPlaying;
-											seek = this.incommingSeek;
-											this.incommingPlaying = null;
-											this.incommingSeek = null;
+											playing = this.incomingPlaying;
+											seek = this.incomingSeek;
+											this.incomingPlaying = null;
+											this.incomingSeek = null;
 										}
 										if (playing.HasValue)
 										{
@@ -195,8 +195,8 @@ namespace Imint.Media.Input
 								else
 								{
 									bool freezed;
-									lock (this.incommingLock)
-										freezed = this.incommingPlaying.HasValue && !this.incommingPlaying.Value;
+									lock (this.incomingLock)
+										freezed = this.incomingPlaying.HasValue && !this.incomingPlaying.Value;
 									lock (this.@lock)
 									{
 										this.status = freezed ? Status.Paused : Status.Playing;
@@ -247,24 +247,24 @@ namespace Imint.Media.Input
 				this.sender = null;
 			}
 			this.status = Status.Closed;
-			this.incommingLock = new object();
-			this.incommingPlaying = null;
-			this.incommingSeek = null;
+			this.incomingLock = new object();
+			this.incomingPlaying = null;
+			this.incomingSeek = null;
 		}
 		public void Play()
 		{
-			lock (this.incommingLock)
-				this.incommingPlaying = true;
+			lock (this.incomingLock)
+				this.incomingPlaying = true;
 		}
 		public void Pause()
 		{
-			lock (this.incommingLock)
-				this.incommingPlaying = false;
+			lock (this.incomingLock)
+				this.incomingPlaying = false;
 		}
 		public void Seek(DateTime position)
 		{
-			lock (this.incommingLock)
-				this.incommingSeek = position;
+			lock (this.incomingLock)
+				this.incomingSeek = position;
 		}
 
 		public void Dispose()
