@@ -29,14 +29,20 @@ namespace Imint.Media.Photo.Buffer
 		private void Loader()
 		{
 			while (this.tailIndex - this.Position < 10 && this.tailIndex < this.Count)
-				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[tailIndex++]));
+			{
+				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[this.tailIndex]));
+				++this.tailIndex;
+			}
 			lock (this.signal)
 				System.Threading.Monitor.Wait(this.signal, 20);
 		}
 		private void WrappingLoader()
 		{
 			while (this.tailIndex - this.Position < 10)
-				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[tailIndex++ % this.Count]));
+			{
+				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[this.tailIndex % this.Count]));
+				++this.tailIndex;
+			}
 			if (this.Position < 10)
 				this.tailIndex %= this.Count;
 			lock (this.signal)

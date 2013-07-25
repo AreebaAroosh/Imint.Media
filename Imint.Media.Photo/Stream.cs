@@ -96,7 +96,7 @@ namespace Imint.Media.Photo
 					}
 				};
 				result = true;
-				if (this.Count <= 1000)
+				//if (this.Count <= 1000)
 					this.Timer.Start();
 			}
 			return result;
