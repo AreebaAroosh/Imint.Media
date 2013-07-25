@@ -24,7 +24,7 @@ namespace Imint.Media.Photo.Buffer
 		public virtual bool Seek(int position)
 		{
 			bool result;
-			if (result = position >= 0 && position < this.Count)
+			if (result = (position >= 0 && position < this.Count))
 				this.Position = position;
 			return result;
 		}
@@ -57,11 +57,13 @@ namespace Imint.Media.Photo.Buffer
 				string directory = System.IO.Path.GetDirectoryName(name.PlatformPath);
 				result = System.IO.Directory.GetFiles(directory, match + "*.png").Sort();
 			}
-			else if (matches.Count > 1) // This shouldn't happen.
+			else if (matches.Count > 1) // This shouldn't happen, but if it does,
+				// panic so we can identify why it happened
 			{
 				result = null;
+				//TODO: throw some exception
 			}
-			else // The filename didn't end in 2 or more digits.
+			else // The filename didn't end in 2 or more digits, so just take the one file.
 				result = new string[] { name.PlatformPath };
 			return result;
 		}

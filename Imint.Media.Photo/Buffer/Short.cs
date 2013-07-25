@@ -17,7 +17,7 @@ namespace Imint.Media.Photo.Buffer
 			this.PhotoPaths = photoPaths;
 			this.buffer = new Raster.Image[this.Count];
 			for (int i = 0; i < this.Count; i++)
-				this.buffer[i] = Raster.Image.Open(photoPaths[i]);
+				this.buffer[i] = Raster.Image.Open(PhotoPaths[i]);
 		}
 
 		public override Tuple<int, Raster.Image> Next()
