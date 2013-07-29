@@ -36,6 +36,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Net
 	public class SourcePlus :
 	   Abstract
 	{
+		public int Timeout { get; set; }
 		string url;
 		public SourcePlus(string url, params DirectShow.Binding.Filters.Abstract[] next) :
 			base("net.sourceplus", new System.Guid(global::Elecard.ElUids.Filters.CLSID_NWSource), "enwsplus.ax", "Elecard NWSource-Plus \"" + url + "\"", next)
@@ -50,7 +51,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Net
 				"Elecard", 
 				"Elecard NWSource-Plus", 
 				System.IO.Path.GetFileName(System.Environment.GetCommandLineArgs()[0]) },
-				KeyValue.Create("[DS] Data Timeout", 0)
+				KeyValue.Create("[DS] Data Timeout", this.Timeout)
 				);
 			DirectShowLib.IBaseFilter result = base.Create();
 			if (result is DirectShowLib.IFileSourceFilter)

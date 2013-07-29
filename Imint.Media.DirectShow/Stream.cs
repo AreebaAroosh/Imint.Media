@@ -91,7 +91,7 @@ namespace Imint.Media.DirectShow
 			if (result)
 			{
 				if (this.Debug)
-					this.Graph.Save(Uri.Locator.FromPlatformPath(Environment.SpecialFolder.MyDocuments, "graph.grf"));
+					this.Graph.Save(Uri.Locator.FromPlatformPath(System.Environment.SpecialFolder.MyDocuments, "graph.grf"));
 				this.Graph.Send = (DateTime position, TimeSpan lifeTime, Bitmap.Image frame) => 
 				{
 					if (this.Graph.NotNull())
