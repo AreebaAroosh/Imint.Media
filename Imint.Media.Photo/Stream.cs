@@ -80,7 +80,6 @@ namespace Imint.Media.Photo
 			bool result = false;
 			if (name.Scheme == "file" && this.SupportedExtensions.Contains(name.Path.Extension))
 			{
-				//this.buffer = (this.Count > 50) ? new Buffer.Long() : new Buffer.Short();
 				this.Buffer = Photo.Buffer.Abstract.Open(name);
 				Kean.Math.Fraction rate = name.Query["rate"];
 				if (rate.Nominator <= 0)

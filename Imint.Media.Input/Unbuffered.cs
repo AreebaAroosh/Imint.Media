@@ -77,9 +77,9 @@ namespace Imint.Media.Input
 		protected virtual void UpdateState(bool closed, bool playing, DateTime start, DateTime end, DateTime position, bool isLinear, bool isNonLinear, bool hasNext)
 		{
 			this.Status = closed ? Status.Closed : playing ? Status.Playing : Status.Paused;
-			this.Position = position;
 			this.Start = start;
 			this.End = end;
+			this.Position = position;
 			this.Length = end - start;
 			this.Seekable = isNonLinear;
 			this.HasEnd = isNonLinear;
@@ -154,9 +154,9 @@ namespace Imint.Media.Input
 			{
 				this.Players.Close();
 				this.Status = Media.Status.Closed;
-				this.Position = new DateTime();
 				this.Start = new DateTime();
 				this.End = new DateTime();
+				this.Position = new DateTime();
 				this.Length = new TimeSpan();
 				this.HasStart = false;
 				this.HasPosition = false;

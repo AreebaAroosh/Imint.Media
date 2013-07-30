@@ -177,11 +177,11 @@ namespace Imint.Media.Input
 										if (player is Player.INonLinear && (player as Player.INonLinear).IsNonLinear && seek.HasValue)
 											(player as Player.INonLinear).Seek(seek.Value);
 									}
-									DateTime position = (player as Player.ILinear).Position;
-									DateTime start = (player is Player.INonLinear && (player as Player.INonLinear).IsNonLinear) ? (player as Player.INonLinear).Start : new DateTime();
-									DateTime end = (player is Player.INonLinear && (player as Player.INonLinear).IsNonLinear) ? (player as Player.INonLinear).End : position;
 									isLinear = player is Player.ILinear && (player as Player.ILinear).IsLinear;
 									isNonLinear = player is Player.INonLinear && (player as Player.INonLinear).IsNonLinear;
+									DateTime position = (player as Player.ILinear).Position;
+									DateTime start = isNonLinear ? (player as Player.INonLinear).Start : new DateTime();
+									DateTime end = isNonLinear ? (player as Player.INonLinear).End : position;
 
 									lock (this.@lock)
 									{
@@ -200,7 +200,7 @@ namespace Imint.Media.Input
 									lock (this.@lock)
 									{
 										this.status = freezed ? Status.Paused : Status.Playing;
-										this.end = this.position = DateTime.Now;
+										this.position = this.end = DateTime.Now;
 									}
 								}
 								lock (this.@lock)
