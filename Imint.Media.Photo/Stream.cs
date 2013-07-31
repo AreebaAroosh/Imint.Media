@@ -127,8 +127,16 @@ namespace Imint.Media.Photo
 			lock (this.signal)
 			{
 				Tuple<int, Raster.Image> next = this.Buffer.Next();
-				this.Index = next.Item1;
-				this.Send(0, this.Position, this.Duration, next.Item2 as Raster.Image, null);
+				if (next.Item2 == null)
+				{
+					this.Timer.Stop();
+					this.Index = 0;
+				}
+				else
+				{
+					this.Index = next.Item1;
+					this.Send(0, this.Position, this.Duration, next.Item2 as Raster.Image, null);
+				}
 			}
 		}
 		#endregion
