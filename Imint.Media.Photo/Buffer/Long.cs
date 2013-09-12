@@ -23,7 +23,7 @@ namespace Imint.Media.Photo.Buffer
 			this.buffer = new Collection.Synchronized.Queue<Raster.Image>();
 			this.PhotoPaths = photoPaths;
 			this.Wrap = (this.Count <= 1000);
-			// If the number of photos is larger than some abitrary value, playback should not loop.
+			// If the number of photos is larger than some arbitrary value, playback should not loop.
 			this.loader = Parallel.RepeatThread.Start("PhotoLoader", this.Wrap ? (Action)this.WrappingLoader : this.Loader);
 		}
 		private void Loader()
