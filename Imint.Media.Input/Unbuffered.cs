@@ -120,9 +120,9 @@ namespace Imint.Media.Input
 				this.dropCount++;
 
 		}
-		protected virtual void Done(bool droped)
+		protected virtual void Done(bool dropped)
 		{
-			if (droped)
+			if (dropped)
 				this.dropCount++;
 		}
 		public event Func<Uri.Locator, Uri.Locator> OpenFilter;

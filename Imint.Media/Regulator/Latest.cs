@@ -106,10 +106,10 @@ namespace Imint.Media.Regulator
 		Frame Rebuild(Frame frame)
 		{
 			Func<bool, Frame> old = frame.Done;
-			frame.Done = droped =>
+			frame.Done = dropped =>
 			{
 				if (old.NotNull())
-					this.Receive(old(droped));
+					this.Receive(old(dropped));
 				Frame result = null;
 				lock (this.Lock)
 				{
