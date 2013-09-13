@@ -27,7 +27,7 @@ namespace Imint.Media.Photo
 		Stream,
 		Media.Player.ILinear
 	{
-		public override Status Status { get { return this.Count == 0 ? base.Status : this.Playing ? Status.Playing : Status.Paused; } }
+		public override Status Status { get { return this.Count > 0 ? base.Status : this.Playing ? Status.Playing : Status.Paused; } }
 		public bool Playing { get; private set; }
 		public bool Play()
 		{
