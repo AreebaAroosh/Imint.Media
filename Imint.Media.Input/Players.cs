@@ -53,7 +53,7 @@ namespace Imint.Media.Input
 		bool isLinear;
 		bool isNonLinear;
 		Status status;
-		DateTime start;
+		DateTime? start;
 		Player.IStream player;
 		System.Threading.Thread sender;
 		DateTime end;
@@ -89,7 +89,15 @@ namespace Imint.Media.Input
 							{
 								bool freezed;
 								lock (this.@lock)
-									freezed = this.status != Status.Playing;
+								{
+									if (!(freezed = this.status != Status.Playing))
+									{
+										if (!this.start.HasValue)
+											this.start = time;
+										this.position = time;
+									}
+									this.end = time;
+								}
 								if (!freezed)
 									this.WrappedSend(channel, time, lifetime, content, meta);
 							};
@@ -142,9 +150,6 @@ namespace Imint.Media.Input
 					if (player.NotNull())
 						try
 						{
-							if (!(player is Player.ILinear && (player as Player.ILinear).IsLinear))
-								lock (this.@lock)
-									this.start = DateTime.Now;
 							lock (this.incomingLock)
 							{ // throw away all old incoming commands
 								this.incomingPlaying = null;
@@ -198,16 +203,13 @@ namespace Imint.Media.Input
 									lock (this.incomingLock)
 										freezed = this.incomingPlaying.HasValue && !this.incomingPlaying.Value;
 									lock (this.@lock)
-									{
 										this.status = freezed ? Status.Paused : Status.Playing;
-										this.position = this.end = DateTime.Now;
-									}
 								}
 								lock (this.@lock)
 								{
 									if (player is Player.ILinear && (player as Player.ILinear).IsLinear)
 										this.status = player.Status;
-									this.UpdateState(this.status == Status.Closed, this.status == Status.Playing, this.start, this.end, this.position, isLinear, isNonLinear, this.hasNext);
+									this.UpdateState(this.status == Status.Closed, this.status == Status.Playing, this.start ?? new DateTime(), this.end, this.position, isLinear, isNonLinear, this.hasNext);
 								}
 							}
 						}
