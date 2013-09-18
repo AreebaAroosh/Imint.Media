@@ -12,7 +12,6 @@
     <AssemblyName>Imint.Media.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -89,6 +88,7 @@
   <ItemGroup>
     <None Include="Configuration\Player\90TestPlayers.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <EmbeddedResource Include="Generator\strip.png" />
   </ItemGroup>
