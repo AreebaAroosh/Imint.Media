@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Collection = Kean.Core.Collection;
+using Collection = Kean.Collection;
 using Raster = Kean.Draw.Raster;
-using Parallel = Kean.Core.Parallel;
-using Kean.Core.Collection.Extension;
-using Kean.Core.Extension;
+using Parallel = Kean.Parallel;
+using Kean.Collection.Extension;
+using Kean.Extension;
 
 namespace Imint.Media.Photo.Buffer
 {
@@ -15,7 +15,7 @@ namespace Imint.Media.Photo.Buffer
 	{
 		int tailIndex;
 		Collection.IQueue<Raster.Image> buffer;
-		Kean.Core.Parallel.RepeatThread loader;
+		Kean.Parallel.RepeatThread loader;
 		object signal = new object();
 		
 		public Long(string[] photoPaths)

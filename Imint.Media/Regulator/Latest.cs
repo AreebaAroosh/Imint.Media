@@ -20,9 +20,9 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
-using Parallel = Kean.Core.Parallel;
+using Kean;
+using Kean.Extension;
+using Parallel = Kean.Parallel;
 
 namespace Imint.Media.Regulator
 {

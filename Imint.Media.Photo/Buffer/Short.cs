@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Collection = Kean.Core.Collection;
+using Collection = Kean.Collection;
 using Raster = Kean.Draw.Raster;
 
 namespace Imint.Media.Photo.Buffer

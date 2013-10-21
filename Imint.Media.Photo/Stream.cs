@@ -20,13 +20,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Kean.Core;
-using Kean.Core.Collection.Extension;
+using Kean;
+using Kean.Collection.Extension;
 using Raster = Kean.Draw.Raster;
-using Collection = Kean.Core.Collection;
-using Serialize = Kean.Core.Serialize;
-using Uri = Kean.Core.Uri;
-using Kean.Core.Extension;
+using Collection = Kean.Collection;
+using Serialize = Kean.Serialize;
+using Uri = Kean.Uri;
+using Kean.Extension;
 using System.Text.RegularExpressions;
 
 namespace Imint.Media.Photo

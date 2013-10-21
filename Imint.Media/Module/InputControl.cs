@@ -20,16 +20,16 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
-using Serialize = Kean.Core.Serialize;
-using Uri = Kean.Core.Uri;
-using Parallel = Kean.Core.Parallel;
+using Kean;
+using Kean.Extension;
+using Serialize = Kean.Serialize;
+using Uri = Kean.Uri;
+using Parallel = Kean.Parallel;
 using Platform = Kean.Platform;
 using Geometry2D = Kean.Math.Geometry2D;
 using Settings = Kean.Platform.Settings;
 using Raster = Kean.Draw.Raster;
-using Collection = Kean.Core.Collection;
+using Collection = Kean.Collection;
 
 namespace Imint.Media.Module
 {

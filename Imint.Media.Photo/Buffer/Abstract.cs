@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Collection = Kean.Core.Collection;
+using Collection = Kean.Collection;
 using Raster = Kean.Draw.Raster;
-using Uri = Kean.Core.Uri;
-using Kean.Core.Collection.Extension;
-using Kean.Core.Extension;
+using Uri = Kean.Uri;
+using Kean.Collection.Extension;
+using Kean.Extension;
 
 namespace Imint.Media.Photo.Buffer
 {

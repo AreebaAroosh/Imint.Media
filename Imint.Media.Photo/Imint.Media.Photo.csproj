@@ -41,45 +41,9 @@
     <Compile Include="Stream.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
-      <Project>{964ee8eb-6a7e-4b62-bdbc-37a29e9c0e3b}</Project>
-      <Name>Kean.Core.Collection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Parallel\Kean.Core.Parallel.csproj">
-      <Project>{8b708cfe-daba-40d5-8830-4c0d67dae732}</Project>
-      <Name>Kean.Core.Parallel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Serialize\Kean.Core.Serialize.csproj">
-      <Project>{06324516-5008-4a34-9c54-041f30f5a229}</Project>
-      <Name>Kean.Core.Serialize</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Uri\Kean.Core.Uri.csproj">
-      <Project>{7e58819e-bcde-4194-8a83-e8e6e3d050f9}</Project>
-      <Name>Kean.Core.Uri</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core\Kean.Core.csproj">
-      <Project>{c5a4bc48-c14f-4f6b-9564-e04c0a79b7c1}</Project>
-      <Name>Kean.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw.Raster\Kean.Draw.Raster.csproj">
-      <Project>{ab4e5e08-6b2a-4a9f-abb3-a8f4ce73fb53}</Project>
-      <Name>Kean.Draw.Raster</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw\Kean.Draw.csproj">
-      <Project>{375108f3-ecbf-4bf9-9161-22bbeab6a7bc}</Project>
-      <Name>Kean.Draw</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Math\Kean.Math.Geometry2D\Kean.Math.Geometry2D.csproj">
-      <Project>{daf18ca8-78ea-417f-8730-0a76b0da2563}</Project>
-      <Name>Kean.Math.Geometry2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Math\Kean.Math.Regression\Kean.Math.Regression.csproj">
-      <Project>{13697abd-61c5-4eb0-b205-d5192e248cf0}</Project>
-      <Name>Kean.Math.Regression</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Math\Kean.Math\Kean.Math.csproj">
-      <Project>{96b4c4b4-5177-4717-9b2f-c74a0c2df7d5}</Project>
-      <Name>Kean.Math</Name>
+    <ProjectReference Include="..\..\Kean\Kean\Kean.csproj">
+      <Project>{db8acbac-64df-439b-bfcd-564d51661ce2}</Project>
+      <Name>Kean</Name>
     </ProjectReference>
     <ProjectReference Include="..\Imint.Media\Imint.Media.csproj">
       <Project>{0c283fe4-7254-4ed1-a125-54c297e985d8}</Project>

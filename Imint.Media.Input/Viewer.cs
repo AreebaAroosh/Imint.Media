@@ -20,16 +20,16 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
+using Kean;
+using Kean.Extension;
 using Bitmap = Kean.Draw.Raster;
-using Collection = Kean.Core.Collection;
-using Error = Kean.Core.Error;
+using Collection = Kean.Collection;
+using Error = Kean.Error;
 using Geometry2D = Kean.Math.Geometry2D;
-using Parallel = Kean.Core.Parallel;
-using Kean.Core.Collection.Extension;
-using Uri = Kean.Core.Uri;
-using Serialize = Kean.Core.Serialize;
+using Parallel = Kean.Parallel;
+using Kean.Collection.Extension;
+using Uri = Kean.Uri;
+using Serialize = Kean.Serialize;
 
 namespace Imint.Media.Input
 {

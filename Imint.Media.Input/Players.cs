@@ -20,17 +20,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
-using Kean.Core.Collection.Extension;
+using Kean;
+using Kean.Extension;
+using Kean.Collection.Extension;
 using Raster = Kean.Draw.Raster;
-using Collection = Kean.Core.Collection;
-using Error = Kean.Core.Error;
-using Parallel = Kean.Core.Parallel;
-using Uri = Kean.Core.Uri;
+using Collection = Kean.Collection;
+using Error = Kean.Error;
+using Parallel = Kean.Parallel;
+using Uri = Kean.Uri;
 using Platform = Kean.Platform;
-using Reflect = Kean.Core.Reflect;
-using Kean.Core.Reflect.Extension;
+using Reflect = Kean.Reflect;
+using Kean.Reflect.Extension;
 
 namespace Imint.Media.Input
 {

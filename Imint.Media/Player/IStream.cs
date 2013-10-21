@@ -20,9 +20,9 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  
 using System;
-using Kean.Core;
+using Kean;
 using Raster = Kean.Draw.Raster;
-using Uri = Kean.Core.Uri;
+using Uri = Kean.Uri;
 
 namespace Imint.Media.Player
 {
