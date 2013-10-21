@@ -12,7 +12,6 @@
     <AssemblyName>Imint.Media.Sensoray</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -52,37 +51,9 @@
       <Project>{0C283FE4-7254-4ED1-A125-54C297E985D8}</Project>
       <Name>Imint.Media</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Buffer\Kean.Core.Buffer.csproj">
-      <Project>{ab030d3b-8b47-4545-86ba-48a8d2afe020}</Project>
-      <Name>Kean.Core.Buffer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
-      <Project>{964ee8eb-6a7e-4b62-bdbc-37a29e9c0e3b}</Project>
-      <Name>Kean.Core.Collection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Error\Kean.Core.Error.csproj">
-      <Project>{9ee43841-ce0c-4943-bdff-1c5e158a0bdb}</Project>
-      <Name>Kean.Core.Error</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Uri\Kean.Core.Uri.csproj">
-      <Project>{7e58819e-bcde-4194-8a83-e8e6e3d050f9}</Project>
-      <Name>Kean.Core.Uri</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core\Kean.Core.csproj">
-      <Project>{c5a4bc48-c14f-4f6b-9564-e04c0a79b7c1}</Project>
-      <Name>Kean.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw.Raster\Kean.Draw.Raster.csproj">
-      <Project>{ab4e5e08-6b2a-4a9f-abb3-a8f4ce73fb53}</Project>
-      <Name>Kean.Draw.Raster</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw\Kean.Draw.csproj">
-      <Project>{375108f3-ecbf-4bf9-9161-22bbeab6a7bc}</Project>
-      <Name>Kean.Draw</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Math\Kean.Math.Geometry2D\Kean.Math.Geometry2D.csproj">
-      <Project>{daf18ca8-78ea-417f-8730-0a76b0da2563}</Project>
-      <Name>Kean.Math.Geometry2D</Name>
+    <ProjectReference Include="..\..\Kean\Kean\Kean.csproj">
+      <Project>{db8acbac-64df-439b-bfcd-564d51661ce2}</Project>
+      <Name>Kean</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

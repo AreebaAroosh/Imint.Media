@@ -27,14 +27,14 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
+using Kean;
+using Kean.Extension;
 using Raster = Kean.Draw.Raster;
-using Uri = Kean.Core.Uri;
+using Uri = Kean.Uri;
 using Geometry2D = Kean.Math.Geometry2D;
 using S2253 = Sensoray.S2253;
-using Buffer = Kean.Core.Buffer;
-using Error = Kean.Core.Error;
+using Buffer = Kean.Buffer;
+using Error = Kean.Error;
 
 namespace Imint.Media.Sensoray.Player
 {

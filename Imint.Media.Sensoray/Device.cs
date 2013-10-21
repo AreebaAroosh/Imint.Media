@@ -27,8 +27,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
+using Kean;
+using Kean.Extension;
 using Geometry2D = Kean.Math.Geometry2D;
 using Raster = Kean.Draw.Raster;
 
