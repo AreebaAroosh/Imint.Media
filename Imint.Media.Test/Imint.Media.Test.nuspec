@@ -9,10 +9,10 @@
 		<description>$description$</description>
 		<dependencies>
 			<dependency id="Imint.Media" />
-			<dependency id="Kean.Core" />
-			<dependency id="Kean.Core.Collection" />
-			<dependency id="Kean.Core.Serialize" />
-			<dependency id="Kean.Core.Uri" />
+			<dependency id="Kean" />
+			<dependency id="Kean.Collection" />
+			<dependency id="Kean.Serialize" />
+			<dependency id="Kean.Uri" />
 			<dependency id="Kean.Draw" />
 			<dependency id="Kean.Draw.Raster" />
 			<dependency id="Kean.Math" />

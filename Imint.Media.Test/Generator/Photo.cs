@@ -20,15 +20,15 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Kean.Core;
+using Kean;
 using Bitmap = Kean.Draw.Raster;
 using Geometry2D = Kean.Math.Geometry2D;
-using Uri = Kean.Core.Uri;
+using Uri = Kean.Uri;
 using Interpolation = Kean.Math.Regression.Interpolation;
-using Collection = Kean.Core.Collection;
-using Kean.Core.Extension;
-using Kean.Core.Collection.Extension;
-using Kean.Core.Collection.Linked.Extension;
+using Collection = Kean.Collection;
+using Kean.Extension;
+using Kean.Collection.Extension;
+using Kean.Collection.Linked.Extension;
 
 namespace Imint.Media.Test.Generator
 {

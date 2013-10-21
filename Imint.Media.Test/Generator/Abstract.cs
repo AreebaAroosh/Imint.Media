@@ -19,11 +19,11 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Kean.Core.Extension;
+using Kean.Extension;
 using System;
 using Raster = Kean.Draw.Raster;
-using Collection = Kean.Core.Collection;
-using Uri = Kean.Core.Uri;
+using Collection = Kean.Collection;
+using Uri = Kean.Uri;
 
 namespace Imint.Media.Test.Generator
 {
