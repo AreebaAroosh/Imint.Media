@@ -108,7 +108,7 @@ namespace Imint.Media.Module
 		#endregion
 		#region Crop
 		Geometry2D.Integer.Shell crop;
-		[Platform.Settings.Property("crop", "Crop of video frame borders", "Get/set the video frame borders [left, right, top, bottom].")]
+		[Platform.Settings.Property("crop", "Crop of video frame borders", "Get/set the video frame borders [left, right, top, bottom | horizontal, vertical | all].")]
 		[Notify("CropChanged")]
 		public Geometry2D.Integer.Shell Crop
 		{
