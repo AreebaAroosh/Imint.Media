@@ -41,13 +41,24 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Net
 		{
 			this.url = url;
 			this.Output = 0;
+			this.OnPreConfigure += configurator =>
+			{
+				Guid rtspDestination = new Guid(global::Elecard.ElUids.Properties.ERTSP_destination);
+
+				//Console.WriteLine("rtspDestination: " + configurator.GetParamValue(ref rtspDestination, null));
+
+				configurator.SetParamValue(ref rtspDestination, "127.0.0.1");
+				configurator.CommitChanges();
+
+				//Console.WriteLine("rtspDestination: " + configurator.GetParamValue(ref rtspDestination, null));
+			};
 		}
 		public override DirectShowLib.IBaseFilter Create()
 		{
 			DirectShowLib.IBaseFilter result = base.Create();
 			if (result is DirectShowLib.IFileSourceFilter)
 			{
-				Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.url, new DirectShowLib.AMMediaType() { majorType = DirectShowLib.MediaType.Stream, subType = DirectShowLib.MediaSubType.Mpeg2Transport }));
+				Binding.Exception.GraphError.Check((result as DirectShowLib.IFileSourceFilter).Load(this.url, new DirectShowLib.AMMediaType()));
 				System.Threading.Thread.Sleep(500);
 			}
 			return result;
@@ -56,7 +67,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Net
 		{
 			bool result = false;
 			DirectShowLib.IBaseFilter filter = this.Create();
-			if (build.Graph.AddFilter(filter, "Elecard RTSP NetSource") == 0)
+			if (build.Graph.AddFilter(filter, "Elecard RTSP NetSource") == 0 && this.PreConfiguration(build))
 			{
 				foreach (DirectShow.Binding.Filters.Abstract candidate in this.Next)
 					if (result = candidate.Build(filter, build))

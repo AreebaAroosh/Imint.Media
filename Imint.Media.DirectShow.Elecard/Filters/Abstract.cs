@@ -40,7 +40,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters
 		string path;
 		string identifier;
 		protected global::Elecard.Utilities.Filter backend;
-
+		protected event Action<global::Elecard.Utilities.ModuleConfig> OnPreConfigure;
 		public Abstract(string identifier, Guid guid, string path, string description, params DirectShow.Binding.Filters.Abstract[] next) :
 			base(description, next)
 		{
@@ -75,7 +75,26 @@ namespace Imint.Media.DirectShow.Elecard.Filters
 				{
 					string value = (module as Icop.Client.Module)["media.directshow.elecard." + this.identifier] as string;
 					if (value.NotEmpty())
-						this.Activate(this.backend, Convert.FromBase64String(value.Replace('-', '/')));
+						this.OnPreConfigure += configurator =>
+					{
+						byte[] key = Convert.FromBase64String(value.Replace('-', '/'));
+						byte[] correct = new byte[16];
+						byte[] secret = new byte[] { 89, 254, 202, 212, 234, 216, 54, 120, 194, 196, 150, 207, 127, 96, 54, 189 };
+						for (int i = 0; i < 16; i++)
+							correct[i] = (byte)(secret[i] ^ key[i]);
+						Guid activationKey = new Guid(correct);
+						//Console.WriteLine(activationKey);
+						configurator.SetParamValue(ref activationKey, null);
+					};
+				}
+			}
+			if (this.OnPreConfigure.NotNull())
+			{
+				global::Elecard.Utilities.ModuleConfig moduleConfigurator = this.backend.GetConfigInterface();
+				if (moduleConfigurator.NotNull())
+				{
+					this.OnPreConfigure(moduleConfigurator);
+					moduleConfigurator.Dispose();
 				}
 			}
 			return base.PreConfiguration(build);
@@ -105,22 +124,6 @@ namespace Imint.Media.DirectShow.Elecard.Filters
 				key.Close();
 			}
 			return result;
-		}
-
-		void Activate(global::Elecard.Utilities.Filter filter, byte[] key)
-		{
-			byte[] correct = new byte[16];
-			byte[] secret = new byte[] { 89, 254, 202, 212, 234, 216, 54, 120, 194, 196, 150, 207, 127, 96, 54, 189 };
-			for (int i = 0; i < 16; i++)
-				correct[i] = (byte)(secret[i] ^ key[i]);
-			global::Elecard.Utilities.ModuleConfig moduleConfigurator = filter.GetConfigInterface();
-			if (moduleConfigurator.NotNull())
-			{
-				Guid activationKey = new Guid(correct);
-				//Console.WriteLine(activationKey);
-				moduleConfigurator.SetParamValue(ref activationKey, null);
-				moduleConfigurator.Dispose();
-			}
 		}
 	}
 }
