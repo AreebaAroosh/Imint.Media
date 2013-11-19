@@ -8,11 +8,13 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
+			<dependency id="DirectShowLib2005" version="2.0.0.0"/>
 			<dependency id="Imint.Media" />
-			<dependency id="Imint.Media.DirectShow.Binding" />
 			<dependency id="Kean.Core" />
+			<dependency id="Kean.Core.Buffer" />
 			<dependency id="Kean.Core.Collection" />
 			<dependency id="Kean.Core.Error" />
+			<dependency id="Kean.Core.Parallel" />
 			<dependency id="Kean.Core.Serialize" />
 			<dependency id="Kean.Core.Uri" />
 			<dependency id="Kean.Draw" />

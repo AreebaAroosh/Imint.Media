@@ -13,7 +13,6 @@
 			<dependency id="Imint.Icop.Client" />
 			<dependency id="Imint.Media" />
 			<dependency id="Imint.Media.DirectShow" />
-			<dependency id="Imint.Media.DirectShow.Binding" />
 			<dependency id="Kean.Core" />
 			<dependency id="Kean.Core.Collection" />
 			<dependency id="Kean.Core.Error" />

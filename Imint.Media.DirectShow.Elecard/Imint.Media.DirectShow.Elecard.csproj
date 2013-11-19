@@ -104,10 +104,6 @@
       <Project>{5865df0e-57d7-47b1-8a34-88adffcee668}</Project>
       <Name>Imint.Icop</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Imint.Media.DirectShow.Binding\Imint.Media.DirectShow.Binding.csproj">
-      <Project>{349BEAA0-9985-4C79-9392-F5B5919BBDFF}</Project>
-      <Name>Imint.Media.DirectShow.Binding</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Imint.Media.DirectShow\Imint.Media.DirectShow.csproj">
       <Project>{DEAD2AAA-D696-410A-9884-08527E0260DD}</Project>
       <Name>Imint.Media.DirectShow</Name>
