@@ -35,6 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Avi.cs" />
+    <Compile Include="Axis\Filters\Net\RTPSource.cs" />
+    <Compile Include="Axis\Network.cs" />
     <Compile Include="Binding\Exception\Abstract.cs" />
     <Compile Include="Binding\Exception\FilterNotFound.cs" />
     <Compile Include="Binding\Exception\GraphError.cs" />
@@ -194,9 +196,9 @@
     <None Include="Configuration\Player\80DirectShowFileAvi.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Configuration\Player\80DirectShowFileWmv.xml">
+    <Content Include="Configuration\Player\90AxisRTP.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Configuration\Player\80DirectShowFileMpeg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -241,6 +243,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\Player\20MainConceptFileMpeg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Player\80DirectShowFileWmv.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
