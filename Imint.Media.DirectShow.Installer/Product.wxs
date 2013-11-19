@@ -30,10 +30,6 @@
 			<Component Id="Imint.Media.DirectShow">
 				<File Source="$(var.Imint.Media.DirectShow.TargetPath)" />
 			</Component>
-
-			<Component Id="Imint.Media.DirectShow.Binding">
-				<File Source="$(var.Imint.Media.DirectShow.Binding.TargetPath)" />
-			</Component>
 			<Component Id="Imint.Media.DirectShow.Elecard">
 				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetPath)" />
 			</Component>
@@ -48,6 +44,21 @@
 			</Component>
 		</ComponentGroup>
 		<ComponentGroup Id="ProductPlayer" Directory="PLAYERFOLDER">
+			<Component Id="Imint.Media.DirectShow_20CyberLinkCapturePlayer">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20CyberLinkCapturePlayer.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20CyberLinkCapturePlayerRecord">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20CyberLinkCapturePlayerRecord.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20CyberLinkFileMpeg">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20CyberLinkFileMpeg.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20MainConceptCapture">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20MainConceptCapture.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20MainConceptFileMpeg">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20MainConceptFileMpeg.xml" />
+			</Component>
 			<Component Id="Imint.Media.DirectShow_80DirectShowCapture">
 				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\80DirectShowCapture.xml" />
 			</Component>
