@@ -195,8 +195,8 @@ namespace Imint.Media.Module
 		public System.Collections.Generic.IEnumerable<Resource> Devices { get { return this.backend.Devices; } }
 
 
-		[Settings.Method("open", "Opens media.", "Opens media specified by locator argument.")]
-		public bool Open(Uri.Locator resource) 
+		[Settings.Method("open", "Opens media.", "Opens media specified by locator argument.", Example = "file:///c:/test.avi")]
+		public bool Open([Settings.Parameter("url", "Locator of file, capture device or video stream.")] Uri.Locator resource) 
 		{
 			bool result = false;
 			if (resource.NotNull())
