@@ -108,7 +108,7 @@ namespace Imint.Media.Module
 		#endregion
 		#region Crop
 		Geometry2D.Integer.Shell crop;
-		[Platform.Settings.Property("crop", "Crop of video frame borders", "Get/set the video frame borders [left, right, top, bottom | horizontal, vertical | all].")]
+		[Platform.Settings.Property("crop", "Crop of video frame borders", "Get/set the video frame cropping [left, right, top, bottom | horizontal, vertical | all].")]
 		[Notify("CropChanged")]
 		public Geometry2D.Integer.Shell Crop
 		{
@@ -134,7 +134,7 @@ namespace Imint.Media.Module
 			remove { this.backend.ResourceChanged -= value; }
 		}
 
-		[Settings.Property("state", "State of media.", "The state [closed | paused | playing] of media.")]
+		[Settings.Property("state", "Media state.", "Media state [closed | paused | playing].")]
 		[Notify("StatusChanged")]
 		public Status Status { get { return this.backend.Status; } }
 		public event Action<Status> StatusChanged
@@ -196,7 +196,7 @@ namespace Imint.Media.Module
 
 
 		[Settings.Method("open", "Opens media.", "Opens media specified by locator argument.", Example = "file:///c:/test.avi")]
-		public bool Open([Settings.Parameter("url", "Locator of file, capture device or video stream.")] Uri.Locator resource) 
+		public bool Open([Settings.Parameter("locator", "Locator of file, capture device or video stream.")] Uri.Locator resource) 
 		{
 			bool result = false;
 			if (resource.NotNull())
