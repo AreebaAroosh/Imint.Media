@@ -90,7 +90,7 @@ namespace Imint.Media.Module
 		#endregion
 		#region Scan
 		Media.Scan scan = Media.Scan.Unknown;
-		[Platform.Settings.Property("scan", "Scan format of video", "Get/set the scan format of video [Unknown | Interlaced | Progressive].")]
+		[Platform.Settings.Property("scan", "Scan format of video", "Get/set the scan format of video [unknown | interlaced | progressive].")]
 		[Notify("ScanChanged")]
 		public Media.Scan Scan
 		{
