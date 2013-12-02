@@ -90,7 +90,7 @@ namespace Imint.Media.Module
 		#endregion
 		#region Scan
 		Media.Scan scan = Media.Scan.Unknown;
-		[Platform.Settings.Property("scan", "Media scan format.", "The media scan format [unknown | interlaced | progressive].")]
+		[Platform.Settings.Property("scan", "Media scan format.", "Media scan format [unknown | interlaced | progressive].")]
 		[Notify("ScanChanged")]
 		public Media.Scan Scan
 		{
@@ -125,7 +125,7 @@ namespace Imint.Media.Module
 		public event Action<Geometry2D.Integer.Shell> CropChanged;
 		#endregion
 
-		[Settings.Property("resource", "Resource currently opened.", "The locator of the currently opened resource.")]
+		[Settings.Property("resource", "Resource currently opened.", "Locator of the currently opened resource.")]
 		[Notify("ResourceChanged")]
 		public Uri.Locator Resource { get { return this.backend.Resource; } }
 		public event Action<Uri.Locator> ResourceChanged
@@ -145,14 +145,14 @@ namespace Imint.Media.Module
 
 		#region Offset
 		TimeSpan offset;
-		[Settings.Property("offset", "Media offset position.", "The media offset position in format [[h:]mm:]ss[.fff].")]
+		[Settings.Property("offset", "Media offset position.", "Media offset position in format [[h:]mm:]ss[.fff].")]
 		[Notify("OffsetChanged")]
 		public TimeSpan Offset { get { return this.offset; } set { if (this.offset != value) this.OffsetChanged.Call(this.offset = value); } }
 		public event Action<TimeSpan> OffsetChanged;
 		#endregion
 
 		#region Start
-		[Settings.Property("start", "Media start position.", "The media start position in format [[h:]mm:]ss[.fff].")]
+		[Settings.Property("start", "Media start position.", "Media start position in format [[h:]mm:]ss[.fff].")]
 		[Notify("StartChanged")]
 		public new DateTime Start 
 		{ 
@@ -163,14 +163,14 @@ namespace Imint.Media.Module
 		#endregion
 
 		#region Position
-		[Settings.Property("position", "Media position.", "The current media position in format [[h:]mm:]ss[.fff].")]
+		[Settings.Property("position", "Media position.", "Current media position in format [[h:]mm:]ss[.fff].")]
 		[Notify("PositionChanged")]
 		public DateTime Position { get { return this.backend.Position + this.Offset; } }
 		public event Action<DateTime> PositionChanged;
 		#endregion
 
 		#region End
-		[Settings.Property("end", "Media end position.", "The media end position in format [[h:]mm:]ss[.fff].")]
+		[Settings.Property("end", "Media end position.", "Media end position in format [[h:]mm:]ss[.fff].")]
 		[Notify("EndChanged")]
 		public DateTime End { get { return this.backend.End + this.Offset; } }
 		public event Action<DateTime> EndChanged;
@@ -217,14 +217,14 @@ namespace Imint.Media.Module
 		[Settings.Method("play", "Start playback.", "Start playback of opened media.")]
 		public void Play() { this.backend.Play(); }
 
-		[Settings.Method("pause", "Pause playback.", "Pause playback when playing.")]
+		[Settings.Method("pause", "Pause playback.", "Pause playback, if playing.")]
 		public void Pause() { this.backend.Pause(); }
 
 		[Settings.Method("eject", "Eject opened media.", "Eject currently opened media.")]
 		public void Eject() { this.backend.Eject(); }
 
 		#region Seek
-		[Settings.Property("seekable", "Whether media is seekable.", "Whether the input media is seekable.")]
+		[Settings.Property("seekable", "Whether media is seekable.", "Whether the input media is seekable [true | false].")]
 		[Notify("SeekableChanged")]
 		public bool Seekable { get { return this.backend.Seekable; } }
 		public event Action<bool> SeekableChanged
@@ -237,7 +237,7 @@ namespace Imint.Media.Module
 		#endregion
 
 		#region Next
-		[Settings.Property("hasnext", "Media has next.", "Whether the input media position can seeked to the last captured position.")]
+		[Settings.Property("hasnext", "Media has next.", "Whether the input media position can seeked to the last captured position [true | false].")]
 		[Notify("HasNextChanged")]
 		public bool HasNext { get { return this.backend.HasNext; } }
 		public event Action<bool> HasNextChanged
@@ -245,12 +245,12 @@ namespace Imint.Media.Module
 			add { this.backend.HasNextChanged += value; }
 			remove { this.backend.HasNextChanged -= value; }
 		}
-		[Settings.Method("next", "Play from last captured position.", "Play media from the last captured position.")]
+		[Settings.Method("next", "Play from last captured position.", "Play the media from the last captured position.")]
 		public void Next() { this.backend.Next(); }
 		#endregion
 		
 		#region Previous
-		[Settings.Property("hasprevious", "Media has previous.", "Whether the input media position can seeked to the first captured position.")]
+		[Settings.Property("hasprevious", "Media has previous.", "Whether the input media position can seeked to the first captured position [true | false].")]
 		[Notify("HasPreviousChanged")]
 		public bool HasPrevious { get { return this.backend.HasPrevious; } }
 		public event Action<bool> HasPreviousChanged
