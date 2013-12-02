@@ -27,7 +27,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core.Extension;
+using Kean.Extension;
 using Bitmap = Kean.Draw.Raster;
 
 namespace Imint.Media.DirectShow.MainConcept.Graph

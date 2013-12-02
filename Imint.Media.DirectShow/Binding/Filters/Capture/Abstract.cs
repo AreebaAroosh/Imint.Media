@@ -27,12 +27,12 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core.Extension;
+using Kean.Extension;
 using Geometry2D = Kean.Math.Geometry2D;
-using Collection = Kean.Core.Collection;
-using Buffer = Kean.Core.Buffer;
-using Kean.Core.Collection.Extension;
-using Error = Kean.Core.Error;
+using Collection = Kean.Collection;
+using Buffer = Kean.Buffer;
+using Kean.Collection.Extension;
+using Error = Kean.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters.Capture
 {

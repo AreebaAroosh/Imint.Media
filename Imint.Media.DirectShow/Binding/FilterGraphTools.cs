@@ -11,7 +11,7 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using Kean.Core.Extension;
+using Kean.Extension;
 using DirectShowLib;
 
 #if !USING_NET11

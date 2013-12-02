@@ -27,14 +27,14 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core.Extension;
+using Kean.Extension;
 using Bitmap = Kean.Draw.Raster;
-using Buffer = Kean.Core.Buffer;
+using Buffer = Kean.Buffer;
 using Geometry2D = Kean.Math.Geometry2D;
-using Uri = Kean.Core.Uri;
+using Uri = Kean.Uri;
 using Platform = Kean.Platform;
-using Error = Kean.Core.Error;
-using Parallel = Kean.Core.Parallel;
+using Error = Kean.Error;
+using Parallel = Kean.Parallel;
 
 namespace Imint.Media.DirectShow.Binding
 {
@@ -216,7 +216,7 @@ namespace Imint.Media.DirectShow.Binding
 			}
 		}
 		public virtual Action<DateTime, TimeSpan, Bitmap.Image> Send { set; get; }
-		public bool Save(Kean.Core.Uri.Locator locator)
+		public bool Save(Kean.Uri.Locator locator)
 		{
 			bool result = false;
 			if (result = this.graph.NotNull())

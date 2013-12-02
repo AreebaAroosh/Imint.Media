@@ -27,11 +27,11 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Error = Kean.Core.Error;
+using Error = Kean.Error;
 using Bitmap = Kean.Draw.Raster;
-using Buffer = Kean.Core.Buffer;
+using Buffer = Kean.Buffer;
 using Geometry2D = Kean.Math.Geometry2D;
-using Kean.Core.Extension;
+using Kean.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber
 {

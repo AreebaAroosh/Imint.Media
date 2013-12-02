@@ -27,8 +27,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Uri = Kean.Core.Uri;
-using Kean.Core.Extension;
+using Uri = Kean.Uri;
+using Kean.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Timeshift
 {

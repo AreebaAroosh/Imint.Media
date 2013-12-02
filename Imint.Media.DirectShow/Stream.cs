@@ -27,12 +27,12 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
+using Kean;
+using Kean.Extension;
 using Bitmap = Kean.Draw.Raster;
-using Uri = Kean.Core.Uri;
-using Error = Kean.Core.Error;
-using Serialize = Kean.Core.Serialize;
+using Uri = Kean.Uri;
+using Error = Kean.Error;
+using Serialize = Kean.Serialize;
 using Platform = Kean.Platform;
 
 namespace Imint.Media.DirectShow

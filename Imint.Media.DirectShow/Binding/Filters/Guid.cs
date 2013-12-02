@@ -27,8 +27,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core.Extension;
-using Error = Kean.Core.Error;
+using Kean.Extension;
+using Error = Kean.Error;
 
 namespace Imint.Media.DirectShow.Binding.Filters
 {

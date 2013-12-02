@@ -27,9 +27,9 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Uri = Kean.Core.Uri;
-using Kean.Core.Extension;
-using Serialize = Kean.Core.Serialize;
+using Uri = Kean.Uri;
+using Kean.Extension;
+using Serialize = Kean.Serialize;
 
 namespace Imint.Media.DirectShow.Elecard
 {

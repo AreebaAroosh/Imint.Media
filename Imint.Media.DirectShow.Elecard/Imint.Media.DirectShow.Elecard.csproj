@@ -64,38 +64,6 @@
     <Compile Include="Timeshift\Network.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Collection\Kean.Core.Collection.csproj">
-      <Project>{964EE8EB-6A7E-4B62-BDBC-37A29E9C0E3B}</Project>
-      <Name>Kean.Core.Collection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Error\Kean.Core.Error.csproj">
-      <Project>{9EE43841-CE0C-4943-BDFF-1C5E158A0BDB}</Project>
-      <Name>Kean.Core.Error</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Serialize\Kean.Core.Serialize.csproj">
-      <Project>{06324516-5008-4a34-9c54-041f30f5a229}</Project>
-      <Name>Kean.Core.Serialize</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core.Uri\Kean.Core.Uri.csproj">
-      <Project>{7E58819E-BCDE-4194-8A83-E8E6E3D050F9}</Project>
-      <Name>Kean.Core.Uri</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Core\Kean.Core\Kean.Core.csproj">
-      <Project>{C5A4BC48-C14F-4F6B-9564-E04C0A79B7C1}</Project>
-      <Name>Kean.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw.Raster\Kean.Draw.Raster.csproj">
-      <Project>{AB4E5E08-6B2A-4A9F-ABB3-A8F4CE73FB53}</Project>
-      <Name>Kean.Draw.Raster</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Draw\Kean.Draw\Kean.Draw.csproj">
-      <Project>{375108F3-ECBF-4BF9-9161-22BBEAB6A7BC}</Project>
-      <Name>Kean.Draw</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kean\Platform\Kean.Platform\Kean.Platform.csproj">
-      <Project>{ABF16C06-E815-40C8-9194-13D9BE11E019}</Project>
-      <Name>Kean.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Imint.Icop\Imint.Icop.Client\Imint.Icop.Client.csproj">
       <Project>{4bd73747-0455-402c-b93c-c520b2dcfccf}</Project>
       <Name>Imint.Icop.Client</Name>
@@ -103,6 +71,10 @@
     <ProjectReference Include="..\..\Imint.Icop\Imint.Icop\Imint.Icop.csproj">
       <Project>{5865df0e-57d7-47b1-8a34-88adffcee668}</Project>
       <Name>Imint.Icop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kean\Kean\Kean.csproj">
+      <Project>{db8acbac-64df-439b-bfcd-564d51661ce2}</Project>
+      <Name>Kean</Name>
     </ProjectReference>
     <ProjectReference Include="..\Imint.Media.DirectShow\Imint.Media.DirectShow.csproj">
       <Project>{DEAD2AAA-D696-410A-9884-08527E0260DD}</Project>

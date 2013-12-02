@@ -27,8 +27,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Error = Kean.Core.Error;
-using Kean.Core.Extension;
+using Error = Kean.Error;
+using Kean.Extension;
 namespace Imint.Media.DirectShow.Bosch.Filters.IO
 {
 	public class Source :

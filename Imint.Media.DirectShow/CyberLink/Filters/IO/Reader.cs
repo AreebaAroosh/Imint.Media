@@ -27,9 +27,9 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Error = Kean.Core.Error;
-using Kean.Core.Extension;
-using Kean.Core;
+using Error = Kean.Error;
+using Kean.Extension;
+using Kean;
 
 namespace Imint.Media.DirectShow.CyberLink.Filters.IO
 {

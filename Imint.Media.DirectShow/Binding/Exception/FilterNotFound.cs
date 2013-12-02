@@ -27,7 +27,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Error = Kean.Core.Error;
+using Error = Kean.Error;
 
 namespace Imint.Media.DirectShow.Binding.Exception
 {

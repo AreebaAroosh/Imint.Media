@@ -27,9 +27,9 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core.Extension;
-using Uri = Kean.Core.Uri;
-using Serialize = Kean.Core.Serialize;
+using Kean.Extension;
+using Uri = Kean.Uri;
+using Serialize = Kean.Serialize;
 using Geometry2D = Kean.Math.Geometry2D;
 using Math = Kean.Math;
 

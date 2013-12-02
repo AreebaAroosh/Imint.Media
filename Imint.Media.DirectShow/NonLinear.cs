@@ -27,10 +27,10 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core;
+using Kean;
 using Bitmap = Kean.Draw.Raster;
-using Uri = Kean.Core.Uri;
-using Kean.Core.Extension;
+using Uri = Kean.Uri;
+using Kean.Extension;
 
 namespace Imint.Media.DirectShow
 {

@@ -27,8 +27,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core;
-using Kean.Core.Extension;
+using Kean;
+using Kean.Extension;
 
 namespace Imint.Media.DirectShow.Elecard.Filters.Demultiplexer
 {

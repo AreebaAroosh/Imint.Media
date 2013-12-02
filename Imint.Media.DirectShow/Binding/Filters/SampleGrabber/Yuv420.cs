@@ -28,7 +28,7 @@
  
 using System;
 using Bitmap = Kean.Draw.Raster;
-using Buffer = Kean.Core.Buffer;
+using Buffer = Kean.Buffer;
 using Geometry2D = Kean.Math.Geometry2D;
 
 namespace Imint.Media.DirectShow.Binding.Filters.SampleGrabber

@@ -28,7 +28,7 @@
  
 using System;
 using Bitmap = Kean.Draw.Raster;
-using Uri = Kean.Core.Uri;
+using Uri = Kean.Uri;
 
 namespace Imint.Media.DirectShow.Binding
 {

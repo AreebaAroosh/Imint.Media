@@ -27,11 +27,11 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Uri = Kean.Core.Uri;
+using Uri = Kean.Uri;
 using Bitmap = Kean.Draw.Raster;
-using Kean.Core.Extension;
+using Kean.Extension;
 using DirectShow = Imint.Media.DirectShow;
-using Kean.Core.Collection.Extension;
+using Kean.Collection.Extension;
 
 namespace Imint.Media.DirectShow.Bosch
 {

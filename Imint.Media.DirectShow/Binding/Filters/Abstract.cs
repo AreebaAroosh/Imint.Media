@@ -28,7 +28,7 @@
  
 using System;
 using Bitmap = Kean.Draw.Raster;
-using Kean.Core.Extension;
+using Kean.Extension;
 
 namespace Imint.Media.DirectShow.Binding.Filters
 {

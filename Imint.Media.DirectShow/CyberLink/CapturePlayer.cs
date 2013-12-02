@@ -27,8 +27,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  
 using System;
-using Kean.Core.Extension;
-using Uri = Kean.Core.Uri;
+using Kean.Extension;
+using Uri = Kean.Uri;
 using DirectShow = Imint.Media.DirectShow;
 
 namespace Imint.Media.DirectShow.CyberLink
