@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include VersionInfo.Generated.wxi ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Imint.Media.DirectShow.Installer" Language="$(var.ProductLanguage)" Version="$(var.ProductVersion)" Manufacturer="$(var.ProductManufacturer)" UpgradeCode="5e0a693f-292b-4073-8b57-4f71a3bb82c9">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes"/>
+
+		<Feature Id="ProductFeature" Title="Imint.Media.DirectShow" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="ProductPlayer" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="[INSTALLFOLDER]">
+					<Directory Id="CONFIGURATIONFOLDER" Name="Configuration">
+						<Directory Id="PLAYERFOLDER" Name="Player" />
+					</Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="Imint.Media.DirectShow">
+				<File Source="$(var.Imint.Media.DirectShow.TargetPath)" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow.Elecard">
+				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetPath)" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow.Elecard.Classes">
+				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetDir)Classes_v10.dll" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow.Elecard.Consts">
+				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetDir)Consts_v10.dll" />
+			</Component>
+			<Component Id="DirectShowLib_2005">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)DirectShowLib-2005.dll" />
+			</Component>
+		</ComponentGroup>
+		<ComponentGroup Id="ProductPlayer" Directory="PLAYERFOLDER">
+			<Component Id="Imint.Media.DirectShow_20CyberLinkCapturePlayer">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20CyberLinkCapturePlayer.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20CyberLinkCapturePlayerRecord">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20CyberLinkCapturePlayerRecord.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20CyberLinkFileMpeg">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20CyberLinkFileMpeg.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20MainConceptCapture">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20MainConceptCapture.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_20MainConceptFileMpeg">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\20MainConceptFileMpeg.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_80DirectShowCapture">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\80DirectShowCapture.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_80DirectShowFileAvi">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\80DirectShowFileAvi.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_80DirectShowFileMpeg">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\80DirectShowFileMpeg.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow_80DirectShowFileWmv">
+				<File Source="$(var.Imint.Media.DirectShow.TargetDir)Configuration\Player\80DirectShowFileWmv.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow.Elecard_10ElecardFile">
+				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetDir)Configuration\Player\10ElecardFile.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow.Elecard_10ElecardNetwork">
+				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetDir)Configuration\Player\10ElecardNetwork.xml" />
+			</Component>
+			<Component Id="Imint.Media.DirectShow.Elecard_10ElecardNetworkRecord">
+				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetDir)Configuration\Player\10ElecardNetworkRecord.xml" />
+			</Component>
+			<!--<Component Id="Imint.Media.DirectShow.Elecard_10ElecardNetworkTimeShift">
+				<File Source="$(var.Imint.Media.DirectShow.Elecard.TargetDir)Configuration\Player\10ElecardNetworkTimeShift.xml" />
+			</Component>-->
+		</ComponentGroup>
+	</Fragment>
+</Wix>
