@@ -110,7 +110,7 @@ namespace Imint.Media.Sensoray.Player
 					result = this.stream.Start(this.size, name.Query.GetEnumeration<Encoding>("encoding", Encoding.H264), name.Query.Get("bitrate", 2500), record);
 				else
 				{
-					result = this.stream.Start(this.size, image => this.Send(0, DateTime.Now, TimeSpan.FromSeconds(this.videoSystem == VideoSystem.Ntsc ? 1 / 30.0f : 1 / 25.0f), image.Convert<Raster.Yuv422>(), null));
+					result = this.stream.Start(this.size, image => this.Send(0, DateTime.Now, TimeSpan.FromSeconds(this.videoSystem == VideoSystem.Ntsc ? 1 / 30.0f : 1 / 25.0f), image, null));
 					string video = null;
 					if (result && (video = name.Query["video"]).NotEmpty())
 					{
