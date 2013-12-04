@@ -138,7 +138,7 @@ namespace Imint.Media.Input
 				this.end = end;
 			}
 		}
-		protected override void  SendFrame(Frame frame)
+		protected override void SendFrame(Frame frame)
 		{
 			lock (this.@lock)
 			{
