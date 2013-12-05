@@ -45,7 +45,6 @@ namespace Imint.Media.Blackmagic
 		{
 			Debug.WriteLine("VideoInputFormatChanged called");
 		}
-		bool intialized;
 		int stride;
 		Geometry2D.Integer.Size size;
 		int divisor = 1;
@@ -56,15 +55,10 @@ namespace Imint.Media.Blackmagic
 			{
 				IntPtr pointer;
 				videoFrame.GetBytes(out pointer);
-				if (!this.intialized)
-				{
-					this.stride = videoFrame.GetRowBytes();
-					//TODO: 350 is the highest number I've tried that doesn't cause stuttering due to CPU load.
-					this.size = new Geometry2D.Integer.Size(videoFrame.GetWidth(), 350);//videoFrame.GetHeight());
-					this.intialized = true;
-				}
+				this.stride = videoFrame.GetRowBytes();
+				this.size = new Geometry2D.Integer.Size(videoFrame.GetWidth(), videoFrame.GetHeight());
 				var buffer = new Buffer.Sized(pointer, this.stride * this.size.Height).Copy();
-				this.threadPool.Enqueue(() => 
+				this.threadPool.Enqueue(() =>
 					this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 50.0f * this.divisor), new Raster.Uyvy(buffer, size), null));
 			}
 		}
