@@ -10,15 +10,6 @@
 		<dependencies>
 			<dependency id="Imint.Media" />
 			<dependency id="Kean" />
-			<dependency id="Kean.Collection" />
-			<dependency id="Kean.Error" />
-			<dependency id="Kean.Serialize" />
-			<dependency id="Kean.Uri" />
-			<dependency id="Kean.Draw" />
-			<dependency id="Kean.Draw.Raster" />
-			<dependency id="Kean.Math" />
-			<dependency id="Kean.Math.Geometry2D" />
-			<dependency id="Kean.Math.Regression" />
 		</dependencies>
 	</metadata>
 	<files>
