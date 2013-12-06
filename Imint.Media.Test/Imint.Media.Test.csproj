@@ -65,7 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Imint.Media.Test.targets" />
-    <None Include="Imint.Media.Test.nuspec" />
+    <None Include="Imint.Media.Test.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Imint.Media.Test.licenseheader" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
