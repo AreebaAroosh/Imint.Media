@@ -75,6 +75,10 @@
       <Project>{DB8ACBAC-64DF-439B-BFCD-564D51661CE2}</Project>
       <Name>Kean</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Imint.Media.DirectShow\Imint.Media.DirectShow.csproj">
+      <Project>{dead2aaa-d696-410a-9884-08527e0260dd}</Project>
+      <Name>Imint.Media.DirectShow</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Imint.Media.Input\Imint.Media.Input.csproj">
       <Project>{0B948F72-FF2B-4936-B23F-D8E8D092DAC5}</Project>
       <Name>Imint.Media.Input</Name>
