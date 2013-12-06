@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using DeckLinkAPI;
-using System.Diagnostics;
-using Imint.Media;
+﻿using DeckLinkAPI;
 using Kean.Extension;
-using Raster = Kean.Draw.Raster;
+using System;
+using System.Diagnostics;
 using Buffer = Kean.Buffer;
+using Generic = System.Collections.Generic;
 using Geometry2D = Kean.Math.Geometry2D;
-using Platform = Kean.Platform;
 using Parallel = Kean.Parallel;
+using Platform = Kean.Platform;
+using Raster = Kean.Draw.Raster;
 
 namespace Imint.Media.Blackmagic
 {
@@ -117,7 +112,7 @@ namespace Imint.Media.Blackmagic
 			this.Status = Media.Status.Closed;
 		}
 
-		public IEnumerable<Resource> Devices
+		public Generic.IEnumerable<Resource> Devices
 		{
 			get 
 			{
