@@ -17,7 +17,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>$(SolutionDir)bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>$(SolutionDir)bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -61,11 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kean\Kean\Kean.csproj">
-      <Project>{db8acbac-64df-439b-bfcd-564d51661ce2}</Project>
+      <Project>{DB8ACBAC-64DF-439B-BFCD-564D51661CE2}</Project>
       <Name>Kean</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(ProjectDir)..\Common.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
