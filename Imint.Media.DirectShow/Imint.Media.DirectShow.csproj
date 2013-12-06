@@ -158,7 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Imint.Media.DirectShow.licenseheader" />
-    <None Include="Imint.Media.DirectShow.nuspec" />
+    <None Include="Imint.Media.DirectShow.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Imint.Media.DirectShow.targets" />
   </ItemGroup>
   <ItemGroup>

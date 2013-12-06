@@ -10,18 +10,7 @@
 		<dependencies>
 			<dependency id="DirectShowLib2005" version="2.0.0.0"/>
 			<dependency id="Imint.Media" />
-			<dependency id="Kean.Core" />
-			<dependency id="Kean.Buffer" />
-			<dependency id="Kean.Collection" />
-			<dependency id="Kean.Error" />
-			<dependency id="Kean.Parallel" />
-			<dependency id="Kean.Serialize" />
-			<dependency id="Kean.Uri" />
-			<dependency id="Kean.Draw" />
-			<dependency id="Kean.Draw.Raster" />
-			<dependency id="Kean.Math" />
-			<dependency id="Kean.Math.Geometry2D" />
-			<dependency id="Kean.Platform" />
+			<dependency id="Kean" />
 		</dependencies>
 	</metadata>
 	<files>
