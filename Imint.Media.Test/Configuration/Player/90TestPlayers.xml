@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Player type="Imint.Media.Test:Stream">
-	<Generator type="Imint.Media.Test:Generator.Photo" />
-	<Generator type="Imint.Media.Test:Generator.Sine" />
-</Player>
