@@ -29,7 +29,7 @@ using Raster = Kean.Draw.Raster;
 using Parallel = Kean.Parallel;
 using Collection = Kean.Collection;
 
-namespace Imint.Media.Mjpeg.Http
+namespace Imint.Media.MotionJpeg.Http
 {
 	public abstract class Multipart :
 		Abstract

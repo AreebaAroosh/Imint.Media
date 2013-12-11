@@ -27,8 +27,11 @@ using Uri = Kean.Uri;
 using Geometry2D = Kean.Math.Geometry2D;
 using Buffer = Kean.Buffer;
 using Error = Kean.Error;
+using IO = Kean.IO;
+using Parallel = Kean.Parallel;
+using Serialize = Kean.Serialize;
 
-namespace Imint.Media.Mjpeg.Player
+namespace Imint.Media.MotionJpeg.Player
 {
 	public class Stream :
 		Media.Player.IStream
@@ -37,14 +40,19 @@ namespace Imint.Media.Mjpeg.Player
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { set; private get; }
 		public Status Status { get; private set; }
 
-		Http.Abstract decoder;
-
+		Http.Response response;
+		Parallel.RepeatThread thread;
+		[Serialize.Parameter]
+		public TimeSpan TimeOut { get; set; }
 		public Stream()
-		{ }
+		{
+			this.TimeOut = TimeSpan.FromSeconds(2);
+		}
 		~Stream()
 		{
 			Error.Log.Wrap((Action)this.Close)();
 		}
+		long frameCount;
 		public void Poll() { System.Threading.Thread.Sleep(10); }
 		public bool Open(Uri.Locator url)
 		{
@@ -53,9 +61,44 @@ namespace Imint.Media.Mjpeg.Player
 			{
 				case "http":
 				case "https":
-					this.decoder = new Http.Mjpeg(url);
-					this.decoder.OnFrame += image => this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 25.0f), image, null);
-					result = this.decoder.Start();
+					if (this.thread.IsNull() && this.response.IsNull())
+					{
+						this.response = new Http.Request() { Url = url }.Connect();
+						System.Threading.AutoResetEvent wait = new System.Threading.AutoResetEvent(false);
+						this.thread = Parallel.RepeatThread.Start("MotionJpegPlayer", () =>
+						{
+							if (!this.response.Open((contentType, device) =>
+								{
+									bool r = true;
+									switch (contentType)
+									{
+										case "image/jpeg":
+										case "image/png": // TODO: does png really work with Raster.Image.Open?
+											if (wait.NotNull())
+												wait.Set();
+											Raster.Image image = Raster.Image.Open(device);
+											if (image.NotNull())
+												this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 25.0f), image, null);
+											break;
+										default:
+											r = false;
+											break;
+									}
+									return r;
+								}))
+								this.thread.Abort();
+						});
+						if (!(result = wait.WaitOne(this.TimeOut)))
+						{
+							this.thread.Abort();
+							this.thread.Dispose();
+							this.thread = null;
+							this.response.Close();
+							this.response = null;
+						}
+						wait.Dispose();
+						wait = null;
+					}
 					break;
 			}
 			this.Status = result ? Status.Playing : Status.Closed;
@@ -64,10 +107,16 @@ namespace Imint.Media.Mjpeg.Player
 
 		public void Close()
 		{
-			if (this.decoder.NotNull())
+			if (this.response.NotNull())
 			{
-				this.decoder.Stop();
-				this.decoder = null;
+				this.response.Close();
+				this.response = null;
+			}
+			if (this.thread.NotNull())
+			{
+				this.thread.Abort();
+				this.thread.Dispose();
+				this.thread = null;
 			}
 		}
 		void IDisposable.Dispose()

@@ -27,7 +27,7 @@ using Kean.Extension;
 using Uri = Kean.Uri;
 using Raster = Kean.Draw.Raster;
 
-namespace Imint.Media.Mjpeg.Http
+namespace Imint.Media.MotionJpeg.Http
 {
 	public class Jpeg :
 		Singlepart

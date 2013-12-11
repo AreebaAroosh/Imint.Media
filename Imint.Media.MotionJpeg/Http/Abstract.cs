@@ -30,7 +30,7 @@ using Parallel = Kean.Parallel;
 using Error = Kean.Error;
 using Collection = Kean.Collection;
 
-namespace Imint.Media.Mjpeg.Http
+namespace Imint.Media.MotionJpeg.Http
 {
 	public abstract class Abstract
 	{

@@ -7,8 +7,8 @@
     <ProjectGuid>{7451CD6C-F381-4311-9A65-AEE39266B84A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Imint.Media.Mjpeg</RootNamespace>
-    <AssemblyName>Imint.Media.Mjpeg</AssemblyName>
+    <RootNamespace>Imint.Media.MotionJpeg</RootNamespace>
+    <AssemblyName>Imint.Media.MotionJpeg</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -39,12 +39,12 @@
     <Compile Include="Http\Jpeg.cs" />
     <Compile Include="Http\Mjpeg.cs" />
     <Compile Include="Http\Multipart.cs" />
+    <Compile Include="Http\Part.cs" />
+    <Compile Include="Http\Request.cs" />
+    <Compile Include="Http\Response.cs" />
     <Compile Include="Http\Singlepart.cs" />
     <Compile Include="Player\Stream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Imint.Media.Mjpeg.licenseheader" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kean\Kean\Kean.csproj">
@@ -57,9 +57,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\Player\80MjpegStream.xml">
+    <None Include="Configuration\Player\80MotionJpegStream.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Imint.Media.MotionJpeg.licenseheader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

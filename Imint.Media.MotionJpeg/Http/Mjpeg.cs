@@ -1,5 +1,5 @@
 ﻿// 
-//  Singlepart.cs
+//  Mjpeg.cs
 //  
 //  Author:
 //       Anders Frisk <andersfrisk77@gmail.com>
@@ -25,32 +25,20 @@ using System;
 using Kean;
 using Kean.Extension;
 using Uri = Kean.Uri;
+using Raster = Kean.Draw.Raster;
 using Collection = Kean.Collection;
 
-namespace Imint.Media.Mjpeg.Http
+namespace Imint.Media.MotionJpeg.Http
 {
-	public abstract class Singlepart :
-		   Abstract
+	public class Mjpeg :
+		Multipart
 	{
-		protected Singlepart(Uri.Locator locator, int readSize, int attempts) : 
+		protected override string Subtype { get { return "image/jpeg"; } }
+		public Mjpeg(Uri.Locator locator) : 
+			this(locator, 1024, 4) 
+		{ }
+		public Mjpeg(Uri.Locator locator, int readSize, int attempts) : 
 			base(locator, readSize, attempts) 
 		{ }
-		protected override void StreamParser(System.Net.WebResponse response, byte[] buffer, int readSize)
-		{
-			System.IO.Stream stream = response.GetResponseStream();
-			int total = 0;
-			// loop
-			// safe check. Flush the buffer if do not have enough space left.
-			while (total + readSize < buffer.Length)
-			{
-				int read = 0;
-				// read == 0 means end of stream.
-				if ((read = stream.Read(buffer, total, readSize)) == 0)
-					break;
-				total += read;
-			}
-			if (total != 0 && total < buffer.Length)
-				this.Send(new System.IO.MemoryStream(buffer, 0, total));
-		}
 	}
 }
