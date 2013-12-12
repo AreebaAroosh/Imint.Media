@@ -19,11 +19,13 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using Kean;
 using Kean.Extension;
 using System;
 using Raster = Kean.Draw.Raster;
 using Collection = Kean.Collection;
 using Uri = Kean.Uri;
+using Serialize = Kean.Serialize;
 
 namespace Imint.Media.Test.Generator
 {
@@ -32,6 +34,10 @@ namespace Imint.Media.Test.Generator
 		IDisposable
 	{
 		public abstract string Name { get; }
+		Collection.IList<KeyValue<string, Uri.Locator>> devices = new Collection.List<KeyValue<string, Uri.Locator>>();
+		[Serialize.Parameter("Device")]
+		public Collection.IList<KeyValue<string, Uri.Locator>> Devices { get { return this.devices; } }
+
 		public abstract void Open(Uri.Locator argument);
 		public abstract void Close();
 

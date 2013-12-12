@@ -1,15 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Player type="Imint.Media.Test:Stream">
-	<Generator type="Imint.Media.Test:Generator.Photo" />
-	<!--<Generator type="Imint.Media.Test:Generator.Photo">
+	<Generator type="Imint.Media.Test:Generator.Photo">
 		<Device>
 			<Key>Test (photo, horizontal 100px)</Key>
 			<Value>test://photo</Value>
 		</Device>
 		<Device>
-			<Key>Test (photo, horizontal 100px)</Key>
-			<Value>test://photo?</Value>
+			<Key>Test (photo, horizontal 200px)</Key>
+			<Value>test://photo?motiontype=periodic&motion=0,1,0,0,0,1,200,0,0,1,0,0</Value>
 		</Device>
-	</Generator>-->
+		<Device>
+			<Key>Test (photo, circle)</Key>
+			<Value>test://photo?motiontype=periodic&motion=0,1,50,0,0,1,0,50,0,1,-50,0,0,1,0,-50,0,1,50,0</Value>
+		</Device>
+	</Generator>
 	<Generator type="Imint.Media.Test:Generator.Sine" />
 </Player>
