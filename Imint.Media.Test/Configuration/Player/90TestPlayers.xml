@@ -10,7 +10,7 @@
 			<Value>test://photo?motiontype=periodic&motion=0,1,0,0,0,1,200,0,0,1,0,0</Value>
 		</Device>
 		<Device>
-			<Key>Test (photo, circle)</Key>
+			<Key>Test (photo, circle, clockwise 50px)</Key>
 			<Value>test://photo?motiontype=periodic&motion=0,1,50,0,0,1,0,50,0,1,-50,0,0,1,0,-50,0,1,50,0</Value>
 		</Device>
 	</Generator>
