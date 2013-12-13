@@ -40,7 +40,7 @@ namespace Imint.Media.Test
 			{
 				foreach (Generator.Abstract generator in this.Generators)
 					if (generator.NotNull())
-						yield return new Media.Resource(ResourceType.Test, generator.Name, "test://" + generator.Name);
+						yield return new Media.Resource(ResourceType.Test, "Test source (" +generator.Name+ ")", "test://" + generator.Name);
 			}
 		}
 		Collection.IList<Generator.Abstract> generators = new Collection.List<Generator.Abstract>();
