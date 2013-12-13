@@ -40,7 +40,7 @@ namespace Imint.Media.MotionJpeg.Player
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { set; private get; }
 		public Status Status { get; private set; }
 
-		Http.Response response;
+		IO.Net.Http.Response response;
 		Parallel.RepeatThread thread;
 		[Serialize.Parameter]
 		public TimeSpan TimeOut { get; set; }
@@ -63,7 +63,7 @@ namespace Imint.Media.MotionJpeg.Player
 				case "https":
 					if (this.thread.IsNull() && this.response.IsNull())
 					{
-						this.response = new Http.Request() { Url = url }.Connect();
+						this.response = new IO.Net.Http.Request() { Url = url }.Connect();
 						System.Threading.AutoResetEvent wait = new System.Threading.AutoResetEvent(false);
 						this.thread = Parallel.RepeatThread.Start("MotionJpegPlayer", () =>
 						{
@@ -123,7 +123,5 @@ namespace Imint.Media.MotionJpeg.Player
 		{
 			this.Close();
 		}
-
 	}
-
 }

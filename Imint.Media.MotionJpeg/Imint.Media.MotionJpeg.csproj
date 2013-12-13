@@ -35,14 +35,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Http\Abstract.cs" />
-    <Compile Include="Http\Jpeg.cs" />
-    <Compile Include="Http\Mjpeg.cs" />
-    <Compile Include="Http\Multipart.cs" />
-    <Compile Include="Http\Part.cs" />
-    <Compile Include="Http\Request.cs" />
-    <Compile Include="Http\Response.cs" />
-    <Compile Include="Http\Singlepart.cs" />
     <Compile Include="Player\Stream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,5 +54,6 @@
     </None>
     <None Include="Imint.Media.MotionJpeg.licenseheader" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
