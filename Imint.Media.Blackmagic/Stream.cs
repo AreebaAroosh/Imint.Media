@@ -1,4 +1,5 @@
 ﻿using DeckLinkAPI;
+using Kean.Collection;
 using Kean.Extension;
 using System;
 using System.Diagnostics;
@@ -17,7 +18,6 @@ namespace Imint.Media.Blackmagic
 		Media.Player.ICapture,
 		Platform.IHasApplication
 	{
-		IDeckLink deckLink;
 		IDeckLinkInput deckLinkInput;
 
 		Parallel.ThreadPool threadPool;
@@ -56,8 +56,9 @@ namespace Imint.Media.Blackmagic
 				this.threadPool.Enqueue(() =>
 					this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 50.0f * this.divisor), new Raster.Uyvy(buffer, size), null));
 			}
+			//deckLinkInput.FlushStreams();
 		}
-	
+
 		public int Channels
 		{
 			get { return 1; }
@@ -75,15 +76,23 @@ namespace Imint.Media.Blackmagic
 			bool result = false;
 			if (name.Scheme == "blackmagic")
 			{
+				IDeckLink deckLink;
 				IDeckLinkIterator deckLinkIterator = new CDeckLinkIterator();
+				int device = 0;
 				deckLinkIterator.Next(out deckLink);
-				if (deckLink != null)
+				while (int.Parse(name.Authority) > device)
+				{
+					deckLinkIterator.Next(out deckLink);
+					device++;
+				}
+				if (deckLink.NotNull())
 				{
 					deckLinkInput = (IDeckLinkInput)deckLink;
 					deckLinkInput.SetCallback(this);
 				}
-				//TODO: Hard coded for the Sony HandyCam, needs to be more intelligent.
-				deckLinkInput.EnableVideoInput(_BMDDisplayMode.bmdModeHD720p50, _BMDPixelFormat.bmdFormat8BitYUV, _BMDVideoInputFlags.bmdVideoInputFlagDefault);
+				DisplayMode m = new DisplayMode(name.Query);
+				PixelFormat p = new PixelFormat(name.Query);
+					deckLinkInput.EnableVideoInput(m.Mode, p.Format, _BMDVideoInputFlags.bmdVideoInputFlagDefault);
 				deckLinkInput.StartStreams();
 				result = true;
 				this.Status = Media.Status.Playing;
@@ -96,6 +105,7 @@ namespace Imint.Media.Blackmagic
 			if (this.deckLinkInput.NotNull())
 			{
 				this.deckLinkInput.StopStreams();
+				//this.deckLinkInput.FlushStreams();
 				this.deckLinkInput.DisableVideoInput();
 				this.deckLinkInput = null;
 			}
@@ -103,7 +113,8 @@ namespace Imint.Media.Blackmagic
 
 		public Status Status
 		{
-			get; private set;
+			get;
+			private set;
 		}
 
 		public void Dispose()
@@ -114,17 +125,21 @@ namespace Imint.Media.Blackmagic
 
 		public Generic.IEnumerable<Resource> Devices
 		{
-			get 
+			get
 			{
-				IDeckLinkIterator deckLinkIterator = new CDeckLinkIterator();
-				deckLinkIterator.Next(out deckLink);
-				while (deckLink != null)
+				int device = 0;
+				string name;
 				{
-					deckLinkInput = (IDeckLinkInput)deckLink;
-					string name;
-					deckLink.GetDisplayName(out name);
-					yield return new Media.Resource(ResourceType.Capture, name, "blackmagic://");
+					IDeckLink deckLink;
+					IDeckLinkIterator deckLinkIterator = new CDeckLinkIterator();
 					deckLinkIterator.Next(out deckLink);
+					while (deckLink.NotNull())
+					{
+						deckLinkInput = (IDeckLinkInput)deckLink;
+						deckLink.GetDisplayName(out name);
+						yield return new Media.Resource(ResourceType.Capture, name, "blackmagic://" + device++);
+						deckLinkIterator.Next(out deckLink);
+					}
 				}
 			}
 		}
