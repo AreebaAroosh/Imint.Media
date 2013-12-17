@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="All.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="PixelFormat.cs" />
     <Compile Include="DisplayMode.cs" />
     <Compile Include="Program.cs" />

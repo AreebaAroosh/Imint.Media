@@ -6,13 +6,23 @@ using System.Text;
 
 namespace Imint.Media.Blackmagic
 {
-	enum Connection
+	public struct Connection
 	{
-		SDI = _BMDVideoConnection.bmdVideoConnectionSDI,
-		HDMI = _BMDVideoConnection.bmdVideoConnectionHDMI,
-		OpticalSDI = _BMDVideoConnection.bmdVideoConnectionOpticalSDI,
-		Component = _BMDVideoConnection.bmdVideoConnectionComponent,
-		Composite =_BMDVideoConnection.bmdVideoConnectionComposite,
-		SVideo = _BMDVideoConnection.bmdVideoConnectionSVideo,
+		public _BMDVideoConnection Cable { get; private set; }
+
+		public Connection(Kean.Uri.Query query, _BMDVideoConnection oldConnection) :
+			this()
+		{
+			this.Cable = oldConnection;
+			string cable = (query["connection"] ?? "SDI").ToLower();
+			if (cable == "sdi")
+				this.Cable = _BMDVideoConnection.bmdVideoConnectionSDI;
+			else if (cable == "opticalsdi")
+				this.Cable = _BMDVideoConnection.bmdVideoConnectionOpticalSDI;
+			else
+				foreach (_BMDVideoConnection connection in Enum.GetValues(typeof(_BMDVideoConnection)))
+					if (connection.ToString().ToLower().EndsWith(cable) && !connection.ToString().ToLower().EndsWith("SDI"))
+						this.Cable = connection;
+		}
 	}
 }

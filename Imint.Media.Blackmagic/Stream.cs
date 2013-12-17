@@ -19,6 +19,7 @@ namespace Imint.Media.Blackmagic
 		Platform.IHasApplication
 	{
 		IDeckLinkInput deckLinkInput;
+		IDeckLinkConfiguration conf;
 
 		Parallel.ThreadPool threadPool;
 		Platform.Application application;
@@ -89,13 +90,27 @@ namespace Imint.Media.Blackmagic
 				{
 					deckLinkInput = (IDeckLinkInput)deckLink;
 					deckLinkInput.SetCallback(this);
+		
+					long connectionInt;
+					this.conf = (IDeckLinkConfiguration)deckLinkInput;
+					this.conf.GetInt(_BMDDeckLinkConfigurationID.bmdDeckLinkConfigVideoInputConnection, out connectionInt);
+					_BMDVideoConnection connection = new Connection(name.Query, (_BMDVideoConnection)connectionInt).Cable;
+					this.conf.SetInt(_BMDDeckLinkConfigurationID.bmdDeckLinkConfigVideoInputConnection, (long)connection);
+					this.conf.GetInt(_BMDDeckLinkConfigurationID.bmdDeckLinkConfigVideoInputConnection, out connectionInt);
+					connection = new Connection(name.Query, (_BMDVideoConnection)connectionInt).Cable;
+					DisplayMode m = new DisplayMode(name.Query);
+					PixelFormat p = new PixelFormat(name.Query);
+					_BMDDisplayModeSupport modeSupport = _BMDDisplayModeSupport.bmdDisplayModeNotSupported;
+					IDeckLinkDisplayMode outMode;
+					deckLinkInput.DoesSupportVideoMode(m.Mode, p.Format, _BMDVideoInputFlags.bmdVideoInputFlagDefault, out modeSupport, out outMode);
+					if (modeSupport == _BMDDisplayModeSupport.bmdDisplayModeSupported)
+					{
+						deckLinkInput.EnableVideoInput(m.Mode, p.Format, _BMDVideoInputFlags.bmdVideoInputFlagDefault);
+						deckLinkInput.StartStreams();
+						this.Status = Media.Status.Playing;
+						result = true;
+					}
 				}
-				DisplayMode m = new DisplayMode(name.Query);
-				PixelFormat p = new PixelFormat(name.Query);
-					deckLinkInput.EnableVideoInput(m.Mode, p.Format, _BMDVideoInputFlags.bmdVideoInputFlagDefault);
-				deckLinkInput.StartStreams();
-				result = true;
-				this.Status = Media.Status.Playing;
 			}
 			return (result);
 		}

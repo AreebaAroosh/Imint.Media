@@ -11,6 +11,7 @@ namespace Imint.Media.Blackmagic.Test
 		{
 			DisplayMode.Test();
 			PixelFormat.Test();
+			Connection.Test();
 		}
 	}
 }
