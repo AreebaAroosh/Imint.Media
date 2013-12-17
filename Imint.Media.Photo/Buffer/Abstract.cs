@@ -48,7 +48,7 @@ namespace Imint.Media.Photo.Buffer
 		static string[] GetImageSeries(Uri.Locator name)
 		{
 			string[] result;
-			MatchCollection matches = Regex.Matches(name.Path.Stem, @"(.*\D+)(\d*)(\d{2})$");
+			MatchCollection matches = Regex.Matches(name.Path.Stem, @"(.*\D*)(\d*)(\d{2})$");
 			// If the file has a name ending in 2 or more digits,
 			// assume series and get a sorted list of the files in it.
 			// NOTE: This will include any files with an identical name before the digits,
