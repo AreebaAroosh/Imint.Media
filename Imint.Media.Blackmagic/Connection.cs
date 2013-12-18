@@ -14,7 +14,7 @@ namespace Imint.Media.Blackmagic
 			this()
 		{
 			this.Cable = oldConnection;
-			string cable = (query["connection"] ?? "SDI").ToLower();
+			string cable = (query["input"] ?? "SDI").ToLower();
 			if (cable == "sdi")
 				this.Cable = _BMDVideoConnection.bmdVideoConnectionSDI;
 			else if (cable == "opticalsdi")
