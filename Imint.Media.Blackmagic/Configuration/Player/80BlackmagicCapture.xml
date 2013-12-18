@@ -1,3 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Player type="Imint.Media.Blackmagic:Stream">
+	<Preset>
+		<Key>DeckLink HD Extreme 3D+ (Handycam, HDMI)</Key>
+		<Value>blackmagic://0?</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink HD Extreme 3D+ (Handycam, composite)</Key>
+		<Value>blackmagic://0?format=PAL</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink Studio 2 (iPod)</Key>
+		<Value>blackmagic://0?</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink Studio 2 (Laptop)</Key>
+		<Value>blackmagic://0?</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink Studio 2 (SDI)</Key>
+		<Value>blackmagic://0?</Value>
+	</Preset>
 </Player>

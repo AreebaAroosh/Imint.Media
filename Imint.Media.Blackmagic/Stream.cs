@@ -1,14 +1,17 @@
 ﻿using DeckLinkAPI;
-using Kean.Collection;
+using Kean;
 using Kean.Extension;
 using System;
 using System.Diagnostics;
 using Buffer = Kean.Buffer;
+using Collection = Kean.Collection;
 using Generic = System.Collections.Generic;
 using Geometry2D = Kean.Math.Geometry2D;
 using Parallel = Kean.Parallel;
 using Platform = Kean.Platform;
 using Raster = Kean.Draw.Raster;
+using Serialize = Kean.Serialize;
+using Uri = Kean.Uri;
 
 namespace Imint.Media.Blackmagic
 {
@@ -20,6 +23,9 @@ namespace Imint.Media.Blackmagic
 	{
 		IDeckLinkInput deckLinkInput;
 		IDeckLinkConfiguration conf;
+
+		[Serialize.Parameter("Preset")]
+		public Collection.List<KeyValue<string, Uri.Locator>> Presets { get; private set; }
 
 		Parallel.ThreadPool threadPool;
 		Platform.Application application;
@@ -154,6 +160,11 @@ namespace Imint.Media.Blackmagic
 						deckLink.GetDisplayName(out name);
 						yield return new Media.Resource(ResourceType.Capture, name, "blackmagic://" + device++);
 						deckLinkIterator.Next(out deckLink);
+					}
+					if (device > 0)
+					{
+						foreach (KeyValue<string, Uri.Locator> preset in this.Presets)
+							yield return new Media.Resource(ResourceType.Capture, preset.Key, preset.Value);
 					}
 				}
 			}
