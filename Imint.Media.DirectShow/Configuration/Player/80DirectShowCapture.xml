@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Player type="Imint.Media.DirectShow:Capture">
 	<Fuzzy>false</Fuzzy>
+	<Blacklist>Blackmagic WDM</Blacklist>
+	<Blacklist>Decklink Video Capture</Blacklist>
 </Player>

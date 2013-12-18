@@ -32,6 +32,7 @@ using Uri = Kean.Uri;
 using Serialize = Kean.Serialize;
 using Geometry2D = Kean.Math.Geometry2D;
 using Math = Kean.Math;
+using Collection = Kean.Collection;
 
 namespace Imint.Media.DirectShow
 {
@@ -43,6 +44,8 @@ namespace Imint.Media.DirectShow
 		public Geometry2D.Integer.Shell Crop { get; set; }
 		[Serialize.Parameter]
 		public Math.Fraction Ratio { get; set; }
+		[Serialize.Parameter]
+		public Collection.List<string> Blacklist { get; private set; }
 
 		public System.Collections.Generic.IEnumerable<Resource> Devices
 		{
@@ -54,12 +57,13 @@ namespace Imint.Media.DirectShow
 				if (this.Ratio.Nominator != 0)
 					query["ratio"] = this.Ratio;
 				foreach (string device in DirectShow.Binding.Graph.Devices)
-					yield return new Resource(ResourceType.Capture, device, new Uri.Locator()
-					{
-						Scheme = "directshow+capture",
-						Authority = device,
-						Query = query,
-					});
+					if (!this.Blacklist.Contains(device))
+						yield return new Resource(ResourceType.Capture, device, new Uri.Locator()
+						{
+							Scheme = "directshow+capture",
+							Authority = device,
+							Query = query,
+						});
 			}
 		}
 
