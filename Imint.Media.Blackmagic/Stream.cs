@@ -23,6 +23,7 @@ namespace Imint.Media.Blackmagic
 	{
 		IDeckLinkInput deckLinkInput;
 		IDeckLinkConfiguration conf;
+		float rate;
 
 		[Serialize.Parameter("Preset")]
 		public Collection.List<KeyValue<string, Uri.Locator>> Presets { get; private set; }
@@ -49,20 +50,31 @@ namespace Imint.Media.Blackmagic
 		}
 		int stride;
 		Geometry2D.Integer.Size size;
-		int divisor = 1;
-		long count;
 		void IDeckLinkInputCallback.VideoInputFrameArrived(IDeckLinkVideoInputFrame videoFrame, IDeckLinkAudioInputPacket audioPacket)
 		{
-			if (this.count++ % this.divisor == 0)
+			IntPtr pointer;
+			videoFrame.GetBytes(out pointer);
+			this.stride = videoFrame.GetRowBytes();
+			_BMDPixelFormat format = videoFrame.GetPixelFormat();
+			this.size = new Geometry2D.Integer.Size(videoFrame.GetWidth(), videoFrame.GetHeight());
+			var buffer = new Buffer.Sized(pointer, this.stride * this.size.Height).Copy();
+			Raster.Image frame;
+			switch (format)
 			{
-				IntPtr pointer;
-				videoFrame.GetBytes(out pointer);
-				this.stride = videoFrame.GetRowBytes();
-				this.size = new Geometry2D.Integer.Size(videoFrame.GetWidth(), videoFrame.GetHeight());
-				var buffer = new Buffer.Sized(pointer, this.stride * this.size.Height).Copy();
-				this.threadPool.Enqueue(() =>
-					this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 50.0f * this.divisor), new Raster.Uyvy(buffer, size), null));
+				case _BMDPixelFormat.bmdFormat8BitYUV:
+					frame = new Raster.Uyvy(buffer, size);
+					break;
+				case _BMDPixelFormat.bmdFormat8BitARGB:
+				case _BMDPixelFormat.bmdFormat8BitBGRA:
+					frame = new Raster.Bgra(buffer, size);
+					break;
+				default:
+					frame = null;
+					break;
 			}
+			if (frame.NotNull())
+				this.threadPool.Enqueue(() =>
+					this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / this.rate), frame, null));
 			//deckLinkInput.FlushStreams();
 		}
 
@@ -105,6 +117,7 @@ namespace Imint.Media.Blackmagic
 					this.conf.GetInt(_BMDDeckLinkConfigurationID.bmdDeckLinkConfigVideoInputConnection, out connectionInt);
 					connection = new Connection(name.Query, (_BMDVideoConnection)connectionInt).Cable;
 					DisplayMode m = new DisplayMode(name.Query);
+					this.rate = m.Rate;
 					PixelFormat p = new PixelFormat(name.Query);
 					_BMDDisplayModeSupport modeSupport = _BMDDisplayModeSupport.bmdDisplayModeNotSupported;
 					IDeckLinkDisplayMode outMode;

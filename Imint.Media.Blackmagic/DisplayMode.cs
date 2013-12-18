@@ -13,6 +13,7 @@ namespace Imint.Media.Blackmagic
 		static float[] rates = { 23.98f, 24, 25, 29.97f, 30, 50, 59.94f, 60 };
 
 		public _BMDDisplayMode Mode { get; private set; }
+		public float Rate { get; private set; }
 
 		public DisplayMode(Kean.Uri.Query query) :
 			this()
@@ -30,6 +31,7 @@ namespace Imint.Media.Blackmagic
 				if (Math.Abs(rate - DisplayMode.rates[i]) < 0.01f)
 				{
 					rate = DisplayMode.rates[i];
+					this.Rate = rate;
 					break;
 				}
 			}
