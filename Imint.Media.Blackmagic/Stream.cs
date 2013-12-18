@@ -158,13 +158,16 @@ namespace Imint.Media.Blackmagic
 					{
 						deckLinkInput = (IDeckLinkInput)deckLink;
 						deckLink.GetDisplayName(out name);
-						yield return new Media.Resource(ResourceType.Capture, name, "blackmagic://" + device++);
-						deckLinkIterator.Next(out deckLink);
-					}
-					if (device > 0)
-					{
-						foreach (KeyValue<string, Uri.Locator> preset in this.Presets)
+						bool hasPresets = false;
+						foreach (KeyValue<string, Uri.Locator> preset in this.Presets.Where(p => int.Parse(p.Value.Authority) == device))
+						{
+							hasPresets = true;
 							yield return new Media.Resource(ResourceType.Capture, preset.Key, preset.Value);
+						}
+						if (!hasPresets)
+							yield return new Media.Resource(ResourceType.Capture, name, "blackmagic://" + device);
+						device++;
+						deckLinkIterator.Next(out deckLink);
 					}
 				}
 			}
