@@ -8,7 +8,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
-			<dependency id="Kean" />
+			<dependency id="Kean" version="$version$" />
 		</dependencies>
 	</metadata>
 </package>

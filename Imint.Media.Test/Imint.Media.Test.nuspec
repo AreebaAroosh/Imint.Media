@@ -8,8 +8,8 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
-			<dependency id="Imint.Media" />
-			<dependency id="Kean" />
+			<dependency id="Imint.Media" version="$version$" />
+			<dependency id="Kean" version="$version$" />
 		</dependencies>
 	</metadata>
 	<files>
