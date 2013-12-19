@@ -27,6 +27,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Imint.Media.Mjpeg")]
 [assembly: AssemblyDescription("")]
+//[assembly: AssemblyVersion("0.0.0.0")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
