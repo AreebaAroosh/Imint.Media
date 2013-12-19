@@ -51,18 +51,28 @@ namespace Imint.Media.Blackmagic
 				{
 					case "ntsc" :
 						this.Mode = _BMDDisplayMode.bmdModeNTSC;
+						if (this.Rate == 0) 
+							this.Rate = 30f;
 						break;
 					case "ntscp" :
 						this.Mode = _BMDDisplayMode.bmdModeNTSCp;
+						if (this.Rate == 0)
+							this.Rate = 30f;
 						break;
 					case "pal" :
 						this.Mode = _BMDDisplayMode.bmdModePAL;
+						if (this.Rate == 0)
+							this.Rate = 25f;
 						break;
 					case "palp" :
 						this.Mode = _BMDDisplayMode.bmdModePALp;
+						if (this.Rate == 0)
+							this.Rate = 25f;
 						break;
 					default :
 						this.Mode = _BMDDisplayMode.bmdModeUnknown;
+						if (this.Rate == 0)
+							this.Rate = 30f;
 						break;
 				}
 			}
