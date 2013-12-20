@@ -141,6 +141,9 @@ namespace Imint.Media.Blackmagic
 				this.deckLinkInput.StopStreams();
 				//this.deckLinkInput.FlushStreams();
 				this.deckLinkInput.DisableVideoInput();
+				this.conf = null;
+				this.threadPool.Abort();
+				this.threadPool.TryDispose();
 				this.deckLinkInput = null;
 			}
 		}
@@ -153,8 +156,8 @@ namespace Imint.Media.Blackmagic
 
 		public void Dispose()
 		{
-			this.Close();
 			this.Status = Media.Status.Closed;
+			this.Close();
 		}
 
 		public Generic.IEnumerable<Resource> Devices
