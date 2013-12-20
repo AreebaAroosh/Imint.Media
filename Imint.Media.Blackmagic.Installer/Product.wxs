@@ -32,8 +32,8 @@
 			</Component>
 		</ComponentGroup>
 		<ComponentGroup Id="ProductPlayer" Directory="PLAYERFOLDER">
-			<Component Id="Imint.Media.Blackmagic_30BlackmagicStream">
-				<File Source="$(var.Imint.Media.Blackmagic.Dummy.TargetDir)Configuration\Player\30BlackmagicStream.xml" />
+			<Component Id="Imint.Media.Blackmagic_30BlackmagicCapture">
+				<File Source="$(var.Imint.Media.Blackmagic.Dummy.TargetDir)Configuration\Player\30BlackmagicCapture.xml" />
 			</Component>
 		</ComponentGroup>
 	</Fragment>
