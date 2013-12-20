@@ -155,6 +155,7 @@
     <None Include="Configuration\Player\80DirectShowFileMpeg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Install.ps1" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
