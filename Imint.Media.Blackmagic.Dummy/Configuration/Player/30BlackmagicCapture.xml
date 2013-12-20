@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Player type="Imint.Media.Blackmagic:Stream">
+	<Preset>
+		<Key>DeckLink HD Extreme 3D+ (Handycam, HDMI)</Key>
+		<Value>blackmagic://1?&input=HDMI&resolution=HD720p&rate=50&format=YUV&depth=8</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink HD Extreme 3D+ (Handycam, composite)</Key>
+		<Value>blackmagic://1?&input=Composite&resolution=PAL&format=YUV&depth=8</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink Studio 2 (iPod)</Key>
+		<Value>blackmagic://0?&input=Composite&resolution=NTSC&format=YUV&depth=8</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink Studio 2 (Laptop)</Key>
+		<Value>blackmagic://0?&input=HDMI&resolution=HD1080p&rate=30&format=YUV&depth=8</Value>
+	</Preset>
+	<Preset>
+		<Key>DeckLink Studio 2 (SDI)</Key>
+		<Value>blackmagic://0?&input=SDI&resolution=HD1080p&rate=30&format=YUV&depth=8</Value>
+	</Preset>
+</Player>
