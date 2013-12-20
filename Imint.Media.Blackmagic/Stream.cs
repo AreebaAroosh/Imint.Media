@@ -142,8 +142,8 @@ namespace Imint.Media.Blackmagic
 				//this.deckLinkInput.FlushStreams();
 				this.deckLinkInput.DisableVideoInput();
 				this.conf = null;
-				this.threadPool.Abort();
-				this.threadPool.TryDispose();
+				//this.threadPool.Abort();
+				//this.threadPool.TryDispose();
 				this.deckLinkInput = null;
 			}
 		}
