@@ -8,11 +8,8 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
 		<dependencies>
-			<dependency id="Imint.Icop" version="$version$" />
 			<dependency id="Imint.Icop.Client" version="$version$" />
-			<dependency id="Imint.Media" version="$version$" />
 			<dependency id="Imint.Media.DirectShow" version="$version$" />
-			<dependency id="Kean" version="$version$" />
 		</dependencies>
 	</metadata>
 	<files>

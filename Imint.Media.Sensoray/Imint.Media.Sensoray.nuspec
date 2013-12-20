@@ -9,7 +9,6 @@
 		<description>$description$</description>
 		<dependencies>
 			<dependency id="Imint.Media" version="$version$" />
-			<dependency id="Kean" version="$version$" />
 		</dependencies>
 	</metadata>
 	<files>
