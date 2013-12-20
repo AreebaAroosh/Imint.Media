@@ -12,7 +12,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Configuration\**.xml" target="Content\Configuration\Player" />
+		<file src="Configuration\**.xml" target="build\Configuration" />
 		<file src="Imint.Media.MotionJpeg.targets" target="build" />
 	</files>
 </package>
