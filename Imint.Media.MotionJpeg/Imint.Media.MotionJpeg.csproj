@@ -49,7 +49,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\Player\80MotionJpegStream.xml">
+    <None Include="Configuration\Player\40MotionJpegStream.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Imint.Media.MotionJpeg.targets" />

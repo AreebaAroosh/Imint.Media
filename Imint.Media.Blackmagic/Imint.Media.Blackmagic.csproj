@@ -45,7 +45,7 @@
     <Compile Include="Stream.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\Player\80BlackmagicCapture.xml">
+    <None Include="Configuration\Player\30BlackmagicCapture.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>

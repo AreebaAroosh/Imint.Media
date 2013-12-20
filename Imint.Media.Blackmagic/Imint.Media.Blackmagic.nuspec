@@ -12,7 +12,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Configuration\Player\*.xml" target="Content\Configuration\Player" />
+		<file src="Configuration\**.xml" target="Content\Configuration\Player" />
 		<file src="Install.ps1" target="tools" />
 	</files>
 </package>
