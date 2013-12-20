@@ -12,7 +12,11 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="Configuration\**.xml" target="build\Configuration" />
+		<file src="Configuration\Player\10*.xml" target="build\Configuration\Player" />
+		<file src="Configuration\Player\20*.xml" target="build\Configuration\Player" />
+		<file src="Configuration\Player\80DirectShowFile*.xml" target="build\Configuration\Player" />
+		<file src="Configuration\Player\80DirectShowCapture.xml" target="Content\Configuration\Player" />
 		<file src="Imint.Media.DirectShow.targets" target="build" />
+		<file src="Install.ps1" target="tools" />
 	</files>
 </package>
