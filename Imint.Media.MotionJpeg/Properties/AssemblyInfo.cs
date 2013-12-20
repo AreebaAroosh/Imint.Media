@@ -25,8 +25,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Imint.Media.Mjpeg")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Imint.Media.MotionJpeg")]
+[assembly: AssemblyDescription("Support for Motion JPEG streams over HTTP.")]
 //[assembly: AssemblyVersion("0.0.0.0")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
