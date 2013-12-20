@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DF7D86BB-E8C1-4269-A35D-722EF2B292D9}</ProjectGuid>
+    <ProjectGuid>{5B81AAD2-74ED-42A2-8F0D-1B668A44B227}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Imint.Media.DirectShow.Dummy</RootNamespace>
-    <AssemblyName>Imint.Media.DirectShow.Dummy</AssemblyName>
+    <RootNamespace>Imint.Media.Blackmagic.Dummy</RootNamespace>
+    <AssemblyName>Imint.Media.Blackmagic.Dummy</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -34,60 +34,30 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Classes_v10, Version=1.2.0.930, Culture=neutral, PublicKeyToken=a6d5afb38b2cfcfa, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Elecard.1.4.111028\lib\net40\Classes_v10.dll</HintPath>
-    </Reference>
-    <Reference Include="Consts_v10, Version=1.2.0.930, Culture=neutral, PublicKeyToken=f893c3352ed489cb, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Elecard.1.4.111028\lib\net40\Consts_v10.dll</HintPath>
-    </Reference>
-    <Reference Include="DirectShowLib-2005, Version=2.0.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\DirectShowLib2005.2.0.0.0\lib\DirectShowLib-2005.dll</HintPath>
-    </Reference>
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Private>True</Private>
       <HintPath>..\..\packages\GLib.Sharp.2.28.1.1\lib\glib-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Icop, Version=2.9.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Icop.2.9.0-prerelease006\lib\net40\Imint.Icop.dll</HintPath>
-    </Reference>
-    <Reference Include="Imint.Icop.Client, Version=2.9.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Icop.Client.2.9.0-prerelease006\lib\net40\Imint.Icop.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Imint.Media, Version=2.9.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Imint.Media">
       <HintPath>..\..\packages\Imint.Media.2.9.0-prerelease006\lib\net40\Imint.Media.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Media.DirectShow, Version=2.9.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.DirectShow.2.9.0-prerelease006\lib\net40\Imint.Media.DirectShow.dll</HintPath>
+    <Reference Include="Imint.Media.Blackmagic">
+      <HintPath>..\..\packages\Imint.Media.Blackmagic.2.9.0-prerelease006\lib\net40\Imint.Media.Blackmagic.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Media.DirectShow.Elecard, Version=2.9.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.DirectShow.Elecard.2.9.0-prerelease006\lib\net40\Imint.Media.DirectShow.Elecard.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean, Version=2.9.0.6, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Kean">
       <HintPath>..\..\packages\Kean.2.9.0-prerelease006\lib\net40\Kean.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\packages\Cairo.2.0.0.1\lib\Mono.Cairo.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK, Version=1.1.1161.61462, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="OpenTK">
       <HintPath>..\..\packages\OpenTK.1.1.1161.61462\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK.GLControl, Version=1.1.1161.61462, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="OpenTK.GLControl">
       <HintPath>..\..\packages\OpenTK.GLControl.1.1.1161.61462\lib\NET40\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
@@ -99,7 +69,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Player\80DirectShowCapture.xml">
+    <Content Include="Configuration\Player\30BlackmagicCapture.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -109,8 +79,6 @@
   <Import Project="..\..\packages\Cairo.2.0.0.1\build\Cairo.targets" Condition="Exists('..\..\packages\Cairo.2.0.0.1\build\Cairo.targets')" />
   <Import Project="..\..\packages\Pango.1.28.3.1\build\Pango.targets" Condition="Exists('..\..\packages\Pango.1.28.3.1\build\Pango.targets')" />
   <Import Project="..\..\packages\Kean.2.9.0-prerelease006\build\Kean.targets" Condition="Exists('..\..\packages\Kean.2.9.0-prerelease006\build\Kean.targets')" />
-  <Import Project="..\..\packages\Imint.Media.DirectShow.2.9.0-prerelease006\build\Imint.Media.DirectShow.targets" Condition="Exists('..\..\packages\Imint.Media.DirectShow.2.9.0-prerelease006\build\Imint.Media.DirectShow.targets')" />
-  <Import Project="..\..\packages\Imint.Media.DirectShow.Elecard.2.9.0-prerelease006\build\Imint.Media.DirectShow.Elecard.targets" Condition="Exists('..\..\packages\Imint.Media.DirectShow.Elecard.2.9.0-prerelease006\build\Imint.Media.DirectShow.Elecard.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
