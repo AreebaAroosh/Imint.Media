@@ -22,17 +22,17 @@ namespace Imint.Media.Blackmagic.Test
 		[Test]
 		public void Equality()
 		{
-			Blackmagic.Connection SomeConnection = new Blackmagic.Connection((Uri.Query)"connection=Component", _BMDVideoConnection.bmdVideoConnectionSDI);
+			Blackmagic.Connection SomeConnection = new Blackmagic.Connection((Uri.Query)"input=Component", _BMDVideoConnection.bmdVideoConnectionSDI);
 			Verify(SomeConnection.Cable, Is.EqualTo(_BMDVideoConnection.bmdVideoConnectionComponent));
-			SomeConnection = new Blackmagic.Connection((Uri.Query)"connection=Composite", _BMDVideoConnection.bmdVideoConnectionSDI);
+			SomeConnection = new Blackmagic.Connection((Uri.Query)"input=Composite", _BMDVideoConnection.bmdVideoConnectionSDI);
 			Verify(SomeConnection.Cable, Is.EqualTo(_BMDVideoConnection.bmdVideoConnectionComposite));
-			SomeConnection = new Blackmagic.Connection((Uri.Query)"connection=HDMI", _BMDVideoConnection.bmdVideoConnectionSDI);
+			SomeConnection = new Blackmagic.Connection((Uri.Query)"input=HDMI", _BMDVideoConnection.bmdVideoConnectionSDI);
 			Verify(SomeConnection.Cable, Is.EqualTo(_BMDVideoConnection.bmdVideoConnectionHDMI));
-			SomeConnection = new Blackmagic.Connection((Uri.Query)"connection=OpticalSDI", _BMDVideoConnection.bmdVideoConnectionSDI);
+			SomeConnection = new Blackmagic.Connection((Uri.Query)"input=OpticalSDI", _BMDVideoConnection.bmdVideoConnectionSDI);
 			Verify(SomeConnection.Cable, Is.EqualTo(_BMDVideoConnection.bmdVideoConnectionOpticalSDI));
-			SomeConnection = new Blackmagic.Connection((Uri.Query)"connection=SDI", _BMDVideoConnection.bmdVideoConnectionSVideo);
+			SomeConnection = new Blackmagic.Connection((Uri.Query)"input=SDI", _BMDVideoConnection.bmdVideoConnectionSVideo);
 			Verify(SomeConnection.Cable, Is.EqualTo(_BMDVideoConnection.bmdVideoConnectionSDI));
-			SomeConnection = new Blackmagic.Connection((Uri.Query)"connection=SVideo", _BMDVideoConnection.bmdVideoConnectionSDI);
+			SomeConnection = new Blackmagic.Connection((Uri.Query)"input=SVideo", _BMDVideoConnection.bmdVideoConnectionSDI);
 			Verify(SomeConnection.Cable, Is.EqualTo(_BMDVideoConnection.bmdVideoConnectionSVideo));
 		}
 	}

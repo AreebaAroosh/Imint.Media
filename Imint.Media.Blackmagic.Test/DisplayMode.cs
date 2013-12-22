@@ -26,6 +26,8 @@ namespace Imint.Media.Blackmagic.Test
 			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdModeHD1080p2398));
 			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=HD1080p&rate=24");
 			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdModeHD1080p24));
+			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=HD1080&rate=24");
+			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdModeHD1080p24));
 			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=2k&rate=23.98");
 			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdMode2k2398));
 			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=2k&rate=24");
@@ -53,6 +55,8 @@ namespace Imint.Media.Blackmagic.Test
 			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=HD1080i&rate=59.94");
 			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdModeHD1080i5994));
 			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=HD1080i&rate=60.00");
+			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdModeHD1080i6000));
+			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=HD1080&rate=60.00");
 			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdModeHD1080i6000));
 			SomeMode = new Blackmagic.DisplayMode((Uri.Query)"resolution=HD1080p&rate=25");
 			Verify(SomeMode.Mode, Is.EqualTo(_BMDDisplayMode.bmdModeHD1080p25));

@@ -21,7 +21,7 @@ namespace Imint.Media.Blackmagic
 				this.Cable = _BMDVideoConnection.bmdVideoConnectionOpticalSDI;
 			else
 				foreach (_BMDVideoConnection connection in Enum.GetValues(typeof(_BMDVideoConnection)))
-					if (connection.ToString().ToLower().EndsWith(cable) && !connection.ToString().ToLower().EndsWith("SDI"))
+					if (connection.ToString().ToLower().EndsWith(cable) && !connection.ToString().ToLower().EndsWith("sdi"))
 						this.Cable = connection;
 		}
 	}
