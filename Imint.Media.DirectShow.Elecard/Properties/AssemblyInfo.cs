@@ -38,7 +38,7 @@ using System.Security.Permissions;
 // associated with an assembly.
 [assembly: AssemblyTitle("Imint.Media.DirectShow.Elecard")]
 [assembly: AssemblyDescription("Support for DirectShow based filters from Elecard.")]
-//[assembly: AssemblyVersion("0.0.0.0")]
+[assembly: AssemblyVersion("0.0.0.0")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
