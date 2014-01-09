@@ -164,27 +164,41 @@ namespace Imint.Media.Blackmagic
 		{
 			get
 			{
-				int device = 0;
-				string name;
+				Generic.IEnumerable<Resource> devices = null;
+				try
 				{
-					IDeckLink deckLink;
-					IDeckLinkIterator deckLinkIterator = new CDeckLinkIterator();
-					deckLinkIterator.Next(out deckLink);
-					while (deckLink.NotNull())
+					devices = EnumerateDevices();
+				}
+				catch (System.Runtime.InteropServices.COMException e)
+				{ 
+				}
+				foreach (Media.Resource device in devices)
+						yield return device;
+			}
+		}
+
+		private Generic.IEnumerable<Resource> EnumerateDevices()
+		{
+			int device = 0;
+			string name;
+			{
+				IDeckLink deckLink;
+				IDeckLinkIterator deckLinkIterator = new CDeckLinkIterator();
+				deckLinkIterator.Next(out deckLink);
+				while (deckLink.NotNull())
+				{
+					deckLinkInput = (IDeckLinkInput)deckLink;
+					deckLink.GetDisplayName(out name);
+					bool hasPresets = false;
+					foreach (KeyValue<string, Uri.Locator> preset in this.Presets.Where(p => int.Parse(p.Value.Authority) == device))
 					{
-						deckLinkInput = (IDeckLinkInput)deckLink;
-						deckLink.GetDisplayName(out name);
-						bool hasPresets = false;
-						foreach (KeyValue<string, Uri.Locator> preset in this.Presets.Where(p => int.Parse(p.Value.Authority) == device))
-						{
-							hasPresets = true;
-							yield return new Media.Resource(ResourceType.Capture, preset.Key, preset.Value);
-						}
-						if (!hasPresets)
-							yield return new Media.Resource(ResourceType.Capture, name, "blackmagic://" + device);
-						device++;
-						deckLinkIterator.Next(out deckLink);
+						hasPresets = true;
+						yield return new Media.Resource(ResourceType.Capture, preset.Key, preset.Value);
 					}
+					if (!hasPresets)
+						yield return new Media.Resource(ResourceType.Capture, name, "blackmagic://" + device);
+					device++;
+					deckLinkIterator.Next(out deckLink);
 				}
 			}
 		}
