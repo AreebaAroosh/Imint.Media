@@ -37,8 +37,10 @@ namespace Imint.Media.Photo.Buffer
 		{
 			Buffer.Abstract result;
 			string[] photoPaths = GetImageSeries(name);
+			if (photoPaths.Length < 1)
+				result = null;
 			// If the series contains more than roughly 40 images, we can't store them all in memory.
-			if (photoPaths.Length > 40)
+			else if (photoPaths.Length > 40)
 				result = new Buffer.Long(photoPaths);
 			else
 				result = new Buffer.Short(photoPaths);
@@ -58,7 +60,9 @@ namespace Imint.Media.Photo.Buffer
 			{
 				string match = matches[0].Groups[1].Value;
 				string directory = System.IO.Path.GetDirectoryName(name.PlatformPath);
-				result = System.IO.Directory.GetFiles(directory, match + "*." + name.Path.Extension, System.IO.SearchOption.TopDirectoryOnly).Sort();
+				result = System.IO.Directory.Exists(directory) ?
+					System.IO.Directory.GetFiles(directory, match + "*." + name.Path.Extension, System.IO.SearchOption.TopDirectoryOnly).Sort() :
+					null;				
 			}
 			else if (matches.Count > 1) // This shouldn't happen, but if it does,
 				// panic so we can identify why it happened

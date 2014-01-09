@@ -80,22 +80,24 @@ namespace Imint.Media.Photo
 			bool result = false;
 			if (name.Scheme == "file" && this.SupportedExtensions.Contains(name.Path.Extension))
 			{
-				this.Buffer = Photo.Buffer.Abstract.Open(name);
-				Kean.Math.Fraction rate = name.Query["rate"];
-				if (rate.Nominator <= 0)
-					rate = this.Rate;
-				this.Timer = new System.Timers.Timer(1000 / (float)rate);
-				this.Duration = new TimeSpan((long)(10000 * 1000 / (float)rate));
-
-				this.Timer.Elapsed += (object sender, System.Timers.ElapsedEventArgs elapsedArguments) =>
+				if ((this.Buffer = Photo.Buffer.Abstract.Open(name)).NotNull())
 				{
-					lock (this.signal)
+					Kean.Math.Fraction rate = name.Query["rate"];
+					if (rate.Nominator <= 0)
+						rate = this.Rate;
+					this.Timer = new System.Timers.Timer(1000 / (float)rate);
+					this.Duration = new TimeSpan((long)(10000 * 1000 / (float)rate));
+
+					this.Timer.Elapsed += (object sender, System.Timers.ElapsedEventArgs elapsedArguments) =>
 					{
-						System.Threading.Monitor.Pulse(this.signal);
-					}
-				};
-				result = true;
-				this.Timer.Start();
+						lock (this.signal)
+						{
+							System.Threading.Monitor.Pulse(this.signal);
+						}
+					};
+					result = true;
+					this.Timer.Start();
+				}
 			}
 			return result;
 		}
