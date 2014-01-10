@@ -42,9 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Imint.Media.2.9.2-CI00003\lib\net40\Imint.Media.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Media.Blackmagic, Version=2.9.0.7, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Imint.Media.Blackmagic, Version=2.9.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.Blackmagic.2.9.0-prerelease007\lib\net40\Imint.Media.Blackmagic.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Media.Blackmagic.2.9.2-CI00003\lib\net40\Imint.Media.Blackmagic.dll</HintPath>
     </Reference>
     <Reference Include="Kean, Version=2.9.2.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -76,7 +76,6 @@
   <ItemGroup>
     <Content Include="Configuration\Player\30BlackmagicCapture.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
