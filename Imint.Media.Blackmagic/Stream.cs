@@ -164,16 +164,23 @@ namespace Imint.Media.Blackmagic
 		{
 			get
 			{
-				Generic.IEnumerable<Resource> devices = null;
-				try
+				Generic.IEnumerator<Resource> devices = this.EnumerateDevices().GetEnumerator();
+				Media.Resource result;
+				while (true)
 				{
-					devices = EnumerateDevices();
+					try
+					{
+						if (!devices.MoveNext())
+							break;
+						result = devices.Current;
+					}
+					catch (System.Runtime.InteropServices.COMException e)
+					{
+						result = null;
+					}
+					if (result.NotNull())
+						yield return result;
 				}
-				catch (System.Runtime.InteropServices.COMException e)
-				{ 
-				}
-				foreach (Media.Resource device in devices)
-						yield return device;
 			}
 		}
 
