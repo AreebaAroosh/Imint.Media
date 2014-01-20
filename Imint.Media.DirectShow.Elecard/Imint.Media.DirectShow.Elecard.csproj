@@ -12,13 +12,12 @@
     <AssemblyName>Imint.Media.DirectShow.Elecard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>$(SolutionDir)\bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>$(SolutionDir)\bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -76,10 +75,6 @@
       <Project>{DB8ACBAC-64DF-439B-BFCD-564D51661CE2}</Project>
       <Name>Kean</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Imint.Media.DirectShow\Imint.Media.DirectShow.csproj">
-      <Project>{dead2aaa-d696-410a-9884-08527e0260dd}</Project>
-      <Name>Imint.Media.DirectShow</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Imint.Media.Input\Imint.Media.Input.csproj">
       <Project>{0B948F72-FF2B-4936-B23F-D8E8D092DAC5}</Project>
       <Name>Imint.Media.Input</Name>
@@ -122,5 +117,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\..\.nuget\NuGet.targets" Condition="Exists('..\..\.nuget\NuGet.targets')" />
 </Project>
