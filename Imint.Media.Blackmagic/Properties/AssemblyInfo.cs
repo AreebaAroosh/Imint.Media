@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Imint.Media.Blackmagic")]
 [assembly: AssemblyDescription("Support for input from BlackMagic capture devices.")]
 [assembly: AssemblyVersion("2.9.2.0")]
-[assembly: AssemblyInformationalVersionAttribute("2.9.2-CI00003")]
+[assembly: AssemblyInformationalVersionAttribute("2.9.2-CI00004")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
