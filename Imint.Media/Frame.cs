@@ -35,7 +35,6 @@ namespace Imint.Media
 		public TimeSpan Elapsed { get; set; }
 		public TimeSpan Lifetime { get; set; }
 		public Func<bool, Frame> Done { get; set; }
-		public Geometry2D.Integer.Shell Crop { get; set; }
 		public float Ratio { get; set; }
 		public Scan Scan { get; set; }
 		Draw.Image content;

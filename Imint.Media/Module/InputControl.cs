@@ -56,7 +56,7 @@ namespace Imint.Media.Module
 		protected override void Send(Frame frame)
 		{
 			if (this.Crop.NotNull())
-				frame.Crop = this.Crop;
+				frame.Content.Crop = this.Crop;
 			if (this.Scan != Scan.Unknown)
 				frame.Scan = this.Scan;
 			if (this.Ratio.NotNull())
