@@ -1,4 +1,4 @@
-﻿	// 
+﻿// 
 //  Stream.cs
 //  
 //  Author:
@@ -39,7 +39,6 @@ namespace Imint.Media.MotionJpeg.Player
 		public int Channels { get { return 1; } }
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { set; private get; }
 		public Status Status { get; private set; }
-
 		IO.Net.Http.Response response;
 		Parallel.RepeatThread thread;
 		[Serialize.Parameter]
@@ -52,9 +51,11 @@ namespace Imint.Media.MotionJpeg.Player
 		{
 			Error.Log.Wrap((Action)this.Close)();
 		}
-		long frameCount;
-		public void Poll() { System.Threading.Thread.Sleep(10); }
-		public bool Open(Uri.Locator url)
+		public void Poll ()
+		{
+			System.Threading.Thread.Sleep(10);
+		}
+		public bool Open (Uri.Locator url)
 		{
 			bool result = false;
 			switch (url.Scheme)
@@ -68,24 +69,24 @@ namespace Imint.Media.MotionJpeg.Player
 						this.thread = Parallel.RepeatThread.Start("MotionJpegPlayer", () =>
 						{
 							if (!this.response.Open((contentType, device) =>
+							{
+								bool r = true;
+								switch (contentType)
 								{
-									bool r = true;
-									switch (contentType)
-									{
-										case "image/jpeg":
-										case "image/png": // TODO: does png really work with Raster.Image.Open?
-											if (wait.NotNull())
-												wait.Set();
-											Raster.Image image = Raster.Image.Open(device);
-											if (image.NotNull())
-												this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 25.0f), image, null);
-											break;
-										default:
-											r = false;
-											break;
-									}
-									return r;
-								}))
+									case "image/jpeg":
+									case "image/png": // TODO: does png really work with Raster.Image.Open?
+										if (wait.NotNull())
+											wait.Set();
+										Raster.Image image = Raster.Image.Open(device);
+										if (image.NotNull())
+											this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 25.0f), image, null);
+										break;
+									default:
+										r = false;
+										break;
+								}
+								return r;
+							}))
 								this.thread.Abort();
 						});
 						if (!(result = wait.WaitOne(this.TimeOut)))
@@ -104,8 +105,7 @@ namespace Imint.Media.MotionJpeg.Player
 			this.Status = result ? Status.Playing : Status.Closed;
 			return result;
 		}
-
-		public void Close()
+		public void Close ()
 		{
 			if (this.response.NotNull())
 			{
@@ -119,7 +119,7 @@ namespace Imint.Media.MotionJpeg.Player
 				this.thread = null;
 			}
 		}
-		void IDisposable.Dispose()
+		void IDisposable.Dispose ()
 		{
 			this.Close();
 		}
