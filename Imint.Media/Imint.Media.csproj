@@ -51,6 +51,9 @@
     <Compile Include="Scan.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="Status.cs" />
+    <Compile Include="IRecorder.cs" />
+    <Compile Include="IPushRecorder.cs" />
+    <Compile Include="IPullRecorder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
