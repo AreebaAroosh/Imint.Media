@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0C283FE4-7254-4ED1-A125-54C297E985D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -12,6 +10,8 @@
     <AssemblyName>Imint.Media</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -51,6 +51,9 @@
     <Compile Include="Scan.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="Status.cs" />
+    <Compile Include="IRecorder.cs" />
+    <Compile Include="IPushRecorder.cs" />
+    <Compile Include="IPullRecorder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

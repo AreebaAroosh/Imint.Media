@@ -152,7 +152,8 @@ namespace Imint.Media.Input
 		{
 			lock (this.Lock)
 			{
-				this.Players.Close();
+				if (this.Players.NotNull())
+					this.Players.Close();
 				this.Status = Media.Status.Closed;
 				this.Start = new DateTime();
 				this.End = new DateTime();
