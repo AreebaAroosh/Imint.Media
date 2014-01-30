@@ -98,7 +98,9 @@
     <None Include="Configuration\Player\10ElecardNetworkRecord.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Configuration\Player\10ElecardNetworkTimeshift.xml" />
+    <None Include="Configuration\Player\10ElecardNetworkTimeshift.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Classes_v10, Version=1.2.0.930, Culture=neutral, PublicKeyToken=a6d5afb38b2cfcfa, processorArchitecture=x86">

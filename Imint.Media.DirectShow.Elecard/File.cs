@@ -72,7 +72,7 @@ namespace Imint.Media.DirectShow.Elecard
 		#region IFile Members
 		public string[] SupportedExtensions
 		{
-			get { return new string[] { "avi", "mpg", "h264", "mp4" }; }
+			get { return new string[] { "avi", "mpg", "h264", "mp4", "mov" }; }
 		}
 		#endregion
 	}
