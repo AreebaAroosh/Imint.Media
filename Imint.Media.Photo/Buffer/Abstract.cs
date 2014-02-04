@@ -50,7 +50,7 @@ namespace Imint.Media.Photo.Buffer
 		static string[] GetImageSeries(Uri.Locator name)
 		{
 			string[] result;
-			MatchCollection matches = Regex.Matches(name.Path.Stem, @"(.*\D*)(\d*)(\d{2})$");
+			MatchCollection matches = Regex.Matches(name.Path.Stem, @"((.*)(\D))?(\d*)(\d{2})$");
 			// If the file has a name ending in 2 or more digits,
 			// assume series and get a sorted list of the files in it.
 			// NOTE: This will include any files with an identical name before the digits,
@@ -62,7 +62,7 @@ namespace Imint.Media.Photo.Buffer
 				string directory = System.IO.Path.GetDirectoryName(name.PlatformPath);
 				result = System.IO.Directory.Exists(directory) ?
 					System.IO.Directory.GetFiles(directory, match + "*." + name.Path.Extension, System.IO.SearchOption.TopDirectoryOnly).Sort() :
-					null;				
+					null;
 			}
 			else if (matches.Count > 1) // This shouldn't happen, but if it does,
 				// panic so we can identify why it happened
