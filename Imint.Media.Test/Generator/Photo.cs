@@ -4,7 +4,7 @@
 //  Author:
 //       Simon Mika <simon.mika@imint.se>
 //  
-//  Copyright (c) 2010-2013 Imint AB
+//  Copyright (c) 2010-2014 Imint AB
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -21,7 +21,7 @@
 
 using System;
 using Kean;
-using Bitmap = Kean.Draw.Raster;
+using Raster = Kean.Draw.Raster;
 using Geometry2D = Kean.Math.Geometry2D;
 using Uri = Kean.Uri;
 using Interpolation = Kean.Math.Regression.Interpolation;
@@ -29,6 +29,7 @@ using Collection = Kean.Collection;
 using Kean.Extension;
 using Kean.Collection.Extension;
 using Kean.Collection.Linked.Extension;
+using Integer = Kean.Math.Integer;
 
 namespace Imint.Media.Test.Generator
 {
@@ -67,7 +68,7 @@ namespace Imint.Media.Test.Generator
 		}
 		Interpolation.Splines.Geometry2D.Single.Transform interpolate;
 		Geometry2D.Single.Transform[] motion;
-		Bitmap.Image photo;
+		Raster.Image photo;
 		public override string Name
 		{
 			get { return "photo"; }
@@ -80,7 +81,7 @@ namespace Imint.Media.Test.Generator
 				Uri.Path path = argument.PlatformPath;
 				if (path.NotNull())
 				{
-					Bitmap.Image image = Bitmap.Image.Open(path);
+					Raster.Image image = Raster.Image.Open(path);
 					this.photo = image;
 				}
 				if (!argument.Query.Empty)
@@ -148,10 +149,10 @@ namespace Imint.Media.Test.Generator
 					break;
 				
 			}
-			this.interpolate = new Kean.Math.Regression.Interpolation.Splines.Geometry2D.Single.Transform(method, measures);
+			this.interpolate = new Interpolation.Splines.Geometry2D.Single.Transform(method, measures);
 			return this.frames;
 		}
-		protected override Tuple<Bitmap.Image, Tuple<string, object>[]> Generate(int frame)
+		protected override Tuple<Raster.Image, Tuple<string, object>[]> Generate(int frame)
 		{
 			Geometry2D.Single.Transform initialValues =this.interpolate.Interpolate(0);
 			Geometry2D.Single.Transform initialAbsolute = initialValues;
@@ -165,14 +166,14 @@ namespace Imint.Media.Test.Generator
 				Geometry2D.Single.Transform previousAbsolute = previousValues;
 				meta = new Tuple<string, object>[2] { Tuple.Create<string, object>("RelativeSyntetic", previousAbsolute.Inverse * currentAbsolute), Tuple.Create<string, object>("AbsoluteSyntetic", initialAbsolute.Inverse * currentAbsolute) };
 			}
-			return Tuple.Create<Bitmap.Image, Tuple<string, object>[]>(this.photo.Copy(this.resolution, currentAbsolute) as Bitmap.Image, meta);
+			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(this.photo.Copy(this.resolution, currentAbsolute) as Raster.Image, meta);
 		}
 		private void Initialize()
 		{
 			this.metaData = false;
 			this.frames = 25 * 2;
 			this.resolution = new Geometry2D.Integer.Size(640, 480);
-			this.photo = Bitmap.Image.OpenResource("Generator/strip.png");
+			this.photo = Raster.Image.OpenResource("Generator/strip.png");
 			this.Format = Colorspace.Yuv420;
 			this.motionType = MotionType.Mirror;
 			this.controlPoints = new Collection.List<ControlPoint>();

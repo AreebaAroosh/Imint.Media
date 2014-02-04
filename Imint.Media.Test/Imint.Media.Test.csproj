@@ -58,9 +58,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <EmbeddedResource Include="Generator\strip.png">
-      <LogicalName>strip.png</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Generator\strip.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
