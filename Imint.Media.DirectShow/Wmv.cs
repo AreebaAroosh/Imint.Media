@@ -42,10 +42,10 @@ namespace Imint.Media.DirectShow
 				result = graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, samplegrabber));
 			else
 			{
-				result = graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decoder.Wmv(samplegrabber)) { Output = 0 }) ||
-				graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decoder.Wmv(samplegrabber)) { Output = 1 }) ||
-				graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decompressor.Mjpeg(samplegrabber)) { Output = 0 }) ||
-				graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decompressor.Mjpeg(samplegrabber)) { Output = 1 });
+				result = graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decoder.Wmv(samplegrabber) { Output = 0 })) ||
+				graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decoder.Wmv(samplegrabber) { Output = 1 })) ||
+				graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decompressor.Mjpeg(samplegrabber) { Output = 0 })) ||
+				graph.Open(new DirectShow.Binding.Filters.File.AsfReader(file, new DirectShow.Binding.Filters.Decompressor.Mjpeg(samplegrabber) { Output = 1 }));
 			}
 			return result;
 		}

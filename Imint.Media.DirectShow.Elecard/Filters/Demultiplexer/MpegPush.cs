@@ -39,7 +39,6 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Demultiplexer
 		public MpegPush(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("demultiplexer.mpegpush", new System.Guid(global::Elecard.ElUids.Filters.CLSID_MPGPDMX), "empgpdmx.ax", "Elecard MPEG Push Demultiplexer", next)
 		{
-			this.Output = 0;
 		}
 		DirectShowLib.IBaseFilter filter;
 		public override DirectShowLib.IBaseFilter Create()

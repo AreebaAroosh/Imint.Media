@@ -56,7 +56,7 @@ namespace Imint.Media.DirectShow.Binding.Filters
 			if (this.Next.NotNull())
 				foreach (Abstract candidate in this.Next) // TODO: fix for all followers
 					result.Append(candidate.ToString());
-			result.Append("), ");            
+			result.Append("), ");
 			return result.ToString();
 		}
 
@@ -67,7 +67,7 @@ namespace Imint.Media.DirectShow.Binding.Filters
 		public virtual bool Build(DirectShowLib.IBaseFilter previous, IBuild build)
 		{
 			bool result = false;
-			if (this.Output == -1)
+			if (!this.Output.HasValue || this.Output.Value == -1)
 			{
 				for (int i = 0; i < 6 && !result; i++)
 					result = this.Build(previous, i, build);

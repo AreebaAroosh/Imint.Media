@@ -38,7 +38,6 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Demultiplexer
 		public Mpeg4(params DirectShow.Binding.Filters.Abstract[] next) :
 			base("demultiplexer.mpeg4", new System.Guid(global::Elecard.ElUids.Filters.CLSID_EMP4Demultiplexer), "emp4demux.ax", "Elecard MP4 Demultiplexer", next)
 		{
-			this.Output = 0;
 		}
 	}
 }

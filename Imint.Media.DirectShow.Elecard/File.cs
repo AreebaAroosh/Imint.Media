@@ -65,7 +65,7 @@ namespace Imint.Media.DirectShow.Elecard
 			return graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
 				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.Mpeg2(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
 				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
-				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg4(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
+				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg4(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All()) { Output = null }))) ||
 				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())));
 
 		}
