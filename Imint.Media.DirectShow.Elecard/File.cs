@@ -67,7 +67,6 @@ namespace Imint.Media.DirectShow.Elecard
 				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())))) ||
 				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Demultiplexer.Mpeg4(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All()) { Output = null }))) ||
 				 graph.Open(new DirectShow.Binding.Filters.File.Source(file, new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())));
-
 		}
 		#region IFile Members
 		public string[] SupportedExtensions
