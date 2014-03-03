@@ -34,7 +34,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Decoder
 		DirectShow.Binding.Filters.Abstract
 	{
 		public All(params DirectShow.Binding.Filters.Abstract[] next) :
-			base("Elecard Decoders", new SD.All(next), new HD.All(next), new K16.All(next), new Mpeg4(next))
+			base("Elecard Decoders", new HD.All(next), new SD.All(next), new K16.All(next), new Mpeg4(next))
 		{ }
 		public override bool Build(DirectShowLib.IPin source, DirectShow.Binding.IBuild build)
 		{
