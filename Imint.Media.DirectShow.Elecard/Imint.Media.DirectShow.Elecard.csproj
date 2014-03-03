@@ -12,6 +12,7 @@
     <AssemblyName>Imint.Media.DirectShow.Elecard</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -75,6 +76,10 @@
       <Project>{DB8ACBAC-64DF-439B-BFCD-564D51661CE2}</Project>
       <Name>Kean</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Imint.Media.DirectShow\Imint.Media.DirectShow.csproj">
+      <Project>{dead2aaa-d696-410a-9884-08527e0260dd}</Project>
+      <Name>Imint.Media.DirectShow</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Imint.Media.Input\Imint.Media.Input.csproj">
       <Project>{0B948F72-FF2B-4936-B23F-D8E8D092DAC5}</Project>
       <Name>Imint.Media.Input</Name>
@@ -118,4 +123,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\.nuget\NuGet.targets" Condition="Exists('..\..\.nuget\NuGet.targets')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>
