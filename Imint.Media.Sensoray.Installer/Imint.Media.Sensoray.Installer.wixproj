@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>3.7</ProductVersion>
+    <ProductVersion>3.8</ProductVersion>
     <ProjectGuid>2c8525c3-2310-43b6-bf94-b7cc59eed97e</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>Imint.Media.Sensoray.Installer</OutputName>
