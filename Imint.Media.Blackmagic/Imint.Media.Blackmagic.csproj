@@ -1,79 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{267B0E9A-FDD7-4618-931A-B4F80DFDD7B3}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Imint.Media.Blackmagic</RootNamespace>
-    <AssemblyName>Imint.Media.Blackmagic</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <BuildPackage>true</BuildPackage>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Connection.cs" />
-    <Compile Include="PixelFormat.cs" />
-    <Compile Include="DisplayMode.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stream.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Configuration\Player\30BlackmagicCapture.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Imint.Media.Blackmagic.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Install.ps1" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Kean\Kean\Kean.csproj">
-      <Project>{DB8ACBAC-64DF-439B-BFCD-564D51661CE2}</Project>
-      <Name>Kean</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Imint.Media\Imint.Media.csproj">
-      <Project>{0C283FE4-7254-4ED1-A125-54C297E985D8}</Project>
-      <Name>Imint.Media</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="DeckLinkAPI">
-      <Guid>{D864517A-EDD5-466D-867D-C819F1C052BB}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\.nuget\NuGet.targets" Condition="Exists('..\..\.nuget\NuGet.targets')" />
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProjectGuid>{267B0E9A-FDD7-4618-931A-B4F80DFDD7B3}</ProjectGuid>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>Imint.Media.Blackmagic</RootNamespace>
+		<AssemblyName>Imint.Media.Blackmagic</AssemblyName>
+		<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+		<FileAlignment>512</FileAlignment>
+		<TargetFrameworkProfile />
+		<ProductVersion>12.0.0</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..</SolutionDir>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>$(SolutionDir)\bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>$(SolutionDir)\bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<BuildPackage>true</BuildPackage>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Data" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="Connection.cs" />
+		<Compile Include="PixelFormat.cs" />
+		<Compile Include="DisplayMode.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="Stream.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Configuration\Player\30BlackmagicCapture.xml">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<SubType>Designer</SubType>
+		</None>
+		<None Include="Imint.Media.Blackmagic.nuspec">
+			<SubType>Designer</SubType>
+		</None>
+		<None Include="Install.ps1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Kean\Kean\Kean.csproj">
+			<Project>{DB8ACBAC-64DF-439B-BFCD-564D51661CE2}</Project>
+			<Name>Kean</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\Imint.Media\Imint.Media.csproj">
+			<Project>{0C283FE4-7254-4ED1-A125-54C297E985D8}</Project>
+			<Name>Imint.Media</Name>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+		<COMReference Include="DeckLinkAPI">
+			<Guid>{D864517A-EDD5-466D-867D-C819F1C052BB}</Guid>
+			<VersionMajor>1</VersionMajor>
+			<VersionMinor>0</VersionMinor>
+			<Lcid>0</Lcid>
+			<WrapperTool>tlbimp</WrapperTool>
+			<Isolated>False</Isolated>
+			<EmbedInteropTypes>True</EmbedInteropTypes>
+		</COMReference>
+	</ItemGroup>
+	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+	<Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>
