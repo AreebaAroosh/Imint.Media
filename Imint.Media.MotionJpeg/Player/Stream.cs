@@ -39,7 +39,7 @@ namespace Imint.Media.MotionJpeg.Player
 		public int Channels { get { return 1; } }
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { set; private get; }
 		public Status Status { get; private set; }
-		IO.Net.Http.Response response;
+		IO.Net.Http.Client client;
 		Parallel.RepeatThread thread;
 		[Serialize.Parameter]
 		public TimeSpan TimeOut { get; set; }
@@ -62,13 +62,13 @@ namespace Imint.Media.MotionJpeg.Player
 			{
 				case "http":
 				case "https":
-					if (this.thread.IsNull() && this.response.IsNull())
+					if (this.thread.IsNull() && this.client.IsNull())
 					{
-						this.response = new IO.Net.Http.Request() { Url = url }.Connect();
+						this.client = IO.Net.Http.Client.Open(url);
 						System.Threading.AutoResetEvent wait = new System.Threading.AutoResetEvent(false);
 						this.thread = Parallel.RepeatThread.Start("MotionJpegPlayer", () =>
 						{
-							if (!this.response.Open((contentType, device) =>
+							if (!this.client.Open((contentType, device) =>
 							{
 								bool r = true;
 								switch (contentType)
@@ -94,8 +94,8 @@ namespace Imint.Media.MotionJpeg.Player
 							this.thread.Abort();
 							this.thread.Dispose();
 							this.thread = null;
-							this.response.Close();
-							this.response = null;
+							this.client.Close();
+							this.client = null;
 						}
 						wait.Dispose();
 						wait = null;
@@ -107,10 +107,10 @@ namespace Imint.Media.MotionJpeg.Player
 		}
 		public void Close ()
 		{
-			if (this.response.NotNull())
+			if (this.client.NotNull())
 			{
-				this.response.Close();
-				this.response = null;
+				this.client.Close();
+				this.client = null;
 			}
 			if (this.thread.NotNull())
 			{
