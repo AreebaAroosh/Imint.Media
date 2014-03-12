@@ -43,14 +43,14 @@ namespace Imint.Media
 		}
 		public static implicit operator string(Resource resource)
 		{
-			return resource.Type.AsString() + ", " + resource.Label + ", " + resource.Locator;
+			return (new string[] { resource.Type.AsString(), resource.Label, (string)resource.Locator }).ToCsv();
 		}
 		public static explicit operator Resource(string resource)
 		{
 			Resource result = null;
 			if (resource.NotEmpty())
 			{
-				string[] splitted = resource.Split(',');
+				string[] splitted = resource.FromCsv().ToArray();
 				int c = 0;
 				int length = splitted.Length;
 				result = new Resource(length > 2 ? splitted[c++].Parse<ResourceType>() : ResourceType.Unknown, length > 1 ? splitted[c++].Trim() : null, splitted[c]);
