@@ -31,21 +31,27 @@ namespace Imint.Media
 		IMedia
 	{
 		Settings.Remote backend;
+
 		Remote(Settings.Remote backend)
 		{
 			this.backend = backend;
 		}
+
 		public static Remote Create(Settings.Remote backend)
 		{
 			return backend.Exists("media") ? new Remote(backend) : null;
 		}
+
 		#region Ratio
+
 		public Kean.Math.Fraction Ratio
 		{
 			get { return this.backend.Get<Kean.Math.Fraction>("media.ratio"); }
 			set { this.backend.Set("media.ratio", value); }
 		}
+
 		Action<Kean.Math.Fraction> ratioChanged;
+
 		public event Action<Kean.Math.Fraction> RatioChanged
 		{
 			add
@@ -56,14 +62,19 @@ namespace Imint.Media
 			}
 			remove { this.ratioChanged -= value; }
 		}
+
 		#endregion
+
 		#region Scan
+
 		public Imint.Media.Scan Scan
 		{
 			get { return this.backend.Get<Imint.Media.Scan>("media.scan"); }
 			set { this.backend.Set("media.scan", value); }
 		}
+
 		Action<Imint.Media.Scan> scanChanged;
+
 		public event Action<Imint.Media.Scan> ScanChanged
 		{
 			add
@@ -74,14 +85,19 @@ namespace Imint.Media
 			}
 			remove { this.scanChanged -= value; }
 		}
+
 		#endregion
+
 		#region Crop
+
 		public Geometry2D.Integer.Shell Crop
 		{
 			get { return this.backend.Get<Geometry2D.Integer.Shell>("media.crop"); }
-			set { this.backend.Set("media.crop",value); }
+			set { this.backend.Set("media.crop", value); }
 		}
+
 		Action<Geometry2D.Integer.Shell> cropChanged;
+
 		public event Action<Kean.Math.Geometry2D.Integer.Shell> CropChanged
 		{
 			add
@@ -92,10 +108,15 @@ namespace Imint.Media
 			}
 			remove { this.cropChanged -= value; }
 		}
+
 		#endregion
+
 		#region Resource
+
 		public Uri.Locator Resource { get { return this.backend.Get<Uri.Locator>("media.resource"); } }
+
 		Action<Uri.Locator> resourceChanged;
+
 		public event Action<Uri.Locator> ResourceChanged
 		{
 			add
@@ -106,10 +127,15 @@ namespace Imint.Media
 			}
 			remove { this.resourceChanged -= value; }
 		}
+
 		#endregion
+
 		#region Status
+
 		public Imint.Media.Status Status { get { return this.backend.Get<Imint.Media.Status>("media.state"); } }
+
 		Action<Imint.Media.Status> statusChanged;
+
 		public event Action<Imint.Media.Status> StatusChanged
 		{
 			add
@@ -120,10 +146,15 @@ namespace Imint.Media
 			}
 			remove { this.statusChanged -= value; }
 		}
+
 		#endregion
+
 		#region Start
+
 		public DateTime Start { get { return this.backend.Get<DateTime>("media.start"); } }
+
 		Action<DateTime> startChanged;
+
 		public event Action<DateTime> StartChanged
 		{
 			add
@@ -134,10 +165,15 @@ namespace Imint.Media
 			}
 			remove { this.startChanged -= value; }
 		}
+
 		#endregion
+
 		#region Position
+
 		public DateTime Position { get { return this.backend.Get<DateTime>("media.position"); } }
+
 		Action<DateTime> positionChanged;
+
 		public event Action<DateTime> PositionChanged
 		{
 			add
@@ -148,10 +184,15 @@ namespace Imint.Media
 			}
 			remove { this.positionChanged -= value; }
 		}
+
 		#endregion
+
 		#region End
+
 		public DateTime End { get { return this.backend.Get<DateTime>("media.end"); } }
+
 		event Action<DateTime> endChanged;
+
 		public event Action<DateTime> EndChanged
 		{
 			add
@@ -162,10 +203,15 @@ namespace Imint.Media
 			}
 			remove { this.positionChanged -= value; }
 		}
+
 		#endregion
+
 		#region Seekable
+
 		public bool Seekable { get { return this.backend.Get<bool>("media.seekable"); } }
+
 		Action<bool> seekableChanged;
+
 		public event Action<bool> SeekableChanged
 		{
 			add
@@ -176,10 +222,15 @@ namespace Imint.Media
 			}
 			remove { this.seekableChanged -= value; }
 		}
+
 		#endregion
+
 		#region HasNext
+
 		public bool HasNext { get { return this.backend.Get<bool>("media.hasnext"); } }
+
 		Action<bool> hasNextChanged;
+
 		public event Action<bool> HasNextChanged
 		{
 			add
@@ -190,10 +241,15 @@ namespace Imint.Media
 			}
 			remove { this.hasNextChanged -= value; }
 		}
+
 		#endregion
+
 		#region HasPrevious
+
 		public bool HasPrevious { get { return this.backend.Get<bool>("media.hasprevious"); } }
+
 		Action<bool> hasPreviousChanged;
+
 		public event Action<bool> HasPreviousChanged
 		{
 			add
@@ -204,20 +260,50 @@ namespace Imint.Media
 			}
 			remove { this.hasPreviousChanged -= value; }
 		}
+
 		#endregion
-		public System.Collections.Generic.IEnumerable<Resource> Devices 
+
+		public System.Collections.Generic.IEnumerable<Resource> Devices
 		{ 
-			get { return this.backend.Get<string>("media.devices").Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Map(device => (Resource)device); } 
+			get { return this.backend.Get<string>("media.devices").FromCsv().Map(device => (Resource)device); } 
 		}
+
 		public string[] Extensions { get { return this.backend.Get<string>("media.extensions").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); } }
 
-		public bool Open(Uri.Locator resource) { return this.backend.Call("media.open", resource); }
-		public void Play() { this.backend.Call("media.play"); }
-		public void Pause() { this.backend.Call("media.pause"); }
-		public void Eject() { this.backend.Call("media.eject"); }
-		public void Seek(DateTime position) { this.backend.Call("media.seek", position); }
-		public void Next() { this.backend.Call("media.next"); }
-		public void Previous() { this.backend.Call("media.previous"); }
+		public bool Open(Uri.Locator resource)
+		{
+			return this.backend.Call("media.open", resource);
+		}
+
+		public void Play()
+		{
+			this.backend.Call("media.play");
+		}
+
+		public void Pause()
+		{
+			this.backend.Call("media.pause");
+		}
+
+		public void Eject()
+		{
+			this.backend.Call("media.eject");
+		}
+
+		public void Seek(DateTime position)
+		{
+			this.backend.Call("media.seek", position);
+		}
+
+		public void Next()
+		{
+			this.backend.Call("media.next");
+		}
+
+		public void Previous()
+		{
+			this.backend.Call("media.previous");
+		}
 
 		public void Dispose()
 		{

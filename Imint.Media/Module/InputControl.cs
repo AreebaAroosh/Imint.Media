@@ -39,6 +39,7 @@ namespace Imint.Media.Module
 		IInputControl
 	{
 		IControl backend;
+
 		public InputControl(IInputControl backend) :
 			base(backend)
 		{
@@ -53,6 +54,7 @@ namespace Imint.Media.Module
 				this.EndChanged.Call(this.End);
 			};
 		}
+
 		protected override void Send(Frame frame)
 		{
 			if (this.Crop.NotNull())
@@ -64,14 +66,19 @@ namespace Imint.Media.Module
 			frame.Time += this.Offset;
 			base.Send(frame);
 		}
+
 		protected override void Stop()
 		{
 			this.Eject();
 			base.Stop();
 		}
+
 		#region IControl Members
+
 		#region Ratio
+
 		Kean.Math.Fraction ratio = null;
+
 		[Platform.Settings.Property("ratio", "Media aspect ratio.", "The media aspect ratio, as a double value [integer.decimals] or integer fraction [nominator/denominator].", Example = "16/9")]
 		[Notify("RatioChanged")]
 		public Kean.Math.Fraction Ratio
@@ -86,10 +93,15 @@ namespace Imint.Media.Module
 				}
 			}
 		}
+
 		public event Action<Kean.Math.Fraction> RatioChanged;
+
 		#endregion
+
 		#region Scan
+
 		Media.Scan scan = Media.Scan.Unknown;
+
 		[Platform.Settings.Property("scan", "Media scan format.", "Media scan format [unknown | interlaced | progressive].")]
 		[Notify("ScanChanged")]
 		public Media.Scan Scan
@@ -104,10 +116,15 @@ namespace Imint.Media.Module
 				}
 			}
 		}
+
 		public event Action<Media.Scan> ScanChanged;
+
 		#endregion
+
 		#region Crop
+
 		Geometry2D.Integer.Shell crop;
+
 		[Platform.Settings.Property("crop", "Video frame cropping", "The video frame cropping [left, right, top, bottom | horizontal, vertical | all].", Example = "20, 40")]
 		[Notify("CropChanged")]
 		public Geometry2D.Integer.Shell Crop
@@ -122,12 +139,15 @@ namespace Imint.Media.Module
 				}
 			}
 		}
+
 		public event Action<Geometry2D.Integer.Shell> CropChanged;
+
 		#endregion
 
 		[Settings.Property("resource", "Resource currently opened.", "Locator of the currently opened resource.")]
 		[Notify("ResourceChanged")]
 		public Uri.Locator Resource { get { return this.backend.Resource; } }
+
 		public event Action<Uri.Locator> ResourceChanged
 		{
 			add { this.backend.ResourceChanged += value; }
@@ -137,6 +157,7 @@ namespace Imint.Media.Module
 		[Settings.Property("state", "Media state.", "Media state [closed | paused | playing].")]
 		[Notify("StatusChanged")]
 		public Status Status { get { return this.backend.Status; } }
+
 		public event Action<Status> StatusChanged
 		{
 			add { this.backend.StatusChanged += value; }
@@ -144,59 +165,80 @@ namespace Imint.Media.Module
 		}
 
 		#region Offset
+
 		TimeSpan offset;
+
 		[Settings.Property("offset", "Media offset position.", "Media offset position in format [[h:]mm:]ss[.fff].")]
 		[Notify("OffsetChanged")]
-		public TimeSpan Offset { get { return this.offset; } set { if (this.offset != value) this.OffsetChanged.Call(this.offset = value); } }
+		public TimeSpan Offset
+		{
+			get { return this.offset; }
+			set
+			{
+				if (this.offset != value)
+					this.OffsetChanged.Call(this.offset = value);
+			}
+		}
+
 		public event Action<TimeSpan> OffsetChanged;
+
 		#endregion
 
 		#region Start
+
 		[Settings.Property("start", "Media start position.", "Media start position in format [[h:]mm:]ss[.fff].")]
 		[Notify("StartChanged")]
-		public new DateTime Start 
+		public new DateTime Start
 		{ 
 			get { return this.backend.Start + this.Offset; }
 			set { this.Offset = value - this.backend.Start; }
 		}
+
 		public event Action<DateTime> StartChanged;
+
 		#endregion
 
 		#region Position
+
 		[Settings.Property("position", "Media position.", "Current media position in format [[h:]mm:]ss[.fff].")]
 		[Notify("PositionChanged")]
 		public DateTime Position { get { return this.backend.Position + this.Offset; } }
+
 		public event Action<DateTime> PositionChanged;
+
 		#endregion
 
 		#region End
+
 		[Settings.Property("end", "Media end position.", "Media end position in format [[h:]mm:]ss[.fff].")]
 		[Notify("EndChanged")]
 		public DateTime End { get { return this.backend.End + this.Offset; } }
+
 		public event Action<DateTime> EndChanged;
+
 		#endregion
 
 		[Settings.Property("extensions", "Media file extensions.", "A list of all media file extensions that can be opened.")]
-		public string AllExtensions 
+		public string AllExtensions
 		{ 
 			get
 			{
 				string result = "";
-				foreach(string extension in this.Extensions)
-				   result += extension + " ";
+				foreach (string extension in this.Extensions)
+					result += extension + " ";
 				return result;
 			}
 		}
+
 		public string[] Extensions { get { return this.backend.Extensions; } }
 
-
 		[Settings.Property("devices", "All detected capture devices.", "A list of all capture devices that can be opened.")]
-		public string AllDevices { get { return this.Devices.Map(device => (string)device).Join("; "); } }
+		public string AllDevices { get { return this.Devices.Map(device => (string)device).ToCsv(); } }
+
 		public System.Collections.Generic.IEnumerable<Resource> Devices { get { return this.backend.Devices; } }
 
-
 		[Settings.Method("open", "Open media.", "Open media specified by locator argument.", Example = "file:///c:/test.avi")]
-		public bool Open([Settings.Parameter("locator", "Locator of file, capture device or video stream.")] Uri.Locator resource) 
+		public bool Open([Settings.Parameter("locator", "Locator of file, capture device or video stream.")] Uri.Locator resource)
 		{
 			bool result = false;
 			if (resource.NotNull())
@@ -215,52 +257,83 @@ namespace Imint.Media.Module
 		}
 
 		[Settings.Method("play", "Start playback.", "Start playback of opened media.")]
-		public void Play() { this.backend.Play(); }
+		public void Play()
+		{
+			this.backend.Play();
+		}
 
 		[Settings.Method("pause", "Pause playback.", "Pause playback, if playing.")]
-		public void Pause() { this.backend.Pause(); }
+		public void Pause()
+		{
+			this.backend.Pause();
+		}
 
 		[Settings.Method("eject", "Eject opened media.", "Eject currently opened media.")]
-		public void Eject() { this.backend.Eject(); }
+		public void Eject()
+		{
+			this.backend.Eject();
+		}
 
 		#region Seek
+
 		[Settings.Property("seekable", "Whether media is seekable.", "Whether the input media is seekable [true | false].")]
 		[Notify("SeekableChanged")]
 		public bool Seekable { get { return this.backend.Seekable; } }
+
 		public event Action<bool> SeekableChanged
 		{
 			add { this.backend.SeekableChanged += value; }
 			remove { this.backend.SeekableChanged -= value; }
 		}
+
 		[Settings.Method("seek", "Seek media to position.", "Seek media to specified position in format [[h:]mm:]ss[.fff].", Example = "03:12")]
-		public void Seek(DateTime position) { this.backend.Seek(position); }
+		public void Seek(DateTime position)
+		{
+			this.backend.Seek(position);
+		}
+
 		#endregion
 
 		#region Next
+
 		[Settings.Property("hasnext", "Media has next.", "Whether the input media position can seeked to the last captured position [true | false].")]
 		[Notify("HasNextChanged")]
 		public bool HasNext { get { return this.backend.HasNext; } }
+
 		public event Action<bool> HasNextChanged
 		{
 			add { this.backend.HasNextChanged += value; }
 			remove { this.backend.HasNextChanged -= value; }
 		}
+
 		[Settings.Method("next", "Play from last captured position.", "Play the media from the last captured position.")]
-		public void Next() { this.backend.Next(); }
+		public void Next()
+		{
+			this.backend.Next();
+		}
+
 		#endregion
-		
+
 		#region Previous
+
 		[Settings.Property("hasprevious", "Media has previous.", "Whether the input media position can seeked to the first captured position [true | false].")]
 		[Notify("HasPreviousChanged")]
 		public bool HasPrevious { get { return this.backend.HasPrevious; } }
+
 		public event Action<bool> HasPreviousChanged
 		{
 			add { this.backend.HasPreviousChanged += value; }
 			remove { this.backend.HasPreviousChanged -= value; }
 		}
+
 		[Settings.Method("previous", "Play from first captured position.", "Play the media from the first captured position.")]
-		public void Previous() { this.backend.Previous(); }
+		public void Previous()
+		{
+			this.backend.Previous();
+		}
+
 		#endregion
+
 		#endregion
 	}
 }
