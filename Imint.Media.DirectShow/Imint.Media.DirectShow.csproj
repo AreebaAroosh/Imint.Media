@@ -92,7 +92,7 @@
     <Compile Include="Binding\Filters\SampleGrabber\Bgr.cs" />
     <Compile Include="Binding\Filters\SampleGrabber\Bgra.cs" />
     <Compile Include="Binding\Filters\SampleGrabber\Yuv420.cs" />
-    <Compile Include="Binding\Filters\SampleGrabber\Yuv422.cs" />
+    <Compile Include="Binding\Filters\SampleGrabber\Yuyv.cs" />
     <Compile Include="Binding\Filters\SampleGrabber\Yvu420.cs" />
     <Compile Include="Binding\Filters\Utils\InfinitePinTee.cs" />
     <Compile Include="Binding\Graph.cs" />

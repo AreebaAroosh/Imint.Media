@@ -44,6 +44,7 @@ namespace Imint.Media.DirectShow
 			else
 				result = graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new DirectShow.Binding.Filters.Decoder.Wmv(samplegrabber)))) ||
 				graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new DirectShow.Binding.Filters.Decompressor.Mjpeg(samplegrabber)))) ||
+				graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new DirectShow.Binding.Filters.Decoder.Mpeg2(samplegrabber)))) ||
 				graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new DirectShow.Binding.Filters.Dmo.Mpeg4(samplegrabber)))) ||
 				graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new DirectShow.Binding.Filters.Dmo.Mpeg43(samplegrabber)))) ||
 				graph.Open(new DirectShow.Binding.Filters.File.Source(file, new DirectShow.Binding.Filters.Demultiplexer.AviSplitter(new DirectShow.Binding.Filters.Dmo.Mpeg4s(samplegrabber)))) ||
