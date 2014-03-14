@@ -35,24 +35,24 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>True</Private>
-      <HintPath>..\..\packages\GLib.Sharp.2.28.1.1\lib\glib-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Imint.Media, Version=2.9.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.2.9.2-CI00009\lib\net40\Imint.Media.dll</HintPath>
+      <HintPath>..\..\packages\GLib.Sharp.2.28.1.2\lib\glib-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Media.Sensoray, Version=2.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Imint.Media, Version=2.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.Sensoray.2.9.2-CI00009\lib\net40\Imint.Media.Sensoray.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Media.2.10.0-CI00005\lib\net40\Imint.Media.dll</HintPath>
     </Reference>
-    <Reference Include="Kean, Version=2.9.2.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Imint.Media.Sensoray, Version=2.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Kean.2.9.2-CI00009\lib\net40\Kean.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Media.Sensoray.2.10.0-CI00005\lib\net40\Imint.Media.Sensoray.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean, Version=2.10.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Kean.2.10.0-CI00005\lib\net40\Kean.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Cairo.2.0.0.1\lib\Mono.Cairo.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Cairo.2.0.0.2\lib\Mono.Cairo.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -64,8 +64,8 @@
       <HintPath>..\..\packages\OpenTK.GLControl.1.1.1161.61462\lib\NET40\OpenTK.GLControl.dll</HintPath>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Pango.1.28.3.1\lib\pango-sharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Pango.1.28.3.2\lib\pango-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -73,11 +73,21 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="..\..\packages\GLib.Sharp.2.28.1.1\build\GLib.Sharp.targets" Condition="Exists('..\..\packages\GLib.Sharp.2.28.1.1\build\GLib.Sharp.targets')" />
-  <Import Project="..\..\packages\Cairo.2.0.0.1\build\Cairo.targets" Condition="Exists('..\..\packages\Cairo.2.0.0.1\build\Cairo.targets')" />
-  <Import Project="..\..\packages\Pango.1.28.3.1\build\Pango.targets" Condition="Exists('..\..\packages\Pango.1.28.3.1\build\Pango.targets')" />
-  <Import Project="..\..\packages\Kean.2.9.2-CI00009\build\Kean.targets" Condition="Exists('..\..\packages\Kean.2.9.2-CI00009\build\Kean.targets')" />
-  <Import Project="..\..\packages\Imint.Media.Sensoray.2.9.2-CI00009\build\Imint.Media.Sensoray.targets" Condition="Exists('..\..\packages\Imint.Media.Sensoray.2.9.2-CI00009\build\Imint.Media.Sensoray.targets')" />
+  <Import Project="..\..\packages\GLib.Sharp.2.28.1.2\build\GLib.Sharp.targets" Condition="Exists('..\..\packages\GLib.Sharp.2.28.1.2\build\GLib.Sharp.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\GLib.Sharp.2.28.1.2\build\GLib.Sharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GLib.Sharp.2.28.1.2\build\GLib.Sharp.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Cairo.2.0.0.2\build\Cairo.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Cairo.2.0.0.2\build\Cairo.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Pango.1.28.3.2\build\Pango.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Pango.1.28.3.2\build\Pango.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Kean.2.10.0-CI00005\build\Kean.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Kean.2.10.0-CI00005\build\Kean.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Imint.Media.Sensoray.2.10.0-CI00005\build\Imint.Media.Sensoray.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Imint.Media.Sensoray.2.10.0-CI00005\build\Imint.Media.Sensoray.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\Cairo.2.0.0.2\build\Cairo.targets" Condition="Exists('..\..\packages\Cairo.2.0.0.2\build\Cairo.targets')" />
+  <Import Project="..\..\packages\Pango.1.28.3.2\build\Pango.targets" Condition="Exists('..\..\packages\Pango.1.28.3.2\build\Pango.targets')" />
+  <Import Project="..\..\packages\Kean.2.10.0-CI00005\build\Kean.targets" Condition="Exists('..\..\packages\Kean.2.10.0-CI00005\build\Kean.targets')" />
+  <Import Project="..\..\packages\Imint.Media.Sensoray.2.10.0-CI00005\build\Imint.Media.Sensoray.targets" Condition="Exists('..\..\packages\Imint.Media.Sensoray.2.10.0-CI00005\build\Imint.Media.Sensoray.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
