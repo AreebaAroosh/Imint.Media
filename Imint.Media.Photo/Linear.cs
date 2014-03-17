@@ -41,6 +41,6 @@ namespace Imint.Media.Photo
 			this.Playing = false;
 			return true;
 		}
-		public bool IsLinear { get { return this.Count <= 1000; } }
+		public bool IsLinear { get { return this.Count > 40; } }
 	}
 }
