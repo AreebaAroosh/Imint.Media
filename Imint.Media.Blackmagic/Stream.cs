@@ -174,7 +174,7 @@ namespace Imint.Media.Blackmagic
 							break;
 						result = devices.Current;
 					}
-					catch (System.Runtime.InteropServices.COMException e)
+					catch (System.Runtime.InteropServices.COMException)
 					{
 						result = null;
 					}

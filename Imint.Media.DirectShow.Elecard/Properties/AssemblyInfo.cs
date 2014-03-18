@@ -31,6 +31,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
+// See http://msdn.microsoft.com/en-us/library/ee191568%28VS.100%29.aspx about this warning
 [assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum, ViewAndModify = "HKEY_CURRENT_USER")]
 
 // General Information about an assembly is controlled through the following 
