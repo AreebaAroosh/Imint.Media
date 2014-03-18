@@ -42,7 +42,6 @@ namespace Imint.Media.Photo
 		/// </summary>
 		[Serialize.Parameter]
 		public Kean.Math.Fraction Rate { get; set; }
-		DateTime currentTime = new DateTime();
 		/// <summary>
 		/// The duration of one frame.
 		/// </summary>
