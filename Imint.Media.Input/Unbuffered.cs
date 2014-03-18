@@ -53,7 +53,7 @@ namespace Imint.Media.Input
 			}
 		}
 		[Serialize.Parameter]
-		public EndMode EndMode { get; set; }
+		public Imint.Media.EndMode EndMode { get; set; }
 
 		Action<Frame> send;
 

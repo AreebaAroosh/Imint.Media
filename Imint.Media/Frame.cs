@@ -37,6 +37,7 @@ namespace Imint.Media
 		public Func<bool, Frame> Done { get; set; }
 		public float Ratio { get; set; }
 		public Scan Scan { get; set; }
+		public EndMode EndMode { get; set; }
 		Draw.Image content;
 		public Draw.Image Content 
 		{

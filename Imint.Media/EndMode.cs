@@ -21,7 +21,7 @@
 
 using System;
 
-namespace Imint.Media.Input
+namespace Imint.Media
 {
 	public enum EndMode
 	{

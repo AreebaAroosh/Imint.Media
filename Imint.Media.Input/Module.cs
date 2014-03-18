@@ -43,7 +43,7 @@ namespace Imint.Media.Input
 			private set { this.backend.Players = value; } 
 		}
 		[Serialize.Parameter]
-		public EndMode EndMode 
+		public Imint.Media.EndMode EndMode 
 		{ 
 			get { return this.backend.EndMode; }
 			set { this.backend.EndMode = value; } 

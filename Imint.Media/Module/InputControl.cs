@@ -63,6 +63,7 @@ namespace Imint.Media.Module
 				frame.Scan = this.Scan;
 			if (this.Ratio.NotNull())
 				frame.Ratio = (float)this.Ratio;
+			frame.EndMode = this.EndMode;
 			frame.Time += this.Offset;
 			base.Send(frame);
 		}
@@ -141,6 +142,29 @@ namespace Imint.Media.Module
 		}
 
 		public event Action<Geometry2D.Integer.Shell> CropChanged;
+
+		#endregion
+
+		#region EndMode
+
+		Media.EndMode endMode = Media.EndMode.Pause;
+
+		[Platform.Settings.Property("endmode", "Media end mode.", "Media end mode [eject | pause | play | repeat].")]
+		[Notify("EndModeChanged")]
+		public Media.EndMode EndMode
+		{
+			get { return this.endMode; }
+			set
+			{
+				if (this.endMode != value)
+				{
+					this.endMode = value;
+					this.EndModeChanged.Call(value);
+				}
+			}
+		}
+
+		public event Action<Media.EndMode> EndModeChanged;
 
 		#endregion
 

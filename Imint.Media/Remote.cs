@@ -111,6 +111,29 @@ namespace Imint.Media
 
 		#endregion
 
+		#region EndMode
+
+		public Imint.Media.EndMode EndMode
+		{
+			get { return this.backend.Get<Imint.Media.EndMode>("media.endmode"); }
+			set { this.backend.Set("media.endmode", value); }
+		}
+
+		Action<Imint.Media.EndMode> endModeChanged;
+
+		public event Action<Imint.Media.EndMode> EndModeChanged
+		{
+			add
+			{
+				if (this.endModeChanged.IsNull())
+					this.backend.Listen("media.endMode", (Imint.Media.EndMode v) => this.endModeChanged.Call(v));
+				this.endModeChanged += value;
+			}
+			remove { this.endModeChanged -= value; }
+		}
+
+		#endregion
+
 		#region Resource
 
 		public Uri.Locator Resource { get { return this.backend.Get<Uri.Locator>("media.resource"); } }
