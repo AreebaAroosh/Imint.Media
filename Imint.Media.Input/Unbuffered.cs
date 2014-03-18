@@ -117,7 +117,7 @@ namespace Imint.Media.Input
 					case EndMode.Eject:
 						this.Pause();
 						System.Threading.Thread.Sleep(80);
-						this.Eject();
+						this.ThreadPool.Enqueue(() => this.Eject());
 						break;
 				}
 			}
@@ -167,7 +167,7 @@ namespace Imint.Media.Input
 			lock (this.Lock)
 			{
 				if (this.Players.NotNull())
-					this.Players.Close();
+					this.Players.Close(); 
 				this.Status = Media.Status.Closed;
 				this.Start = new DateTime();
 				this.End = new DateTime();
