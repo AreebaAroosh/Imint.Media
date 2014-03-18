@@ -27,6 +27,7 @@ namespace Imint.Media.Photo
 		Stream,
 		Media.Player.ILinear
 	{
+		// TODO: This never returns Status.Paused. Why "this.Count > 0"?
 		public override Status Status { get { return this.Count > 0 ? base.Status : this.Playing ? Status.Playing : Status.Paused; } }
 		public bool Playing { get; private set; }
 		public bool Play()

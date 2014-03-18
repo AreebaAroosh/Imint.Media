@@ -73,6 +73,7 @@ namespace Imint.Media.Photo
 		#region IStream Members
 		public int Channels { get { return 1; } }
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { get; set; }
+		// TODO: Something about this status - never returns Status.Paused.
 		public virtual Status Status { get { return (this.Buffer.NotNull() && this.Count > 0) ? Status.Playing : Status.Closed; } }
 		public bool Open(Uri.Locator name)
 		{
