@@ -52,8 +52,22 @@ namespace Imint.Media.Input
 				}
 			}
 		}
+		Imint.Media.EndMode endMode;
 		[Serialize.Parameter]
-		public Imint.Media.EndMode EndMode { get; set; }
+		public Imint.Media.EndMode EndMode
+		{ 
+			get { return this.endMode; }
+			set
+			{
+				if (this.endMode != value)
+				{
+					this.endMode = value;
+					this.EndModeChanged.Call(value);
+				}
+			} 
+		}
+
+		public event Action<EndMode> EndModeChanged;
 
 		Action<Frame> send;
 
@@ -403,5 +417,6 @@ namespace Imint.Media.Input
 			this.Extensions = this.Players.SupportedExtensions.ToArray();
 		}
 		#endregion
+
 	}
 }

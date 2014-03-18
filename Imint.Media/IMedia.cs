@@ -34,7 +34,5 @@ namespace Imint.Media
 		event Action<Media.Scan> ScanChanged;
 		Geometry2D.Integer.Shell Crop { get; set; }
 		event Action<Geometry2D.Integer.Shell> CropChanged;
-		Media.EndMode EndMode { get; set; }
-		event Action<Media.EndMode> EndModeChanged;
 	}
 }

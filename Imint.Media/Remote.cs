@@ -126,7 +126,7 @@ namespace Imint.Media
 			add
 			{
 				if (this.endModeChanged.IsNull())
-					this.backend.Listen("media.endMode", (Imint.Media.EndMode v) => this.endModeChanged.Call(v));
+					this.backend.Listen("media.endmode", (Imint.Media.EndMode v) => this.endModeChanged.Call(v));
 				this.endModeChanged += value;
 			}
 			remove { this.endModeChanged -= value; }

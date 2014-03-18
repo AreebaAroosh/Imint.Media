@@ -63,7 +63,6 @@ namespace Imint.Media.Module
 				frame.Scan = this.Scan;
 			if (this.Ratio.NotNull())
 				frame.Ratio = (float)this.Ratio;
-			frame.EndMode = this.EndMode;
 			frame.Time += this.Offset;
 			base.Send(frame);
 		}
@@ -147,24 +146,19 @@ namespace Imint.Media.Module
 
 		#region EndMode
 
-		Media.EndMode endMode = Media.EndMode.Pause;
-
-		[Platform.Settings.Property("endmode", "Media end mode.", "Media end mode [eject | pause | play | repeat].")]
+		[Settings.Property("endmode", "Media end mode.", "Media end mode [eject | pause | play | repeat].")]
 		[Notify("EndModeChanged")]
-		public Media.EndMode EndMode
-		{
-			get { return this.endMode; }
-			set
-			{
-				if (this.endMode != value)
-				{
-					this.endMode = value;
-					this.EndModeChanged.Call(value);
-				}
-			}
+		public Media.EndMode EndMode 
+		{ 
+			get { return this.backend.EndMode; }
+			set { this.backend.EndMode = value; }
 		}
 
-		public event Action<Media.EndMode> EndModeChanged;
+		public event Action<Media.EndMode> EndModeChanged
+		{
+			add { this.backend.EndModeChanged += value; }
+			remove { this.backend.EndModeChanged -= value; }
+		}
 
 		#endregion
 
@@ -273,8 +267,11 @@ namespace Imint.Media.Module
 				string scan = resource.Query["scan"];
 				if (scan.NotEmpty())
 					this.Scan = (Media.Scan)Enum.Parse(typeof(Media.Scan), scan, true);
+				string endMode = resource.Query["endmode"];
+				if (endMode.NotEmpty())
+					this.EndMode = (Media.EndMode)Enum.Parse(typeof(Media.EndMode), endMode, true);
 				this.Ratio = resource.Query["ratio"];
-				resource.Query.Remove("crop", "ratio", "scan");
+				resource.Query.Remove("crop", "ratio", "scan", "endmode");
 				result = this.backend.Open(resource);
 			}
 			return result;

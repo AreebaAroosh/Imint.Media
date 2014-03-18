@@ -38,6 +38,8 @@ namespace Imint.Media
 		event Action<DateTime> PositionChanged;
 		DateTime End { get; }
 		event Action<DateTime> EndChanged;
+		Media.EndMode EndMode { get; set; }
+		event Action<Media.EndMode> EndModeChanged;
 
 		bool Seekable { get; }
 		event Action<bool> SeekableChanged;
