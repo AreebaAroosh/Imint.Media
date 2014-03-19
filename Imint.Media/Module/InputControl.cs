@@ -125,7 +125,7 @@ namespace Imint.Media.Module
 
 		Geometry2D.Integer.Shell crop;
 
-		[Platform.Settings.Property("crop", "Video frame cropping", "The video frame cropping [left, right, top, bottom | horizontal, vertical | all].", Example = "20, 40")]
+		[Platform.Settings.Property("crop", "Media frame cropping.", "The media frame cropping [left, right, top, bottom | horizontal, vertical | all].", Example = "20, 40")]
 		[Notify("CropChanged")]
 		public Geometry2D.Integer.Shell Crop
 		{
