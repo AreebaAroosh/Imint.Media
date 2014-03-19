@@ -68,7 +68,7 @@ namespace Imint.Media.Photo.Buffer
 				// panic so we can identify why it happened
 			{
 				result = null;
-				//TODO: throw some exception
+				throw new ArgumentOutOfRangeException("matches.Count", "Too many matches found in locator string.");
 			}
 			else // The filename didn't end in 2 or more digits, so just take the one file.
 				result = new string[] { name.PlatformPath };

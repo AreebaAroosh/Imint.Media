@@ -24,7 +24,7 @@ using System;
 namespace Imint.Media.Player
 {
 	/// <summary>
-	/// Interface to fullfill for players supporting play, pause and position functionality.
+	/// Interface to fulfill for players supporting play, pause and position functionality.
 	/// This is intended for file formats lacking seek functionality, for example when an index is missing.
 	/// If seek and total length is available use INonLinear instead and if pause is not available use IStream.
 	/// If the player opens file resources implement IFile as well.
@@ -38,7 +38,7 @@ namespace Imint.Media.Player
 		/// </summary>
 		bool IsLinear { get; }
 		/// <summary>
-		/// Timestamp of the current position. This shall preferebly indicate the real date and time when the 
+		/// Timestamp of the current position. This shall preferably indicate the real date and time when the 
 		/// current frame was recorded but it may contain elapsed time since start of the video nothing else is available.
 		/// </summary>
 		DateTime Position { get; }
@@ -50,7 +50,7 @@ namespace Imint.Media.Player
 		/// <summary>
 		/// Called to halt playing of resource.
 		/// </summary>
-		/// <returns>True if pause was successfull.</returns>
+		/// <returns>True if pause was successful.</returns>
 		bool Pause();
 	}
 }
