@@ -17,6 +17,7 @@ namespace Imint.Media.Photo.Buffer
 		Collection.IQueue<Raster.Image> buffer;
 		Kean.Parallel.RepeatThread loader;
 		object signal = new object();
+		int? seek;
 		
 		public Long(string[] photoPaths)
 		{
@@ -26,25 +27,37 @@ namespace Imint.Media.Photo.Buffer
 			// If the number of photos is larger than some arbitrary value, playback should not loop.
 			this.loader = Parallel.RepeatThread.Start("PhotoLoader", this.Wrap ? (Action)this.WrappingLoader : this.Loader);
 		}
-		private void Loader()
+		void Loader()
 		{
-			while (this.tailIndex - this.Position < 10 && this.tailIndex < this.Count)
+			lock (this.signal)
 			{
-				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[this.tailIndex]));
-				++this.tailIndex;
+				if (this.seek.NotNull() && base.Seek((int)this.seek))
+				{
+					this.seek = null;
+					this.tailIndex = this.Position;
+					this.buffer.Clear();
+				}
+				while (this.tailIndex - this.Position < 10 && this.tailIndex < this.Count)
+					this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[this.tailIndex++]));
 			}
 			lock (this.signal)
 				System.Threading.Monitor.Wait(this.signal, 20);
 		}
-		private void WrappingLoader()
+		void WrappingLoader()
 		{
-			while (this.tailIndex - this.Position < 10)
+			lock (this.signal)
 			{
-				this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[this.tailIndex % this.Count]));
-				++this.tailIndex;
+				if (this.seek.NotNull() && base.Seek((int)this.seek))
+				{
+					this.seek = null;
+					this.tailIndex = this.Position;
+					this.buffer.Clear();
+				}
+				while (this.tailIndex - this.Position < 10)
+					this.buffer.Enqueue(Raster.Image.Open(this.PhotoPaths[this.tailIndex++ % this.Count]));
+				if (this.Position < 10)
+					this.tailIndex %= this.Count;
 			}
-			if (this.Position < 10)
-				this.tailIndex %= this.Count;
 			lock (this.signal)
 				System.Threading.Monitor.Wait(this.signal, 20);
 		}
@@ -58,16 +71,15 @@ namespace Imint.Media.Photo.Buffer
 			this.Position++;
 			if (this.Wrap)
 				this.Position %= this.Count;
-			Tuple<int, Raster.Image> result = new Tuple<int, Raster.Image>(this.Position, this.buffer.Dequeue() as Raster.Image);
-			return result;
+			return Tuple.Create(this.Position, this.buffer.Dequeue() as Raster.Image);
 		}
 		public override bool Seek(int position)
 		{
 			bool result;
 			lock (this.signal)
 			{
-				this.Clear();
-				result = base.Seek(this.tailIndex = position);
+				this.seek = position;
+				result = true;
 				System.Threading.Monitor.Pulse(this.signal);
 			}
 			return result;
