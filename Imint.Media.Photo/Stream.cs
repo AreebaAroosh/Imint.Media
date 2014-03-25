@@ -75,7 +75,7 @@ namespace Imint.Media.Photo
 		public Action<int, DateTime, TimeSpan, Raster.Image, Tuple<string, object>[]> Send { get; set; }
 		// TODO: Something about this status - never returns Status.Paused.
 		public virtual Status Status { get { return (this.Buffer.NotNull() && this.Count > 0) ? Status.Playing : Status.Closed; } }
-		public bool Open(Uri.Locator name)
+		public virtual bool Open(Uri.Locator name)
 		{
 			bool result = false;
 			if (name.Scheme == "file" && this.SupportedExtensions.Contains(name.Path.Extension))

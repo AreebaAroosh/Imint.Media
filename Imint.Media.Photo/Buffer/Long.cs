@@ -63,9 +63,10 @@ namespace Imint.Media.Photo.Buffer
 		}
 		public override Tuple<int, Raster.Image> Next()
 		{
+			// TODO: What if Position > Count?
 			lock (this.signal)
 			{
-				if (this.tailIndex - this.Position < 10)
+				if (this.tailIndex - this.Position < 10 && (this.Wrap || this.tailIndex < this.Count))
 					System.Threading.Monitor.Pulse(this.signal);
 			}
 			this.Position++;

@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Uri = Kean.Uri;
 
 namespace Imint.Media.Photo
 {
@@ -38,6 +39,12 @@ namespace Imint.Media.Photo
 			this.Buffer.Seek(Kean.Math.Integer.Clamp((int)(position.Ticks / 10000 / (1000 / (float)this.Rate)), 0, this.Count - 1));
 			if (!this.Playing)
 				this.SendFrame();
+		}
+		public override bool Open(Uri.Locator name)
+		{
+			bool result = base.Open(name);
+			this.Pause();
+			return result;
 		}
 	}
 }
