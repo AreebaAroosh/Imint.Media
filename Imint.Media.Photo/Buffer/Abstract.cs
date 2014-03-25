@@ -15,7 +15,7 @@ namespace Imint.Media.Photo.Buffer
 		IDisposable
 	{
 		protected string[] PhotoPaths { get; set; }
-		protected bool Wrap { get; set; }
+		public bool Wrap { get; protected set; }
 		public int Position { get; protected set; }
 		public int Count { get { return this.PhotoPaths.Length; } }
 		protected Abstract()
