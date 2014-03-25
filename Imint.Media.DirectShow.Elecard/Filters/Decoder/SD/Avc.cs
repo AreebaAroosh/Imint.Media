@@ -37,7 +37,7 @@ namespace Imint.Media.DirectShow.Elecard.Filters.Decoder.SD
 		Abstract
 	{
 		public Avc(params DirectShow.Binding.Filters.Abstract[] next) :
-			base("decoder.sd.avc", new System.Guid(global::Elecard.ElUids.Filters.CLSID_EAVCDEC_SD), "eavcdec_sd.ax", "Elecard AVC Video Decoder SD", next)
+			base("decoder.sd.avc", new System.Guid(global::Elecard.ElUids.Filters.CLSID_EAVCDEC_SD), "eavcdec.ax", "Elecard AVC Video Decoder SD", next)
 		{
 			this.Output = 0;
 		}
