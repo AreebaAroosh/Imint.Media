@@ -100,6 +100,8 @@ namespace Imint.Media.Input
 								}
 								if (!freezed)
 									this.WrappedSend(channel, time, lifetime, content, meta);
+								else
+									content.Dispose();
 							};
 						if (player is Player.IFile)
 							(this.supportedExtensions as Collection.IList<string>).Add((player as Player.IFile).SupportedExtensions);
