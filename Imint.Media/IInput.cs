@@ -32,7 +32,7 @@ namespace Imint.Media
 		IDisposable
 	{
 		Action<Frame> Send { set; }
-		event Action OnReset;
+		event Action Resetting;
 		void Initialize(Parallel.ThreadPool threadPool);
 	}
 }

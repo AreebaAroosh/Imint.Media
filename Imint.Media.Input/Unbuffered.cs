@@ -252,7 +252,7 @@ namespace Imint.Media.Input
 					if (this.status != value)
 					{
 						if (value == Status.Closed)
-							this.OnReset.Call();
+							this.Resetting.Call();
 						this.status = value;
 						this.ThreadPool.Enqueue(this.StatusChanged.Call, value);
 					}
@@ -410,7 +410,7 @@ namespace Imint.Media.Input
 		#endregion
 		#region IInput Members
 		public virtual Action<Frame> Send { set { this.send = value; } }
-		public event Action OnReset;
+		public event Action Resetting;
 		public virtual void Initialize(Parallel.ThreadPool threadPool)
 		{
 			this.ThreadPool = threadPool;

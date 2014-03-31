@@ -37,12 +37,12 @@
   <ItemGroup>
     <Compile Include="EndMode.cs" />
     <Compile Include="IMedia.cs" />
-    <Compile Include="Module\Input.cs" />
+    <Compile Include="InputControlWrapper.cs" />
     <Compile Include="IInputControl.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="IControl.cs" />
     <Compile Include="IInput.cs" />
-    <Compile Include="Module\InputControl.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="Player\ICapture.cs" />
     <Compile Include="Player\IFile.cs" />
     <Compile Include="Player\ILinear.cs" />

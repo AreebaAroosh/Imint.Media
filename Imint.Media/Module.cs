@@ -31,22 +31,43 @@ using Settings = Kean.Platform.Settings;
 using Raster = Kean.Draw.Raster;
 using Collection = Kean.Collection;
 
-namespace Imint.Media.Module
+namespace Imint.Media
 {
-	public class InputControl :
-		Input,
+	public class Module :
+		Platform.Module,
 		IMedia,
 		IInputControl
 	{
-		IControl backend;
-
-		public InputControl(IInputControl backend) :
-			base(backend)
+		IInputControl backend;
+		IInputControl Backend 
 		{
-			this.backend = backend;
-			this.backend.StartChanged += start => this.StartChanged.Call(start + this.Offset);
-			this.backend.PositionChanged += position => this.PositionChanged.Call(position + this.Offset);
-			this.backend.EndChanged += end => this.EndChanged.Call(end + this.Offset);
+			get { return this.backend; }
+			set
+			{
+				if (this.backend != value)
+				{
+					if (this.backend.NotNull())
+					{
+						this.backend.Send = null;
+						this.backend.Resetting -= this.Resetting;
+					}
+					this.backend = value;
+					if (this.backend.NotNull())
+					{
+						this.backend.Send = this.Send;
+						this.backend.StartChanged += start => this.StartChanged.Call(start + this.Offset);
+						this.backend.PositionChanged += position => this.PositionChanged.Call(position + this.Offset);
+						this.backend.EndChanged += end => this.EndChanged.Call(end + this.Offset);
+						this.backend.Resetting += this.Resetting;
+					}
+				}
+			}
+		}
+		Action<Frame> send;
+		public Module(IInputControl backend) :
+			base("Media")
+		{
+			this.Backend = backend;
 			this.OffsetChanged += offset =>
 			{
 				this.StartChanged.Call(this.Start);
@@ -54,8 +75,63 @@ namespace Imint.Media.Module
 				this.EndChanged.Call(this.End);
 			};
 		}
+		protected void OnResetting()
+		{
+			this.Resetting.Call();
+		}
+		protected override void Initialize()
+		{
+			this.Application["Settings"].WhenLoaded<Settings.Module>(m => m.Load("media", "Media controls.", "Object that contains all media controls.", this));
+			this.Application["ThreadPool"].WhenLoaded<Platform.Module<Parallel.ThreadPool>>(m => (this as IInput).Initialize(m.Value));
+			base.Initialize();
+		}
+		#region IInput Members
+		Action<Frame> IInput.Send { set { this.send = value; } }
+		public event Action Resetting;
+		void IInput.Initialize(Parallel.ThreadPool threadPool) 
+		{
+			this.Backend.Initialize(threadPool);
+		}
+		#endregion
+		protected override void Dispose()
+		{
+			if (this.Backend.NotNull())
+			{
+				this.Backend.Dispose();
+				this.Backend = null;
+			}
+			base.Dispose();
+		}
 
-		protected override void Send(Frame frame)
+		public virtual void Insert(InputControlWrapper wrapper)
+		{
+			this.Backend = this.Insert(this.Backend, wrapper);
+		}
+		IInputControl Insert(IInputControl backend, InputControlWrapper wrapper)
+		{
+			IInputControl result;
+			if (backend is InputControlWrapper)
+			{
+				if ((backend as InputControlWrapper).Priority < wrapper.Priority)
+				{
+					(backend as InputControlWrapper).Backend = this.Insert((backend as InputControlWrapper).Backend, wrapper);
+					result = backend;
+				}
+				else
+				{
+					wrapper.Backend = backend;
+					result = wrapper;
+				}
+			}
+			else
+			{
+				wrapper.Backend = backend;
+				result = wrapper;
+			}
+			return result;
+		}
+
+		protected void Send(Frame frame)
 		{
 			if (this.Crop.NotNull())
 				frame.Content.Crop = this.Crop;
@@ -64,7 +140,7 @@ namespace Imint.Media.Module
 			if (this.Ratio.NotNull())
 				frame.Ratio = (float)this.Ratio;
 			frame.Time += this.Offset;
-			base.Send(frame);
+			this.send(frame);
 		}
 
 		protected override void Stop()
@@ -150,36 +226,36 @@ namespace Imint.Media.Module
 		[Notify("EndModeChanged")]
 		public Media.EndMode EndMode 
 		{ 
-			get { return this.backend.EndMode; }
-			set { this.backend.EndMode = value; }
+			get { return this.Backend.EndMode; }
+			set { this.Backend.EndMode = value; }
 		}
 
 		public event Action<Media.EndMode> EndModeChanged
 		{
-			add { this.backend.EndModeChanged += value; }
-			remove { this.backend.EndModeChanged -= value; }
+			add { this.Backend.EndModeChanged += value; }
+			remove { this.Backend.EndModeChanged -= value; }
 		}
 
 		#endregion
 
 		[Settings.Property("resource", "Resource currently opened.", "Locator of the currently opened resource.")]
 		[Notify("ResourceChanged")]
-		public Uri.Locator Resource { get { return this.backend.Resource; } }
+		public Uri.Locator Resource { get { return this.Backend.Resource; } }
 
 		public event Action<Uri.Locator> ResourceChanged
 		{
-			add { this.backend.ResourceChanged += value; }
-			remove { this.backend.ResourceChanged -= value; }
+			add { this.Backend.ResourceChanged += value; }
+			remove { this.Backend.ResourceChanged -= value; }
 		}
 
 		[Settings.Property("state", "Media state.", "Media state [closed | paused | playing].")]
 		[Notify("StatusChanged")]
-		public Status Status { get { return this.backend.Status; } }
+		public Status Status { get { return this.Backend.Status; } }
 
 		public event Action<Status> StatusChanged
 		{
-			add { this.backend.StatusChanged += value; }
-			remove { this.backend.StatusChanged -= value; }
+			add { this.Backend.StatusChanged += value; }
+			remove { this.Backend.StatusChanged -= value; }
 		}
 
 		#region Offset
@@ -208,8 +284,8 @@ namespace Imint.Media.Module
 		[Notify("StartChanged")]
 		public new DateTime Start
 		{ 
-			get { return this.backend.Start + this.Offset; }
-			set { this.Offset = value - this.backend.Start; }
+			get { return this.Backend.Start + this.Offset; }
+			set { this.Offset = value - this.Backend.Start; }
 		}
 
 		public event Action<DateTime> StartChanged;
@@ -220,7 +296,7 @@ namespace Imint.Media.Module
 
 		[Settings.Property("position", "Media position.", "Current media position in format [[h:]mm:]ss[.fff].")]
 		[Notify("PositionChanged")]
-		public DateTime Position { get { return this.backend.Position + this.Offset; } }
+		public DateTime Position { get { return this.Backend.Position + this.Offset; } }
 
 		public event Action<DateTime> PositionChanged;
 
@@ -230,7 +306,7 @@ namespace Imint.Media.Module
 
 		[Settings.Property("end", "Media end position.", "Media end position in format [[h:]mm:]ss[.fff].")]
 		[Notify("EndChanged")]
-		public DateTime End { get { return this.backend.End + this.Offset; } }
+		public DateTime End { get { return this.Backend.End + this.Offset; } }
 
 		public event Action<DateTime> EndChanged;
 
@@ -248,12 +324,12 @@ namespace Imint.Media.Module
 			}
 		}
 
-		public string[] Extensions { get { return this.backend.Extensions; } }
+		public string[] Extensions { get { return this.Backend.Extensions; } }
 
 		[Settings.Property("devices", "All detected capture devices.", "A list of all capture devices that can be opened.")]
 		public string AllDevices { get { return this.Devices.Map(device => (string)device).ToCsv(); } }
 
-		public System.Collections.Generic.IEnumerable<Resource> Devices { get { return this.backend.Devices; } }
+		public System.Collections.Generic.IEnumerable<Resource> Devices { get { return this.Backend.Devices; } }
 
 		[Settings.Method("open", "Open media.", "Open media specified by locator argument.", Example = "file:///c:/test.avi")]
 		public bool Open([Settings.Parameter("locator", "Locator of file, capture device or video stream.")] Uri.Locator resource)
@@ -272,7 +348,7 @@ namespace Imint.Media.Module
 					this.EndMode = (Media.EndMode)Enum.Parse(typeof(Media.EndMode), endMode, true);
 				this.Ratio = resource.Query["ratio"];
 				resource.Query.Remove("crop", "ratio", "scan", "endmode");
-				result = this.backend.Open(resource);
+				result = this.Backend.Open(resource);
 			}
 			return result;
 		}
@@ -280,37 +356,37 @@ namespace Imint.Media.Module
 		[Settings.Method("play", "Start playback.", "Start playback of opened media.")]
 		public void Play()
 		{
-			this.backend.Play();
+			this.Backend.Play();
 		}
 
 		[Settings.Method("pause", "Pause playback.", "Pause playback, if playing.")]
 		public void Pause()
 		{
-			this.backend.Pause();
+			this.Backend.Pause();
 		}
 
 		[Settings.Method("eject", "Eject opened media.", "Eject currently opened media.")]
 		public void Eject()
 		{
-			this.backend.Eject();
+			this.Backend.Eject();
 		}
 
 		#region Seek
 
 		[Settings.Property("seekable", "Whether media is seekable.", "Whether the input media is seekable [true | false].")]
 		[Notify("SeekableChanged")]
-		public bool Seekable { get { return this.backend.Seekable; } }
+		public bool Seekable { get { return this.Backend.Seekable; } }
 
 		public event Action<bool> SeekableChanged
 		{
-			add { this.backend.SeekableChanged += value; }
-			remove { this.backend.SeekableChanged -= value; }
+			add { this.Backend.SeekableChanged += value; }
+			remove { this.Backend.SeekableChanged -= value; }
 		}
 
 		[Settings.Method("seek", "Seek media to position.", "Seek media to specified position in format [[h:]mm:]ss[.fff].", Example = "03:12")]
 		public void Seek(DateTime position)
 		{
-			this.backend.Seek(position);
+			this.Backend.Seek(position);
 		}
 
 		#endregion
@@ -319,18 +395,18 @@ namespace Imint.Media.Module
 
 		[Settings.Property("hasnext", "Media has next.", "Whether the input media position can seeked to the last captured position [true | false].")]
 		[Notify("HasNextChanged")]
-		public bool HasNext { get { return this.backend.HasNext; } }
+		public bool HasNext { get { return this.Backend.HasNext; } }
 
 		public event Action<bool> HasNextChanged
 		{
-			add { this.backend.HasNextChanged += value; }
-			remove { this.backend.HasNextChanged -= value; }
+			add { this.Backend.HasNextChanged += value; }
+			remove { this.Backend.HasNextChanged -= value; }
 		}
 
 		[Settings.Method("next", "Play from last captured position.", "Play the media from the last captured position.")]
 		public void Next()
 		{
-			this.backend.Next();
+			this.Backend.Next();
 		}
 
 		#endregion
@@ -339,18 +415,18 @@ namespace Imint.Media.Module
 
 		[Settings.Property("hasprevious", "Media has previous.", "Whether the input media position can seeked to the first captured position [true | false].")]
 		[Notify("HasPreviousChanged")]
-		public bool HasPrevious { get { return this.backend.HasPrevious; } }
+		public bool HasPrevious { get { return this.Backend.HasPrevious; } }
 
 		public event Action<bool> HasPreviousChanged
 		{
-			add { this.backend.HasPreviousChanged += value; }
-			remove { this.backend.HasPreviousChanged -= value; }
+			add { this.Backend.HasPreviousChanged += value; }
+			remove { this.Backend.HasPreviousChanged -= value; }
 		}
 
 		[Settings.Method("previous", "Play from first captured position.", "Play the media from the first captured position.")]
 		public void Previous()
 		{
-			this.backend.Previous();
+			this.Backend.Previous();
 		}
 
 		#endregion

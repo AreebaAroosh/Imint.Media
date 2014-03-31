@@ -33,7 +33,7 @@ using Collection = Kean.Collection;
 namespace Imint.Media.Input
 {
 	public class Module :
-		Media.Module.InputControl
+		Media.Module
 	{
 		Unbuffered backend;
 		[Serialize.Parameter("Player")]

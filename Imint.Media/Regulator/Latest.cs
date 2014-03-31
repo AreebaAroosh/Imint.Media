@@ -51,19 +51,19 @@ namespace Imint.Media.Regulator
 
 		#region IInput Members
 		public Action<Frame> Send { set; private get; }
-		public event Action OnReset;
+		public event Action Resetting;
 		public void Initialize(Parallel.ThreadPool threadPool)
 		{
 			this.Backend.Initialize(threadPool);
 			this.Backend.Send = this.Receive;
-			this.Backend.OnReset += () =>
+			this.Backend.Resetting += () =>
 			{
 				lock (this.Lock)
 				{
 					this.activeCount = 0;
 					this.discardedCount = 0;
 				}
-				this.OnReset.Call();
+				this.Resetting.Call();
 			};
 		}
 		#endregion
