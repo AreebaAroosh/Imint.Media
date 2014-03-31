@@ -48,17 +48,19 @@ namespace Imint.Media
 				{
 					if (this.backend.NotNull())
 					{
-						this.backend.Send = null;
-						this.backend.Resetting -= this.Resetting;
+						this.backend.StartChanged -= this.OnStartChanged;
+						this.backend.PositionChanged -= this.OnPositionChanged;
+						this.backend.EndChanged -= this.OnEndChanged;
+						this.backend.Resetting -= this.OnResetting;
 					}
 					this.backend = value;
 					if (this.backend.NotNull())
 					{
 						this.backend.Send = this.Send;
-						this.backend.StartChanged += start => this.StartChanged.Call(start + this.Offset);
-						this.backend.PositionChanged += position => this.PositionChanged.Call(position + this.Offset);
-						this.backend.EndChanged += end => this.EndChanged.Call(end + this.Offset);
-						this.backend.Resetting += this.Resetting;
+						this.backend.StartChanged += this.OnStartChanged;
+						this.backend.PositionChanged += this.OnPositionChanged;
+						this.backend.EndChanged += this.OnEndChanged;
+						this.backend.Resetting += this.OnResetting;
 					}
 				}
 			}
@@ -70,9 +72,9 @@ namespace Imint.Media
 			this.Backend = backend;
 			this.OffsetChanged += offset =>
 			{
-				this.StartChanged.Call(this.Start);
-				this.PositionChanged.Call(this.Position);
-				this.EndChanged.Call(this.End);
+				this.OnStartChanged(this.Start);
+				this.OnPositionChanged(this.Position);
+				this.OnEndChanged(this.End);
 			};
 		}
 		protected void OnResetting()
@@ -289,7 +291,10 @@ namespace Imint.Media
 		}
 
 		public event Action<DateTime> StartChanged;
-
+		protected void OnStartChanged(DateTime start)
+		{
+			this.StartChanged.Call(start + this.Offset);
+		}
 		#endregion
 
 		#region Position
@@ -299,6 +304,10 @@ namespace Imint.Media
 		public DateTime Position { get { return this.Backend.Position + this.Offset; } }
 
 		public event Action<DateTime> PositionChanged;
+		protected void OnPositionChanged(DateTime position)
+		{
+			this.PositionChanged.Call(position + this.Offset);
+		}
 
 		#endregion
 
@@ -309,7 +318,10 @@ namespace Imint.Media
 		public DateTime End { get { return this.Backend.End + this.Offset; } }
 
 		public event Action<DateTime> EndChanged;
-
+		protected void OnEndChanged(DateTime end)
+		{
+			this.EndChanged.Call(end + this.Offset);
+		}
 		#endregion
 
 		[Settings.Property("extensions", "Media file extensions.", "A list of all media file extensions that can be opened.")]

@@ -61,7 +61,7 @@ namespace Imint.Media
 					this.backend = value;
 					if (this.backend.NotNull())
 					{
-						this.Send = this.OnSend;
+						this.backend.Send = this.OnSend;
 						this.backend.EndChanged += this.OnEndChanged;
 						this.backend.EndModeChanged += this.OnEndModeChanged;
 						this.backend.HasNextChanged += this.OnHasNextChanged;
