@@ -166,12 +166,12 @@ namespace Imint.Media.Test.Generator
 				Geometry2D.Single.Transform previousAbsolute = previousValues;
 				meta = new Tuple<string, object>[2] { Tuple.Create<string, object>("RelativeSyntetic", previousAbsolute.Inverse * currentAbsolute), Tuple.Create<string, object>("AbsoluteSyntetic", initialAbsolute.Inverse * currentAbsolute) };
 			}
-			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(
-				this.photo.Copy(this.resolution, currentAbsolute).ResizeTo(this.resolution-
-					new Geometry2D.Integer.Size(
-						Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Width-1),Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Height-1))
-					).ResizeTo(this.resolution)
-				as Raster.Image, meta);
+			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(this.photo.Copy(this.resolution, currentAbsolute) as Raster.Image, meta);
+				//(this.photo.Copy(this.resolution, currentAbsolute).ResizeTo(this.resolution-
+				//	new Geometry2D.Integer.Size(
+				//		Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Width-1),Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Height-1))
+				//	).ResizeTo(this.resolution)
+				//as Raster.Image, meta);
 		}
 		private void Initialize()
 		{
