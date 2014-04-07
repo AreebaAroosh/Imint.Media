@@ -57,6 +57,7 @@ namespace Imint.Media
 						this.backend.SeekableChanged -= this.OnSeekableChanged;
 						this.backend.StartChanged -= this.OnStartChanged;
 						this.backend.StatusChanged -= this.OnStatusChanged;
+						this.backend.Resetting -= this.OnResetting;
 					}
 					this.backend = value;
 					if (this.backend.NotNull())
@@ -71,6 +72,7 @@ namespace Imint.Media
 						this.backend.SeekableChanged += this.OnSeekableChanged;
 						this.backend.StartChanged += this.OnStartChanged;
 						this.backend.StatusChanged += this.OnStatusChanged;
+						this.backend.Resetting += this.OnResetting;
 					}
 				}
 			}
@@ -85,6 +87,10 @@ namespace Imint.Media
 			this.Send(frame);
 		}
 		public event Action Resetting;
+		protected virtual void OnResetting()
+		{
+			this.Resetting.Call();
+		}
 
 		public virtual void Initialize(Parallel.ThreadPool threadPool)
 		{
