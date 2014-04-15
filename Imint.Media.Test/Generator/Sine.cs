@@ -77,7 +77,6 @@ namespace Imint.Media.Test.Generator
 				for (int x = 0; x < result.Size.Width; x++)
 					for (int y = 0; y < result.Size.Height; y++)
 					{
-						int pixel = (x + y * result.Size.Width) * 4;
 						double value =
 							(Math.Sin(Convert.ToSingle((x + frame * 10) % result.Size.Width) / Convert.ToSingle(result.Size.Width) * 2.0 * Math.PI * 7) +
 							Math.Sin(Convert.ToSingle(y) / Convert.ToSingle(result.Size.Height) * 2.0 * Math.PI * 5) + 2.0)
