@@ -42,10 +42,7 @@ namespace Imint.Media.Photo
 		}
 		public override bool Open(Uri.Locator name)
 		{
-			bool result = base.Open(name);
-			if (!this.Buffer.Wrap)
-				this.Pause();
-			return result;
+			return base.Open(name) && (this.Buffer.Wrap || this.Pause());
 		}
 	}
 }
