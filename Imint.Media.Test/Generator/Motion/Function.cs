@@ -44,16 +44,18 @@ namespace Imint.Media.Test.Generator.Motion
 			float delta = 1f / count;
 			for (float time = 0; time <= 1.0f; time += delta)
 			{
-				Geometry3D.Single.Transform result = Geometry3D.Single.Transform.CreateTranslation(
-					                                     this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
-					                                     this.Y.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0,
-					                                     this.Z.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0);
+				var translation = new Geometry3D.Single.Size(
+					                  this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
+					                  this.Y.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0,
+					                  this.Z.NotNull() ? this.Z.Evaluate(KeyValue.Create("t", time)) : 0);
+				var result = Geometry3D.Single.Transform.Identity; // Geometry3D.Single.Transform.CreateTranslation(-translation);
 				if (this.RotationX.NotNull())
-					result *= Geometry3D.Single.Transform.CreateRotationX(this.RotationX.Evaluate(KeyValue.Create("t", time)));
+					result = result.RotateX(this.RotationX.Evaluate(KeyValue.Create("t", time)));
 				if (this.RotationY.NotNull())
-					result *= Geometry3D.Single.Transform.CreateRotationY(this.RotationY.Evaluate(KeyValue.Create("t", time)));
+					result = result.RotateY(this.RotationY.Evaluate(KeyValue.Create("t", time)));
 				if (this.RotationZ.NotNull())
-					result *= Geometry3D.Single.Transform.CreateRotationZ(this.RotationZ.Evaluate(KeyValue.Create("t", time)));
+					result = result.RotateZ(this.RotationZ.Evaluate(KeyValue.Create("t", time)));
+				result = result.Translate(translation);
 				yield return result;
 			}
 		}
