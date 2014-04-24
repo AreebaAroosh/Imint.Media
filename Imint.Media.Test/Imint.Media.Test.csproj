@@ -88,6 +88,9 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <Folder Include="Generator\Motion\" />
+    <EmbeddedResource Include="Generator\zoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generator\600x600b.png" />
   </ItemGroup>
 </Project>

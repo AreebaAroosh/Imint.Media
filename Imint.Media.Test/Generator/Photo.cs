@@ -23,6 +23,7 @@ using System;
 using Kean;
 using Raster = Kean.Draw.Raster;
 using Geometry2D = Kean.Math.Geometry2D;
+using Geometry3D = Kean.Math.Geometry3D;
 using Uri = Kean.Uri;
 using Interpolation = Kean.Math.Regression.Interpolation;
 using Collection = Kean.Collection;
@@ -44,7 +45,7 @@ namespace Imint.Media.Test.Generator
 			this.Initialize();
 		}
 		Motion.Abstract motion;
-		Geometry2D.Single.Transform[] transforms;
+		Geometry3D.Single.Transform[] transforms;
 		Raster.Image photo;
 		public override string Name
 		{
@@ -53,7 +54,7 @@ namespace Imint.Media.Test.Generator
 		protected override int Prepare(Uri.Locator argument)
 		{
 			string platformPath = argument.PlatformPath;
-			this.photo = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/strip.png");
+			this.photo = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/zoom.png");
 			if (!argument.Query.Empty)
 			{
 				string value = argument.Query["resolution"];
@@ -70,24 +71,24 @@ namespace Imint.Media.Test.Generator
 					this.metaData = bool.Parse(value);
 			}
 			this.motion = Motion.Abstract.Parse(argument.Query);
-			this.transforms = this.motion.Get2DTransforms(this.frames).ToArray();
+			this.transforms = this.motion.Get3DTransforms(this.frames).ToArray();
 			return this.frames;
 		}
 		protected override Tuple<Raster.Image, Tuple<string, object>[]> Generate(int frame)
 		{
-			Geometry2D.Single.Transform initialAbsolute = this.transforms[0];
-			Geometry2D.Single.Transform currentAbsolute = this.transforms[frame];
+			Geometry3D.Single.Transform initialAbsolute = this.transforms[0];
+			Geometry3D.Single.Transform currentAbsolute = this.transforms[frame];
 			Tuple<string, object>[] meta = null;
 			if (this.metaData)
 			{
 				int previousFrame = frame > 0 ? frame - 1 : (this.motion.MotionType == Motion.MotionType.Mirror ? this.frames - 1 : 0);
-				Geometry2D.Single.Transform previousAbsolute = this.transforms[previousFrame];
+				Geometry3D.Single.Transform previousAbsolute = this.transforms[previousFrame];
 				meta = new Tuple<string, object>[2] {
 					Tuple.Create<string, object>("RelativeSyntetic", previousAbsolute.Inverse * currentAbsolute),
 					Tuple.Create<string, object>("AbsoluteSyntetic", initialAbsolute.Inverse * currentAbsolute)
 				};
 			}
-			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(this.photo.Copy(this.resolution, currentAbsolute) as Raster.Image, meta);
+			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(this.photo.ProjectOn(currentAbsolute, new Geometry2D.Single.Size(45f, 45f)) as Raster.Image, meta);
 			//(this.photo.Copy(this.resolution, currentAbsolute).ResizeTo(this.resolution-
 			//	new Geometry2D.Integer.Size(
 			//		Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Width-1),Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Height-1))
