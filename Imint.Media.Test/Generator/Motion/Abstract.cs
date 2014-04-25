@@ -26,7 +26,7 @@ namespace Imint.Media.Test.Generator.Motion
 			return motion.NotEmpty() ?
 				(Abstract)Interpolation.Parse(motionType, motion) :
 				new Function {
-				X = (Kean.Math.Algebra.Expression)(query["x"] ?? "sin(t * 3.14) * 200"),
+				X = (Kean.Math.Algebra.Expression)query["x"],
 				Y = (Kean.Math.Algebra.Expression)query["y"],
 				Z = (Kean.Math.Algebra.Expression)(query["z"] ?? query["s"] ?? query["scale"]),
 				RotationX = (Kean.Math.Algebra.Expression)(query["rx"] ?? query["rotationX"]),

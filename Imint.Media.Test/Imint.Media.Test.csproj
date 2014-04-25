@@ -93,4 +93,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Generator\600x600b.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Generator\zoom2.png" />
+  </ItemGroup>
 </Project>

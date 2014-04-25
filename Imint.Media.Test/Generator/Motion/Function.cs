@@ -27,7 +27,7 @@ namespace Imint.Media.Test.Generator.Motion
 		public override Generic.IEnumerable<Geometry2D.Single.Transform> Get2DTransforms(int count)
 		{
 			float delta = 1f / count;
-			for (float time = 0; time <= 1.0f; time += delta)
+			for (float time = 0; time < 1.0f; time += delta)
 			{
 				Geometry2D.Single.Transform result = Geometry2D.Single.Transform.CreateTranslation(
 					                                     this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
@@ -42,13 +42,13 @@ namespace Imint.Media.Test.Generator.Motion
 		public override Generic.IEnumerable<Geometry3D.Single.Transform> Get3DTransforms(int count)
 		{
 			float delta = 1f / count;
-			for (float time = 0; time <= 1.0f; time += delta)
+			for (float time = 0; time < 1.0f; time += delta)
 			{
 				var translation = new Geometry3D.Single.Size(
 					                  this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
 					                  this.Y.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0,
 					                  this.Z.NotNull() ? this.Z.Evaluate(KeyValue.Create("t", time)) : 0);
-				var result = Geometry3D.Single.Transform.Identity; // Geometry3D.Single.Transform.CreateTranslation(-translation);
+				var result = Geometry3D.Single.Transform.Identity;
 				if (this.RotationX.NotNull())
 					result = result.RotateX(this.RotationX.Evaluate(KeyValue.Create("t", time)));
 				if (this.RotationY.NotNull())
