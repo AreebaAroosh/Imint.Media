@@ -39,7 +39,7 @@ namespace Imint.Media.Test.Generator
 	{
 		bool metaData;
 		int frames;
-		Geometry2D.Integer.Size resolution;
+		Geometry2D.Integer.Size size;
 		public Photo()
 		{
 			this.Initialize();
@@ -54,12 +54,12 @@ namespace Imint.Media.Test.Generator
 		protected override int Prepare(Uri.Locator argument)
 		{
 			string platformPath = argument.PlatformPath;
-			this.photo = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/zoom.png");
+			this.photo = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/strip.png");
 			if (!argument.Query.Empty)
 			{
-				string value = argument.Query["resolution"];
+				string value = argument.Query["size"];
 				if (value.NotEmpty())
-					this.resolution = (Geometry2D.Integer.Size)value;
+					this.size = (Geometry2D.Integer.Size)value;
 				value = argument.Query["format"];
 				if (value.NotEmpty())
 					this.Format = (Colorspace)Enum.Parse(typeof(Colorspace), value, true);
@@ -88,7 +88,7 @@ namespace Imint.Media.Test.Generator
 					Tuple.Create<string, object>("AbsoluteSyntetic", initialAbsolute.Inverse * currentAbsolute)
 				};
 			}
-			var image = new Raster.Bgra(new Geometry2D.Integer.Size(512, 512));
+			var image = new Raster.Bgra(size);
 			this.photo.ProjectOn(image, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
 			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(image as Raster.Image, meta);
 			//(this.photo.Copy(this.resolution, currentAbsolute).ResizeTo(this.resolution-
@@ -101,7 +101,7 @@ namespace Imint.Media.Test.Generator
 		{
 			this.metaData = false;
 			this.frames = 25 * 2;
-			this.resolution = new Geometry2D.Integer.Size(640, 480);
+			this.size = new Geometry2D.Integer.Size(640, 480);
 			this.Format = Colorspace.Yuv420;
 		}
 	}
