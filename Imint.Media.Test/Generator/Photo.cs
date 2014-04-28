@@ -54,7 +54,7 @@ namespace Imint.Media.Test.Generator
 		protected override int Prepare(Uri.Locator argument)
 		{
 			string platformPath = argument.PlatformPath;
-			this.photo = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/strip.png");
+			this.photo = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/strip.jpg");
 			if (!argument.Query.Empty)
 			{
 				string value = argument.Query["size"];
@@ -90,6 +90,8 @@ namespace Imint.Media.Test.Generator
 			}
 			var image = new Raster.Bgra(size);
 			this.photo.ProjectOn(image, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
+			//var correctedImage = image.Project(currentAbsolute.Inverse, new Geometry2D.Single.Size(45f, 45f));
+			//image.Dispose();
 			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(image as Raster.Image, meta);
 			//(this.photo.Copy(this.resolution, currentAbsolute).ResizeTo(this.resolution-
 			//	new Geometry2D.Integer.Size(
