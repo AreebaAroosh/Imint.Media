@@ -22,6 +22,7 @@
 using System;
 using Kean;
 using Raster = Kean.Draw.Raster;
+using OpenGL = Kean.Draw.OpenGL;
 using Geometry2D = Kean.Math.Geometry2D;
 using Geometry3D = Kean.Math.Geometry3D;
 using Uri = Kean.Uri;
@@ -89,10 +90,10 @@ namespace Imint.Media.Test.Generator
 				};
 			}
 			var image = new Raster.Bgra(size);
-			this.photo.ProjectOn(image, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
-			//var correctedImage = image.Project(currentAbsolute.Inverse, new Geometry2D.Single.Size(45f, 45f));
-			//image.Dispose();
-			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(image as Raster.Image, meta);
+
+				image.ProjectionOf(this.photo, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
+				return Tuple.Create<Raster.Image, Tuple<string, object>[]>(image as Raster.Image, meta);
+
 			//(this.photo.Copy(this.resolution, currentAbsolute).ResizeTo(this.resolution-
 			//	new Geometry2D.Integer.Size(
 			//		Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Width-1),Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Height-1))
