@@ -84,9 +84,10 @@ namespace Imint.Media.Test.Generator
 			{
 				int previousFrame = frame > 0 ? frame - 1 : (this.motion.MotionType == Motion.MotionType.Mirror ? this.frames - 1 : 0);
 				Geometry3D.Single.Transform previousAbsolute = this.transforms[previousFrame];
-				meta = new Tuple<string, object>[2] {
+				meta = new Tuple<string, object>[3] {
 					Tuple.Create<string, object>("RelativeSyntetic", previousAbsolute.Inverse * currentAbsolute),
-					Tuple.Create<string, object>("AbsoluteSyntetic", initialAbsolute.Inverse * currentAbsolute)
+					Tuple.Create<string, object>("AbsoluteSyntetic", initialAbsolute.Inverse * currentAbsolute),
+					Tuple.Create<string, object>("CurrentAbsolute", currentAbsolute)
 				};
 			}
 			var image = new Raster.Bgra(size);
