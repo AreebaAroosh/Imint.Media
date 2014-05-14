@@ -44,10 +44,6 @@ namespace Imint.Media.Test.Generator.Motion
 			float delta = 1f / count;
 			for (float time = 0; time < 1.0f; time += delta)
 			{
-				var translation = new Geometry3D.Single.Size(
-					                  this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
-					                  this.Y.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0,
-					                  this.Z.NotNull() ? this.Z.Evaluate(KeyValue.Create("t", time)) : 0);
 				var result = Geometry3D.Single.Transform.Identity;
 				if (this.RotationX.NotNull())
 					result = result.RotateX(this.RotationX.Evaluate(KeyValue.Create("t", time)));
@@ -55,7 +51,10 @@ namespace Imint.Media.Test.Generator.Motion
 					result = result.RotateY(this.RotationY.Evaluate(KeyValue.Create("t", time)));
 				if (this.RotationZ.NotNull())
 					result = result.RotateZ(this.RotationZ.Evaluate(KeyValue.Create("t", time)));
-				result = result.Translate(translation);
+				result = result.Translate(new Geometry3D.Single.Size(
+					                  this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
+					                  this.Y.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0,
+					                  this.Z.NotNull() ? this.Z.Evaluate(KeyValue.Create("t", time)) : 0));
 				yield return result;
 			}
 		}
