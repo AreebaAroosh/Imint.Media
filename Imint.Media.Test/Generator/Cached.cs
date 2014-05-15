@@ -25,6 +25,7 @@ using Collection = Kean.Collection;
 using Raster = Kean.Draw.Raster;
 using Serialize = Kean.Serialize;
 using Uri = Kean.Uri;
+using Parallel = Kean.Parallel;
 
 namespace Imint.Media.Test.Generator
 {
@@ -48,7 +49,7 @@ namespace Imint.Media.Test.Generator
 		protected Cached()
 		{
 		}
-		protected virtual int Prepare(Uri.Locator argument)
+		protected virtual int Prepare(Uri.Locator argument, Parallel.ThreadPool threadPool)
 		{
 			return 0;
 		}
@@ -56,10 +57,10 @@ namespace Imint.Media.Test.Generator
 		{
 			return null;
 		}
-		public sealed override void Open(Uri.Locator argument)
+		public sealed override void Open(Uri.Locator argument, Parallel.ThreadPool threadPool)
 		{
-			this.cache = new Collection.Vector<Tuple<Raster.Image, Tuple<string, object>[]>>(this.Prepare(argument));
-			new Action<int>(frame =>
+			this.cache = new Collection.Vector<Tuple<Raster.Image, Tuple<string, object>[]>>(this.Prepare(argument, threadPool));
+			threadPool.For(frame =>
 			{
 				Tuple<Raster.Image, Tuple<string, object>[]> result = this.Generate(frame);
 				Raster.Image generated = result.Item1;
@@ -89,7 +90,7 @@ namespace Imint.Media.Test.Generator
 				}
 				lock (this.cache)
 					this.cache[frame] = result;
-			}).For(this.Count);
+			}, this.Count);
 		}
 		public sealed override void Close()
 		{

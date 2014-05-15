@@ -27,13 +27,27 @@ using Collection = Kean.Collection;
 using Serialize = Kean.Serialize;
 using Uri = Kean.Uri;
 using Kean.Extension;
+using Platform = Kean.Platform;
+using Parallel = Kean.Parallel;
 
 namespace Imint.Media.Test
 {
 	public class Stream :
 		Media.Player.IStream,
-		Media.Player.ICapture
+		Media.Player.ICapture,
+		Platform.IHasApplication
 	{
+		Platform.Application application;
+		public Platform.Application Application	
+		{ 
+			get { return this.application; }
+			set
+			{
+				if ((this.application = value).NotNull())
+					this.application["ThreadPool"].WhenLoaded<Platform.Module<Parallel.ThreadPool>>(m => this.threadPool = m.Value);
+			}
+		}
+		Parallel.ThreadPool threadPool;
 		public System.Collections.Generic.IEnumerable<Resource> Devices
 		{
 			get
@@ -75,7 +89,7 @@ namespace Imint.Media.Test
 				this.generator = this.Generators.Find(generator => generator.Name == name.Authority.Endpoint.Host);
 				if (this.generator.NotNull())
 				{
-					this.generator.Open(name);
+					this.generator.Open(name, this.threadPool);
 					Kean.Math.Fraction rate = name.Query["rate"];
 					if (rate.Nominator > 0)
 						this.Timer = new System.Timers.Timer(1000 / (float)rate);

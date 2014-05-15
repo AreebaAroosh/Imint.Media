@@ -32,6 +32,7 @@ using Kean.Extension;
 using Kean.Collection.Extension;
 using Kean.Collection.Linked.Extension;
 using Integer = Kean.Math.Integer;
+using Parallel = Kean.Parallel;
 
 namespace Imint.Media.Test.Generator
 {
@@ -41,21 +42,22 @@ namespace Imint.Media.Test.Generator
 		bool metaData;
 		int frames;
 		Geometry2D.Integer.Size size;
+		OpenGL.Image photo;
 		public Photo()
 		{
 			this.Initialize();
 		}
 		Motion.Abstract motion;
 		Geometry3D.Single.Transform[] transforms;
-		Raster.Image photo;
 		public override string Name
 		{
 			get { return "photo"; }
 		}
-		protected override int Prepare(Uri.Locator argument)
+		protected override int Prepare(Uri.Locator argument, Parallel.ThreadPool threadPool)
 		{
 			string platformPath = argument.PlatformPath;
-			this.photo = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/strip.jpg");
+			using (var raster = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/strip.jpg"))
+				this.photo = threadPool.Process<OpenGL.Image>(() => OpenGL.Image.Create(raster));
 			if (!argument.Query.Empty)
 			{
 				string value = argument.Query["size"];
@@ -90,16 +92,11 @@ namespace Imint.Media.Test.Generator
 					Tuple.Create<string, object>("CurrentAbsolute", currentAbsolute)
 				};
 			}
-			var image = new Raster.Bgra(size);
-
-				image.ProjectionOf(this.photo, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
-				return Tuple.Create<Raster.Image, Tuple<string, object>[]>(image as Raster.Image, meta);
-
-			//(this.photo.Copy(this.resolution, currentAbsolute).ResizeTo(this.resolution-
-			//	new Geometry2D.Integer.Size(
-			//		Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Width-1),Kean.Math.Integer.Minimum((frame%4 == 0 ? 1 : 0)*frame*12, this.resolution.Height-1))
-			//	).ResizeTo(this.resolution)
-			//as Raster.Image, meta);
+			var image = new OpenGL.Bgr(this.size);
+			image.ProjectionOf(this.photo, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
+			var raster = image.Convert<Raster.Image>();
+			image.Dispose();
+			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(raster, meta);
 		}
 		void Initialize()
 		{
@@ -107,6 +104,10 @@ namespace Imint.Media.Test.Generator
 			this.frames = 25 * 2;
 			this.size = new Geometry2D.Integer.Size(640, 480);
 			this.Format = Colorspace.Yuv420;
+		}
+		~Photo()
+		{
+			this.photo.Dispose();
 		}
 	}
 }

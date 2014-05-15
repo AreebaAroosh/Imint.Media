@@ -28,6 +28,7 @@ using Kean.Collection.Extension;
 using Kean.Extension;
 using Kean.Collection.Linked.Extension;
 using Serialize = Kean.Serialize;
+using Parallel = Kean.Parallel;
 
 namespace Imint.Media.Test.Generator
 {
@@ -44,7 +45,7 @@ namespace Imint.Media.Test.Generator
 		{
 			get { return "sine"; }
 		}
-		protected override int Prepare(Uri.Locator argument)
+		protected override int Prepare(Uri.Locator argument, Parallel.ThreadPool threadPool)
 		{
 			try
 			{

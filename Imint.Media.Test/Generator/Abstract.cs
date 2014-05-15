@@ -26,6 +26,7 @@ using Raster = Kean.Draw.Raster;
 using Collection = Kean.Collection;
 using Uri = Kean.Uri;
 using Serialize = Kean.Serialize;
+using Parallel = Kean.Parallel;
 
 namespace Imint.Media.Test.Generator
 {
@@ -38,7 +39,7 @@ namespace Imint.Media.Test.Generator
 		[Serialize.Parameter("Device")]
 		public Collection.IList<KeyValue<string, Uri.Locator>> Devices { get { return this.devices; } }
 
-		public abstract void Open(Uri.Locator argument);
+		public abstract void Open(Uri.Locator argument, Parallel.ThreadPool threadPool);
 		public abstract void Close();
 
 		void IDisposable.Dispose()
