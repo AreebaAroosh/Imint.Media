@@ -43,21 +43,26 @@ namespace Imint.Media.Test.Generator
 		int frames;
 		Geometry2D.Integer.Size size;
 		OpenGL.Image photo;
-		public Photo()
-		{
-			this.Initialize();
-		}
 		Motion.Abstract motion;
 		Geometry3D.Single.Transform[] transforms;
 		public override string Name
 		{
 			get { return "photo"; }
 		}
+		public Photo()
+		{
+			this.Initialize();
+		}
 		protected override int Prepare(Uri.Locator argument, Parallel.ThreadPool threadPool)
 		{
 			string platformPath = argument.PlatformPath;
 			using (var raster = (platformPath.NotEmpty() ? Raster.Image.Open(argument.PlatformPath) : null) ?? Raster.Image.OpenResource("Generator/strip.jpg"))
-				this.photo = threadPool.Process<OpenGL.Image>(() => OpenGL.Image.Create(raster));
+				this.photo = threadPool.Process<OpenGL.Image>(() =>
+				{
+					var result = OpenGL.Image.Create(raster);
+					result.Flush();
+					return result;
+				});
 			if (!argument.Query.Empty)
 			{
 				string value = argument.Query["size"];
@@ -105,9 +110,11 @@ namespace Imint.Media.Test.Generator
 			this.size = new Geometry2D.Integer.Size(640, 480);
 			this.Format = Colorspace.Yuv420;
 		}
-		~Photo()
+		public override void Close()
 		{
-			this.photo.Dispose();
+			this.photo.TryDispose();
+			this.photo = null;
+			base.Close();
 		}
 	}
 }

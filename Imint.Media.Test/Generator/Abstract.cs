@@ -27,6 +27,7 @@ using Collection = Kean.Collection;
 using Uri = Kean.Uri;
 using Serialize = Kean.Serialize;
 using Parallel = Kean.Parallel;
+using Error = Kean.Error;
 
 namespace Imint.Media.Test.Generator
 {
@@ -38,16 +39,23 @@ namespace Imint.Media.Test.Generator
 		Collection.IList<KeyValue<string, Uri.Locator>> devices = new Collection.List<KeyValue<string, Uri.Locator>>();
 		[Serialize.Parameter("Device")]
 		public Collection.IList<KeyValue<string, Uri.Locator>> Devices { get { return this.devices; } }
-
+		protected Abstract()
+		{
+		}
+		~Abstract()
+		{
+			Error.Log.Call(((IDisposable)this).Dispose);
+		}
 		public abstract void Open(Uri.Locator argument, Parallel.ThreadPool threadPool);
-		public abstract void Close();
+		public virtual void Close()
+		{
+			foreach (Tuple<Raster.Image, Tuple<string, object>[]> item in this)
+				item.Item1.TryDispose();
+		}
 
 		void IDisposable.Dispose()
 		{
 			this.Close();
-			foreach (Tuple<Raster.Image, Tuple<string, object>[]> item in this)
-				if (item.Item1.NotNull())
-					item.Item1.Dispose();
 		}
 	}
 }

@@ -92,7 +92,7 @@ namespace Imint.Media.Test.Generator
 					this.cache[frame] = result;
 			}, this.Count);
 		}
-		public sealed override void Close()
+		public override void Close()
 		{
 			lock (this.cache)
 				if (this.cache.NotNull())
@@ -100,6 +100,7 @@ namespace Imint.Media.Test.Generator
 					this.cache.Apply(frame => frame.Item1.Dispose());
 					this.cache = null;
 				}
+			base.Close();
 		}
 	}
 }
