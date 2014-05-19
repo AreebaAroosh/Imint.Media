@@ -33,6 +33,7 @@ using Kean.Collection.Extension;
 using Kean.Collection.Linked.Extension;
 using Integer = Kean.Math.Integer;
 using Parallel = Kean.Parallel;
+using Single = Kean.Math.Single;
 
 namespace Imint.Media.Test.Generator
 {
@@ -45,6 +46,7 @@ namespace Imint.Media.Test.Generator
 		OpenGL.Image photo;
 		Motion.Abstract motion;
 		Geometry3D.Single.Transform[] transforms;
+		float fieldOfView;
 		public override string Name
 		{
 			get { return "photo"; }
@@ -77,6 +79,7 @@ namespace Imint.Media.Test.Generator
 				value = argument.Query["meta"];
 				if (value.NotEmpty())
 					this.metaData = bool.Parse(value);
+				this.fieldOfView = Single.ToRadians(argument.Query["fov"].As(45f));
 			}
 			this.motion = Motion.Abstract.Parse(argument.Query);
 			this.transforms = this.motion.Get3DTransforms(this.frames).ToArray();
@@ -91,14 +94,16 @@ namespace Imint.Media.Test.Generator
 			{
 				int previousFrame = frame > 0 ? frame - 1 : (this.motion.MotionType == Motion.MotionType.Mirror ? this.frames - 1 : 0);
 				Geometry3D.Single.Transform previousAbsolute = this.transforms[previousFrame];
-				meta = new Tuple<string, object>[3] {
-					Tuple.Create<string, object>("RelativeSyntetic", previousAbsolute.Inverse * currentAbsolute),
-					Tuple.Create<string, object>("AbsoluteSyntetic", initialAbsolute.Inverse * currentAbsolute),
-					Tuple.Create<string, object>("CurrentAbsolute", currentAbsolute)
+				meta = new Tuple<string, object>[5] {
+					Tuple.Create("RelativeSyntetic", (object)(previousAbsolute.Inverse * currentAbsolute)),
+					Tuple.Create("AbsoluteSyntetic", (object)(initialAbsolute.Inverse * currentAbsolute)),
+					Tuple.Create("CurrentAbsolute", (object)(currentAbsolute)),
+					Tuple.Create("FieldOfView", (object)(this.fieldOfView)),
+					Tuple.Create("ZPlane", (object)((float)this.size.Width / (Single.Tangens(this.fieldOfView / 2f) * 2f)))
 				};
 			}
 			var image = new OpenGL.Bgr(this.size);
-			image.ProjectionOf(this.photo, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
+			image.Project(this.photo, currentAbsolute, new Geometry2D.Single.Size(45f, 45f));
 			var raster = image.Convert<Raster.Image>();
 			image.Dispose();
 			return Tuple.Create<Raster.Image, Tuple<string, object>[]>(raster, meta);
