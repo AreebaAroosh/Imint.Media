@@ -24,21 +24,24 @@ namespace Imint.Media.Test.Generator.Motion
 		public Function()
 		{
 		}
-		public override Generic.IEnumerable<Geometry2D.Single.Transform> Get2DTransforms(int count)
-		{
-			float delta = 1f / count;
-			for (float time = 0; time < 1.0f; time += delta)
-			{
-				Geometry2D.Single.Transform result = Geometry2D.Single.Transform.CreateTranslation(
-					                                     this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
-					                                     this.Y.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0);
-				if (this.Z.NotNull()) // TODO: use field of view
-					result *= Geometry2D.Single.Transform.CreateScaling(this.Z.Evaluate(KeyValue.Create("t", time)));
-				if (this.RotationZ.NotNull())
-					result *= Geometry2D.Single.Transform.CreateRotation(this.RotationZ.Evaluate(KeyValue.Create("t", time)));
-				yield return result;
-			}
-		}
+        public override Generic.IEnumerable<Geometry2D.Single.Transform> Get2DTransforms(int count)
+        {
+            float delta = 1f / count;
+            for (float time = 0; time < 1.0f; time += delta)
+            {
+                Geometry2D.Single.Transform result = Geometry2D.Single.Transform.CameraTo2DTransform(
+                    new Kean.Math.Geometry3D.Single.EuclidTransform(
+                        new Kean.Math.Geometry3D.Single.Rotation(this.RotationX.NotNull() ? this.RotationX.Evaluate(KeyValue.Create("t", time)) : 0,
+                                                                 this.RotationY.NotNull() ? this.RotationY.Evaluate(KeyValue.Create("t", time)) : 0,
+                                                                 this.RotationZ.NotNull() ? this.RotationZ.Evaluate(KeyValue.Create("t", time)) : 0),
+                        new Geometry3D.Single.Size(this.X.NotNull() ? this.X.Evaluate(KeyValue.Create("t", time)) : 0,
+                                                   this.Y.NotNull() ? this.Y.Evaluate(KeyValue.Create("t", time)) : 0,
+                                                   this.Z.NotNull() ? this.Z.Evaluate(KeyValue.Create("t", time)) : 0)),
+                        this.FieldOfView,
+                        new Geometry2D.Single.Size(640, 480));
+                yield return result;
+            }
+        }
 		public override Generic.IEnumerable<Geometry3D.Single.Transform> Get3DTransforms(int count)
 		{
 			float delta = 1f / count;

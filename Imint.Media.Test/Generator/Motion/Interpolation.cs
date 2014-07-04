@@ -50,7 +50,7 @@ namespace Imint.Media.Test.Generator.Motion
 			float step = count / (float)(this.controlPoints.Count - 1);
 			var measures = new Tuple<float, Geometry2D.Single.Transform>[this.controlPoints.Count];
 			for (int i = 0; i < this.controlPoints.Count; i++)
-				measures[i] = Tuple.Create<float,Geometry2D.Single.Transform>(i * step, (Geometry2D.Single.Transform.CreateTranslation(this.controlPoints[i].X, this.controlPoints[i].Y) * Geometry2D.Single.Transform.CreateRotation(Kean.Math.Single.ToRadians(this.controlPoints[i].Angle)) * Geometry2D.Single.Transform.CreateScaling(this.controlPoints[i].Scale)));
+				measures[i] = Tuple.Create<float,Geometry2D.Single.Transform>(i * step, (Geometry2D.Single.Transform.CreateTranslation(this.controlPoints[i].X, this.controlPoints[i].Y) * Geometry2D.Single.Transform.CreateZRotation(Kean.Math.Single.ToRadians(this.controlPoints[i].Angle)) * Geometry2D.Single.Transform.CreateScaling(this.controlPoints[i].Scale)));
 			Regression.Interpolation.Splines.Method method;
 			switch (this.MotionType)
 			{
