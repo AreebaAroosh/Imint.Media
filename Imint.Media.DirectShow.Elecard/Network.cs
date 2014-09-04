@@ -82,7 +82,7 @@ namespace Imint.Media.DirectShow.Elecard
 		bool Open(DirectShow.Binding.IGraph graph, Uri.Locator name)
 		{
 			return graph.Open(new Filters.Net.SourcePlus(name, new Filters.Demultiplexer.MpegPush(new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All()) { Output = -1 }) { WaitForOutput = new TimeSpan(0, 0, 0, 1), Latency = this.Latency }) { Timeout = this.Timeout }) ||
-			graph.Open(new Filters.Net.RtspSource(name, new Filters.Decoder.SD.Avc(new DirectShow.Binding.Filters.SampleGrabber.All())));
+			graph.Open(new Filters.Net.RtspSource(name, new Filters.Decoder.All(new DirectShow.Binding.Filters.SampleGrabber.All())));
 		}
 
 		public System.Collections.Generic.IEnumerable<Resource> Devices
