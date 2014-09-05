@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
-    <NuGetPackageImportStamp>313ad158</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>5fe984e1</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,29 +52,29 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\GLib.Sharp.2.28.1.2\lib\glib-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Icop, Version=2.11.1.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Imint.Icop, Version=2.11.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Icop.2.11.1\lib\net40\Imint.Icop.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Icop.2.11.4\lib\net40\Imint.Icop.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Icop.Client, Version=2.11.1.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Imint.Icop.Client, Version=2.11.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Icop.Client.2.11.1\lib\net40\Imint.Icop.Client.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Icop.Client.2.11.4\lib\net40\Imint.Icop.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Media, Version=2.11.1.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Imint.Media, Version=2.11.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.2.11.1\lib\net40\Imint.Media.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Media.2.11.4\lib\net40\Imint.Media.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Media.DirectShow, Version=2.11.1.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Imint.Media.DirectShow, Version=2.11.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.DirectShow.2.11.1\lib\net40\Imint.Media.DirectShow.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Media.DirectShow.2.11.4\lib\net40\Imint.Media.DirectShow.dll</HintPath>
     </Reference>
-    <Reference Include="Imint.Media.DirectShow.Elecard, Version=2.11.1.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Imint.Media.DirectShow.Elecard, Version=2.11.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Imint.Media.DirectShow.Elecard.2.11.1\lib\net40\Imint.Media.DirectShow.Elecard.dll</HintPath>
+      <HintPath>..\..\packages\Imint.Media.DirectShow.Elecard.2.11.4\lib\net40\Imint.Media.DirectShow.Elecard.dll</HintPath>
     </Reference>
-    <Reference Include="Kean, Version=2.11.1.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Kean, Version=2.11.4.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Kean.2.11.1\lib\net40\Kean.dll</HintPath>
+      <HintPath>..\..\packages\Kean.2.11.4\lib\net40\Kean.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cairo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -115,15 +115,15 @@
     <Error Condition="!Exists('..\..\packages\GLib.Sharp.2.28.1.2\build\GLib.Sharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GLib.Sharp.2.28.1.2\build\GLib.Sharp.targets'))" />
     <Error Condition="!Exists('..\..\packages\Cairo.2.0.0.2\build\Cairo.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Cairo.2.0.0.2\build\Cairo.targets'))" />
     <Error Condition="!Exists('..\..\packages\Pango.1.28.3.2\build\Pango.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Pango.1.28.3.2\build\Pango.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Kean.2.11.1\build\Kean.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Kean.2.11.1\build\Kean.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Imint.Media.DirectShow.2.11.1\build\Imint.Media.DirectShow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Imint.Media.DirectShow.2.11.1\build\Imint.Media.DirectShow.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Imint.Media.DirectShow.Elecard.2.11.1\build\Imint.Media.DirectShow.Elecard.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Imint.Media.DirectShow.Elecard.2.11.1\build\Imint.Media.DirectShow.Elecard.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Kean.2.11.4\build\Kean.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Kean.2.11.4\build\Kean.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Imint.Media.DirectShow.2.11.4\build\Imint.Media.DirectShow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Imint.Media.DirectShow.2.11.4\build\Imint.Media.DirectShow.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Imint.Media.DirectShow.Elecard.2.11.4\build\Imint.Media.DirectShow.Elecard.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Imint.Media.DirectShow.Elecard.2.11.4\build\Imint.Media.DirectShow.Elecard.targets'))" />
   </Target>
   <Import Project="..\..\packages\Cairo.2.0.0.2\build\Cairo.targets" Condition="Exists('..\..\packages\Cairo.2.0.0.2\build\Cairo.targets')" />
   <Import Project="..\..\packages\Pango.1.28.3.2\build\Pango.targets" Condition="Exists('..\..\packages\Pango.1.28.3.2\build\Pango.targets')" />
-  <Import Project="..\..\packages\Kean.2.11.1\build\Kean.targets" Condition="Exists('..\..\packages\Kean.2.11.1\build\Kean.targets')" />
-  <Import Project="..\..\packages\Imint.Media.DirectShow.2.11.1\build\Imint.Media.DirectShow.targets" Condition="Exists('..\..\packages\Imint.Media.DirectShow.2.11.1\build\Imint.Media.DirectShow.targets')" />
-  <Import Project="..\..\packages\Imint.Media.DirectShow.Elecard.2.11.1\build\Imint.Media.DirectShow.Elecard.targets" Condition="Exists('..\..\packages\Imint.Media.DirectShow.Elecard.2.11.1\build\Imint.Media.DirectShow.Elecard.targets')" />
+  <Import Project="..\..\packages\Kean.2.11.4\build\Kean.targets" Condition="Exists('..\..\packages\Kean.2.11.4\build\Kean.targets')" />
+  <Import Project="..\..\packages\Imint.Media.DirectShow.2.11.4\build\Imint.Media.DirectShow.targets" Condition="Exists('..\..\packages\Imint.Media.DirectShow.2.11.4\build\Imint.Media.DirectShow.targets')" />
+  <Import Project="..\..\packages\Imint.Media.DirectShow.Elecard.2.11.4\build\Imint.Media.DirectShow.Elecard.targets" Condition="Exists('..\..\packages\Imint.Media.DirectShow.Elecard.2.11.4\build\Imint.Media.DirectShow.Elecard.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
