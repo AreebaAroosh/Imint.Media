@@ -68,26 +68,33 @@ namespace Imint.Media.MotionJpeg.Player
 						System.Threading.AutoResetEvent wait = new System.Threading.AutoResetEvent(false);
 						this.thread = Parallel.RepeatThread.Start("MotionJpegPlayer", () =>
 						{
-							if (!this.client.Open((contentType, device) =>
-							{
-								bool r = true;
-								switch (contentType)
-								{
-									case "image/jpeg":
-									case "image/png": // TODO: does png really work with Raster.Image.Open?
-										if (wait.NotNull())
-											wait.Set();
-										Raster.Image image = Raster.Image.Open(device);
-										if (image.NotNull())
-											this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 25.0f), image, null);
-										break;
-									default:
-										r = false;
-										break;
-								}
-								return r;
-							}))
-								this.thread.Abort();
+                            try
+                            {
+                                if (!this.client.Open((contentType, device) =>
+                                {
+                                    bool r = true;
+                                    switch (contentType)
+                                    {
+                                        case "image/jpeg":
+                                        case "image/png": // TODO: does png really work with Raster.Image.Open?
+                                            if (wait.NotNull())
+                                                wait.Set();
+                                            Raster.Image image = Raster.Image.Open(device);
+                                            if (image.NotNull())
+                                                this.Send(0, DateTime.Now, TimeSpan.FromSeconds(1 / 25.0f), image, null);
+                                            break;
+                                        default:
+                                            r = false;
+                                            break;
+                                    }
+                                    return r;
+                                }))
+                                this.thread.Abort();
+                            }
+                            catch (System.Net.WebException)
+                            {
+                                this.Close();
+                            }
 						});
 						if (!(result = wait.WaitOne(this.TimeOut)))
 						{
