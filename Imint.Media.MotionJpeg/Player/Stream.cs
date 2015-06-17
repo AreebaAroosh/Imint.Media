@@ -95,6 +95,10 @@ namespace Imint.Media.MotionJpeg.Player
                             {
                                 this.Close();
                             }
+                            catch (System.IO.IOException)
+                            {
+                                this.Close();
+                            }
 						});
 						if (!(result = wait.WaitOne(this.TimeOut)))
 						{
